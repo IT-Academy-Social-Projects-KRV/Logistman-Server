@@ -18,6 +18,5 @@ namespace Core.DTO
         public string Vin { get; set; } // check variable naming
         public string Category { get; set; }
         public int? UserId { get; set; }
-        public User User { get; set; }
     }
 }

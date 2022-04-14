@@ -12,10 +12,10 @@ namespace Infrastructure.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        internal ApplicationContext context;
+        internal LogistDbContext context;
         internal DbSet<TEntity> dbSet;
 
-        public Repository(ApplicationContext context)
+        public Repository(LogistDbContext context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

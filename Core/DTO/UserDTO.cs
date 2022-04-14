@@ -13,6 +13,6 @@ namespace Core.DTO
         public string Surname { get; set; }
         public float Rating { get; set; }
         public bool IsHasCar { get; set; }
-        public virtual ICollection<Car> Cars { get; set; }
+        public ICollection<Car> Cars { get; set; }
     }
 }
