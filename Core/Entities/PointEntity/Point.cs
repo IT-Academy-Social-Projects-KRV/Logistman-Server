@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core.Entities.OfferEntity;
-using Core.Entities.PointTripEntity;
+using Core.Entities.TripEntity;
 
 namespace Core.Entities.PointEntity
 {
@@ -14,6 +14,6 @@ namespace Core.Entities.PointEntity
         public string Region { get; set; }
         public int Order { get; set; }
         public ICollection<Offer> Offers { get; set; }
-        public ICollection<PointTrip> PointTrips { get; set; }
+        public ICollection<Trip> Trips { get; set; }
     }
 }

@@ -20,12 +20,11 @@ namespace Core.Entities.OfferEntity
         public GoodCategory GoodCategory { get; set; }
         public int OfferPointId { get; set; }
         public Point Point { get; set; }
-        public int RelatedTripId { get; set; }
+        public int? RelatedTripId { get; set; }
         public Trip Trip { get; set; }
         public string OfferCreatorId { get; set; }
         public User User { get; set; }
         public string CreatorRoleId { get; set; }
         public Role Role { get; set; }
-
     }
 }

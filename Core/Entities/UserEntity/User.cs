@@ -12,7 +12,7 @@ namespace Core.Entities.UserEntity
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public float Rating  { get; set; }
+        public float? Rating  { get; set; }
         public bool HasCar { get; set; }
         public DateTimeOffset RegistrationDate { get; set; }
         public ICollection<Offer> Offers { get; set; }

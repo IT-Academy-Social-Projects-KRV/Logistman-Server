@@ -14,9 +14,8 @@ namespace Core.Entities.TripEntity
                 .Property(p => p.Description)
                 .IsRequired(false);
             builder
-                .HasMany(p => p.PointTrips)
-                .WithOne(p => p.Trip)
-                .HasForeignKey(p => p.TripId);
+                .HasMany(p => p.Points)
+                .WithMany(p => p.Trips);
             builder
                 .HasMany(p => p.Offers)
                 .WithOne(p => p.Trip)
