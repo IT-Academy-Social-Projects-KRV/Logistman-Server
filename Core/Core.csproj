@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DTO\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Exceptions\" />
     <Folder Include="Interfaces\CustomService\" />
     <Folder Include="Services\" />
   </ItemGroup>
