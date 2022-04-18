@@ -12,7 +12,7 @@ namespace Core.Entities.OfferEntity
         public int Id { get; set; }
         public DateTimeOffset CreationDate { get; set; }
         public string Description { get; set; }
-        public bool Closed { get; set; }
+        public bool IsClosed { get; set; }
         public float GoodsWeight { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset ExpirationDate { get; set; }

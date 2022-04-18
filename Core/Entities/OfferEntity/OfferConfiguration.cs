@@ -9,7 +9,7 @@ namespace Core.Entities.OfferEntity
         {
             builder
                 .Property(p => p.Description)
-                .IsRequired();
+                .IsRequired(false);
             builder
                 .HasOne(p => p.Role)
                 .WithMany(p => p.Offers)
@@ -26,7 +26,7 @@ namespace Core.Entities.OfferEntity
                 .HasOne(p => p.Trip)
                 .WithMany(p => p.Offers)
                 .HasForeignKey(p => p.RelatedTripId)
-                .IsRequired();
+                .IsRequired(false);
             builder
                 .HasOne(p => p.User)
                 .WithMany(p => p.Offers)

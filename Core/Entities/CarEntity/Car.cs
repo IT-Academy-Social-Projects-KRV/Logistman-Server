@@ -14,7 +14,7 @@ namespace Core.Entities.CarEntity
         public float LoadCapacity { get; set; }
         public string Color { get; set; }
         public string Vin { get; set; }
-        public DateTimeOffset AddDate { get; set; }
+        public DateTimeOffset CreationDate { get; set; }
         public int CategoryId { get; set; }
         public CarCategory Category { get; set; }
         public ICollection<Trip> Trips { get; set; }

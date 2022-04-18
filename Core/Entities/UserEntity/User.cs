@@ -19,7 +19,7 @@ namespace Core.Entities.UserEntity
         public ICollection<Trip> Trips { get; set; }
         public ICollection<Rating> RatedRatings { get; set; }
         public ICollection<Rating> EstimatorRatings { get; set; }
-        public ICollection<Report> ReportedReports { get; set; }
+        public ICollection<Report> ViolationReports { get; set; }
         public ICollection<Report> ReporterReports { get; set; }
     }
 }

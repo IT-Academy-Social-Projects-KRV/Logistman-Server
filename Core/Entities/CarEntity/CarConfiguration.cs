@@ -9,16 +9,19 @@ namespace Core.Entities.CarEntity
         {
             builder
                 .Property(p => p.Vin)
+                .IsUnicode(false)
                 .HasMaxLength(17);
             builder
                 .Property(p => p.Color)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(15);
             builder
                 .Property(p => p.TechnicalPassport)
+                .IsUnicode(false)
                 .HasMaxLength(20);
             builder
                 .Property(p => p.RegistrationNumber)
+                .IsUnicode(false)
                 .HasMaxLength(20);
             builder
                 .Property(p => p.Model)

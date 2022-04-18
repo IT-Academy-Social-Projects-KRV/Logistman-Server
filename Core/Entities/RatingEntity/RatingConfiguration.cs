@@ -9,7 +9,7 @@ namespace Core.Entities.RatingEntity
         {
             builder
                 .Property(p => p.Description)
-                .IsRequired();
+                .IsRequired(false);
             builder
                .HasOne(p => p.EstimatorUser)
                .WithMany(p => p.EstimatorRatings)

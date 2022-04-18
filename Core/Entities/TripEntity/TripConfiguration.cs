@@ -9,10 +9,10 @@ namespace Core.Entities.TripEntity
         {
             builder
                 .Property(p => p.EndDate)
-                .IsRequired();
+                .IsRequired(false);
             builder
                 .Property(p => p.Description)
-                .IsRequired();
+                .IsRequired(false);
             builder
                 .HasMany(p => p.PointTrips)
                 .WithOne(p => p.Trip)

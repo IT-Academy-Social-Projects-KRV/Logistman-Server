@@ -9,7 +9,7 @@ namespace Core.Entities.ReportEntity
         {
             builder
                 .HasOne(p => p.ReportedUser)
-                .WithMany(p => p.ReportedReports)
+                .WithMany(p => p.ViolationReports)
                 .HasForeignKey(p => p.ReportedUserId);
             builder
                 .HasOne(p => p.ReporterUser)

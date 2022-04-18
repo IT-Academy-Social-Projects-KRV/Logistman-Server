@@ -9,7 +9,7 @@ namespace Core.Entities.RatingEntity
         public int Id { get; set; }
         public int Mark { get; set; }
         public string Description { get; set; }
-        public DateTimeOffset Date { get; set; }
+        public DateTimeOffset RatingDate { get; set; }
         public int TripId { get; set; }
         public Trip Trip { get; set; }
         public string RatedUserId { get; set; }

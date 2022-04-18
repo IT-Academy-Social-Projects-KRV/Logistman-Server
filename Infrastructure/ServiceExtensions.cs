@@ -12,9 +12,5 @@ namespace Infrastructure
         {
             service.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
         }
-        public static void AddIdentityCoreDbContext(this IServiceCollection services)
-        {
-            services.AddIdentityCore<User>().AddEntityFrameworkStores<ApplicationContext>();
-        }
     }
 }

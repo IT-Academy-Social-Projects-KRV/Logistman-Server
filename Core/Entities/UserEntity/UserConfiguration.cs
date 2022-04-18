@@ -9,7 +9,7 @@ namespace Core.Entities.UserEntity
         {
             builder
                 .Property(p => p.Rating)
-                .IsRequired();
+                .IsRequired(false);
             builder
                 .HasMany(p => p.Offers)
                 .WithOne(p => p.User)
@@ -27,7 +27,7 @@ namespace Core.Entities.UserEntity
                 .WithOne(p => p.EstimatorUser)
                 .HasForeignKey(p => p.EstimatorUserId);
             builder
-                .HasMany(p => p.ReportedReports)
+                .HasMany(p => p.ViolationReports)
                 .WithOne(p => p.ReportedUser)
                 .HasForeignKey(p => p.ReportedUserId);
             builder
