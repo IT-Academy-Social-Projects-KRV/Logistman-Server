@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Core.Exceptions
 {
-    [Serializable]
     public class HttpException : ApplicationException
     {
         public HttpStatusCode StatusCode { get; set; }

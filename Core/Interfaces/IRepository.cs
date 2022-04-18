@@ -10,14 +10,10 @@ namespace Core.Interfaces
     // TEST CHANGES
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
-                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                    string includeProperties = "");
-        Task<TEntity> GetByIdAsync(object id);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity> GetByIdAsync<TKey>(TKey id);
         Task InsertAsync(TEntity entity);
-        Task DeleteAsync(object id);
-        void Delete(TEntity entityToDelete);
-        void Update(TEntity entityToUpdate);
-        Task SaveChangesAsync();
+        void DeleteAsync(TEntity entityToDelete);
+        void UpdateAsync(TEntity entityToUpdate);
     }
 }
