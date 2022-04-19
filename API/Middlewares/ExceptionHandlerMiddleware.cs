@@ -24,7 +24,7 @@ namespace API.Middlewares
             }
             catch(HttpException exception)
             {
-                await HandleGlobalExceptionAsync(context, exception.StatusCode, new { error = exception.Message });
+                await HandleGlobalExceptionAsync(context, exception.StatusCode, exception.Message);
             }
             catch (Exception)
             {
@@ -36,9 +36,8 @@ namespace API.Middlewares
         private static async Task HandleGlobalExceptionAsync(
             HttpContext context, 
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
-            object errorBody = null)
+            string errorBody = "Unknown error has occured")
         {
-            errorBody ??= new { error = "Unknown error has occured" };
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
             await context.Response.WriteAsync(JsonConvert.SerializeObject(errorBody));
