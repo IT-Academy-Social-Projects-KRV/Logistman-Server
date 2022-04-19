@@ -1,10 +1,10 @@
+using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Infrastructure;
 
 namespace API
 {
@@ -19,10 +19,11 @@ namespace API
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
 
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
+
+            services.AddIdentityDbContext();
 
             services.AddSwaggerGen(c =>
             {

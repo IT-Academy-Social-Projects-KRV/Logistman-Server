@@ -1,6 +1,6 @@
 ﻿namespace Core
 {
-    public class ServiceExtentions
+    public class ServiceExtensions
     {
 
     }
