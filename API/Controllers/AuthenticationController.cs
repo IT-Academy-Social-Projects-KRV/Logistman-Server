@@ -21,11 +21,5 @@ namespace API.Controllers
             await _authenticationService.RegisterAsync(data);
             return Ok("Successfully created new user!");
         }
-
-        [HttpPost("login")]
-        public async Task<ActionResult<AuthenticationResultDTO>> Login([FromBody] UserLoginDTO data)
-        {
-            return await _authenticationService.LoginAsync(data.Email, data.Password);
-        }
     }
 }

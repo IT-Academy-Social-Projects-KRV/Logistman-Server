@@ -1,7 +1,4 @@
-﻿
-using System;
-using System.Runtime.InteropServices.ComTypes;
-using Core.Entities.CarCategoryEntity;
+﻿using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
 using Core.Entities.GoodCategoryEntity;
 using Core.Entities.OfferEntity;
