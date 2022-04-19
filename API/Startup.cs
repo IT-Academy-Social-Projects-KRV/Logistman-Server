@@ -1,3 +1,6 @@
+using API.Middlewares;
+using Core;
+using Core.Helpers;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +28,17 @@ namespace API
 
             services.AddIdentityDbContext();
 
+            services.AddCustomServices();
+
+            services.AddAutoMapper();
+
+            services.AddResponseCaching();
+
+            services.Configure<JwtOptions>(Configuration.GetSection(nameof(JwtOptions)));
+
+            services.AddJwtAuthentication(Configuration);
+
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -43,6 +57,12 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+            app.UseMiddleware<ErrorHandlerMiddlware>();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

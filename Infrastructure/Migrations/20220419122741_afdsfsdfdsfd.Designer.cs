@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220418193248_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20220419122741_afdsfsdfdsfd")]
+    partial class afdsfsdfdsfd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -416,8 +416,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasDefaultValue("UserNaaaaame");
 
                     b.HasKey("Id");
 
@@ -541,7 +543,9 @@ namespace Infrastructure.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<bool>("HasCar")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -550,7 +554,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("real");
 
                     b.Property<DateTimeOffset>("RegistrationDate")
-                        .HasColumnType("datetimeoffset");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset")
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2022, 4, 19, 12, 27, 41, 220, DateTimeKind.Unspecified).AddTicks(4453), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
