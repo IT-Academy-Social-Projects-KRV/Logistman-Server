@@ -23,27 +23,6 @@ namespace Core.Services
             _jwtOptions = jwtOptions;
         }
 
-        //public string GenerateToken(string email)
-        //{
-        //    var claims = new List<Claim>()
-        //    {
-        //        new Claim(ClaimTypes.Email, email,ClaimTypes.Role, )
-        //    };
-
-        //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Value.Key));
-        //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        //    var token = new JwtSecurityToken(
-        //            issuer: _jwtOptions.Value.Issuer,
-        //            claims: claims,
-        //            expires: DateTime.UtcNow.AddHours(_jwtOptions.Value.LifeTime),
-        //            signingCredentials: credentials
-        //            );
-
-        //    return new JwtSecurityTokenHandler().WriteToken(token);
-        ////}
-
-
         public async Task RegisterAsync(UserRegistrationDTO userData)
         {
             var user = new User()

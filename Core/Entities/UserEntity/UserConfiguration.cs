@@ -9,8 +9,6 @@ namespace Core.Entities.UserEntity
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder
-                .Property(p => p.UserName);
-            builder
                 .Property(p => p.HasCar)
                 .HasDefaultValue(false);
             builder
