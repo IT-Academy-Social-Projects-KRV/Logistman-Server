@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Interfaces\CustomService\" />
     <Folder Include="Services\" />
