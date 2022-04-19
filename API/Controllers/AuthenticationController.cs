@@ -1,6 +1,5 @@
 ﻿using Core.DTO;
 using Core.Interfaces.CustomService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

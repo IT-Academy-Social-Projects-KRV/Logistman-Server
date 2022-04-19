@@ -12,7 +12,7 @@ namespace Core
         public static void AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IJwtService, JwtService>();
+            //services.AddScoped<IJwtService, JwtService>();
         }
         
         public static void AddAutoMapper(this IServiceCollection services)
