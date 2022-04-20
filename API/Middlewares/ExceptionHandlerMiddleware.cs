@@ -29,7 +29,6 @@ namespace API.Middlewares
             catch (Exception)
             {
                 await HandleGlobalExceptionAsync(context);
-                return;
             }
         }
 
