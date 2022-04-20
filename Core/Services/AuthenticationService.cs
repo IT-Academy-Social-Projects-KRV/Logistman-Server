@@ -1,10 +1,8 @@
 ﻿using Core.DTO;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
-using Core.Helpers;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +26,7 @@ namespace Core.Services
                 Name = userData.Name,
                 Surname = userData.Surname
             };
+
             var result = await _userManager.CreateAsync(user, userData.Password);
 
             if (!result.Succeeded)
