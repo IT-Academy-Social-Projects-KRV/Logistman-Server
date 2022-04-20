@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Resources;
 
 namespace Core.Services
 {
@@ -32,7 +33,7 @@ namespace Core.Services
 
             if (!result.Succeeded)
             {
-                StringBuilder messageBuilder = new StringBuilder();
+                var messageBuilder = new StringBuilder();
 
                 foreach (var error in result.Errors)
                 {
@@ -52,6 +53,15 @@ namespace Core.Services
                 Token = token
             };
             return tokens;
+        }
+
+        public async Task LoginAsync(UserLoginDTO data)
+        {
+            var user = await _userManager.FindByEmailAsync(data.Email);
+            if (user == null || !await _userManager.CheckPasswordAsync(user, data.Password))
+            {
+                throw new HttpException(HttpStatusCode.Unauthorized, ErrorMessages.IncorrectLoginOrPassword);
+            }
         }
     }
 }
