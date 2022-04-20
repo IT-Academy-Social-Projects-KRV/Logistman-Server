@@ -19,7 +19,7 @@ namespace API.Controllers
         public async Task<ActionResult> Register([FromBody] UserRegistrationDTO data)
         {
             await _authenticationService.RegisterAsync(data);
-            return Ok("Successfully created new user!");
+            return Ok();
         }
     }
 }

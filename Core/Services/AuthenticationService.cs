@@ -1,4 +1,5 @@
-﻿using Core.DTO;
+﻿using AutoMapper;
+using Core.DTO;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Interfaces.CustomService;
@@ -12,22 +13,16 @@ namespace Core.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly UserManager<User> _userManager;
-        public AuthenticationService(UserManager<User> userManager)
+        private readonly IMapper _mapper;
+        public AuthenticationService(UserManager<User> userManager,IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task RegisterAsync(UserRegistrationDTO userData)
         {
-            var user = new User()
-            {
-                UserName = userData.Email,
-                Email = userData.Email,
-                Name = userData.Name,
-                Surname = userData.Surname
-            };
-
-            var result = await _userManager.CreateAsync(user, userData.Password);
+            var result = await _userManager.CreateAsync(_mapper.Map<User>(userData), userData.Password);
 
             if (!result.Succeeded)
             {

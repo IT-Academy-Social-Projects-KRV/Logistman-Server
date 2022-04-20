@@ -19,6 +19,9 @@ namespace Core
             var configures = new MapperConfiguration(mc =>
             {
                 mc.CreateMap<User, UserRegistrationDTO>().ReverseMap();
+                mc.CreateMap<User, UserRegistrationDTO>().ReverseMap()
+                    .ForMember(dest => dest.UserName, 
+                    act => act.MapFrom(src => src.Email));
             });
 
             IMapper mapper = configures.CreateMapper();
