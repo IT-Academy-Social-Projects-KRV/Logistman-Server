@@ -1,4 +1,5 @@
 using Core;
+using API.Middlewares;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +55,8 @@ namespace API
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseAuthentication();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseAuthorization();
 
