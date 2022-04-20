@@ -1,4 +1,3 @@
-using API.Middlewares;
 using Core;
 using Core.Helpers;
 using Infrastructure;
@@ -34,11 +33,6 @@ namespace API
 
             services.AddResponseCaching();
 
-            services.Configure<JwtOptions>(Configuration.GetSection(nameof(JwtOptions)));
-
-            services.AddJwtAuthentication(Configuration);
-
-            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -59,8 +53,6 @@ namespace API
             app.UseRouting();
 
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-
-            app.UseMiddleware<ErrorHandlerMiddlware>();
 
             app.UseAuthentication();
 

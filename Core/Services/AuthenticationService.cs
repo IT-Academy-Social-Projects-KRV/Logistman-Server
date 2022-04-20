@@ -14,13 +14,9 @@ namespace Core.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly UserManager<User> _userManager;
-        private readonly IOptions<JwtOptions> _jwtOptions;
-
-        public AuthenticationService(UserManager<User> userManager, 
-            IOptions<JwtOptions> jwtOptions)
+        public AuthenticationService(UserManager<User> userManager)
         {
             _userManager = userManager;
-            _jwtOptions = jwtOptions;
         }
 
         public async Task RegisterAsync(UserRegistrationDTO userData)
