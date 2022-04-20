@@ -1,4 +1,4 @@
-﻿using Core.DTO;
+﻿using Core.DTO.UserDTO;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -15,6 +15,7 @@ namespace API.Controllers
         {
             _authenticationService = authenticationService;
         }
+
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] UserRegistrationDTO data)
         {
