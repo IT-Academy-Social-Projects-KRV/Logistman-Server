@@ -1,3 +1,4 @@
+using Core;
 using API.Middlewares;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -26,6 +27,12 @@ namespace API
 
             services.AddIdentityDbContext();
 
+            services.AddCustomServices();
+
+            services.AddAutoMapper();
+
+            services.AddResponseCaching();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -44,6 +51,10 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+            app.UseAuthentication();
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 
