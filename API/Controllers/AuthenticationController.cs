@@ -22,5 +22,12 @@ namespace API.Controllers
             await _authenticationService.RegisterAsync(data);
             return Ok();
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> Login([FromBody] UserLoginDTO data)
+        {
+            /*tokens =*/ await _authenticationService.LoginAsync(data);
+            return Ok(/*tokens*/);
+        }
     }
 }
