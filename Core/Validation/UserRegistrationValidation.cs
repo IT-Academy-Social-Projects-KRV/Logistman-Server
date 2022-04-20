@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Core.DTO.UserDTO;
 using Core.Entities.UserEntity;
@@ -56,9 +52,5 @@ namespace Core.Validation
             var userEntity = await _userManager.FindByEmailAsync(email);
             return userEntity == null;
         }
-        //private async Task<bool> HasNumber(string val, CancellationToken cancellationToken)
-        //{
-        //    return await Task.Run(() => val.Any(char.IsNumber) == false);
-        //}
     }
 }
