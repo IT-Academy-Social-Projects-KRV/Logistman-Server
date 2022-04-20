@@ -3,6 +3,8 @@ using Core.DTO.UserDTO;
 using Core.Entities.UserEntity;
 using Core.Interfaces.CustomService;
 using Core.Services;
+using Core.Validation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core
@@ -26,6 +28,11 @@ namespace Core
 
             IMapper mapper = configures.CreateMapper();
             services.AddSingleton(mapper);
+        }
+
+        public static void AddFluentValidation(this IServiceCollection services)
+        {
+            services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<UserRegistrationValidation>());
         }
     }
 }
