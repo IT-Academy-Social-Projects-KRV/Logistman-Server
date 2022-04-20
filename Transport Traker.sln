@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{7521DA4D-2F1C-4E51-8F8D-853D83C5059F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{7521DA4D-2F1C-4E51-8F8D-853D83C5059F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{A3FB695A-8C93-4D3C-8F69-D5E67DB71180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{A3FB695A-8C93-4D3C-8F69-D5E67DB71180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{31CA57F8-841F-44BA-A325-BB0EFC5B279F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{31CA57F8-841F-44BA-A325-BB0EFC5B279F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

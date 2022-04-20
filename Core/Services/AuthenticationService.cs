@@ -33,7 +33,7 @@ namespace Core.Services
                     messageBuilder.AppendLine(error.Description);
                 }
 
-                throw new HttpException(messageBuilder.ToString(), HttpStatusCode.BadRequest);
+                throw new HttpException(HttpStatusCode.BadRequest, messageBuilder.ToString());
             }
         }
     }
