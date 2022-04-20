@@ -1,4 +1,4 @@
-﻿using Core.DTO;
+﻿using Core.DTO.UserDTO;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService

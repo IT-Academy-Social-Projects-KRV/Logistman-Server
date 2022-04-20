@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTO;
+using Core.DTO.UserDTO;
 using Core.Entities.UserEntity;
 using Core.Interfaces.CustomService;
 using Core.Services;
