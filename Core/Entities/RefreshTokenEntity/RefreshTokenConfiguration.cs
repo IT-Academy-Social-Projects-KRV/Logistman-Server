@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Core.Entities.RefreshTokenEntity
 {
@@ -9,21 +8,21 @@ namespace Core.Entities.RefreshTokenEntity
         public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {
             builder
-                .HasKey(x => x.Id);
+                .HasKey(p => p.Id);
 
             builder
-                .Property(x => x.Token)
+                .Property(p => p.Token)
                 .HasMaxLength(50)
                 .IsRequired();
 
             builder
-                .Property(x => x.UserId)
+                .Property(p => p.UserId)
                 .IsRequired();
 
             builder
-                .HasOne(x => x.User)
-                .WithMany(x => x.RefreshTokens)
-                .HasForeignKey(x => x.UserId);
+                .HasOne(p => p.User)
+                .WithMany(p => p.RefreshTokens)
+                .HasForeignKey(p => p.UserId);
         }
     }
 }

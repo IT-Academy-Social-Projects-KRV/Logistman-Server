@@ -42,9 +42,9 @@ namespace Infrastructure.Repository
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task InsertAsync(TEntity entity)
+        public async Task<TEntity> InsertAsync(TEntity entity)
         {
-            await _dbSet.AddAsync(entity);
+            return (await _dbSet.AddAsync(entity)).Entity;
         }
 
         public async Task UpdateAsync(TEntity entityToUpdate)

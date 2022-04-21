@@ -575,7 +575,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTimeOffset>("RegistrationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2022, 4, 21, 14, 46, 32, 136, DateTimeKind.Unspecified).AddTicks(9350), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2022, 4, 21, 17, 59, 12, 789, DateTimeKind.Unspecified).AddTicks(7574), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");

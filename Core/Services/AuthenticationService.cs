@@ -19,7 +19,7 @@ namespace Core.Services
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
-        protected readonly IRepository<RefreshToken> _refreshTokenRepository;
+        private readonly IRepository<RefreshToken> _refreshTokenRepository;
 
         public AuthenticationService(
             UserManager<User> userManager,
@@ -67,7 +67,7 @@ namespace Core.Services
         {
             var claims = _jwtService.SetClaims(user);
             var token = _jwtService.CreateToken(claims);
-            var refreshToken = await CreateRefreshToken();
+            var refreshToken = await CreateRefreshToken(user.Id);
 
             var tokens = new UserAutorizationDTO()
             {
@@ -78,11 +78,11 @@ namespace Core.Services
             return tokens;
         }
 
-        private async Task<string> CreateRefreshToken()
+        private async Task<string> CreateRefreshToken(string userId)
         {
-            var refeshTokenEntity = _jwtService.GenerateRefreshToken();
+            var refeshTokenEntity = _jwtService.GenerateRefreshToken(userId);
 
-            await _refreshTokenRepository.UpdateAsync(refeshTokenEntity);
+            await _refreshTokenRepository.InsertAsync(refeshTokenEntity);
             await _refreshTokenRepository.SaveChangesAsync();
 
             return refeshTokenEntity.Token;
@@ -90,16 +90,14 @@ namespace Core.Services
 
         public async Task<UserAutorizationDTO> RefreshTokenAsync(UserAutorizationDTO userTokensDTO)
         {
-            var userFromDB = getUserByRefreshToken(userTokensDTO.RefreshToken);
-            var refeshTokenFromDb = userFromDB.RefreshTokens.FirstOrDefault();
+            var user = getUserByRefreshToken(userTokensDTO.RefreshToken);
+            var refeshTokenFromDb = user.RefreshTokens.FirstOrDefault();
 
             var claims = _jwtService.GetClaimsFromExpiredToken(userTokensDTO.Token);
             var newToken = _jwtService.CreateToken(claims);
-            var newRefreshToken = await CreateRefreshToken();
+            var newRefreshToken = await CreateRefreshToken(user.Id);
 
             refeshTokenFromDb.Token = newRefreshToken;
-            await _refreshTokenRepository.UpdateAsync(refeshTokenFromDb);
-            await _refreshTokenRepository.SaveChangesAsync();
 
             var tokens = new UserAutorizationDTO()
             {

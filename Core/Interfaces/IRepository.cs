@@ -10,7 +10,7 @@ namespace Core.Interfaces
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync<TKey>(TKey id);
-        Task InsertAsync(TEntity entity);
+        Task<TEntity> InsertAsync(TEntity entity);
         Task DeleteAsync(TEntity entityToDelete);
         Task UpdateAsync(TEntity entityToUpdate);
         Task<int> SaveChangesAsync();

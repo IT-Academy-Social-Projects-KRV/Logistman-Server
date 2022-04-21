@@ -34,12 +34,10 @@ namespace API.Controllers
             return Ok(tokens);
         }
 
-        [HttpPost]
-        [Route("refresh-token")]
+        [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshTokenAsync([FromBody] UserAutorizationDTO userTokensDTO)
         {
             var tokens = await _authenticationService.RefreshTokenAsync(userTokensDTO);
-
             return Ok(tokens);
         }
     }

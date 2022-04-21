@@ -9,7 +9,7 @@ namespace Core.Interfaces.CustomService
     {
         IEnumerable<Claim> SetClaims(User user);
         string CreateToken(IEnumerable<Claim> claims);
-        RefreshToken GenerateRefreshToken();
+        RefreshToken GenerateRefreshToken(string userId);
         public IEnumerable<Claim> GetClaimsFromExpiredToken(string token);
     }
 }

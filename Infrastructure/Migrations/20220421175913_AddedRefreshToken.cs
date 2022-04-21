@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class AddRefreshToken : Migration
+    public partial class AddedRefreshToken : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace Infrastructure.Migrations
                 table: "AspNetUsers",
                 type: "datetimeoffset",
                 nullable: true,
-                defaultValue: new DateTimeOffset(new DateTime(2022, 4, 21, 14, 46, 32, 136, DateTimeKind.Unspecified).AddTicks(9350), new TimeSpan(0, 0, 0, 0, 0)),
+                defaultValue: new DateTimeOffset(new DateTime(2022, 4, 21, 17, 59, 12, 789, DateTimeKind.Unspecified).AddTicks(7574), new TimeSpan(0, 0, 0, 0, 0)),
                 oldClrType: typeof(DateTimeOffset),
                 oldType: "datetimeoffset",
                 oldNullable: true,
@@ -58,7 +58,7 @@ namespace Infrastructure.Migrations
                 oldClrType: typeof(DateTimeOffset),
                 oldType: "datetimeoffset",
                 oldNullable: true,
-                oldDefaultValue: new DateTimeOffset(new DateTime(2022, 4, 21, 14, 46, 32, 136, DateTimeKind.Unspecified).AddTicks(9350), new TimeSpan(0, 0, 0, 0, 0)));
+                oldDefaultValue: new DateTimeOffset(new DateTime(2022, 4, 21, 17, 59, 12, 789, DateTimeKind.Unspecified).AddTicks(7574), new TimeSpan(0, 0, 0, 0, 0)));
         }
     }
 }
