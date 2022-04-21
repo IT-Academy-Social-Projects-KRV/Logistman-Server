@@ -63,6 +63,19 @@ namespace Core.Services
             return await GenerateUserTokens(user);
         }
 
+        public async Task LogoutAsync(UserLogoutDTO userLogoutDTO)
+        {
+            var refreshToken = _refreshTokenRepository.Query().SingleOrDefault(t => t.Token == userLogoutDTO.RefreshToken);
+
+            if (refreshToken == null)
+            {
+                throw new HttpException(HttpStatusCode.NotFound, ErrorMessages.InvalidToken);
+            }
+
+            await _refreshTokenRepository.DeleteAsync(refreshToken);
+            await _refreshTokenRepository.SaveChangesAsync();
+        }
+
         private async Task<UserAutorizationDTO> GenerateUserTokens(User user)
         {
             var claims = _jwtService.SetClaims(user);
