@@ -31,7 +31,6 @@ namespace Core.Validation
                 .Matches(@"\A[A-Z][a-z]{1,49}[a-z]*$").WithMessage("The first letter in '{PropertyName}' must be uppercase, the others must be lowercase!")
                 .Matches("^[^£# “”!@$%^&*(){}:;<>,.?/+_=|'~\\-]*$").WithMessage("'{PropertyName}' must not contain special characters!");
 
-
             RuleFor(user => user.Email)
                 .NotNull()
                 .EmailAddress().WithMessage("'{PropertyValue}' - is not an email address!")
