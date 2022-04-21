@@ -14,15 +14,21 @@ namespace Core.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
-        public AuthenticationService(UserManager<User> userManager,IMapper mapper)
+        protected readonly IJwtService _jwtService;
+        public AuthenticationService(
+            UserManager<User> userManager,
+            IMapper mapper,
+            IJwtService jwtService)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _jwtService = jwtService;
         }
 
         public async Task RegisterAsync(UserRegistrationDTO userData)
         {
-            var result = await _userManager.CreateAsync(_mapper.Map<User>(userData), userData.Password);
+            var user = _mapper.Map<User>(userData);
+            var result = await _userManager.CreateAsync(user, userData.Password);
 
             if (!result.Succeeded)
             {
@@ -35,6 +41,17 @@ namespace Core.Services
 
                 throw new HttpException(HttpStatusCode.BadRequest, messageBuilder.ToString());
             }
+        }
+
+        private UserAutorizationDTO GenerateUserTokens(User user)
+        {
+            var claims = _jwtService.SetClaims(user);
+            var token = _jwtService.CreateToken(claims);
+            var tokens = new UserAutorizationDTO()
+            {
+                Token = token
+            };
+            return tokens;
         }
     }
 }

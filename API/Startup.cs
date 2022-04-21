@@ -26,12 +26,16 @@ namespace API
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddIdentityDbContext();
+            
+            services.AddAuthentication();
 
             services.AddCustomServices();
 
             services.AddAutoMapper();
 
             services.AddResponseCaching();
+
+            services.ConfigJwtOptions(Configuration);
 
             services.AddSwaggerGen(c =>
             {
