@@ -31,6 +31,8 @@ namespace API
 
             services.AddCustomServices();
 
+            services.AddFluentValidation();
+
             services.AddAutoMapper();
 
             services.AddResponseCaching();
