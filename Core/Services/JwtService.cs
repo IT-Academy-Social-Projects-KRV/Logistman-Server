@@ -20,7 +20,6 @@ namespace Core.Services
             _jwtOptions = jwtOptions;
         }
 
-
         public string CreateToken(IEnumerable<Claim> claims)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Value.Key));  
@@ -42,7 +41,6 @@ namespace Core.Services
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Email, user.Email),
             };
-
             return claims;
         }
     }

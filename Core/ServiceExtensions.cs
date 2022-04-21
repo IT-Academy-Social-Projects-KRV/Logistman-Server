@@ -33,9 +33,7 @@ namespace Core
 
         public static void ConfigJwtOptions(this IServiceCollection services, IConfiguration config)
         {
-
             services.Configure<JwtOptions>(config.GetSection("JwtOptions"));
-
         }
 
     }

@@ -25,7 +25,7 @@ namespace Core.Services
             _jwtService = jwtService;
         }
 
-        public async Task<UserAutorizationDTO> RegisterAsync(UserRegistrationDTO userData)
+        public async Task RegisterAsync(UserRegistrationDTO userData)
         {
             var user = _mapper.Map<User>(userData);
             var result = await _userManager.CreateAsync(user, userData.Password);
@@ -41,20 +41,16 @@ namespace Core.Services
 
                 throw new HttpException(HttpStatusCode.BadRequest, messageBuilder.ToString());
             }
-            return await Task.Run(()=> GenerateUserTokens(user));
         }
 
         private UserAutorizationDTO GenerateUserTokens(User user)
         {
             var claims = _jwtService.SetClaims(user);
-
             var token = _jwtService.CreateToken(claims);
-
             var tokens = new UserAutorizationDTO()
             {
                 Token = token
             };
-
             return tokens;
         }
     }

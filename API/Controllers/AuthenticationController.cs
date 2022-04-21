@@ -19,8 +19,8 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] UserRegistrationDTO data)
         {
-            var result = await _authenticationService.RegisterAsync(data);
-            return Ok(result);
+            await _authenticationService.RegisterAsync(data);
+            return Ok();
         }
     }
 }
