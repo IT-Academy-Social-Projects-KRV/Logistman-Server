@@ -23,6 +23,8 @@ namespace API
         {
             services.AddControllers();
 
+            services.AddRepositories();
+
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddIdentityDbContext();

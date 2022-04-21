@@ -1,7 +1,10 @@
 ﻿using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
@@ -39,9 +42,9 @@ namespace Infrastructure.Repository
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task InsertAsync(TEntity entity)
+        public async Task<TEntity> InsertAsync(TEntity entity)
         {
-            await _dbSet.AddAsync(entity);
+            return (await _dbSet.AddAsync(entity)).Entity;
         }
 
         public async Task UpdateAsync(TEntity entityToUpdate)
@@ -51,6 +54,19 @@ namespace Infrastructure.Repository
                 _dbSet.Attach(entityToUpdate);
                 _context.Entry(entityToUpdate).State = EntityState.Modified;
             });
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
+        public IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes)
+        {
+            var query = includes
+                .Aggregate<Expression<Func<TEntity, object>>, IQueryable<TEntity>>(_dbSet, (current, include) => current.Include(include));
+
+            return query;
         }
     }
 }

@@ -8,6 +8,7 @@ using Core.Entities.ReportEntity;
 using Core.Entities.RoleEntity;
 using Core.Entities.TripEntity;
 using Core.Entities.UserEntity;
+using Core.Entities.RefreshTokenEntity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,7 @@ namespace Infrastructure.Data
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<GoodCategory> GoodCategories { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new CarConfiguration());
@@ -36,6 +38,7 @@ namespace Infrastructure.Data
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new TripConfiguration());
             builder.ApplyConfiguration(new RatingConfiguration());
+            builder.ApplyConfiguration(new RefreshTokenConfiguration());
             base.OnModelCreating(builder);
         }
     }
