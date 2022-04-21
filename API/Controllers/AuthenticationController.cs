@@ -1,10 +1,6 @@
 ﻿using Core.DTO.UserDTO;
-using Core.Helpers;
 using Core.Interfaces.CustomService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using System;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -39,6 +35,13 @@ namespace API.Controllers
         {
             var tokens = await _authenticationService.RefreshTokenAsync(userTokensDTO);
             return Ok(tokens);
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> LogoutAsync([FromBody] UserLogoutDTO userLogoutDTO)
+        {
+            await _authenticationService.LogoutAsync(userLogoutDTO);
+            return Ok();
         }
     }
 }
