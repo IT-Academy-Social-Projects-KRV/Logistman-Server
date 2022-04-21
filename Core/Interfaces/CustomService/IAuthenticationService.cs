@@ -5,6 +5,6 @@ namespace Core.Interfaces.CustomService
 {
     public interface IAuthenticationService
     {
-        Task RegisterAsync(UserRegistrationDTO data);
+        Task<UserAutorizationDTO> RegisterAsync(UserRegistrationDTO data);
     }
 }
