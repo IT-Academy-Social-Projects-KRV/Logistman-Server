@@ -9,12 +9,8 @@ namespace Core.Validation
 {
     public class UserLoginValidation : AbstractValidator<UserLoginDTO>
     {
-        protected readonly UserManager<User> _userManager;
-
-        public UserLoginValidation(UserManager<User> userManager)
+        public UserLoginValidation()
         {
-            _userManager = userManager;
-
             RuleFor(user => user.Email)
                 .NotNull()
                 .EmailAddress().WithMessage("'{PropertyValue}' - is not an email address!");
