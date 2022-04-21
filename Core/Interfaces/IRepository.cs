@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Linq.Expressions;
+using System;
 
 namespace Core.Interfaces
 {
@@ -10,5 +13,7 @@ namespace Core.Interfaces
         Task InsertAsync(TEntity entity);
         Task DeleteAsync(TEntity entityToDelete);
         Task UpdateAsync(TEntity entityToUpdate);
+        Task<int> SaveChangesAsync();
+        IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes);
     }
 }

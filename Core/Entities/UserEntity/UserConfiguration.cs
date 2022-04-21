@@ -41,6 +41,10 @@ namespace Core.Entities.UserEntity
                 .HasMany(p => p.ReporterReports)
                 .WithOne(p => p.ReporterUser)
                 .HasForeignKey(p => p.ReporterUserId);
+            builder
+                .HasMany(p => p.RefreshTokens)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId);
         }
     }
 }

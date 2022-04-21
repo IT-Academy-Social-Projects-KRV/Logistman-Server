@@ -1,12 +1,16 @@
-﻿using Core.Entities.UserEntity;
+﻿using Core.Entities.RefreshTokenEntity;
+using Core.Entities.UserEntity;
+using Core.Exceptions;
 using Core.Helpers;
 using Core.Interfaces.CustomService;
+using Core.Resources;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Core.Services
@@ -34,6 +38,30 @@ namespace Core.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public IEnumerable<Claim> GetClaimsFromExpiredToken(string token)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = false,
+                ValidateLifetime = false,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = _jwtOptions.Value.Issuer,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Value.Key)),
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken jwtSecurityToken;
+
+            tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+            jwtSecurityToken = securityToken as JwtSecurityToken;
+
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new HttpException(System.Net.HttpStatusCode.BadRequest, ErrorMessages.InvalidToken);
+
+            return jwtSecurityToken.Claims;
+        }
+
         public IEnumerable<Claim> SetClaims(User user)
         {
             var claims = new List<Claim>
@@ -42,6 +70,19 @@ namespace Core.Services
                 new Claim(ClaimTypes.Email, user.Email),
             };
             return claims;
+        }
+
+        public RefreshToken GenerateRefreshToken()
+        {
+            using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
+            var randomBytes = new byte[64];
+            rngCryptoServiceProvider.GetBytes(randomBytes);
+            var refreshToken = new RefreshToken
+            {
+                Token = Convert.ToBase64String(randomBytes)
+            };
+
+            return refreshToken;
         }
     }
 }

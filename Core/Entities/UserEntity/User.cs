@@ -1,5 +1,6 @@
 ﻿using Core.Entities.OfferEntity;
 using Core.Entities.RatingEntity;
+using Core.Entities.RefreshTokenEntity;
 using Core.Entities.ReportEntity;
 using Core.Entities.TripEntity;
 using Microsoft.AspNetCore.Identity;
@@ -21,5 +22,6 @@ namespace Core.Entities.UserEntity
         public ICollection<Rating> EstimatorRatings { get; set; }
         public ICollection<Report> ViolationReports { get; set; }
         public ICollection<Report> ReporterReports { get; set; }
+        public ICollection<RefreshToken> RefreshTokens { get; set; }
     }
 }
