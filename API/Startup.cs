@@ -26,6 +26,8 @@ namespace API
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddIdentityDbContext();
+            
+            services.AddAuthentication();
 
             services.AddCustomServices();
 
@@ -34,6 +36,8 @@ namespace API
             services.AddAutoMapper();
 
             services.AddResponseCaching();
+
+            services.ConfigJwtOptions(Configuration);
 
             services.AddSwaggerGen(c =>
             {
