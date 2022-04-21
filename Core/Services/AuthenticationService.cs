@@ -15,7 +15,7 @@ namespace Core.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
-        protected readonly IJwtService _jwtService;
+        private readonly IJwtService _jwtService;
         public AuthenticationService(
             UserManager<User> userManager,
             IMapper mapper,
@@ -55,13 +55,14 @@ namespace Core.Services
             return tokens;
         }
 
-        public async Task LoginAsync(UserLoginDTO data)
+        public async Task<UserAutorizationDTO> LoginAsync(UserLoginDTO data)
         {
             var user = await _userManager.FindByEmailAsync(data.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, data.Password))
             {
                 throw new HttpException(HttpStatusCode.Unauthorized, ErrorMessages.IncorrectLoginOrPassword);
             }
+            return GenerateUserTokens(user);
         }
     }
 }
