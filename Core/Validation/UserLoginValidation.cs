@@ -1,9 +1,5 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Core.DTO.UserDTO;
-using Core.Entities.UserEntity;
+﻿using Core.DTO.UserDTO;
 using FluentValidation;
-using Microsoft.AspNetCore.Identity;
 
 namespace Core.Validation
 {
