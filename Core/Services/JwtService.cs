@@ -57,7 +57,7 @@ namespace Core.Services
             jwtSecurityToken = securityToken as JwtSecurityToken;
 
             if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-                throw new HttpException(System.Net.HttpStatusCode.BadRequest, ErrorMessages.InvalidToken);
+                throw new HttpException(ErrorMessages.InvalidToken, System.Net.HttpStatusCode.BadRequest);
 
             return jwtSecurityToken.Claims;
         }

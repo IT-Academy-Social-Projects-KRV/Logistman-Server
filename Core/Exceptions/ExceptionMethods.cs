@@ -14,93 +14,93 @@ namespace Core.Exceptions
 {
     public static class ExceptionMethods
     {
-        public static void UserNullCheck(User User)
+        public static void UserNullCheck(User user)
         {
-            if (User == null)
+            if (user == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.UserNotFound);
+                    ErrorMessages.UserNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
-        public static void CarNullCheck(Car Car)
+        public static void CarNullCheck(Car car)
         {
-            if (Car == null)
+            if (car == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.CarNotFound);
+                    ErrorMessages.CarNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
-        public static void OfferNullCheck(Offer Offer)
+        public static void OfferNullCheck(Offer offer)
         {
-            if (Offer == null)
+            if (offer == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.OfferNotFound);
+                    ErrorMessages.OfferNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
-        public static void PointNullCheck(Point Point)
+        public static void PointNullCheck(Point point)
         {
-            if (Point == null)
+            if (point == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.PointNotFound);
+                    ErrorMessages.PointNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
-        public static void CarCategoryNullCheck(CarCategory CarCategory)
+        public static void CarCategoryNullCheck(CarCategory carCategory)
         {
-            if (CarCategory == null)
+            if (carCategory == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.CarCategoryNotFound);
+                    ErrorMessages.CarCategoryNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
-        public static void GoodCategoryNullCheck(GoodCategory GoodCategory)
+        public static void GoodCategoryNullCheck(GoodCategory goodCategory)
         {
-            if (GoodCategory == null)
+            if (goodCategory == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.GoodCategoryNotFound);
+                    ErrorMessages.GoodCategoryNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
-        public static void RatingNullCheck(Rating Rating)
+        public static void RatingNullCheck(Rating rating)
         {
-            if (Rating == null)
+            if (rating == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.RatingNotFound);
+                    ErrorMessages.RatingNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
-        public static void ReportNullCheck(Report Report)
+        public static void ReportNullCheck(Report report)
         {
-            if (Report == null)
+            if (report == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.ReportNotFound);
+                    ErrorMessages.ReportNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
-        public static void RoleNullCheck(Role Role)
+        public static void RoleNullCheck(Role role)
         {
-            if (Role == null)
+            if (role == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.RoleNotFound);
+                    ErrorMessages.RoleNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
     }
