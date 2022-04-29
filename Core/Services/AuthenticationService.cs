@@ -20,20 +20,17 @@ namespace Core.Services
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
         private readonly IRepository<RefreshToken> _refreshTokenRepository;
-        private readonly IRepository<User> _userRepository;
 
         public AuthenticationService(
             UserManager<User> userManager,
             IMapper mapper,
             IJwtService jwtService,
-            IRepository<RefreshToken> refreshTokenRepository,
-            IRepository<User> userRepository)
+            IRepository<RefreshToken> refreshTokenRepository)
         {
             _userManager = userManager;
             _mapper = mapper;
             _jwtService = jwtService;
             _refreshTokenRepository = refreshTokenRepository;
-            _userRepository = userRepository;
         }
 
         public async Task RegisterAsync(UserRegistrationDTO userData)
