@@ -26,7 +26,7 @@ namespace API.Middlewares
             {
                 await HandleGlobalExceptionAsync(context, exception.StatusCode, exception.Message);
             }
-            catch (Exception)
+            catch(Exception)
             {
                 await HandleGlobalExceptionAsync(context);
             }

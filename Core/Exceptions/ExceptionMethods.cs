@@ -14,9 +14,9 @@ namespace Core.Exceptions
 {
     public static class ExceptionMethods
     {
-        public static void UserNullCheck(User User)
+        public static void UserNullCheck(User user)
         {
-            if (User == null)
+            if (user == null)
             {
                 throw new HttpException(
                     ErrorMessages.UserNotFound,
@@ -24,9 +24,9 @@ namespace Core.Exceptions
             }
         }
 
-        public static void CarNullCheck(Car Car)
+        public static void CarNullCheck(Car car)
         {
-            if (Car == null)
+            if (car == null)
             {
                 throw new HttpException(
                     ErrorMessages.CarNotFound,
@@ -34,9 +34,9 @@ namespace Core.Exceptions
             }
         }
 
-        public static void OfferNullCheck(Offer Offer)
+        public static void OfferNullCheck(Offer offer)
         {
-            if (Offer == null)
+            if (offer == null)
             {
                 throw new HttpException(
                     ErrorMessages.OfferNotFound,
@@ -44,9 +44,9 @@ namespace Core.Exceptions
             }
         }
 
-        public static void PointNullCheck(Point Point)
+        public static void PointNullCheck(Point point)
         {
-            if (Point == null)
+            if (point == null)
             {
                 throw new HttpException(
                     ErrorMessages.PointNotFound,
@@ -54,9 +54,9 @@ namespace Core.Exceptions
             }
         }
 
-        public static void CarCategoryNullCheck(CarCategory CarCategory)
+        public static void CarCategoryNullCheck(CarCategory carCategory)
         {
-            if (CarCategory == null)
+            if (carCategory == null)
             {
                 throw new HttpException(
                     ErrorMessages.CarCategoryNotFound,
@@ -64,9 +64,9 @@ namespace Core.Exceptions
             }
         }
 
-        public static void GoodCategoryNullCheck(GoodCategory GoodCategory)
+        public static void GoodCategoryNullCheck(GoodCategory goodCategory)
         {
-            if (GoodCategory == null)
+            if (goodCategory == null)
             {
                 throw new HttpException(
                     ErrorMessages.GoodCategoryNotFound,
@@ -74,9 +74,9 @@ namespace Core.Exceptions
             }
         }
 
-        public static void RatingNullCheck(Rating Rating)
+        public static void RatingNullCheck(Rating rating)
         {
-            if (Rating == null)
+            if (rating == null)
             {
                 throw new HttpException(
                     ErrorMessages.RatingNotFound,
@@ -84,9 +84,9 @@ namespace Core.Exceptions
             }
         }
 
-        public static void ReportNullCheck(Report Report)
+        public static void ReportNullCheck(Report report)
         {
-            if (Report == null)
+            if (report == null)
             {
                 throw new HttpException(
                     ErrorMessages.ReportNotFound,
@@ -94,9 +94,9 @@ namespace Core.Exceptions
             }
         }
 
-        public static void RoleNullCheck(Role Role)
+        public static void RoleNullCheck(Role role)
         {
-            if (Role == null)
+            if (role == null)
             {
                 throw new HttpException(
                     ErrorMessages.RoleNotFound,
