@@ -72,18 +72,14 @@ namespace Core.Services
             return claims;
         }
 
-        public RefreshToken GenerateRefreshToken(string userId)
+        public string GenerateRefreshToken()
         {
             var randomBytes = new byte[32];
             using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
 
             rngCryptoServiceProvider.GetBytes(randomBytes);
 
-            var refreshToken = new RefreshToken
-            {
-                Token = Convert.ToBase64String(randomBytes),
-                UserId = userId
-            };
+            var refreshToken = Convert.ToBase64String(randomBytes);
 
             return refreshToken;
         }
