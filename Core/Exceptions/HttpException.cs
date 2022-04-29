@@ -8,7 +8,7 @@ namespace Core.Exceptions
     {
         public HttpStatusCode StatusCode { get; set; }
         public HttpException() { }
-        public HttpException(HttpStatusCode statusCode, string message) : base(message)
+        public HttpException(string message, HttpStatusCode statusCode) : base(message)
         {
             this.StatusCode = statusCode;
         }

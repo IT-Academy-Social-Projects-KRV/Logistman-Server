@@ -47,7 +47,7 @@ namespace Core.Services
                     messageBuilder.AppendLine(error.Description);
                 }
 
-                throw new HttpException(HttpStatusCode.BadRequest, messageBuilder.ToString());
+                throw new HttpException(messageBuilder.ToString(), HttpStatusCode.BadRequest);
             }
         }
 
@@ -57,7 +57,7 @@ namespace Core.Services
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, data.Password))
             {
-                throw new HttpException(HttpStatusCode.Unauthorized, ErrorMessages.IncorrectLoginOrPassword);
+                throw new HttpException(ErrorMessages.IncorrectLoginOrPassword, HttpStatusCode.Unauthorized);
             }
 
             return await GenerateUserTokens(user);
@@ -69,7 +69,7 @@ namespace Core.Services
 
             if (refreshToken == null)
             {
-                throw new HttpException(HttpStatusCode.NotFound, ErrorMessages.InvalidToken);
+                throw new HttpException(ErrorMessages.InvalidToken, HttpStatusCode.NotFound);
             }
 
             await _refreshTokenRepository.DeleteAsync(refreshToken);
@@ -126,7 +126,7 @@ namespace Core.Services
             var user = _refreshTokenRepository.Query().Where(t => t.Token == token).FirstOrDefault().User;
 
             if (user == null)
-                throw new HttpException(HttpStatusCode.NotFound, ErrorMessages.InvalidToken);
+                throw new HttpException(ErrorMessages.InvalidToken, HttpStatusCode.NotFound);
 
             return user;
         }

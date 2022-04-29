@@ -19,8 +19,8 @@ namespace Core.Exceptions
             if (User == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.UserNotFound);
+                    ErrorMessages.UserNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
@@ -29,8 +29,8 @@ namespace Core.Exceptions
             if (Car == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.CarNotFound);
+                    ErrorMessages.CarNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
@@ -39,8 +39,8 @@ namespace Core.Exceptions
             if (Offer == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.OfferNotFound);
+                    ErrorMessages.OfferNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
@@ -49,8 +49,8 @@ namespace Core.Exceptions
             if (Point == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.PointNotFound);
+                    ErrorMessages.PointNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
@@ -59,8 +59,8 @@ namespace Core.Exceptions
             if (CarCategory == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.CarCategoryNotFound);
+                    ErrorMessages.CarCategoryNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
@@ -69,8 +69,8 @@ namespace Core.Exceptions
             if (GoodCategory == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.GoodCategoryNotFound);
+                    ErrorMessages.GoodCategoryNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
@@ -79,8 +79,8 @@ namespace Core.Exceptions
             if (Rating == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.RatingNotFound);
+                    ErrorMessages.RatingNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
@@ -89,8 +89,8 @@ namespace Core.Exceptions
             if (Report == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.ReportNotFound);
+                    ErrorMessages.ReportNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
 
@@ -99,8 +99,8 @@ namespace Core.Exceptions
             if (Role == null)
             {
                 throw new HttpException(
-                    HttpStatusCode.NotFound,
-                    ErrorMessages.RoleNotFound);
+                    ErrorMessages.RoleNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
     }
