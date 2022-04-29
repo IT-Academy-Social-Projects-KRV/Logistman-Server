@@ -2,6 +2,7 @@ using AutoMapper;
 using Core.DTO.UserDTO;
 using Core.Entities.UserEntity;
 using Core.Helpers;
+using Core.Helpers.ApplicationProfiles;
 using Core.Interfaces.CustomService;
 using Core.Services;
 using Core.Validation;
@@ -23,10 +24,7 @@ namespace Core
         {
             var configures = new MapperConfiguration(mc =>
             {
-                mc.CreateMap<User, UserRegistrationDTO>().ReverseMap();
-                mc.CreateMap<User, UserRegistrationDTO>().ReverseMap()
-                    .ForMember(dest => dest.UserName, 
-                    act => act.MapFrom(src => src.Email));
+                mc.AddProfile(new UserProfiles());
             });
 
             IMapper mapper = configures.CreateMapper();
