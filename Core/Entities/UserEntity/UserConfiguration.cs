@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Core.Entities.UserEntity
 {
@@ -11,9 +10,6 @@ namespace Core.Entities.UserEntity
             builder
                 .Property(p => p.HasCar)
                 .HasDefaultValue(false);
-            builder
-                .Property(p => p.RegistrationDate)
-                .HasDefaultValue(DateTimeOffset.UtcNow);
             builder
                 .Property(p => p.Rating)
                 .IsRequired(false);
