@@ -4,6 +4,7 @@ using Core.Exceptions;
 using Core.Helpers;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -26,7 +27,7 @@ namespace Core.Services
 
         public string CreateToken(IEnumerable<Claim> claims)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Value.Key));  
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Value.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
@@ -86,6 +87,31 @@ namespace Core.Services
             };
 
             return refreshToken;
+        }
+
+        public string GetUserIdFromRequest(HttpRequest request)
+        {
+            request.Headers.TryGetValue("Authorization", out var accessToken);
+
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                throw new HttpException(ErrorMessages.InvalidToken, System.Net.HttpStatusCode.NotFound);
+            }
+
+            // Split a token because its format is "Bearer ${token}"
+            accessToken = accessToken.ToString().Split(' ')[1];
+
+            var claims = GetClaimsFromExpiredToken(accessToken);
+
+            foreach (Claim claim in claims)
+            {
+                if (claim.Type == ClaimTypes.NameIdentifier)
+                {
+                    return claim.Value;
+                }
+            }
+
+            throw new HttpException(ErrorMessages.InvalidToken, System.Net.HttpStatusCode.NotFound);
         }
     }
 }

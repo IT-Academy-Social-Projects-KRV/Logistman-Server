@@ -154,7 +154,7 @@
     <value>Invalid request</value>
   </data>
   <data name="InvalidToken" xml:space="preserve">
-    <value>Invalid refresh token</value>
+    <value>Invalid token</value>
   </data>
   <data name="InvalidTokenVerification" xml:space="preserve">
     <value>Invalid token verification</value>
