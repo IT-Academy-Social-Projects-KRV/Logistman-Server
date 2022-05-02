@@ -81,54 +81,64 @@ namespace Core.Services
             var claims = _jwtService.SetClaims(user);
             var token = _jwtService.CreateToken(claims);
             var refreshToken = await CreateRefreshToken(user.Id);
+            user.RefreshTokens.Add(refreshToken);
 
             var tokens = new UserAutorizationDTO()
             {
                 Token = token,
-                RefreshToken = refreshToken
+                RefreshToken = refreshToken.Token
             };
 
             return tokens;
         }
 
-        private async Task<string> CreateRefreshToken(string userId)
+        private async Task<RefreshToken> CreateRefreshToken(string userId)
         {
-            var refeshTokenEntity = _jwtService.GenerateRefreshToken(userId);
+            var refeshToken = _jwtService.GenerateRefreshToken();
 
-            await _refreshTokenRepository.InsertAsync(refeshTokenEntity);
+            var refreshTokenEntity = new RefreshToken
+            {
+                Token = refeshToken,
+                UserId = userId
+            };
+
+            await _refreshTokenRepository.InsertAsync(refreshTokenEntity);
             await _refreshTokenRepository.SaveChangesAsync();
 
-            return refeshTokenEntity.Token;
+            return refreshTokenEntity;
         }
 
         public async Task<UserAutorizationDTO> RefreshTokenAsync(UserAutorizationDTO userTokensDTO)
         {
-            var user = getUserByRefreshToken(userTokensDTO.RefreshToken);
-            var refeshTokenFromDb = user.RefreshTokens.FirstOrDefault();
-
+            var refreshToken = GetRefreshToken(userTokensDTO.RefreshToken);
             var claims = _jwtService.GetClaimsFromExpiredToken(userTokensDTO.Token);
             var newToken = _jwtService.CreateToken(claims);
-            var newRefreshToken = await CreateRefreshToken(user.Id);
+            var newRefreshToken = _jwtService.GenerateRefreshToken();
 
-            refeshTokenFromDb.Token = newRefreshToken;
+            refreshToken.Token = newRefreshToken;
+
+            await _refreshTokenRepository.UpdateAsync(refreshToken);
+            await _refreshTokenRepository.SaveChangesAsync();
 
             var tokens = new UserAutorizationDTO()
             {
                 Token = newToken,
-                RefreshToken = newRefreshToken
+                RefreshToken = refreshToken.Token
             };
 
             return tokens;
         }
 
-        private User getUserByRefreshToken(string token)
+        private RefreshToken GetRefreshToken(string token)
         {
-            var user = _refreshTokenRepository.Query().Where(t => t.Token == token).FirstOrDefault().User;
+            var refreshToken = _refreshTokenRepository
+                .Query()
+                .Where(t => t.Token == token)
+                .FirstOrDefault();
 
-            if (user == null)
-                throw new HttpException(ErrorMessages.InvalidToken, HttpStatusCode.NotFound);
+            ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 
-            return user;
+            return refreshToken;
         }
     }
 }

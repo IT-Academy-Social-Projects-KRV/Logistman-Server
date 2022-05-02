@@ -9,6 +9,7 @@ using Core.Entities.GoodCategoryEntity;
 using Core.Entities.RatingEntity;
 using Core.Entities.ReportEntity;
 using Core.Entities.RoleEntity;
+using Core.Entities.RefreshTokenEntity;
 
 namespace Core.Exceptions
 {
@@ -100,6 +101,16 @@ namespace Core.Exceptions
             {
                 throw new HttpException(
                     ErrorMessages.RoleNotFound,
+                    HttpStatusCode.NotFound);
+            }
+        }
+
+        public static void RefreshTokenNullCheck(RefreshToken refreshToken)
+        {
+            if (refreshToken == null)
+            {
+                throw new HttpException(
+                    ErrorMessages.InvalidToken,
                     HttpStatusCode.NotFound);
             }
         }
