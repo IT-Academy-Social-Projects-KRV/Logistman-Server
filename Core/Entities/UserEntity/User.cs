@@ -15,7 +15,7 @@ namespace Core.Entities.UserEntity
         public string Surname { get; set; }
         public float? Rating  { get; set; }
         public bool HasCar { get; set; }
-        public DateTimeOffset RegistrationDate { get; set; }
+        public DateTimeOffset RegistrationDate { get; set; } = DateTimeOffset.UtcNow;
         public ICollection<Offer> Offers { get; set; }
         public ICollection<Trip> Trips { get; set; }
         public ICollection<Rating> RatedRatings { get; set; }
