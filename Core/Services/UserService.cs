@@ -3,7 +3,7 @@ using Core.DTO.UserDTO;
 using Core.Entities.UserEntity;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
-using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -24,9 +24,9 @@ namespace Core.Services
             _mapper = mapper;
         }
 
-        public async Task<UserProfileInfoDTO> GetUserProfileInfoAsync(HttpRequest request)
+        public async Task<UserProfileInfoDTO> GetUserProfileInfoAsync(ClaimsPrincipal currentUser)
         {
-            var userId = _jwtService.GetUserIdFromRequest(request);
+            var userId = currentUser.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var user = await _userRepository.GetByIdAsync(userId);
 

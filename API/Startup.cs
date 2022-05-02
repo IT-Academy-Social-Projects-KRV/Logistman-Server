@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using API.ServiceExtension;
 
 namespace API
 {
@@ -40,6 +41,8 @@ namespace API
             services.AddResponseCaching();
 
             services.ConfigJwtOptions(Configuration);
+
+            services.AddJwtAuthentication(Configuration);
 
             services.AddSwaggerGen(c =>
             {
