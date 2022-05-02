@@ -1,6 +1,4 @@
 using AutoMapper;
-using Core.DTO.UserDTO;
-using Core.Entities.UserEntity;
 using Core.Helpers;
 using Core.Helpers.ApplicationProfiles;
 using Core.Interfaces.CustomService;
@@ -17,6 +15,7 @@ namespace Core
         public static void AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtService, JwtService>();
         }
         

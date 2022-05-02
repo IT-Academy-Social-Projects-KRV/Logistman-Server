@@ -154,7 +154,7 @@
     <value>Invalid request</value>
   </data>
   <data name="InvalidToken" xml:space="preserve">
-    <value>Invalid refresh token</value>
+    <value>Invalid token</value>
   </data>
   <data name="InvalidTokenVerification" xml:space="preserve">
     <value>Invalid token verification</value>
@@ -200,6 +200,9 @@
   </data>
   <data name="UserAlreadyHasInvite" xml:space="preserve">
     <value>User already has invite, wait for a answer</value>
+  </data>
+  <data name="UserIdNotFound" xml:space="preserve">
+    <value>User id not found!</value>
   </data>
   <data name="UsernameAlreadyExists" xml:space="preserve">
     <value>User with this usernamre already exist</value>

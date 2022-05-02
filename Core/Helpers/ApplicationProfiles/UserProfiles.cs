@@ -12,6 +12,8 @@ namespace Core.Helpers.ApplicationProfiles
             CreateMap<User, UserRegistrationDTO>().ReverseMap()
                 .ForMember(dest => dest.UserName,
                     act => act.MapFrom(src => src.Email));
+
+            CreateMap<User, UserProfileInfoDTO>().ReverseMap();
         }
     }
 }

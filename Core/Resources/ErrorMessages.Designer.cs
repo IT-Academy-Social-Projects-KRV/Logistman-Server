@@ -311,7 +311,18 @@ namespace Core.Resources {
                 return ResourceManager.GetString("UserAlreadyHasInvite", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to User not found.
+        /// </summary>
+        internal static string UserIdNotFound
+        {
+            get
+            {
+                return ResourceManager.GetString("UserIdNotFound", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to User with this usernamre already exist.
         /// </summary>
