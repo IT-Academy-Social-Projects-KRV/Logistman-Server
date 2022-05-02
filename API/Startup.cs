@@ -43,11 +43,8 @@ namespace API
             services.ConfigJwtOptions(Configuration);
 
             services.AddJwtAuthentication(Configuration);
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-            });
+            
+            services.AddSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
