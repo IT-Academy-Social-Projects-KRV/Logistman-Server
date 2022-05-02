@@ -201,6 +201,9 @@
   <data name="UserAlreadyHasInvite" xml:space="preserve">
     <value>User already has invite, wait for a answer</value>
   </data>
+  <data name="UserIdNotFound" xml:space="preserve">
+    <value>User id not found!</value>
+  </data>
   <data name="UsernameAlreadyExists" xml:space="preserve">
     <value>User with this usernamre already exist</value>
   </data>

@@ -21,7 +21,8 @@ namespace API.Controllers
         [HttpGet("user-info")]
         public async Task<ActionResult> GetUserInfo()
         {
-            var userInfo = await _userService.GetUserProfileInfoAsync(User);
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            var userInfo = await _userService.GetUserProfileInfoAsync(userId);
             return Ok(userInfo);
         }
     }

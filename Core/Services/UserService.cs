@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Core.DTO.UserDTO;
 using Core.Entities.UserEntity;
+using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
+using Core.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -24,9 +26,17 @@ namespace Core.Services
             _mapper = mapper;
         }
 
-        public async Task<UserProfileInfoDTO> GetUserProfileInfoAsync(ClaimsPrincipal currentUser)
+        public string GetCurrentUserNameIdentifier(ClaimsPrincipal currentUser)
         {
-            var userId = currentUser.FindFirstValue(ClaimTypes.NameIdentifier);
+            return currentUser.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        public async Task<UserProfileInfoDTO> GetUserProfileInfoAsync(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new HttpException(ErrorMessages.UserIdNotFound, System.Net.HttpStatusCode.NotFound);
+            }
 
             var user = await _userRepository.GetByIdAsync(userId);
 

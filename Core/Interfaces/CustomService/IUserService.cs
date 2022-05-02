@@ -6,6 +6,7 @@ namespace Core.Interfaces.CustomService
 {
     public interface IUserService
     {
-        Task<UserProfileInfoDTO> GetUserProfileInfoAsync(ClaimsPrincipal user);
+        Task<UserProfileInfoDTO> GetUserProfileInfoAsync(string userId);
+        string GetCurrentUserNameIdentifier(ClaimsPrincipal currentUser);
     }
 }
