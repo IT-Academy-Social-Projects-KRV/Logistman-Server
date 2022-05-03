@@ -16,29 +16,23 @@ namespace Core.Validation
             _userManager = userManager;
 
             RuleFor(user => user.Name)
-                .NotNull()
-                .NotEmpty()
-                .Length(2, 50)
-                .Matches(@"^\D*$").WithMessage("'{PropertyName}' must not contain digits!")
-                .Matches(@"\A[A-Z][a-z]{1,49}[a-z]*$").WithMessage("The first letter in '{PropertyName}' must be uppercase, the others must be lowercase!")
-                .Matches("^[^£# “”!@$%^&*(){}:;<>,.?/+_=|'~\\-]*$").WithMessage("'{PropertyName}' must not contain special characters!");
+                .NotEmpty().WithMessage("'{PropertyName}' must not be empty!")
+                .Length(2, 50).WithMessage("'{PropertyName}' must be between 2 and 50 letters!")
+                .Matches(@"^[A-Z][a-z]+$").WithMessage("The first letter in '{PropertyName}' must be uppercase, the others lowercase! And only in Latin letters!");
 
             RuleFor(user => user.Surname)
-                .NotNull()
-                .NotEmpty()
-                .Length(2, 50)
-                .Matches(@"^\D*$").WithMessage("'{PropertyName}' must not contain digits!")
-                .Matches(@"\A[A-Z][a-z]{1,49}[a-z]*$").WithMessage("The first letter in '{PropertyName}' must be uppercase, the others must be lowercase!")
-                .Matches("^[^£# “”!@$%^&*(){}:;<>,.?/+_=|'~\\-]*$").WithMessage("'{PropertyName}' must not contain special characters!");
+                .NotEmpty().WithMessage("'{PropertyName}' must not be empty!")
+                .Length(2, 50).WithMessage("'{PropertyName}' must be between 2 and 50 letters!")
+                .Matches(@"^[A-Z][a-z]+$").WithMessage("The first letter in '{PropertyName}' must be uppercase, the others lowercase! And only in Latin letters!");
 
             RuleFor(user => user.Email)
-                .NotNull()
+                .NotEmpty().WithMessage("'{PropertyName}' must not be empty!")
                 .EmailAddress().WithMessage("'{PropertyValue}' - is not an email address!")
                 .MustAsync(IsUniqueUserEmail).WithMessage("A user with this email ('{PropertyValue}') is already registered!");
 
             RuleFor(user => user.Password)
-                .NotNull()
-                .Length(8, 50)
+                .NotEmpty().WithMessage("'{PropertyName}' must not be empty!")
+                .Length(8, 50).WithMessage("'{PropertyName}' must be between 8 and 50 letters!")
                 .Matches("[A-Z]").WithMessage("'{PropertyName}' must contain one or more uppercase letters!")
                 .Matches("[a-z]").WithMessage("'{PropertyName}' must contain one or more lowercase letters!")
                 .Matches(@"\d").WithMessage("'{PropertyName}' must contain one or more digits!")
