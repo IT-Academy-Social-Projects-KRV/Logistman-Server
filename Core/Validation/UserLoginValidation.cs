@@ -8,12 +8,12 @@ namespace Core.Validation
         public UserLoginValidation()
         {
             RuleFor(user => user.Email)
-                .NotNull()
+                .NotEmpty().WithMessage("'{PropertyName}' must not be empty!")
                 .EmailAddress().WithMessage("'{PropertyValue}' - is not an email address!");
 
             RuleFor(user => user.Password)
-                .NotNull()
-                .Length(8, 50)
+                .NotEmpty().WithMessage("'{PropertyName}' must not be empty!")
+                .Length(8, 50).WithMessage("'{PropertyName}' must be between 8 and 50 letters!")
                 .Matches("[A-Z]").WithMessage("'{PropertyName}' must contain one or more uppercase letters!")
                 .Matches("[a-z]").WithMessage("'{PropertyName}' must contain one or more lowercase letters!")
                 .Matches(@"\d").WithMessage("'{PropertyName}' must contain one or more digits!")
