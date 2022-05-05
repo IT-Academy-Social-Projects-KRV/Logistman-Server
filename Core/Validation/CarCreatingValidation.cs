@@ -12,7 +12,7 @@ namespace Core.Validation
                 .Matches("^[a-zA-Z0-9 ]*$");
             RuleFor(car => car.Color)
                 .NotEmpty()
-                .Matches("^[a-zA-Z_.-]*$");
+                .Matches("^[a-zA-Z]*$");
             RuleFor(car => car.RegistrationNumber)
                 .NotEmpty()
                 .Matches("^[a-zA-Z0-9 ]*$");
