@@ -17,6 +17,8 @@ namespace Core
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IOfferService, OfferService>();
+            services.AddScoped<IPointService, PointService>();
         }
         
         public static void AddAutoMapper(this IServiceCollection services)
@@ -24,6 +26,8 @@ namespace Core
             var configures = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new UserProfiles());
+                mc.AddProfile(new OfferProfiles());
+                mc.AddProfile(new PointProfiles());
             });
 
             IMapper mapper = configures.CreateMapper();
