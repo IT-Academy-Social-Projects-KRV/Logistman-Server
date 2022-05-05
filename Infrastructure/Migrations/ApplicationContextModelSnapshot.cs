@@ -53,6 +53,11 @@ namespace Infrastructure.Migrations
                     b.Property<DateTimeOffset>("CreationDate")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<bool>("IsVerified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<float>("LoadCapacity")
                         .HasColumnType("real");
 
@@ -70,6 +75,9 @@ namespace Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(20)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Vin")
                         .HasMaxLength(17)
                         .IsUnicode(false)
@@ -78,6 +86,8 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cars");
                 });
@@ -589,7 +599,13 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.UserEntity.User", "User")
+                        .WithMany("Cars")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Entities.OfferEntity.Offer", b =>
@@ -805,6 +821,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.UserEntity.User", b =>
                 {
+                    b.Navigation("Cars");
+
                     b.Navigation("EstimatorRatings");
 
                     b.Navigation("Offers");

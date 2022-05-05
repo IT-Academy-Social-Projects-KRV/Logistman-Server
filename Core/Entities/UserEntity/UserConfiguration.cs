@@ -41,6 +41,10 @@ namespace Core.Entities.UserEntity
                 .HasMany(p => p.RefreshTokens)
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserId);
+            builder
+                .HasMany(p => p.Cars)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId);
         }
     }
 }

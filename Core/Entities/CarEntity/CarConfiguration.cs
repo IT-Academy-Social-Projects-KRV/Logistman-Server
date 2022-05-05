@@ -34,6 +34,13 @@ namespace Core.Entities.CarEntity
                 .HasMany(p => p.Trips)
                 .WithOne(p => p.Car)
                 .HasForeignKey(p => p.TransportationCarId);
+            builder
+                .HasOne(p => p.User)
+                .WithMany(p => p.Cars)
+                .HasForeignKey(p => p.UserId);
+            builder
+                .Property(p => p.IsVerified)
+                .HasDefaultValue(false);
         }
     }
 }
