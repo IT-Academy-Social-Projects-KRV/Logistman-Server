@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Core.DTO.CarDTO;
 using Core.Interfaces.CustomService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CarController : ControllerBase

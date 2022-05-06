@@ -42,7 +42,7 @@ namespace Core.Services
             car.User = user ?? throw new HttpException(ErrorMessages.UserNotFound, HttpStatusCode.NotFound);
             car.User.HasCar = true;
             
-            await _carRepository.InsertAsync(car);
+            car = await _carRepository.InsertAsync(car);
             await _carRepository.SaveChangesAsync();
             return _mapper.Map<CarDTO>(car);
         }
