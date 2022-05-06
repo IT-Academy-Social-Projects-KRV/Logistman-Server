@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220503175123_CarEntityChanged")]
+    [Migration("20220506071639_CarEntityChanged")]
     partial class CarEntityChanged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
