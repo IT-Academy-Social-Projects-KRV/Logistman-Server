@@ -17,6 +17,7 @@ namespace Core
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<ICarService, CarService>();
         }
         
         public static void AddAutoMapper(this IServiceCollection services)
@@ -24,9 +25,10 @@ namespace Core
             var configures = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new UserProfiles());
+                mc.AddProfile(new CarProfile());
             });
 
-            IMapper mapper = configures.CreateMapper();
+            var mapper = configures.CreateMapper();
             services.AddSingleton(mapper);
         }
 

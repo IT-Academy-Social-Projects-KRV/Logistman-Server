@@ -6,6 +6,7 @@ using Core.Entities.TripEntity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using Core.Entities.CarEntity;
 
 namespace Core.Entities.UserEntity
 {
@@ -16,6 +17,7 @@ namespace Core.Entities.UserEntity
         public float? Rating  { get; set; }
         public bool HasCar { get; set; }
         public DateTimeOffset RegistrationDate { get; set; } = DateTimeOffset.UtcNow;
+        public ICollection<Car> Cars { get; set; }
         public ICollection<Offer> Offers { get; set; }
         public ICollection<Trip> Trips { get; set; }
         public ICollection<Rating> RatedRatings { get; set; }
