@@ -26,7 +26,7 @@ namespace Core.Validation
                 .MaximumLength(100);
 
             RuleFor(point => point.Order)
-                .NotEmpty();
+                .GreaterThan(-1);
         }
     }
 }

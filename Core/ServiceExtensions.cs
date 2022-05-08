@@ -19,6 +19,7 @@ namespace Core
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IOfferService, OfferService>();
             services.AddScoped<IPointService, PointService>();
+            services.AddScoped<IGoodCategoryService, GoodCategoryService>();
             services.AddScoped<ICarService, CarService>();
         }
         
@@ -29,6 +30,7 @@ namespace Core
                 mc.AddProfile(new UserProfiles());
                 mc.AddProfile(new OfferProfiles());
                 mc.AddProfile(new PointProfiles());
+                mc.AddProfile(new GoodCategoryProfiles());
                 mc.AddProfile(new CarProfile());
             });
 
