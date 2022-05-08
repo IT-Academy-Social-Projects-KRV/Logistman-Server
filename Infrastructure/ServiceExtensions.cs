@@ -17,7 +17,7 @@ namespace Infrastructure
         }
         public static void AddIdentityDbContext(this IServiceCollection service)
         {
-            service.AddIdentity<User, Role>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+            service.AddIdentity<User, Role>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders().AddRoles<Role>();
         }
         public static void AddRepositories(this IServiceCollection service)
         {

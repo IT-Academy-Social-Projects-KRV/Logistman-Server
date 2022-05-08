@@ -11,7 +11,6 @@ namespace Core.DTO.OfferDTO
         public DateTimeOffset ExpirationDate { get; set; }
         public int GoodCategoryId { get; set; }
         public int OfferPointId { get; set; }
-        public string OfferCreatorId { get; set; }
         public string CreatorRoleId { get; set; }
     }
 }

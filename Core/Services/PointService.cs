@@ -4,6 +4,7 @@ using Core.DTO.PointDTO;
 using Core.Entities.PointEntity;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Services
 {
@@ -17,10 +18,11 @@ namespace Core.Services
             _mapper = mapper;
             _pointRepository = pointRepository;
         }
-        public async Task CreatePoint(PointCreateDTO offerCreate)
+        public async Task<PointCreateDTO> CreatePoint(PointCreateDTO offerCreate)
         {
             await _pointRepository.InsertAsync(_mapper.Map<Point>(offerCreate));
             await _pointRepository.SaveChangesAsync();
+            return _mapper.Map<PointCreateDTO>(offerCreate);
         }
     }
 }

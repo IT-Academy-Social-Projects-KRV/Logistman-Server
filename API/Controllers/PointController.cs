@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
-using Core.DTO.PointDTO;
+﻿using Core.DTO.PointDTO;
 using Core.Interfaces.CustomService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PointController : ControllerBase
@@ -19,8 +20,7 @@ namespace API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] PointCreateDTO pointCreate)
         {
-            await _pointService.CreatePoint(pointCreate);
-            return Ok(pointCreate);
+            return Ok(await _pointService.CreatePoint(pointCreate));
         }
     }
 }
