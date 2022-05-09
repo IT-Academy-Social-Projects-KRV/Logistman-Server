@@ -24,7 +24,7 @@ namespace Core.Entities.OfferEntity
         public Trip Trip { get; set; }
         public string OfferCreatorId { get; set; }
         public User User { get; set; }
-        public string CreatorRoleId { get; set; }
+        public int CreatorRoleId { get; set; }
         public Role Role { get; set; }
     }
 }

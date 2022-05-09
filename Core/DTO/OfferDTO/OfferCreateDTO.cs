@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.Entities.GoodCategoryEntity;
+using Core.DTO.PointDTO;
 
 namespace Core.DTO.OfferDTO
 {
@@ -10,7 +10,7 @@ namespace Core.DTO.OfferDTO
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset ExpirationDate { get; set; }
         public int GoodCategoryId { get; set; }
-        public int OfferPointId { get; set; }
-        public string CreatorRoleId { get; set; }
+        public string Role { get; set; }
+        public PointCreateDTO Point { get; set; }
     }
 }

@@ -2,12 +2,14 @@
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using AutoMapper;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using System.Threading.Tasks;
+using Core.DTO.PointDTO;
 using Core.Entities.GoodCategoryEntity;
 using Core.Entities.PointEntity;
 using Core.Entities.RoleEntity;
@@ -23,25 +25,22 @@ namespace Core.Services
     {
         private readonly IMapper _mapper;
         private readonly IRepository<Offer> _offerRepository;
-        private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly IRepository<Point> _pointRepository;
         private readonly IRepository<GoodCategory> _goodCategoryRepository;
-        private readonly IRepository<Role> _repository;
+        private readonly IRepository<Role> _roleRepository;
         public OfferService(
             IMapper mapper, 
-            IRepository<Offer> offerRepository, 
-            RoleManager<Role> roleManager,
+            IRepository<Offer> offerRepository,
             UserManager<User> userManager, 
             IRepository<Point> pointRepository,
             IRepository<GoodCategory> goodCategoryRepository,
-            IRepository<Role> repository
-            )
+            IRepository<Role> roleRepository
+        )
         {
-            _repository = repository;
+            _roleRepository = roleRepository;
             _mapper = mapper;
             _offerRepository = offerRepository;
-            _roleManager = roleManager;
             _userManager = userManager;
             _pointRepository = pointRepository;
             _goodCategoryRepository = goodCategoryRepository;
@@ -49,19 +48,30 @@ namespace Core.Services
 
         public async Task<OfferCreateDTO> CreateOffer(OfferCreateDTO offerCreate, string userId)
         {
+           
             ExceptionMethods.UserNullCheck(
                 await _userManager.FindByIdAsync(userId));
-            ExceptionMethods.PointNullCheck(
-                await _pointRepository.GetByIdAsync(offerCreate.OfferPointId));
             ExceptionMethods.GoodCategoryNullCheck(
                 await _goodCategoryRepository.GetByIdAsync(offerCreate.GoodCategoryId));
 
-            var test = _roleManager.Roles.First(p => p.Id == offerCreate.CreatorRoleId);
+            var roles = await _roleRepository.GetAllAsync();
+            var role = roles.FirstOrDefault(role => role.Name == offerCreate.Role.ToUpper());
+            if (role == null)
+            {
+                throw new HttpException("Role not found", HttpStatusCode.BadRequest);
+            }
 
+            var point = _mapper.Map<Point>(offerCreate.Point);
+            await _pointRepository.InsertAsync(point);
+            await _pointRepository.SaveChangesAsync();
+
+            
             var offer = _mapper.Map<Offer>(offerCreate);
             offer.OfferCreatorId = userId;
             offer.CreationDate = DateTimeOffset.UtcNow;
+            offer.OfferPointId = point.Id;
             offer.IsClosed = false;
+            offer.Role = role;
            
             await _offerRepository.InsertAsync(offer);
             await _offerRepository.SaveChangesAsync();
