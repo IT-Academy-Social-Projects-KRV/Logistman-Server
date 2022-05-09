@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="DTO\GoodCategoryDTO\" />
-    <Folder Include="DTO\OfferDTO\" />
     <Folder Include="Helpers\ApplicationProfiles\" />
   </ItemGroup>
 

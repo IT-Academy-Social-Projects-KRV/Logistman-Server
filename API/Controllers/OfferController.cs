@@ -13,10 +13,15 @@ namespace API.Controllers
     {
         private readonly IOfferService _offerService;
         private readonly IUserService _userService;
-        public OfferController(IOfferService offerService, IUserService userService)
+        private readonly IPointService _pointService;
+        public OfferController(
+            IOfferService offerService, 
+            IUserService userService,
+            IPointService pointService)
         {
             _offerService = offerService;
             _userService = userService;
+            _pointService = pointService;
         }
 
         [HttpPost("create")]
