@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlreadyComfirmEmail" xml:space="preserve">
+  <data name="AlreadyConfirmEmail" xml:space="preserve">
     <value>You already confirmed your email address!</value>
   </data>
   <data name="CannotAcceptInvite" xml:space="preserve">
@@ -159,7 +159,7 @@
   <data name="InvalidTokenVerification" xml:space="preserve">
     <value>Invalid token verification</value>
   </data>
-  <data name="InviteAlreadyAccerted" xml:space="preserve">
+  <data name="InviteAlreadyAccepted" xml:space="preserve">
     <value>You have already confirmed this invitation</value>
   </data>
   <data name="InviteNotFound" xml:space="preserve">
@@ -205,7 +205,7 @@
     <value>User id not found!</value>
   </data>
   <data name="UsernameAlreadyExists" xml:space="preserve">
-    <value>User with this usernamre already exist</value>
+    <value>User with this username already exist</value>
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>User not found</value>

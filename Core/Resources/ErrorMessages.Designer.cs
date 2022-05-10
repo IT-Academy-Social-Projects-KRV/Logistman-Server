@@ -72,9 +72,9 @@ namespace Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You already confirmed your email address!.
         /// </summary>
-        internal static string AlreadyComfirmEmail {
+        internal static string AlreadyConfirmEmail {
             get {
-                return ResourceManager.GetString("AlreadyComfirmEmail", resourceCulture);
+                return ResourceManager.GetString("AlreadyConfirmEmail", resourceCulture);
             }
         }
         
@@ -198,9 +198,9 @@ namespace Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You have already confirmed this invitation.
         /// </summary>
-        internal static string InviteAlreadyAccerted {
+        internal static string InviteAlreadyAccepted {
             get {
-                return ResourceManager.GetString("InviteAlreadyAccerted", resourceCulture);
+                return ResourceManager.GetString("InviteAlreadyAccepted", resourceCulture);
             }
         }
         
@@ -331,7 +331,7 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User with this usernamre already exist.
+        ///   Looks up a localized string similar to User with this username already exist.
         /// </summary>
         internal static string UsernameAlreadyExists {
             get {
