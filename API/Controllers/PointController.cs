@@ -20,7 +20,7 @@ namespace API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] PointCreateDTO pointCreate)
         {
-            return Ok(await _pointService.CreatePoint(pointCreate));
+            return Ok(await _pointService.CreatePointAsync(pointCreate));
         }
     }
 }

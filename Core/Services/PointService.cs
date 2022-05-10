@@ -17,7 +17,7 @@ namespace Core.Services
             _mapper = mapper;
             _pointRepository = pointRepository;
         }
-        public async Task<PointCreateDTO> CreatePoint(PointCreateDTO offerCreate)
+        public async Task<PointCreateDTO> CreatePointAsync(PointCreateDTO offerCreate)
         {
             await _pointRepository.InsertAsync(_mapper.Map<Point>(offerCreate));
             await _pointRepository.SaveChangesAsync();

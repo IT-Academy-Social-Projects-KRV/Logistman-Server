@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 namespace Core.Services
 {
     public class OfferService : IOfferService
-
     {
         private readonly IMapper _mapper;
         private readonly IRepository<Offer> _offerRepository;
@@ -42,7 +41,7 @@ namespace Core.Services
             _goodCategoryRepository = goodCategoryRepository;
         }
 
-        public async Task<OfferCreateDTO> CreateOffer(OfferCreateDTO offerCreate, string userId)
+        public async Task<OfferCreateDTO> CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
         {
             ExceptionMethods.UserNullCheck(
                 await _userManager.FindByIdAsync(userId));

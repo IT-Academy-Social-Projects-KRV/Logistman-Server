@@ -20,7 +20,7 @@ namespace API.Controllers
         [HttpGet("get/all")]
         public async Task<GoodCategoryListDTO> GetAllGoodCategory()
         { 
-            return await _goodCategoryService.GetAllGoodCategory();
+            return await _goodCategoryService.GetAllGoodCategoryAsync();
         }
     }
 }

@@ -5,6 +5,6 @@ namespace Core.Interfaces.CustomService
 {
     public interface IOfferService
     {
-        Task<OfferCreateDTO> CreateOffer(OfferCreateDTO offerCreate, string userId);
+        Task<OfferCreateDTO> CreateOfferAsync(OfferCreateDTO offerCreate, string userId);
     }
 }

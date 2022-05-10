@@ -6,7 +6,6 @@ using Core.Interfaces.CustomService;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace Core.Services
 {
     public class GoodCategoryService : IGoodCategoryService
@@ -22,7 +21,7 @@ namespace Core.Services
             _goodCategoryRepository = goodCategoryRepository;
         }
 
-        public async Task<GoodCategoryListDTO> GetAllGoodCategory()
+        public async Task<GoodCategoryListDTO> GetAllGoodCategoryAsync()
         {
             var list = await _goodCategoryRepository.GetAllAsync();
             return new GoodCategoryListDTO
