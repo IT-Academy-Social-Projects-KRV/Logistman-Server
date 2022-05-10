@@ -36,7 +36,7 @@ namespace Core.Services
         public async Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId)
         {
             var car = _mapper.Map<Car>(createCarDTO);
-            if (await CarExists(car))
+            if (await IsCarExist(car))
                 throw new HttpException(ErrorMessages.AddingCarNotAllowed, HttpStatusCode.NotAcceptable);
 
             car.CreationDate = DateTimeOffset.UtcNow;
@@ -51,17 +51,23 @@ namespace Core.Services
             return _mapper.Map<CarDTO>(car);
         }
 
-        private async Task<bool> CarExists(Car newCar)
+        private async Task<bool> IsCarExist(Car newCar)
         {
             var carsList = await _carRepository.GetAllAsync();
             foreach (var car in carsList)
             {
                 if (car.RegistrationNumber.Equals(newCar.RegistrationNumber))
+                {
                     return true;
+                }
                 if (car.Vin.Equals(newCar.Vin))
+                {
                     return true;
+                }
                 if (car.TechnicalPassport.Equals(newCar.TechnicalPassport))
+                {
                     return true;
+                }
             }
 
             return false;
