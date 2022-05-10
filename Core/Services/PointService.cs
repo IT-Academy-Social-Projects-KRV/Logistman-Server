@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO.PointDTO;
 using Core.Entities.PointEntity;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
-using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Core.Services
 {

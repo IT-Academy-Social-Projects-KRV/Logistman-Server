@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Core.Interfaces.CustomService;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO.GoodCategoryDTO;
 using Core.Entities.GoodCategoryEntity;
 using Core.Interfaces;
+using Core.Interfaces.CustomService;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace Core.Services

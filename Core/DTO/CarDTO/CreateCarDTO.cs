@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Core.DTO.CarDTO
+﻿namespace Core.DTO.CarDTO
 {
     public class CreateCarDTO
     {

@@ -1,5 +1,4 @@
-﻿using Core.Entities.RefreshTokenEntity;
-using Core.Entities.UserEntity;
+﻿using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Helpers;
 using Core.Interfaces.CustomService;

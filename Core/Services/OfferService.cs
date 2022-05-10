@@ -1,22 +1,18 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO.OfferDTO;
-using Core.Entities.OfferEntity;
-using Core.Interfaces;
-using Core.Interfaces.CustomService;
-using System.Threading.Tasks;
-using Core.DTO.PointDTO;
 using Core.Entities.GoodCategoryEntity;
+using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
 using Core.Entities.RoleEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
-using Core.Resources;
+using Core.Interfaces;
+using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -48,7 +44,6 @@ namespace Core.Services
 
         public async Task<OfferCreateDTO> CreateOffer(OfferCreateDTO offerCreate, string userId)
         {
-           
             ExceptionMethods.UserNullCheck(
                 await _userManager.FindByIdAsync(userId));
             ExceptionMethods.GoodCategoryNullCheck(
@@ -65,7 +60,6 @@ namespace Core.Services
             await _pointRepository.InsertAsync(point);
             await _pointRepository.SaveChangesAsync();
 
-            
             var offer = _mapper.Map<Offer>(offerCreate);
             offer.OfferCreatorId = userId;
             offer.CreationDate = DateTimeOffset.UtcNow;

@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using Core.DTO.OfferDTO;
-using Core.Entities.OfferEntity;
+﻿using Core.DTO.OfferDTO;
+using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService
 {

@@ -1,6 +1,6 @@
 ﻿using Core.Entities.OfferEntity;
-using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using FluentValidation.TestHelper;
 
 namespace Core.Entities.RoleEntity
 {
