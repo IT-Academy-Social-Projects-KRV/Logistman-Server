@@ -32,19 +32,39 @@ namespace Core.Services
             _mapper = mapper;
             _userManager = userManager;
         }
+
         public async Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId)
         {
             var car = _mapper.Map<Car>(createCarDTO);
+            if (await CarExists(car))
+                throw new HttpException(ErrorMessages.AddingCarNotAllowed, HttpStatusCode.NotAcceptable);
+
             car.CreationDate = DateTimeOffset.UtcNow;
             car.Category = await _categoryRepository.GetByIdAsync(createCarDTO.CategoryId);
-            
+
             var user = await _userManager.FindByIdAsync(userId);
             car.User = user ?? throw new HttpException(ErrorMessages.UserNotFound, HttpStatusCode.NotFound);
             car.User.HasCar = true;
-            
+
             car = await _carRepository.InsertAsync(car);
             await _carRepository.SaveChangesAsync();
             return _mapper.Map<CarDTO>(car);
+        }
+
+        private async Task<bool> CarExists(Car newCar)
+        {
+            var carsList = await _carRepository.GetAllAsync();
+            foreach (var car in carsList)
+            {
+                if (car.RegistrationNumber.Equals(newCar.RegistrationNumber))
+                    return true;
+                if (car.Vin.Equals(newCar.Vin))
+                    return true;
+                if (car.TechnicalPassport.Equals(newCar.TechnicalPassport))
+                    return true;
+            }
+
+            return false;
         }
     }
 }

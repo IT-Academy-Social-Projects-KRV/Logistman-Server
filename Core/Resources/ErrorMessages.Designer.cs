@@ -19,7 +19,7 @@ namespace Core.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class ErrorMessages {
@@ -57,6 +57,15 @@ namespace Core.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Car with one or more of such properties already exists..
+        /// </summary>
+        internal static string AddingCarNotAllowed {
+            get {
+                return ResourceManager.GetString("AddingCarNotAllowed", resourceCulture);
             }
         }
         
@@ -169,7 +178,7 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid refresh token.
+        ///   Looks up a localized string similar to Invalid token.
         /// </summary>
         internal static string InvalidToken {
             get {
@@ -311,18 +320,16 @@ namespace Core.Resources {
                 return ResourceManager.GetString("UserAlreadyHasInvite", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to User not found.
+        ///   Looks up a localized string similar to User id not found!.
         /// </summary>
-        internal static string UserIdNotFound
-        {
-            get
-            {
+        internal static string UserIdNotFound {
+            get {
                 return ResourceManager.GetString("UserIdNotFound", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to User with this usernamre already exist.
         /// </summary>

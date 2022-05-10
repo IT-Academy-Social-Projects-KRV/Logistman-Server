@@ -213,4 +213,7 @@
   <data name="WrongResetPasswordCode" xml:space="preserve">
     <value>Wrong code or this code is deprecated, try again!</value>
   </data>
+  <data name="AddingCarNotAllowed" xml:space="preserve">
+    <value>Car with one or more of such properties already exists.</value>
+  </data>
 </root>
