@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using Core.DTO.CarDTO;
-using Core.Entities.CarEntity;
+﻿using Core.DTO.CarDTO;
+using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService
 {

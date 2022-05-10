@@ -18,6 +18,7 @@ namespace Infrastructure.Data
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) 
             : base(options) {}
+        public DbSet<Role> Roles { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Offer> Offers { get; set; }

@@ -17,14 +17,20 @@ namespace Core
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IOfferService, OfferService>();
+            services.AddScoped<IPointService, PointService>();
+            services.AddScoped<IGoodCategoryService, GoodCategoryService>();
             services.AddScoped<ICarService, CarService>();
         }
-        
+
         public static void AddAutoMapper(this IServiceCollection services)
         {
             var configures = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new UserProfiles());
+                mc.AddProfile(new OfferProfiles());
+                mc.AddProfile(new PointProfiles());
+                mc.AddProfile(new GoodCategoryProfiles());
                 mc.AddProfile(new CarProfile());
             });
 

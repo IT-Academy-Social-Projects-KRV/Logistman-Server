@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO.CarDTO;
 using Core.Entities.CarEntity;
+using System.Linq;
 
 namespace Core.Helpers.ApplicationProfiles
 {

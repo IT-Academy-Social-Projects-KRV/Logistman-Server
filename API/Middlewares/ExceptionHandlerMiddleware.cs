@@ -26,16 +26,16 @@ namespace API.Middlewares
             {
                 await HandleGlobalExceptionAsync(context, exception.StatusCode, exception.Message);
             }
-            catch(Exception)
+            catch(Exception exception)
             {
-                await HandleGlobalExceptionAsync(context);
+                await HandleGlobalExceptionAsync(context, errorBody: exception.Message);
             }
         }
 
         private static async Task HandleGlobalExceptionAsync(
             HttpContext context, 
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError,
-            string errorBody = "Unknown error has occured")
+            string errorBody = "Unknown error has been occurred")
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
