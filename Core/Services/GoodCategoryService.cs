@@ -31,9 +31,9 @@ namespace Core.Services
                 {GoodCategories = _mapper.ProjectTo<GoodCategoryDTO>(list.AsQueryable())};
         }
 
-        public int GetGoodCategoryByName(string name)
+        public int GetGoodCategoryByName(string goodCategoryName)
         {
-            var goodCategory =  _goodCategoryRepository.Query().FirstOrDefault(goodCategory => goodCategory.Name == name);
+            var goodCategory =  _goodCategoryRepository.Query().FirstOrDefault(goodCategory => goodCategory.Name == goodCategoryName.ToUpper());
             ExceptionMethods.GoodCategoryNullCheck(goodCategory);
             return goodCategory.Id;
         }

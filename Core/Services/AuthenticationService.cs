@@ -133,8 +133,7 @@ namespace Core.Services
         {
             var refreshToken = _refreshTokenRepository
                 .Query()
-                .Where(t => t.Token == token)
-                .FirstOrDefault();
+                .FirstOrDefault(t => t.Token == token);
 
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 

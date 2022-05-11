@@ -9,13 +9,15 @@ namespace Core.Services
     public class RoleService : IRoleService
     {
         private readonly IRepository<Role> _roleRepository;
+
         public RoleService(IRepository<Role> roleRepository)
         {
             _roleRepository = roleRepository;
         }
-        public int GetRoleByName(string name)
+
+        public int GetRoleByName(string roleName)
         {
-            var role = _roleRepository.Query().FirstOrDefault(role => role.Name == name.ToUpper());
+            var role = _roleRepository.Query().FirstOrDefault(role => role.Name == roleName.ToUpper());
             ExceptionMethods.RoleNullCheck(role);
             return role.Id;
         }

@@ -19,6 +19,7 @@ namespace Core.Services
         private readonly IGoodCategoryService _goodCategoryRepository;
         private readonly IRoleService _roleRepository;
         private readonly IPointService _pointService;
+
         public OfferService(
             IMapper mapper, 
             IRepository<Offer> offerRepository,
@@ -34,6 +35,7 @@ namespace Core.Services
             _userManager = userManager;
             _goodCategoryRepository = goodCategoryRepository;
         }
+
         public async Task<OfferCreateDTO> CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
         {
             ExceptionMethods.UserNullCheck(await _userManager.FindByIdAsync(userId));
@@ -41,11 +43,11 @@ namespace Core.Services
             var offer = _mapper.Map<Offer>(offerCreate);
             offer.OfferCreatorId = userId;
             offer.CreationDate = DateTimeOffset.UtcNow;
-            offer.OfferPointId = await _pointService.CreatePointForOfferAsync(offerCreate.Point);
             offer.IsClosed = false;
             offer.CreatorRoleId = _roleRepository.GetRoleByName(offerCreate.Role);
             offer.GoodCategoryId = _goodCategoryRepository
                 .GetGoodCategoryByName(offerCreate.GoodCategory);
+            offer.OfferPointId = await _pointService.CreatePointForOfferAsync(offerCreate.Point);
 
             await _offerRepository.InsertAsync(offer);
             await _offerRepository.SaveChangesAsync();
