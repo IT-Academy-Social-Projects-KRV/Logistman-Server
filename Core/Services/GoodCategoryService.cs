@@ -1,10 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Core.DTO.GoodCategoryDTO;
 using Core.Entities.GoodCategoryEntity;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
@@ -26,6 +29,13 @@ namespace Core.Services
             var list = await _goodCategoryRepository.GetAllAsync();
             return new GoodCategoryListDTO
                 {GoodCategories = _mapper.ProjectTo<GoodCategoryDTO>(list.AsQueryable())};
+        }
+
+        public int GetGoodCategoryByName(string goodCategoryName)
+        {
+            var goodCategory =  _goodCategoryRepository.Query().FirstOrDefault(goodCategory => goodCategory.Name == goodCategoryName.ToUpper());
+            ExceptionMethods.GoodCategoryNullCheck(goodCategory);
+            return goodCategory.Id;
         }
     }
 }
