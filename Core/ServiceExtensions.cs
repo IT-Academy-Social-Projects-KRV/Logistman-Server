@@ -21,6 +21,7 @@ namespace Core
             services.AddScoped<IPointService, PointService>();
             services.AddScoped<IGoodCategoryService, GoodCategoryService>();
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
