@@ -21,6 +21,7 @@ namespace Core.Services
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
         private readonly IRoleService _roleService;
+        private readonly IUserService _userService;
         private readonly IRepository<RefreshToken> _refreshTokenRepository;
         private readonly IOptions<RolesOptions> _rolesOptions;
 
@@ -29,6 +30,7 @@ namespace Core.Services
             IMapper mapper,
             IJwtService jwtService,
             IRoleService roleService,
+            IUserService userService,
             IRepository<RefreshToken> refreshTokenRepository,
             IOptions<RolesOptions> rolesOptions)
         {
@@ -36,6 +38,7 @@ namespace Core.Services
             _mapper = mapper;
             _jwtService = jwtService;
             _roleService = roleService;
+            _userService = userService;
             _refreshTokenRepository = refreshTokenRepository;
             _rolesOptions = rolesOptions;
         }
@@ -63,7 +66,9 @@ namespace Core.Services
                 throw new HttpException(ErrorMessages.IncorrectLoginOrPassword, HttpStatusCode.Unauthorized);
             }
 
-            return await GenerateUserTokens(user);
+            var userRole = await _userService.GetUserRoleAsync(user);
+
+            return await GenerateUserTokens(user, userRole);
         }
 
         public async Task LogoutAsync(UserLogoutDTO userLogoutDTO)
@@ -79,9 +84,9 @@ namespace Core.Services
             await _refreshTokenRepository.SaveChangesAsync();
         }
 
-        private async Task<UserAutorizationDTO> GenerateUserTokens(User user)
+        private async Task<UserAutorizationDTO> GenerateUserTokens(User user, string userRole)
         {
-            var claims = await _jwtService.SetClaims(user);
+            var claims = _jwtService.SetClaims(user, userRole);
             var token = _jwtService.CreateToken(claims);
             var refreshToken = await CreateRefreshToken(user.Id);
             user.RefreshTokens.Add(refreshToken);

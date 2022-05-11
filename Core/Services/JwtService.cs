@@ -3,32 +3,25 @@ using Core.Exceptions;
 using Core.Helpers;
 using Core.Interfaces.CustomService;
 using Core.Resources;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Services
 {
     public class JwtService : IJwtService
     {
         private readonly IOptions<JwtOptions> _jwtOptions;
-        private readonly UserManager<User> _userManager;
 
-        public JwtService(
-            IOptions<JwtOptions> jwtOptions,
-            UserManager<User> userManager)
+        public JwtService(IOptions<JwtOptions> jwtOptions)
         {
             _jwtOptions = jwtOptions;
-            _userManager = userManager;
         }
 
         public string CreateToken(IEnumerable<Claim> claims)
@@ -73,20 +66,13 @@ namespace Core.Services
             return jwtSecurityToken.Claims;
         }
 
-        public async Task<IEnumerable<Claim>> SetClaims(User user)
+        public IEnumerable<Claim> SetClaims(User user, string userRole)
         {
-            var userRoles = await _userManager.GetRolesAsync(user) as List<string>;
-
-            if (userRoles == null)
-            {
-                throw new HttpException(ErrorMessages.RoleNotFound, HttpStatusCode.NotFound);
-            }
-
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, userRoles.First()) // we get only the first role, because the user will have only one
+                new Claim(ClaimTypes.Role, userRole)
             };
 
             return claims;
