@@ -5,12 +5,13 @@ using Core.Exceptions;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using Core.Resources;
 using Core.Interfaces;
 using Core.Entities.RefreshTokenEntity;
 using System.Linq;
+using Microsoft.Extensions.Options;
+using Core.Helpers;
 
 namespace Core.Services
 {
@@ -19,36 +20,41 @@ namespace Core.Services
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
+        private readonly IRoleService _roleService;
+        private readonly IUserService _userService;
         private readonly IRepository<RefreshToken> _refreshTokenRepository;
+        private readonly IOptions<RolesOptions> _rolesOptions;
 
         public AuthenticationService(
             UserManager<User> userManager,
             IMapper mapper,
             IJwtService jwtService,
-            IRepository<RefreshToken> refreshTokenRepository)
+            IRoleService roleService,
+            IUserService userService,
+            IRepository<RefreshToken> refreshTokenRepository,
+            IOptions<RolesOptions> rolesOptions)
         {
             _userManager = userManager;
             _mapper = mapper;
             _jwtService = jwtService;
+            _roleService = roleService;
+            _userService = userService;
             _refreshTokenRepository = refreshTokenRepository;
+            _rolesOptions = rolesOptions;
         }
 
         public async Task RegisterAsync(UserRegistrationDTO userData)
         {
             var user = _mapper.Map<User>(userData);
-            var result = await _userManager.CreateAsync(user, userData.Password);
+            var createUserResult = await _userManager.CreateAsync(user, userData.Password);
 
-            if (!result.Succeeded)
-            {
-                var messageBuilder = new StringBuilder();
+            ExceptionMethods.CheckIdentityResult(createUserResult);
 
-                foreach (var error in result.Errors)
-                {
-                    messageBuilder.AppendLine(error.Description);
-                }
+            var roleName = _rolesOptions.Value.User;
+            var userRole = _roleService.GetIdentityRoleByName(roleName);
+            var addToRoleResult = await _userManager.AddToRoleAsync(user, userRole.Name);
 
-                throw new HttpException(messageBuilder.ToString(), HttpStatusCode.BadRequest);
-            }
+            ExceptionMethods.CheckIdentityResult(addToRoleResult);
         }
 
         public async Task<UserAutorizationDTO> LoginAsync(UserLoginDTO data)
@@ -60,7 +66,9 @@ namespace Core.Services
                 throw new HttpException(ErrorMessages.IncorrectLoginOrPassword, HttpStatusCode.Unauthorized);
             }
 
-            return await GenerateUserTokens(user);
+            var userRole = await _userService.GetUserRoleAsync(user);
+
+            return await GenerateUserTokens(user, userRole);
         }
 
         public async Task LogoutAsync(UserLogoutDTO userLogoutDTO)
@@ -76,9 +84,9 @@ namespace Core.Services
             await _refreshTokenRepository.SaveChangesAsync();
         }
 
-        private async Task<UserAutorizationDTO> GenerateUserTokens(User user)
+        private async Task<UserAutorizationDTO> GenerateUserTokens(User user, string userRole)
         {
-            var claims = _jwtService.SetClaims(user);
+            var claims = _jwtService.SetClaims(user, userRole);
             var token = _jwtService.CreateToken(claims);
             var refreshToken = await CreateRefreshToken(user.Id);
             user.RefreshTokens.Add(refreshToken);

@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -55,19 +56,25 @@ namespace Core.Services
             tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
             jwtSecurityToken = securityToken as JwtSecurityToken;
 
-            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-                throw new HttpException(ErrorMessages.InvalidToken, System.Net.HttpStatusCode.BadRequest);
+            if (jwtSecurityToken == null ||
+                !jwtSecurityToken.Header.Alg
+                    .Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new HttpException(ErrorMessages.InvalidToken, HttpStatusCode.BadRequest);
+            }
 
             return jwtSecurityToken.Claims;
         }
 
-        public IEnumerable<Claim> SetClaims(User user)
+        public IEnumerable<Claim> SetClaims(User user, string userRole)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, userRole)
             };
+
             return claims;
         }
 

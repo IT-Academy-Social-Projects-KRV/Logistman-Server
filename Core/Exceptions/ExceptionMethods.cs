@@ -10,6 +10,8 @@ using Core.Entities.RatingEntity;
 using Core.Entities.ReportEntity;
 using Core.Entities.RoleEntity;
 using Core.Entities.RefreshTokenEntity;
+using Microsoft.AspNetCore.Identity;
+using System.Text;
 
 namespace Core.Exceptions
 {
@@ -105,6 +107,16 @@ namespace Core.Exceptions
             }
         }
 
+        public static void IdentityRoleNullCheck(IdentityRole role)
+        {
+            if (role == null)
+            {
+                throw new HttpException(
+                    ErrorMessages.RoleNotFound,
+                    HttpStatusCode.NotFound);
+            }
+        }
+
         public static void RefreshTokenNullCheck(RefreshToken refreshToken)
         {
             if (refreshToken == null)
@@ -112,6 +124,21 @@ namespace Core.Exceptions
                 throw new HttpException(
                     ErrorMessages.InvalidToken,
                     HttpStatusCode.NotFound);
+            }
+        }
+
+        public static void CheckIdentityResult(IdentityResult identityResult)
+        {
+            if (!identityResult.Succeeded)
+            {
+                var messageBuilder = new StringBuilder();
+
+                foreach (var error in identityResult.Errors)
+                {
+                    messageBuilder.AppendLine(error.Description);
+                }
+
+                throw new HttpException(messageBuilder.ToString(), HttpStatusCode.BadRequest);
             }
         }
     }
