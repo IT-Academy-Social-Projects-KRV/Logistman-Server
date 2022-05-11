@@ -65,7 +65,7 @@ namespace Core.Services
             offer.OfferPointId = point.Id;
             offer.IsClosed = false;
             offer.Role = role;
-           
+
             await _offerRepository.InsertAsync(offer);
             await _offerRepository.SaveChangesAsync();
             return _mapper.Map<OfferCreateDTO>(offerCreate);
