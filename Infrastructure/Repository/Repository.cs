@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.SpecificationEvaluator;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,11 @@ namespace Infrastructure.Repository
                 .Aggregate<Expression<Func<TEntity, object>>, IQueryable<TEntity>>(_dbSet, (current, include) => current.Include(include));
 
             return query;
+        }
+
+        public IEnumerable<TEntity> FindWithSpecification(ISpecification<TEntity> specification)
+        {
+            return SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification);
         }
     }
 }
