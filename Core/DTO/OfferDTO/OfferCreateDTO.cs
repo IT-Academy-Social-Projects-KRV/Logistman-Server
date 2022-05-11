@@ -9,7 +9,7 @@ namespace Core.DTO.OfferDTO
         public float GoodsWeight { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset ExpirationDate { get; set; }
-        public int GoodCategoryId { get; set; }
+        public string GoodCategory { get; set; }
         public string Role { get; set; }
         public PointCreateDTO Point { get; set; }
     }

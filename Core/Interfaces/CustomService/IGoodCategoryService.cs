@@ -6,5 +6,6 @@ namespace Core.Interfaces.CustomService
     public interface IGoodCategoryService
     {
         Task<GoodCategoryListDTO> GetAllGoodCategoryAsync();
+        int GetGoodCategoryByName(string name);
     }
 }

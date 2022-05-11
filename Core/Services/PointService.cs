@@ -17,11 +17,13 @@ namespace Core.Services
             _mapper = mapper;
             _pointRepository = pointRepository;
         }
-        public async Task<PointCreateDTO> CreatePointAsync(PointCreateDTO offerCreate)
+
+        public async Task<int> CreatePointForOfferAsync(PointCreateDTO offerCreate)
         {
-            await _pointRepository.InsertAsync(_mapper.Map<Point>(offerCreate));
+            var point = _mapper.Map<Point>(offerCreate);
+            await _pointRepository.InsertAsync(point);
             await _pointRepository.SaveChangesAsync();
-            return _mapper.Map<PointCreateDTO>(offerCreate);
+            return point.Id;
         }
     }
 }
