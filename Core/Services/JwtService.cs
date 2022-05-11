@@ -72,7 +72,7 @@ namespace Core.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, userRole)
+                new Claim("role", userRole)
             };
 
             return claims;
