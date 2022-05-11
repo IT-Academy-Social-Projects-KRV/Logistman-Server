@@ -26,8 +26,8 @@ namespace Core.Services
             ExceptionMethods.RoleNullCheck(role);
             return role.Id;
         }
-        
-         public IdentityRole GetIdentityRoleByName(string roleName)
+
+        public IdentityRole GetIdentityRoleByName(string roleName)
         {
             var role = _identityRoleRepository.Query().FirstOrDefault(r => r.Name == roleName);
 
