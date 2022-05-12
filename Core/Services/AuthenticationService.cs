@@ -74,9 +74,9 @@ namespace Core.Services
 
         public async Task LogoutAsync(UserLogoutDTO userLogoutDTO)
         {
-            var refreshTokenSpecification = new GetRefreshTokenByToken(userLogoutDTO.RefreshToken);
-
-            var refreshToken = _refreshTokenRepository.FindWithSpecification(refreshTokenSpecification).First();
+            var refreshToken = _refreshTokenRepository
+                .FindWithSpecification(new GetRefreshTokenByToken(userLogoutDTO.RefreshToken))
+                .First();
 
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 
@@ -118,9 +118,9 @@ namespace Core.Services
 
         public async Task<UserAutorizationDTO> RefreshTokenAsync(UserAutorizationDTO userTokensDTO)
         {
-            var refreshTokenSpecification = new GetRefreshTokenByToken(userTokensDTO.RefreshToken);
-
-            var refreshToken = _refreshTokenRepository.FindWithSpecification(refreshTokenSpecification).First();
+            var refreshToken = _refreshTokenRepository
+                .FindWithSpecification(new GetRefreshTokenByToken(userTokensDTO.RefreshToken))
+                .First();
 
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 
