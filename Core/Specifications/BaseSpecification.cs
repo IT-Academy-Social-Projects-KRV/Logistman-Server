@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Core.Specifications
 {
-    public class BaseSpecification<TEntity>: ISpecification<TEntity>
+    public class BaseSpecification<TEntity> : ISpecification<TEntity>
     {
         public BaseSpecification()
         {

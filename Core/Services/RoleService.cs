@@ -4,6 +4,7 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using System.Linq;
+using Core.Specifications;
 
 namespace Core.Services
 {
@@ -22,14 +23,19 @@ namespace Core.Services
 
         public int GetRoleByName(string roleName)
         {
-            var role = _roleRepository.Query().FirstOrDefault(role => role.Name == roleName.ToUpper());
+            var role = _roleRepository
+                .FindWithSpecification(new GetRoleByName(roleName))
+                .First();
+
             ExceptionMethods.RoleNullCheck(role);
             return role.Id;
         }
 
         public IdentityRole GetIdentityRoleByName(string roleName)
         {
-            var role = _identityRoleRepository.Query().FirstOrDefault(r => r.Name == roleName);
+            var role = _identityRoleRepository
+                .FindWithSpecification(new GetIdentityRoleByUserRoleName(roleName))
+                .First();
 
             ExceptionMethods.IdentityRoleNullCheck(role);
 
