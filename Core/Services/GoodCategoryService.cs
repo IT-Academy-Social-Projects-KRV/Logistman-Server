@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO.GoodCategoryDTO;
 using Core.Entities.GoodCategoryEntity;
 using Core.Interfaces;
@@ -7,7 +6,7 @@ using Core.Interfaces.CustomService;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Exceptions;
-using Microsoft.EntityFrameworkCore;
+using Core.Specifications;
 
 namespace Core.Services
 {
@@ -33,8 +32,12 @@ namespace Core.Services
 
         public int GetGoodCategoryByName(string goodCategoryName)
         {
-            var goodCategory =  _goodCategoryRepository.Query().FirstOrDefault(goodCategory => goodCategory.Name == goodCategoryName.ToUpper());
+            var goodCategory =  _goodCategoryRepository
+                .FindWithSpecification(new GetGoodCategoryByName(goodCategoryName))
+                .First();
+
             ExceptionMethods.GoodCategoryNullCheck(goodCategory);
+
             return goodCategory.Id;
         }
     }
