@@ -30,10 +30,10 @@ namespace Core.Services
                 {GoodCategories = _mapper.ProjectTo<GoodCategoryDTO>(list.AsQueryable())};
         }
 
-        public int GetGoodCategoryByName(string goodCategoryName)
+        public async Task<int> GetGoodCategoryByNameAsync(string goodCategoryName)
         {
-            var goodCategory =  _goodCategoryRepository
-                .FindWithSpecification(new GetGoodCategoryByName(goodCategoryName))
+            var goodCategory = (await _goodCategoryRepository
+                .FindWithSpecificationAsync(new GetGoodCategoryByName(goodCategoryName)))
                 .First();
 
             ExceptionMethods.GoodCategoryNullCheck(goodCategory);

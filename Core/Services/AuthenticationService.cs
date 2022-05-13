@@ -52,7 +52,7 @@ namespace Core.Services
             ExceptionMethods.CheckIdentityResult(createUserResult);
 
             var roleName = _rolesOptions.Value.User;
-            var userRole = _roleService.GetIdentityRoleByName(roleName);
+            var userRole = await _roleService.GetIdentityRoleByNameAsync(roleName);
             var addToRoleResult = await _userManager.AddToRoleAsync(user, userRole.Name);
 
             ExceptionMethods.CheckIdentityResult(addToRoleResult);
@@ -74,8 +74,8 @@ namespace Core.Services
 
         public async Task LogoutAsync(UserLogoutDTO userLogoutDTO)
         {
-            var refreshToken = _refreshTokenRepository
-                .FindWithSpecification(new GetRefreshTokenByToken(userLogoutDTO.RefreshToken))
+            var refreshToken = (await _refreshTokenRepository
+                .FindWithSpecificationAsync(new GetRefreshTokenByToken(userLogoutDTO.RefreshToken)))
                 .First();
 
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);
@@ -118,8 +118,8 @@ namespace Core.Services
 
         public async Task<UserAutorizationDTO> RefreshTokenAsync(UserAutorizationDTO userTokensDTO)
         {
-            var refreshToken = _refreshTokenRepository
-                .FindWithSpecification(new GetRefreshTokenByToken(userTokensDTO.RefreshToken))
+            var refreshToken = (await _refreshTokenRepository
+                .FindWithSpecificationAsync(new GetRefreshTokenByToken(userTokensDTO.RefreshToken)))
                 .First();
 
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);

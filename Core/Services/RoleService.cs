@@ -5,6 +5,7 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using System.Linq;
 using Core.Specifications;
+using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -21,20 +22,20 @@ namespace Core.Services
             _identityRoleRepository = identityRoleRepository;
         }
 
-        public int GetRoleByName(string roleName)
+        public async Task<int> GetRoleByNameAsync(string roleName)
         {
-            var role = _roleRepository
-                .FindWithSpecification(new GetRoleByName(roleName))
+            var role = (await _roleRepository
+                .FindWithSpecificationAsync(new GetRoleByName(roleName)))
                 .First();
 
             ExceptionMethods.RoleNullCheck(role);
             return role.Id;
         }
 
-        public IdentityRole GetIdentityRoleByName(string roleName)
+        public async Task<IdentityRole> GetIdentityRoleByNameAsync(string roleName)
         {
-            var role = _identityRoleRepository
-                .FindWithSpecification(new GetIdentityRoleByUserRoleName(roleName))
+            var role = (await _identityRoleRepository
+                .FindWithSpecificationAsync(new GetIdentityRoleByUserRoleName(roleName)))
                 .First();
 
             ExceptionMethods.IdentityRoleNullCheck(role);
