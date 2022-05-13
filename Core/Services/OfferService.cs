@@ -21,7 +21,7 @@ namespace Core.Services
         private readonly IPointService _pointService;
 
         public OfferService(
-            IMapper mapper, 
+            IMapper mapper,
             IRepository<Offer> offerRepository,
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryRepository,
@@ -44,9 +44,9 @@ namespace Core.Services
             offer.OfferCreatorId = userId;
             offer.CreationDate = DateTimeOffset.UtcNow;
             offer.IsClosed = false;
-            offer.CreatorRoleId = _roleRepository.GetRoleByName(offerCreate.Role);
-            offer.GoodCategoryId = _goodCategoryRepository
-                .GetGoodCategoryByName(offerCreate.GoodCategory);
+            offer.CreatorRoleId = await _roleRepository.GetRoleByNameAsync(offerCreate.Role);
+            offer.GoodCategoryId = await _goodCategoryRepository
+                .GetGoodCategoryByNameAsync(offerCreate.GoodCategory);
             offer.OfferPointId = await _pointService.CreatePointForOfferAsync(offerCreate.Point);
 
             await _offerRepository.InsertAsync(offer);
