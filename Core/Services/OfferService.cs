@@ -7,6 +7,7 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -39,7 +40,7 @@ namespace Core.Services
         public async Task<OfferCreateDTO> CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
         {
             ExceptionMethods.UserNullCheck(await _userManager.FindByIdAsync(userId));
-
+            
             var offer = _mapper.Map<Offer>(offerCreate);
             offer.OfferCreatorId = userId;
             offer.CreationDate = DateTimeOffset.UtcNow;
