@@ -521,6 +521,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 1,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -533,6 +534,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 2,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -545,6 +547,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 3,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -557,6 +560,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 4,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -569,6 +573,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 5,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -581,6 +586,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 6,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -594,6 +600,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 7,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -606,6 +613,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 8,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -618,6 +626,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 9,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -630,6 +639,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 10,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -643,6 +653,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 11,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -655,6 +666,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 12,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -667,6 +679,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 13,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -679,6 +692,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 14,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -691,6 +705,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 15,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -703,6 +718,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 16,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -715,6 +731,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 17,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -727,6 +744,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 18,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -739,6 +757,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 19,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
@@ -751,6 +770,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 20,
+                    Description = $"{Faker.Random.Words(Faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = Faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{Faker.Random.Int(1, 5)}.07.2022 {Faker.Random.Int(5, 12)}:00"),
