@@ -13,5 +13,10 @@ namespace Infrastructure.Repository
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<TEntity>> FindWithSpecificationAsync(ISpecification<TEntity> specification)
+        {
+            return await SpecificationEvaluator<TEntity>.GetQueryAsync(_context.Set<TEntity>().AsQueryable(), specification);
+        }
     }
 }
