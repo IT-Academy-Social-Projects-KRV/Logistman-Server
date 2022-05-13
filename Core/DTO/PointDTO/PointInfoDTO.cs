@@ -1,6 +1,6 @@
 ﻿namespace Core.DTO.PointDTO
 {
-    public class PointCreateDTO
+    public class PointInfoDTO
     {
         public float Latitude { get; set; }
         public float Longitude { get; set; }

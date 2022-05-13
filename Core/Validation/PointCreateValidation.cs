@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Core.Validation
 {
-    public class PointCreateValidation : AbstractValidator<PointCreateDTO>
+    public class PointCreateValidation : AbstractValidator<PointInfoDTO>
     {
         public PointCreateValidation()
         {
