@@ -15,6 +15,10 @@ namespace Core.Interfaces
         Task UpdateAsync(TEntity entityToUpdate);
         Task<int> SaveChangesAsync();
         IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes);
+<<<<<<< HEAD
         Task<IEnumerable<TEntity>> FindWithSpecificationAsync(ISpecification<TEntity> specification);
+=======
+        IEnumerable<TEntity> FindWithSpecification(ISpecification<TEntity> specification);
+>>>>>>> 8a83ac67acfb270be6b52f5d2140f970db84dace
     }
 }

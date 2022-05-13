@@ -32,8 +32,13 @@ namespace Core.Services
 
         public async Task<int> GetGoodCategoryByNameAsync(string goodCategoryName)
         {
+<<<<<<< HEAD
             var goodCategory = (await _goodCategoryRepository
                 .FindWithSpecificationAsync(new GetGoodCategoryByName(goodCategoryName)))
+=======
+            var goodCategory =  _goodCategoryRepository
+                .FindWithSpecification(new GetGoodCategoryByName(goodCategoryName))
+>>>>>>> 8a83ac67acfb270be6b52f5d2140f970db84dace
                 .First();
 
             ExceptionMethods.GoodCategoryNullCheck(goodCategory);

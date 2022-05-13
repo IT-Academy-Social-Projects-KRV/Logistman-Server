@@ -70,9 +70,15 @@ namespace Infrastructure.Repository
             return query;
         }
 
+<<<<<<< HEAD
         public async Task<IEnumerable<TEntity>> FindWithSpecificationAsync(ISpecification<TEntity> specification)
         {
             return await SpecificationEvaluator<TEntity>.GetQueryAsync(_context.Set<TEntity>().AsQueryable(), specification);
+=======
+        public IEnumerable<TEntity> FindWithSpecification(ISpecification<TEntity> specification)
+        {
+            return SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification);
+>>>>>>> 8a83ac67acfb270be6b52f5d2140f970db84dace
         }
     }
 }
