@@ -43,7 +43,7 @@ namespace Core.Validation
                 .NotEmpty();
 
             RuleFor(offer => offer.ExpirationDate.Subtract(offer.StartDate) < _hour)
-                .Must(date => date == false)
+                .Must(date => !date)
                 .WithMessage(
                     $"The difference between the StartDate and the ExpirationDate must be at least {_hour.Hours} hours!");
 
