@@ -33,7 +33,7 @@ namespace API.Controllers
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
-            OfferInfoDTO offerDTO = await _offerService.GetConcreteOfferAsync(offerId, userId);
+            var offerDTO = await _offerService.GetConcreteOfferAsync(offerId, userId);
 
             return Ok(offerDTO);
         }

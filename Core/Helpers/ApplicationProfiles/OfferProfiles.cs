@@ -12,10 +12,7 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(offer => offer.Point, dto => dto.Ignore())
                 .ForMember(offer => offer.Role, dto => dto.Ignore())
                 .ForMember(offer => offer.GoodCategory, dto => dto.Ignore());
-            CreateMap<OfferInfoDTO, Offer>().ReverseMap()
-                .ForMember(dto => dto.Point, offer => offer.Ignore())
-                .ForMember(dto => dto.Role, offer => offer.Ignore())
-                .ForMember(dto => dto.GoodCategory, offer => offer.Ignore());
+            CreateMap<OfferInfoDTO, Offer>().ReverseMap();
         }
     }
 }
