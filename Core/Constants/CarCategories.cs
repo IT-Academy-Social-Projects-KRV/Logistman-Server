@@ -1,10 +1,10 @@
 ﻿namespace Core.Constants
 {
-    public enum CarCategories
+    public static class CarCategories
     {
-        A = 1,
-        B,
-        C,
-        D
+        public static string A { get; } = "A";
+        public static string B { get; } = "B";
+        public static string C { get; } = "C";
+        public static string D { get; } = "D";
     }
 }

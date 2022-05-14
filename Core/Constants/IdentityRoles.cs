@@ -1,9 +1,9 @@
 ﻿namespace Core.Constants
 {
-    public enum IdentityRoleNames
+    public static class IdentityRoleNames
     {
-        User,
-        Admin,
-        Logist
+        public static string User { get; } = "User";
+        public static string Admin { get; } = "Admin";
+        public static string Logist { get; } = "Logist";
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Core.Constants
 {
-    public enum OfferRoles : int
+    public static class OfferRoles
     {
-        Sender = 1,
-        Recipient
+        public static string Sender { get; } = "SENDER";
+        public static string Recipient { get; } = "RECIPIENT";
     }
 }
