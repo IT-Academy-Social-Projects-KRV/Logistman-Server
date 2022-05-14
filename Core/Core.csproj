@@ -24,7 +24,7 @@
   <ItemGroup>
     <Folder Include="DTO\GoodCategoryDTO\" />
     <Folder Include="Helpers\ApplicationProfiles\" />
-    <Folder Include="Roles\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
 
   <ItemGroup>

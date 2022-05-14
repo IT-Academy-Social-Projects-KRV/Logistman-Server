@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using Core.DTO.OfferDTO;
+﻿using Core.DTO.OfferDTO;
 using FluentValidation;
+using System;
 
 namespace Core.Validation
 {
@@ -37,11 +36,13 @@ namespace Core.Validation
 
             RuleFor(offer => offer.StartDate)
                 .NotEmpty()
-                .Must(date => date != DateTimeOffset.UtcNow)
-                .WithMessage("StartDate cannot be created in the past tense");
+                .Must(date => date >= DateTimeOffset.UtcNow)
+                .WithMessage("StartDate cannot be created in the past");
 
-            RuleFor(offer => (offer.ExpirationDate - offer.StartDate) < _hour)
-                .NotEmpty()
+            RuleFor(offer => offer.ExpirationDate)
+                .NotEmpty();
+
+            RuleFor(offer => offer.ExpirationDate.Subtract(offer.StartDate) < _hour)
                 .Must(date => date == false)
                 .WithMessage(
                     $"The difference between the StartDate and the ExpirationDate must be at least {_hour.Hours} hours!");
