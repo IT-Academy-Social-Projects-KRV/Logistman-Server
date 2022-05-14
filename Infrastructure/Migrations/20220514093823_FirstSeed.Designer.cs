@@ -1493,7 +1493,7 @@ namespace Infrastructure.Migrations
                             TwoFactorEnabled = false,
                             UserName = "antonina.loboda@oa.edu.ua",
                             HasCar = false,
-                            Name = "Antinina",
+                            Name = "Antonina",
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 14, 9, 38, 22, 616, DateTimeKind.Unspecified).AddTicks(9909), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Loboda"
                         },

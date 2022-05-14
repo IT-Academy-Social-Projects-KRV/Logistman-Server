@@ -129,7 +129,7 @@ namespace Infrastructure.Data.SeedData
             var userAntonina = new User()
             {
                 Id = ANTONINA_ID,
-                Name = "Antinina",
+                Name = "Antonina",
                 Surname = "Loboda",
                 UserName = "antonina.loboda@oa.edu.ua",
                 NormalizedEmail = "antonina.loboda@oa.edu.ua".ToUpper(),
