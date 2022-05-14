@@ -19,12 +19,19 @@ namespace API.Controllers
             _carService = carService;
             _userService = userService;
         }
-        
+
         [HttpPost("add")]
         public async Task<ActionResult> CreateCarAsync([FromBody] CreateCarDTO carDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             return Ok(await _carService.AddCarAsync(carDTO, userId));
+        }
+
+        [HttpGet("user-cars")]
+        public ActionResult GetAllUserCars()
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            return Ok(_carService.GetAllUserCars(userId));
         }
     }
 }
