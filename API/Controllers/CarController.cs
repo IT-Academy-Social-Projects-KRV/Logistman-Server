@@ -28,7 +28,7 @@ namespace API.Controllers
         }
 
         [HttpGet("user-cars")]
-        public ActionResult GetAllCarsAsync()
+        public ActionResult GetAllUserCars()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             return Ok(_carService.GetAllUserCars(userId));
