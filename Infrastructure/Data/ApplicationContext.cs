@@ -9,6 +9,7 @@ using Core.Entities.RoleEntity;
 using Core.Entities.TripEntity;
 using Core.Entities.UserEntity;
 using Core.Entities.RefreshTokenEntity;
+using Infrastructure.Data.SeedData;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,7 @@ namespace Infrastructure.Data
             builder.ApplyConfiguration(new TripConfiguration());
             builder.ApplyConfiguration(new RatingConfiguration());
             builder.ApplyConfiguration(new RefreshTokenConfiguration());
+            builder.Seed();
             base.OnModelCreating(builder);
         }
     }
