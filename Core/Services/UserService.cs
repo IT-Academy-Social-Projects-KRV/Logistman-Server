@@ -57,5 +57,19 @@ namespace Core.Services
 
             return userRoles.First(); // we get only the first role, because the user will have only one
         }
+
+        public async Task<UserEditProfileInfoDTO>  UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo)
+        {
+            var updateUser = _userRepository
+                .Query(user => user.Email == userEditProfileInfo.Email)
+                .First();
+
+            updateUser.Name = userEditProfileInfo.Name;
+            updateUser.Surname = userEditProfileInfo.Surname;
+            updateUser.Email = userEditProfileInfo.Email;
+            await _userRepository.UpdateAsync(updateUser);
+
+            return _mapper.Map<UserEditProfileInfoDTO>(updateUser);
+        }
     }
 }

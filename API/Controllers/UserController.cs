@@ -1,6 +1,7 @@
 ﻿using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Core.DTO.UserDTO;
 using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
@@ -24,6 +25,12 @@ namespace API.Controllers
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             var userInfo = await _userService.GetUserProfileInfoAsync(userId);
             return Ok(userInfo);
+        }
+
+        [HttpGet("user-edit-info")]
+        public async Task<UserEditProfileInfoDTO> UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo)
+        {
+            return await _userService.UserEditProfileInfo(userEditProfileInfo);
         }
     }
 }
