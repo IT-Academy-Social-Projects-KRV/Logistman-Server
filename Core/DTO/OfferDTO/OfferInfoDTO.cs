@@ -5,6 +5,7 @@ namespace Core.DTO.OfferDTO
 {
     public class OfferInfoDTO
     {
+        public int Id { get; set; }
         public DateTimeOffset CreationDate { get; set; }
         public string Description { get; set; }
         public bool IsClosed { get; set; }
