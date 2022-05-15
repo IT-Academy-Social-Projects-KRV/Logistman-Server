@@ -1,12 +1,13 @@
-﻿using Core.Entities.RefreshTokenEntity;
+﻿using Ardalis.Specification;
+using Core.Entities.RefreshTokenEntity;
 
 namespace Core.Specifications
 {
-    public class GetRefreshTokenByToken : BaseSpecification<RefreshToken>
+    public class GetRefreshTokenByToken : Specification<RefreshToken>, ISingleResultSpecification<RefreshToken>
     {
-        public GetRefreshTokenByToken(string refreshToken) : base(r => r.Token == refreshToken)
+        public GetRefreshTokenByToken(string refreshToken)
         {
-
+            Query.Where(r => r.Token == refreshToken);
         }
     }
 }
