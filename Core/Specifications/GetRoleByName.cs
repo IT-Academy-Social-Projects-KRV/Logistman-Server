@@ -1,12 +1,13 @@
-﻿using Core.Entities.RoleEntity;
+﻿using Ardalis.Specification;
+using Core.Entities.RoleEntity;
 
 namespace Core.Specifications
 {
-    public class GetRoleByName : BaseSpecification<Role>
+    public class GetRoleByName : Specification<Role>, ISingleResultSpecification<Role>
     {
-        public GetRoleByName(string roleName) : base(r => r.Name == roleName.ToUpper())
+        public GetRoleByName(string roleName)
         {
-
+            Query.Where(r => r.Name == roleName.ToUpper());
         }
     }
 }

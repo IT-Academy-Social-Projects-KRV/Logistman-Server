@@ -3,7 +3,6 @@ using Core.Entities.RoleEntity;
 using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
-using System.Linq;
 using Core.Specifications;
 using System.Threading.Tasks;
 
@@ -12,21 +11,20 @@ namespace Core.Services
     public class RoleService : IRoleService
     {
         private readonly IRepository<Role> _roleRepository;
-        private readonly IRepository<IdentityRole> _identityRoleRepository;
+        private readonly RoleManager<IdentityRole> _identityRoleManager;
 
         public RoleService(
             IRepository<Role> roleRepository,
-            IRepository<IdentityRole> identityRoleRepository)
+            RoleManager<IdentityRole> identityRoleManger)
         {
             _roleRepository = roleRepository;
-            _identityRoleRepository = identityRoleRepository;
+            _identityRoleManager = identityRoleManger;
         }
 
         public async Task<int> GetRoleByNameAsync(string roleName)
         {
-            var role = (await _roleRepository
-                .FindWithSpecificationAsync(new GetRoleByName(roleName)))
-                .First();
+            var role = await _roleRepository
+                .GetBySpecAsync(new GetRoleByName(roleName));
 
             ExceptionMethods.RoleNullCheck(role);
             return role.Id;
@@ -34,9 +32,7 @@ namespace Core.Services
 
         public async Task<IdentityRole> GetIdentityRoleByNameAsync(string roleName)
         {
-            var role = (await _identityRoleRepository
-                .FindWithSpecificationAsync(new GetIdentityRoleByUserRoleName(roleName)))
-                .First();
+            var role = await _identityRoleManager.FindByNameAsync(roleName);
 
             ExceptionMethods.IdentityRoleNullCheck(role);
 
