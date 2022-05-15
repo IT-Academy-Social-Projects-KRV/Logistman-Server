@@ -9,10 +9,9 @@ using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
-using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -69,17 +68,11 @@ namespace Core.Services
             return _mapper.Map<OfferCreateDTO>(offerCreate);
         }
 
-        public async Task<OfferInfoDTO> GetConcreteOfferAsync(int offerId, string userId)
+        public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
         {
-            var offer = await _offerRepository.GetByIdAsync(offerId);
+            var offer = _offerRepository.Query().FirstOrDefault(o => o.Id == offerId && o.OfferCreatorId == userId);
 
             ExceptionMethods.OfferNullCheck(offer);
-            ExceptionMethods.UserNullCheck(await _userManager.FindByIdAsync(userId));
-
-            if (offer.OfferCreatorId != userId)
-            {
-                throw new HttpException(ErrorMessages.OfferNotFound, HttpStatusCode.NotFound);
-            }
 
             var offerInfo = _mapper.Map<OfferInfoDTO>(offer);
             offerInfo.Role = (await _roleRepository.GetByIdAsync(offer.CreatorRoleId)).Name;
