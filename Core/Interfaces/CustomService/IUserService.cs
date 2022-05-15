@@ -10,6 +10,6 @@ namespace Core.Interfaces.CustomService
         Task<UserProfileInfoDTO> GetUserProfileInfoAsync(string userId);
         string GetCurrentUserNameIdentifier(ClaimsPrincipal currentUser);
         Task<string> GetUserRoleAsync(User user);
-        Task<UserEditProfileInfoDTO> UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo);
+        Task<UserEditProfileInfoDTO> UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo,string userId);
     }
 }
