@@ -11,6 +11,7 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +52,7 @@ namespace Core.Services
             car.User = user;
             car.User.HasCar = true;
 
-            car = await _carRepository.InsertAsync(car);
+            car = await _carRepository.AddAsync(car);
             await _carRepository.SaveChangesAsync();
             return _mapper.Map<CarDTO>(car);
         }
@@ -65,14 +66,13 @@ namespace Core.Services
             return _mapper.ProjectTo<CarDTO>(userCars);
         }
 
-        private bool IsCarExist(Car newCar)
+        private async Task<bool> IsCarExist(Car newCar)
         {
-            return _carRepository
-                .Query()
-                .Any(c => 
-                    c.RegistrationNumber == newCar.RegistrationNumber ||
-                    c.Vin == newCar.Vin ||
-                    c.TechnicalPassport == newCar.TechnicalPassport);
+            return await _carRepository
+                .AnyAsync(new GetCarWithMainCredentials(
+                    newCar.RegistrationNumber,
+                    newCar.Vin,
+                    newCar.TechnicalPassport));;
         }
 
         public bool CheckIsCarBelongsToUserByIds(int carId, string userId)
