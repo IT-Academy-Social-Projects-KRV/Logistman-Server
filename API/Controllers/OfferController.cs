@@ -25,7 +25,9 @@ namespace API.Controllers
         public async Task<IActionResult> Create([FromBody] OfferCreateDTO offer)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            return Ok(await _offerService.CreateOfferAsync(offer, userId));
+            await _offerService.CreateOfferAsync(offer, userId);
+
+            return Ok();
         }
     }
 }

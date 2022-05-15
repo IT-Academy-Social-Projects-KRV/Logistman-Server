@@ -5,8 +5,10 @@ using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
+using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -19,6 +21,7 @@ namespace Core.Services
         private readonly IGoodCategoryService _goodCategoryRepository;
         private readonly IRoleService _roleRepository;
         private readonly IPointService _pointService;
+        private readonly ITripService _tripService;
 
         public OfferService(
             IMapper mapper, 
@@ -26,7 +29,8 @@ namespace Core.Services
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryRepository,
             IRoleService roleRepository,
-            IPointService pointService)
+            IPointService pointService,
+            ITripService tripService)
         {
             _pointService = pointService;
             _roleRepository = roleRepository;
@@ -34,10 +38,21 @@ namespace Core.Services
             _offerRepository = offerRepository;
             _userManager = userManager;
             _goodCategoryRepository = goodCategoryRepository;
+            _tripService = tripService;
         }
 
-        public async Task<OfferCreateDTO> CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
+        public async Task CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
         {
+            if (offerCreate.Point.TripId != null)
+            {
+                var isTripExists = _tripService.CheckIsTripExistsById((int)offerCreate.Point.TripId);
+
+                if (!isTripExists)
+                {
+                    throw new HttpException(ErrorMessages.TripNotFound, HttpStatusCode.NotFound);
+                }
+            }
+
             ExceptionMethods.UserNullCheck(await _userManager.FindByIdAsync(userId));
 
             var offer = _mapper.Map<Offer>(offerCreate);
@@ -51,7 +66,6 @@ namespace Core.Services
 
             await _offerRepository.InsertAsync(offer);
             await _offerRepository.SaveChangesAsync();
-            return _mapper.Map<OfferCreateDTO>(offerCreate);
         }
     }
 }
