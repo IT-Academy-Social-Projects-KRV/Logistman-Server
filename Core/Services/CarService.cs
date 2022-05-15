@@ -62,6 +62,12 @@ namespace Core.Services
             return _mapper.ProjectTo<CarDTO>(userCars);
         }
 
+        public bool CheckIsCarExistsById(int carId)
+        {
+            return _carRepository.Query()
+                                 .SingleOrDefault(c => c.Id == carId) != null;
+        }
+
         private async Task<bool> IsCarExist(Car newCar)
         {
             var carsList = await _carRepository.GetAllAsync();
