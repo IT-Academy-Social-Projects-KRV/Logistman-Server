@@ -34,6 +34,7 @@ namespace Core
                 mc.AddProfile(new PointProfiles());
                 mc.AddProfile(new GoodCategoryProfiles());
                 mc.AddProfile(new CarProfile());
+                mc.AddProfile(new TripProfile());
             });
 
             var mapper = configures.CreateMapper();
