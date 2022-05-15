@@ -11,6 +11,7 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,7 +49,7 @@ namespace Core.Services
             car.User = user ?? throw new HttpException(ErrorMessages.UserNotFound, HttpStatusCode.NotFound);
             car.User.HasCar = true;
 
-            car = await _carRepository.InsertAsync(car);
+            car = await _carRepository.AddAsync(car);
             await _carRepository.SaveChangesAsync();
             return _mapper.Map<CarDTO>(car);
         }
@@ -64,24 +65,11 @@ namespace Core.Services
 
         private async Task<bool> IsCarExist(Car newCar)
         {
-            var carsList = await _carRepository.GetAllAsync();
-            foreach (var car in carsList)
-            {
-                if (car.RegistrationNumber.Equals(newCar.RegistrationNumber))
-                {
-                    return true;
-                }
-                if (car.Vin.Equals(newCar.Vin))
-                {
-                    return true;
-                }
-                if (car.TechnicalPassport.Equals(newCar.TechnicalPassport))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return await _carRepository
+                .AnyAsync(new GetCarWithMainCredentials(
+                    newCar.RegistrationNumber,
+                    newCar.Vin,
+                    newCar.TechnicalPassport));;
         }
     }
 }

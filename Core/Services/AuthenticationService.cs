@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Core.Resources;
 using Core.Interfaces;
 using Core.Entities.RefreshTokenEntity;
-using System.Linq;
 using Microsoft.Extensions.Options;
 using Core.Helpers;
 using Core.Specifications;
@@ -74,9 +73,8 @@ namespace Core.Services
 
         public async Task LogoutAsync(UserLogoutDTO userLogoutDTO)
         {
-            var refreshToken = (await _refreshTokenRepository
-                .FindWithSpecificationAsync(new GetRefreshTokenByToken(userLogoutDTO.RefreshToken)))
-                .First();
+            var refreshToken = await _refreshTokenRepository
+                .GetBySpecAsync(new GetRefreshTokenByToken(userLogoutDTO.RefreshToken));
 
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 
@@ -110,7 +108,7 @@ namespace Core.Services
                 UserId = userId
             };
 
-            await _refreshTokenRepository.InsertAsync(refreshTokenEntity);
+            await _refreshTokenRepository.AddAsync(refreshTokenEntity);
             await _refreshTokenRepository.SaveChangesAsync();
 
             return refreshTokenEntity;
@@ -118,9 +116,8 @@ namespace Core.Services
 
         public async Task<UserAutorizationDTO> RefreshTokenAsync(UserAutorizationDTO userTokensDTO)
         {
-            var refreshToken = (await _refreshTokenRepository
-                .FindWithSpecificationAsync(new GetRefreshTokenByToken(userTokensDTO.RefreshToken)))
-                .First();
+            var refreshToken = await _refreshTokenRepository
+                .GetBySpecAsync(new GetRefreshTokenByToken(userTokensDTO.RefreshToken));
 
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 

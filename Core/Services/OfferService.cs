@@ -49,7 +49,7 @@ namespace Core.Services
                 .GetGoodCategoryByNameAsync(offerCreate.GoodCategory);
             offer.OfferPointId = await _pointService.CreatePointForOfferAsync(offerCreate.Point);
 
-            await _offerRepository.InsertAsync(offer);
+            await _offerRepository.AddAsync(offer);
             await _offerRepository.SaveChangesAsync();
             return _mapper.Map<OfferCreateDTO>(offerCreate);
         }
