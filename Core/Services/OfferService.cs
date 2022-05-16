@@ -58,17 +58,14 @@ namespace Core.Services
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
         {
-            var offer = _offerRepository.Query()
+            var offer = await _offerRepository.Query()
                 .Where(o => o.Id == offerId && o.OfferCreatorId == userId)
                 .Include(offer => offer.Point)
                 .Include(offer => offer.Role)
                 .Include(offer => offer.GoodCategory)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             ExceptionMethods.OfferNullCheck(offer);
-            ExceptionMethods.PointNullCheck(offer.Point);
-            ExceptionMethods.RoleNullCheck(offer.Role);
-            ExceptionMethods.GoodCategoryNullCheck(offer.GoodCategory);
 
             var offerInfo = _mapper.Map<OfferInfoDTO>(offer);
             offerInfo.Role = offer.Role.Name;
