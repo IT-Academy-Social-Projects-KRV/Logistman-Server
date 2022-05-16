@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using Core.DTO.OfferDTO;
-using Core.DTO.PointDTO;
-using Core.Entities.GoodCategoryEntity;
 using Core.Entities.OfferEntity;
-using Core.Entities.PointEntity;
-using Core.Entities.RoleEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,9 +21,6 @@ namespace Core.Services
         private readonly IGoodCategoryService _goodCategoryService;
         private readonly IRoleService _roleService;
         private readonly IPointService _pointService;
-        private readonly IRepository<Role> _roleRepository;
-        private readonly IRepository<GoodCategory> _goodCategoryRepository;
-        private readonly IRepository<Point> _pointRepository;
 
         public OfferService(
             IMapper mapper,
@@ -34,10 +28,7 @@ namespace Core.Services
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryService,
             IRoleService roleService,
-            IPointService pointService,
-            IRepository<Role> roleRepository,
-            IRepository<GoodCategory> goodCategoryRepository,
-            IRepository<Point> pointRepository)
+            IPointService pointService)
         {
             _pointService = pointService;
             _roleService = roleService;
@@ -45,9 +36,6 @@ namespace Core.Services
             _offerRepository = offerRepository;
             _userManager = userManager;
             _goodCategoryService = goodCategoryService;
-            _roleRepository = roleRepository;
-            _goodCategoryRepository = goodCategoryRepository;
-            _pointRepository = pointRepository;
         }
 
         public async Task<OfferCreateDTO> CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
@@ -70,19 +58,21 @@ namespace Core.Services
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
         {
-            var offer = _offerRepository.Query().FirstOrDefault(o => o.Id == offerId && o.OfferCreatorId == userId);
+            var offer = _offerRepository.Query()
+                .Where(o => o.Id == offerId && o.OfferCreatorId == userId)
+                .Include(offer => offer.Point)
+                .Include(offer => offer.Role)
+                .Include(offer => offer.GoodCategory)
+                .FirstOrDefault();
 
             ExceptionMethods.OfferNullCheck(offer);
+            ExceptionMethods.PointNullCheck(offer.Point);
+            ExceptionMethods.RoleNullCheck(offer.Role);
+            ExceptionMethods.GoodCategoryNullCheck(offer.GoodCategory);
 
             var offerInfo = _mapper.Map<OfferInfoDTO>(offer);
-            offerInfo.Role = (await _roleRepository.GetByIdAsync(offer.CreatorRoleId)).Name;
-            offerInfo.GoodCategory = (await _goodCategoryRepository.
-                GetByIdAsync(offer.GoodCategoryId)).Name;
-            var point = await _pointRepository.GetByIdAsync(offer.OfferPointId);
-
-            ExceptionMethods.PointNullCheck(point);
-
-            offerInfo.Point = _mapper.Map<PointInfoDTO>(point);
+            offerInfo.Role = offer.Role.Name;
+            offerInfo.GoodCategory = offer.GoodCategory.Name;
 
             return offerInfo;
         }

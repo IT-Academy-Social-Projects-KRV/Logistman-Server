@@ -11,6 +11,6 @@ namespace Core.DTO.OfferDTO
         public DateTimeOffset ExpirationDate { get; set; }
         public string GoodCategory { get; set; }
         public string Role { get; set; }
-        public PointInfoDTO Point { get; set; }
+        public PointCreateDTO Point { get; set; }
     }
 }
