@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,6 +13,7 @@ using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
@@ -23,12 +25,12 @@ namespace Core.Services
         private readonly IMapper _mapper;
 
         public CarService(
-            IRepository<Car> car,
+            IRepository<Car> carRepository,
             IRepository<CarCategory> categoryRepository,
             IMapper mapper,
             UserManager<User> userManager)
         {
-            _carRepository = car;
+            _carRepository = carRepository;
             _categoryRepository = categoryRepository;
             _mapper = mapper;
             _userManager = userManager;
@@ -49,6 +51,15 @@ namespace Core.Services
 
             car = await _carRepository.AddAsync(car);
             return _mapper.Map<CarDTO>(car);
+        }
+
+        public IQueryable<CarDTO> GetAllUserCars(string userId)
+        {
+            var userCars = _carRepository.Query()
+                                         .Where(c => c.UserId == userId)
+                                         .Include(c => c.Category);
+
+            return _mapper.ProjectTo<CarDTO>(userCars);
         }
 
         private async Task<bool> IsCarExist(Car newCar)
