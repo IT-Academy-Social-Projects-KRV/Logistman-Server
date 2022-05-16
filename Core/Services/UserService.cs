@@ -62,6 +62,7 @@ namespace Core.Services
         public async Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId)
         {
             var updateUser = await _userManager.FindByIdAsync(userId);
+            ExceptionMethods.UserNullCheck(updateUser);
 
             updateUser.Name = userEditProfileInfo.Name;
             updateUser.Surname = userEditProfileInfo.Surname;
@@ -69,6 +70,7 @@ namespace Core.Services
             updateUser.UserName = userEditProfileInfo.Email;
             updateUser.NormalizedEmail = userEditProfileInfo.Email.ToUpper();
             updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();
+            updateUser.EmailConfirmed = false;
             await _userRepository.UpdateAsync(updateUser);
             await _userRepository.SaveChangesAsync();
         }
