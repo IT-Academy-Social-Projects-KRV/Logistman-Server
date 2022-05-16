@@ -39,7 +39,7 @@ namespace Core.Services
             _mapper = mapper;
             _offerRepository = offerRepository;
             _userManager = userManager;
-            _goodCategoryRepository = goodCategoryRepository;
+            _goodCategoryService = goodCategoryService;
             _tripService = tripService;
         }
 
