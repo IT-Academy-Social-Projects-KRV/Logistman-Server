@@ -79,7 +79,6 @@ namespace Core.Services
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 
             await _refreshTokenRepository.DeleteAsync(refreshToken);
-            await _refreshTokenRepository.SaveChangesAsync();
         }
 
         private async Task<UserAutorizationDTO> GenerateUserTokens(User user, string userRole)
@@ -109,7 +108,6 @@ namespace Core.Services
             };
 
             await _refreshTokenRepository.AddAsync(refreshTokenEntity);
-            await _refreshTokenRepository.SaveChangesAsync();
 
             return refreshTokenEntity;
         }
@@ -128,7 +126,6 @@ namespace Core.Services
             refreshToken.Token = newRefreshToken;
 
             await _refreshTokenRepository.UpdateAsync(refreshToken);
-            await _refreshTokenRepository.SaveChangesAsync();
 
             var tokens = new UserAutorizationDTO()
             {

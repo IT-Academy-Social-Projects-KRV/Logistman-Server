@@ -22,7 +22,6 @@ namespace Core.Services
         {
             var point = _mapper.Map<Point>(offerCreate);
             await _pointRepository.AddAsync(point);
-            await _pointRepository.SaveChangesAsync();
             return point.Id;
         }
     }
