@@ -1,10 +1,13 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Core.DTO.CarCategoryDTO;
 using Core.Entities.CarCategoryEntity;
+using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
+using Core.Resources;
 
 namespace Core.Services
 {
@@ -23,8 +26,16 @@ namespace Core.Services
         public async Task<CarCategoriesListDTO> GetAllCarCategoriesAsync()
         {
             var list = await _carCategoryRepository.GetAllAsync();
+            var carCategories = list.ToList();
+            if (!carCategories.Any())
+            {
+                throw new HttpException(ErrorMessages.CarCategoryNotFound, HttpStatusCode.NotFound);
+            }
+            
             return new CarCategoriesListDTO
-                {CarCategories = _mapper.ProjectTo<CarCategoryDTO>(list.AsQueryable())};
+            {
+                CarCategories = _mapper.ProjectTo<CarCategoryDTO>(carCategories.AsQueryable())
+            };
         }
     }
 }
