@@ -27,11 +27,12 @@ namespace API.Controllers
             return Ok(userInfo);
         }
 
-        [HttpPost("edit/info")]
-        public async Task<UserEditProfileInfoDTO> UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo)
+        [HttpPost("edit-info")]
+        public async Task<ActionResult> UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            return await _userService.UserEditProfileInfo(userEditProfileInfo, userId);
+            await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId);
+            return Ok();
         }
     }
 }

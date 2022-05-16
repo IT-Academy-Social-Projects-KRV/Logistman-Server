@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Services
 {
@@ -58,17 +59,18 @@ namespace Core.Services
             return userRoles.First(); // we get only the first role, because the user will have only one
         }
 
-        public async Task<UserEditProfileInfoDTO>  UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo, string userId)
+        public async Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId)
         {
             var updateUser = await _userManager.FindByIdAsync(userId);
 
             updateUser.Name = userEditProfileInfo.Name;
             updateUser.Surname = userEditProfileInfo.Surname;
             updateUser.Email = userEditProfileInfo.Email;
+            updateUser.UserName = userEditProfileInfo.Email;
+            updateUser.NormalizedEmail = userEditProfileInfo.Email.ToUpper();
+            updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();
             await _userRepository.UpdateAsync(updateUser);
             await _userRepository.SaveChangesAsync();
-
-            return _mapper.Map<UserEditProfileInfoDTO>(updateUser);
         }
     }
 }
