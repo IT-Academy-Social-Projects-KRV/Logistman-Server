@@ -4,7 +4,8 @@ using Infrastructure.Data;
 
 namespace Infrastructure.Repository
 {
-    public class Repository<TEntity> : RepositoryBase<TEntity>, IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> 
+        : RepositoryBase<TEntity>, IRepository<TEntity> where TEntity : class
     {
         private ApplicationContext _context;
 

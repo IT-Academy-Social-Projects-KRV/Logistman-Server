@@ -50,7 +50,6 @@ namespace Core.Services
             car.User.HasCar = true;
 
             car = await _carRepository.AddAsync(car);
-            await _carRepository.SaveChangesAsync();
             return _mapper.Map<CarDTO>(car);
         }
 
