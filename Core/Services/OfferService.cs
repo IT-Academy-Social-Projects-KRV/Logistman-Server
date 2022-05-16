@@ -68,8 +68,6 @@ namespace Core.Services
             ExceptionMethods.OfferNullCheck(offer);
 
             var offerInfo = _mapper.Map<OfferInfoDTO>(offer);
-            offerInfo.Role = offer.Role.Name;
-            offerInfo.GoodCategory = offer.GoodCategory.Name;
 
             return offerInfo;
         }
