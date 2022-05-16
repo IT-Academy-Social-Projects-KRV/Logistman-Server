@@ -39,7 +39,9 @@ namespace Core.Services
         {
             var car = _mapper.Map<Car>(createCarDTO);
             if (IsCarExist(car))
+            {
                 throw new HttpException(ErrorMessages.AddingCarNotAllowed, HttpStatusCode.NotAcceptable);
+            }
 
             car.CreationDate = DateTimeOffset.UtcNow;
             car.Category = _categoryRepository.Query().First(c => c.Name == createCarDTO.CategoryName);

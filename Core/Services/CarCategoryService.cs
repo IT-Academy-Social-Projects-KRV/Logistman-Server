@@ -25,8 +25,7 @@ namespace Core.Services
         
         public async Task<CarCategoriesListDTO> GetAllCarCategoriesAsync()
         {
-            var list = await _carCategoryRepository.GetAllAsync();
-            var carCategories = list.ToList();
+            var carCategories = (await _carCategoryRepository.GetAllAsync()).ToList();
             if (!carCategories.Any())
             {
                 throw new HttpException(ErrorMessages.CarCategoryNotFound, HttpStatusCode.NotFound);
