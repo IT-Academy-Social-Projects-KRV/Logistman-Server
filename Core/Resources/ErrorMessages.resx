@@ -216,4 +216,7 @@
   <data name="AddingCarNotAllowed" xml:space="preserve">
     <value>Car with one or more of such properties already exists.</value>
   </data>
+  <data name="EmailAlreadyExists" xml:space="preserve">
+    <value>User with such email already exists.</value>
+  </data>
 </root>

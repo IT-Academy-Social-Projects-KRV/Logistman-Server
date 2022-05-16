@@ -6,11 +6,11 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Services
 {
@@ -68,14 +68,15 @@ namespace Core.Services
             updateUser.Surname = userEditProfileInfo.Surname;
             if (!userEditProfileInfo.Email.Equals(updateUser.Email))
             {
-                updateUser.Email = userEditProfileInfo.Email;
-                updateUser.UserName = userEditProfileInfo.Email;
-                updateUser.NormalizedEmail = userEditProfileInfo.Email.ToUpper();
-                updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();
+                if (await _userRepository.Query().AnyAsync(user => user.Email == userEditProfileInfo.Email))
+                {
+                    throw new HttpException(ErrorMessages.EmailAlreadyExists, HttpStatusCode.BadRequest);
+                }
+                await _userManager.SetEmailAsync(updateUser, userEditProfileInfo.Email);
+                await _userManager.SetUserNameAsync(updateUser, userEditProfileInfo.Email);
                 updateUser.EmailConfirmed = false;
             }
-            await _userRepository.UpdateAsync(updateUser);
-            await _userRepository.SaveChangesAsync();
+            await _userManager.UpdateAsync(updateUser);
         }
     }
 }
