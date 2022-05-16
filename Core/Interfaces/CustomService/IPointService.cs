@@ -5,6 +5,6 @@ namespace Core.Interfaces.CustomService
 {
     public interface IPointService
     {
-        Task<int> CreatePointForOfferAsync(PointInfoDTO offerCreate);
+        Task<int> CreatePointForOfferAsync(PointCreateDTO offerCreate);
     }
 }
