@@ -66,11 +66,14 @@ namespace Core.Services
 
             updateUser.Name = userEditProfileInfo.Name;
             updateUser.Surname = userEditProfileInfo.Surname;
-            updateUser.Email = userEditProfileInfo.Email;
-            updateUser.UserName = userEditProfileInfo.Email;
-            updateUser.NormalizedEmail = userEditProfileInfo.Email.ToUpper();
-            updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();
-            updateUser.EmailConfirmed = false;
+            if (!userEditProfileInfo.Email.Equals(updateUser.Email))
+            {
+                updateUser.Email = userEditProfileInfo.Email;
+                updateUser.UserName = userEditProfileInfo.Email;
+                updateUser.NormalizedEmail = userEditProfileInfo.Email.ToUpper();
+                updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();
+                updateUser.EmailConfirmed = false;
+            }
             await _userRepository.UpdateAsync(updateUser);
             await _userRepository.SaveChangesAsync();
         }
