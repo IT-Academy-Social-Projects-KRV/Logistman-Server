@@ -67,9 +67,10 @@ namespace Core.Services
         {
             return _carRepository
                 .Query()
-                .Any(c => c.RegistrationNumber.Equals(newCar.RegistrationNumber)
-                                                   || c.Vin == newCar.Vin
-                                                   || c.TechnicalPassport.Equals(newCar.TechnicalPassport));
+                .Any(c => 
+                    c.RegistrationNumber == newCar.RegistrationNumber ||
+                    c.Vin == newCar.Vin ||
+                    c.TechnicalPassport == newCar.TechnicalPassport);
         }
     }
 }

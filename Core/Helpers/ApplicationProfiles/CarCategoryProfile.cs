@@ -8,7 +8,7 @@ namespace Core.Helpers.ApplicationProfiles
     {
         public CarCategoryProfile()
         {
-            CreateMap<CarCategory, CarCategoryDTO>().ReverseMap();
+            CreateMap<CarCategory, CarCategoryDTO>();
         }
     }
 }

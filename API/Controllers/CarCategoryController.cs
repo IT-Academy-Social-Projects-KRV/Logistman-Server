@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Core.DTO.CarCategoryDTO;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,18 +8,18 @@ namespace API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CarCategoryController : ControllerBase
+    public class CarCategoriesController : ControllerBase
     {
         private readonly ICarCategoryService _carCategoryService;
-        public CarCategoryController(ICarCategoryService carCategoryService)
+        public CarCategoriesController(ICarCategoryService carCategoryService)
         {
             _carCategoryService = carCategoryService;
         }
 
-        [HttpGet("categories")]
-        public async Task<CarCategoriesListDTO> GetAllCarCategories()
+        [HttpGet]
+        public async Task<IActionResult> GetAllCarCategories()
         { 
-            return await _carCategoryService.GetAllCarCategoriesAsync();
+            return Ok(await _carCategoryService.GetAllCarCategoriesAsync());
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Core.DTO.CarCategoryDTO
 {
     public class CarCategoriesListDTO
     {
-        public IQueryable<CarCategoryDTO> CarCategories { get; set; }
+        public IEnumerable<CarCategoryDTO> CarCategories { get; set; }
     }
 }
