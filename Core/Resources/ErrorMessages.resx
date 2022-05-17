@@ -219,4 +219,7 @@
   <data name="TripIsAlreadyExistsInTheTimeSpace" xml:space="preserve">
     <value>There is already a trip in this time space!</value>
   </data>
+  <data name="CarIsNotVerified" xml:space="preserve">
+    <value>Car is not verified!</value>
+  </data>
 </root>

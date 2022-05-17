@@ -80,5 +80,11 @@ namespace Core.Services
             return _carRepository.Query()
                                  .Any(c => c.Id == carId && c.UserId == userId);
         }
+
+        public bool CheckIsCarVerifiedById(int carId)
+        {
+            return _carRepository.Query()
+                                 .Any(c => c.Id == carId && c.IsVerified);
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Core.Interfaces.CustomService
         Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId);
         IQueryable<CarDTO> GetAllUserCars(string userId);
         bool CheckIsCarBelongsToUserByIds(int carId, string userId);
+        bool CheckIsCarVerifiedById(int carId);
     }
 }

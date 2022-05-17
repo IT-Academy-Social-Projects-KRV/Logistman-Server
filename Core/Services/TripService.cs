@@ -46,6 +46,13 @@ namespace Core.Services
                 throw new HttpException(ErrorMessages.CarNotFound, HttpStatusCode.NotFound);
             }
 
+            var isCarVerified = _carService.CheckIsCarVerifiedById(createTripDTO.TransportationCarId);
+
+            if (!isCarVerified)
+            {
+                throw new HttpException(ErrorMessages.CarIsNotVerified, HttpStatusCode.BadRequest);
+            }
+
             var trip = _mapper.Map<Trip>(createTripDTO);
 
             trip.IsActive = false;

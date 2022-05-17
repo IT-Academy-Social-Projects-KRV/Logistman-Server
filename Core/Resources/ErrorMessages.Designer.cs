@@ -106,6 +106,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Car is not verified!.
+        /// </summary>
+        internal static string CarIsNotVerified {
+            get {
+                return ResourceManager.GetString("CarIsNotVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Car not found.
         /// </summary>
         internal static string CarNotFound {
