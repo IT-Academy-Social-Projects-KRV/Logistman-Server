@@ -8,7 +8,7 @@ namespace Core.Helpers.ApplicationProfiles
     {
         public PointProfiles()
         {
-            CreateMap<Point, CreatePointDTO>().ReverseMap();
+            CreateMap<Point, PointCreateDTO>().ReverseMap();
         }
     }
 }
