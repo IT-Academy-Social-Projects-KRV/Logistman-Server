@@ -22,7 +22,6 @@ namespace Core.Validation
             RuleFor(user => user.Email)
                 .NotEmpty().WithMessage("'{PropertyName}' must not be empty!")
                 .EmailAddress().WithMessage("'{PropertyValue}' - is not an email address!");
-
         }        
     }
 }
