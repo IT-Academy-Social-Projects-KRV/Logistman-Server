@@ -29,5 +29,15 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [HttpGet("offer-info")]
+        public async Task<IActionResult> GetOfferInfo(int offerId)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+
+            var offerDTO = await _offerService.GetOfferByIdAsync(offerId, userId);
+
+            return Ok(offerDTO);
+        }
     }
 }
