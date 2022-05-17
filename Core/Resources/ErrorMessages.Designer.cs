@@ -277,6 +277,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is already a trip in this time space!.
+        /// </summary>
+        internal static string TripIsAlreadyExistsInTheTimeSpace {
+            get {
+                return ResourceManager.GetString("TripIsAlreadyExistsInTheTimeSpace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trip not found.
         /// </summary>
         internal static string TripNotFound {

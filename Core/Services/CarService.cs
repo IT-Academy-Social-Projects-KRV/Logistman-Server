@@ -65,7 +65,7 @@ namespace Core.Services
         public bool CheckIsCarExistsById(int carId)
         {
             return _carRepository.Query()
-                                 .SingleOrDefault(c => c.Id == carId) != null;
+                                 .Any(c => c.Id == carId);
         }
 
         private async Task<bool> IsCarExist(Car newCar)

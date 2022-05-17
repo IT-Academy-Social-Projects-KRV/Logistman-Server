@@ -31,12 +31,14 @@ namespace Core.Services
         public bool CheckIsTripExistsById(int tripId)
         {
             return _tripRepository.Query()
-                                  .SingleOrDefault(p => p.Id == tripId) != null;
+                                  .Any(p => p.Id == tripId);
         }
 
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
         {
-            var isCarExists =_carService.CheckIsCarExistsById(createTripDTO.TransportationCarId);
+            ValidateTripDate(createTripDTO.StartDate, createTripDTO.ExpirationDate);
+
+            var isCarExists = _carService.CheckIsCarExistsById(createTripDTO.TransportationCarId);
 
             if (!isCarExists)
             {
@@ -51,6 +53,21 @@ namespace Core.Services
 
             await _tripRepository.InsertAsync(trip);
             await _tripRepository.SaveChangesAsync();
+        }
+
+        private void ValidateTripDate(DateTimeOffset startDate, DateTimeOffset expirationDate)
+        {
+            var isTimeSpaceBusy = _tripRepository.Query()
+                                                  .Any(t => !t.IsEnded &&
+                                                       (t.StartDate >= startDate && t.StartDate < expirationDate) ||
+                                                       (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate));
+
+            if (isTimeSpaceBusy)
+            {
+                throw new HttpException(
+                            ErrorMessages.TripIsAlreadyExistsInTheTimeSpace,
+                            HttpStatusCode.BadRequest);
+            }
         }
     }
 }
