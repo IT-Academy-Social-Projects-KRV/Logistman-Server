@@ -39,14 +39,17 @@ namespace Core.Services
         public async Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId)
         {
             var car = _mapper.Map<Car>(createCarDTO);
-            if (await IsCarExist(car))
+            if (IsCarExist(car))
+            {
                 throw new HttpException(ErrorMessages.AddingCarNotAllowed, HttpStatusCode.NotAcceptable);
+            }
 
             car.CreationDate = DateTimeOffset.UtcNow;
-            car.Category = await _categoryRepository.GetByIdAsync(createCarDTO.CategoryId);
+            car.Category = _categoryRepository.Query().First(c => c.Name == createCarDTO.CategoryName);
 
             var user = await _userManager.FindByIdAsync(userId);
-            car.User = user ?? throw new HttpException(ErrorMessages.UserNotFound, HttpStatusCode.NotFound);
+            ExceptionMethods.UserNullCheck(user);
+            car.User = user;
             car.User.HasCar = true;
 
             car = await _carRepository.AddAsync(car);
@@ -62,7 +65,7 @@ namespace Core.Services
             return _mapper.ProjectTo<CarDTO>(userCars);
         }
 
-        private async Task<bool> IsCarExist(Car newCar)
+        private bool IsCarExist(Car newCar)
         {
             return await _carRepository
                 .AnyAsync(new GetCarWithMainCredentials(
