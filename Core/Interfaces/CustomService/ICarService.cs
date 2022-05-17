@@ -8,6 +8,6 @@ namespace Core.Interfaces.CustomService
     {
         Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId);
         IQueryable<CarDTO> GetAllUserCars(string userId);
-        bool CheckIsCarExistsById(int carId);
+        bool CheckIsCarBelongsToUserByIds(int carId, string userId);
     }
 }

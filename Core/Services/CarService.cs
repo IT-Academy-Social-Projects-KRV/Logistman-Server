@@ -65,12 +65,6 @@ namespace Core.Services
             return _mapper.ProjectTo<CarDTO>(userCars);
         }
 
-        public bool CheckIsCarExistsById(int carId)
-        {
-            return _carRepository.Query()
-                                 .Any(c => c.Id == carId);
-        }
-
         private bool IsCarExist(Car newCar)
         {
             return _carRepository
@@ -79,6 +73,12 @@ namespace Core.Services
                     c.RegistrationNumber == newCar.RegistrationNumber ||
                     c.Vin == newCar.Vin ||
                     c.TechnicalPassport == newCar.TechnicalPassport);
+        }
+
+        public bool CheckIsCarBelongsToUserByIds(int carId, string userId)
+        {
+            return _carRepository.Query()
+                                 .Any(c => c.Id == carId && c.UserId == userId);
         }
     }
 }

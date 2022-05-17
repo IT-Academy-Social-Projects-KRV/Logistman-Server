@@ -38,9 +38,10 @@ namespace Core.Services
         {
             ValidateTripDate(createTripDTO.StartDate, createTripDTO.ExpirationDate);
 
-            var isCarExists = _carService.CheckIsCarExistsById(createTripDTO.TransportationCarId);
+            var isCarValid = _carService
+                                .CheckIsCarBelongsToUserByIds(createTripDTO.TransportationCarId, creatorId);
 
-            if (!isCarExists)
+            if (!isCarValid)
             {
                 throw new HttpException(ErrorMessages.CarNotFound, HttpStatusCode.NotFound);
             }
