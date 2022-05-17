@@ -38,14 +38,17 @@ namespace Core.Services
         public async Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId)
         {
             var car = _mapper.Map<Car>(createCarDTO);
-            if (await IsCarExist(car))
+            if (IsCarExist(car))
+            {
                 throw new HttpException(ErrorMessages.AddingCarNotAllowed, HttpStatusCode.NotAcceptable);
+            }
 
             car.CreationDate = DateTimeOffset.UtcNow;
-            car.Category = await _categoryRepository.GetByIdAsync(createCarDTO.CategoryId);
+            car.Category = _categoryRepository.Query().First(c => c.Name == createCarDTO.CategoryName);
 
             var user = await _userManager.FindByIdAsync(userId);
-            car.User = user ?? throw new HttpException(ErrorMessages.UserNotFound, HttpStatusCode.NotFound);
+            ExceptionMethods.UserNullCheck(user);
+            car.User = user;
             car.User.HasCar = true;
 
             car = await _carRepository.InsertAsync(car);
@@ -68,26 +71,14 @@ namespace Core.Services
                                  .Any(c => c.Id == carId);
         }
 
-        private async Task<bool> IsCarExist(Car newCar)
+        private bool IsCarExist(Car newCar)
         {
-            var carsList = await _carRepository.GetAllAsync();
-            foreach (var car in carsList)
-            {
-                if (car.RegistrationNumber.Equals(newCar.RegistrationNumber))
-                {
-                    return true;
-                }
-                if (car.Vin.Equals(newCar.Vin))
-                {
-                    return true;
-                }
-                if (car.TechnicalPassport.Equals(newCar.TechnicalPassport))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return _carRepository
+                .Query()
+                .Any(c => 
+                    c.RegistrationNumber == newCar.RegistrationNumber ||
+                    c.Vin == newCar.Vin ||
+                    c.TechnicalPassport == newCar.TechnicalPassport);
         }
     }
 }

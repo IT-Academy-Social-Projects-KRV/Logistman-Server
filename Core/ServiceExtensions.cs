@@ -23,6 +23,7 @@ namespace Core
             services.AddScoped<ICarService, CarService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ITripService, TripService>();
+            services.AddScoped<ICarCategoryService, CarCategoryService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
@@ -35,6 +36,7 @@ namespace Core
                 mc.AddProfile(new GoodCategoryProfiles());
                 mc.AddProfile(new CarProfile());
                 mc.AddProfile(new TripProfile());
+                mc.AddProfile(new CarCategoryProfile());
             });
 
             var mapper = configures.CreateMapper();
