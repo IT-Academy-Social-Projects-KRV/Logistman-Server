@@ -27,5 +27,15 @@ namespace API.Controllers
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             return Ok(await _offerService.CreateOfferAsync(offer, userId));
         }
+
+        [HttpGet("offer-info")]
+        public async Task<IActionResult> GetOfferInfo(int offerId)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+
+            var offerDTO = await _offerService.GetOfferByIdAsync(offerId, userId);
+
+            return Ok(offerDTO);
+        }
     }
 }

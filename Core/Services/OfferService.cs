@@ -6,7 +6,9 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -21,7 +23,7 @@ namespace Core.Services
         private readonly IPointService _pointService;
 
         public OfferService(
-            IMapper mapper, 
+            IMapper mapper,
             IRepository<Offer> offerRepository,
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryRepository,
@@ -52,6 +54,22 @@ namespace Core.Services
             await _offerRepository.InsertAsync(offer);
             await _offerRepository.SaveChangesAsync();
             return _mapper.Map<OfferCreateDTO>(offerCreate);
+        }
+
+        public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
+        {
+            var offer = await _offerRepository.Query()
+                .Where(o => o.Id == offerId && o.OfferCreatorId == userId)
+                .Include(offer => offer.Point)
+                .Include(offer => offer.Role)
+                .Include(offer => offer.GoodCategory)
+                .FirstOrDefaultAsync();
+
+            ExceptionMethods.OfferNullCheck(offer);
+
+            var offerInfo = _mapper.Map<OfferInfoDTO>(offer);
+
+            return offerInfo;
         }
     }
 }
