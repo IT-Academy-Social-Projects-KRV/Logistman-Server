@@ -36,7 +36,7 @@ namespace Core.Services
 
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
         {
-            ValidateTripDate(createTripDTO.StartDate, createTripDTO.ExpirationDate);
+            ValidateTripDate(createTripDTO.StartDate, createTripDTO.ExpirationDate, creatorId);
 
             var isCarValid = _carService
                                 .CheckIsCarBelongsToUserByIds(createTripDTO.TransportationCarId, creatorId);
@@ -56,10 +56,10 @@ namespace Core.Services
             await _tripRepository.SaveChangesAsync();
         }
 
-        private void ValidateTripDate(DateTimeOffset startDate, DateTimeOffset expirationDate)
+        private void ValidateTripDate(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
         {
             var isTimeSpaceBusy = _tripRepository.Query()
-                                                  .Any(t => !t.IsEnded &&
+                                                  .Any(t => t.TripCreatorId == creatorId && !t.IsEnded &&
                                                        (t.StartDate >= startDate && t.StartDate < expirationDate) ||
                                                        (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate));
 
