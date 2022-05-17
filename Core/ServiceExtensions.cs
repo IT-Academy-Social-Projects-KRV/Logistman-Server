@@ -22,6 +22,7 @@ namespace Core
             services.AddScoped<IGoodCategoryService, GoodCategoryService>();
             services.AddScoped<ICarService, CarService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ITripService, TripService>();
             services.AddScoped<ICarCategoryService, CarCategoryService>();
         }
 
@@ -34,6 +35,7 @@ namespace Core
                 mc.AddProfile(new PointProfiles());
                 mc.AddProfile(new GoodCategoryProfiles());
                 mc.AddProfile(new CarProfile());
+                mc.AddProfile(new TripProfile());
                 mc.AddProfile(new CarCategoryProfile());
             });
 

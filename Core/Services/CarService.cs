@@ -74,5 +74,17 @@ namespace Core.Services
                     c.Vin == newCar.Vin ||
                     c.TechnicalPassport == newCar.TechnicalPassport);
         }
+
+        public bool CheckIsCarBelongsToUserByIds(int carId, string userId)
+        {
+            return _carRepository.Query()
+                                 .Any(c => c.Id == carId && c.UserId == userId);
+        }
+
+        public bool CheckIsCarVerifiedById(int carId)
+        {
+            return _carRepository.Query()
+                                 .Any(c => c.Id == carId && c.IsVerified);
+        }
     }
 }

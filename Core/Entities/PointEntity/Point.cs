@@ -13,6 +13,8 @@ namespace Core.Entities.PointEntity
         public string Settlement { get; set; }
         public string Region { get; set; }
         public int Order { get; set; }
+        public int? TripId { get; set; }
+        public Trip Trip { get; set; }
         public ICollection<Offer> Offers { get; set; }
         public ICollection<Trip> Trips { get; set; }
     }

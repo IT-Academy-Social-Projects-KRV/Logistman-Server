@@ -8,5 +8,6 @@
         public string Settlement { get; set; }
         public string Region { get; set; }
         public int Order { get; set; }
+        public int? TripId { get; set; }
     }
 }

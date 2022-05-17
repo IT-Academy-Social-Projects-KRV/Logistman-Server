@@ -15,7 +15,8 @@ namespace Core.Entities.TripEntity
                 .IsRequired(false);
             builder
                 .HasMany(p => p.Points)
-                .WithMany(p => p.Trips);
+                .WithOne(p => p.Trip)
+                .HasForeignKey(p => p.TripId);
             builder
                 .HasMany(p => p.Offers)
                 .WithOne(p => p.Trip)
