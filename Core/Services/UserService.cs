@@ -6,6 +6,7 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -56,6 +57,26 @@ namespace Core.Services
             }
 
             return userRoles.First(); // we get only the first role, because the user will have only one
+        }
+
+        public async Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId)
+        {
+            var updateUser = await _userManager.FindByIdAsync(userId);
+            ExceptionMethods.UserNullCheck(updateUser);
+
+            updateUser.Name = userEditProfileInfo.Name;
+            updateUser.Surname = userEditProfileInfo.Surname;
+            if (!userEditProfileInfo.Email.Equals(updateUser.Email))
+            {
+                if (await _userRepository.Query().AnyAsync(user => user.Email == userEditProfileInfo.Email))
+                {
+                    throw new HttpException(ErrorMessages.EmailAlreadyExists, HttpStatusCode.BadRequest);
+                }
+                await _userManager.SetEmailAsync(updateUser, userEditProfileInfo.Email);
+                await _userManager.SetUserNameAsync(updateUser, userEditProfileInfo.Email);
+                updateUser.EmailConfirmed = false;
+            }
+            await _userManager.UpdateAsync(updateUser);
         }
     }
 }
