@@ -106,6 +106,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Car is not verified!.
+        /// </summary>
+        internal static string CarIsNotVerified {
+            get {
+                return ResourceManager.GetString("CarIsNotVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Car not found.
         /// </summary>
         internal static string CarNotFound {
@@ -282,6 +291,15 @@ namespace Core.Resources {
         internal static string SendInviteYourself {
             get {
                 return ResourceManager.GetString("SendInviteYourself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is already a trip in this time space!.
+        /// </summary>
+        internal static string TripIsAlreadyExistsInTheTimeSpace {
+            get {
+                return ResourceManager.GetString("TripIsAlreadyExistsInTheTimeSpace", resourceCulture);
             }
         }
         

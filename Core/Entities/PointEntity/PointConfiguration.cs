@@ -21,8 +21,10 @@ namespace Core.Entities.PointEntity
                 .WithOne(p => p.Point)
                 .HasForeignKey(p => p.OfferPointId);
             builder
-                .HasMany(p => p.Trips)
-                .WithMany(p => p.Points);
+                .HasOne(p => p.Trip)
+                .WithMany(p => p.Points)
+                .HasForeignKey(p => p.TripId)
+                .IsRequired(false);
         }
     }
 }
