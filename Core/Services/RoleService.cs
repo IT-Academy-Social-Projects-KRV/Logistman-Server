@@ -10,11 +10,11 @@ namespace Core.Services
 {
     public class RoleService : IRoleService
     {
-        private readonly IRepository<Role> _roleRepository;
+        private readonly IRepository<OfferRole> _roleRepository;
         private readonly RoleManager<IdentityRole> _identityRoleManager;
 
         public RoleService(
-            IRepository<Role> roleRepository,
+            IRepository<OfferRole> roleRepository,
             RoleManager<IdentityRole> identityRoleManger)
         {
             _roleRepository = roleRepository;
@@ -24,7 +24,7 @@ namespace Core.Services
         public async Task<int> GetRoleByNameAsync(string roleName)
         {
             var role = await _roleRepository
-                .GetBySpecAsync(new GetRoleByName(roleName));
+                .GetBySpecAsync(new OfferRoleSpecification.GetByName(roleName));
 
             ExceptionMethods.RoleNullCheck(role);
             return role.Id;

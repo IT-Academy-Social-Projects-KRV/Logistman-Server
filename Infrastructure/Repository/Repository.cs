@@ -1,6 +1,8 @@
-﻿using Ardalis.Specification.EntityFrameworkCore;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
 using Core.Interfaces;
 using Infrastructure.Data;
+using System.Linq;
 
 namespace Infrastructure.Repository
 {
@@ -12,6 +14,17 @@ namespace Infrastructure.Repository
         public Repository(ApplicationContext context) : base(context)
         {
             _context = context;
+        }
+
+        public IQueryable<TEntity> GetListBySpecAsync(ISpecification<TEntity> specification)
+        {
+            return ApplySpecification(specification);
+        }
+
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
+        {
+            var evaluator = new SpecificationEvaluator();
+            return evaluator.GetQuery(_context.Set<TEntity>(), specification);
         }
     }
 }

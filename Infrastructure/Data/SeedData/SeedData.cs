@@ -250,13 +250,13 @@ namespace Infrastructure.Data.SeedData
         #region SeedRole
 
         public static void SeedRole(ModelBuilder builder) =>
-            builder.Entity<Role>().HasData(
-                new Role()
+            builder.Entity<OfferRole>().HasData(
+                new OfferRole()
                 {
                     Id = 1,
                     Name = OfferRoles.Sender
                 },
-                new Role()
+                new OfferRole()
                 {
                     Id = 2,
                     Name = OfferRoles.Recipient

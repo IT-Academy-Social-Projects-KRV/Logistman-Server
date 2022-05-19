@@ -15,5 +15,13 @@ namespace Core.Specifications
                             c.TechnicalPassport.Equals(technicalPassport));
             }
         }
+
+        internal class GetByUserId: Specification<Car>
+        {
+            public GetByUserId(string userId)
+            {
+                Query.Where(c => c.UserId == userId).Include(c => c.Category);
+            }
+        }
     }
 }
