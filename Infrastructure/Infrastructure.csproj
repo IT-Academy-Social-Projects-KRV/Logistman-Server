@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.16" />
@@ -27,6 +28,10 @@
     <Folder Include="Repository\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
+   
   <ItemGroup>
     <Folder Include="Data\SeedData\" />
   </ItemGroup>

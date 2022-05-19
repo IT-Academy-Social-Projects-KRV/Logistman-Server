@@ -8,6 +8,6 @@
         public float LoadCapacity { get; set; }
         public string Color { get; set; }
         public string Vin { get; set; }
-        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }
