@@ -976,7 +976,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("Core.Entities.RoleEntity.Role", b =>
+            modelBuilder.Entity("Core.Entities.RoleEntity.OfferRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1536,7 +1536,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.OfferEntity.Offer", b =>
                 {
-                    b.HasOne("Core.Entities.RoleEntity.Role", "Role")
+                    b.HasOne("Core.Entities.RoleEntity.OfferRole", "OfferRole")
                         .WithMany("Offers")
                         .HasForeignKey("CreatorRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1564,9 +1564,9 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("GoodCategory");
 
-                    b.Navigation("Point");
+                    b.Navigation("OfferRole");
 
-                    b.Navigation("Role");
+                    b.Navigation("Point");
 
                     b.Navigation("Trip");
 
@@ -1733,7 +1733,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Offers");
                 });
 
-            modelBuilder.Entity("Core.Entities.RoleEntity.Role", b =>
+            modelBuilder.Entity("Core.Entities.RoleEntity.OfferRole", b =>
                 {
                     b.Navigation("Offers");
                 });

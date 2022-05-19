@@ -65,7 +65,7 @@ namespace Core.Services
         private async Task<bool> IsCarExist(Car newCar)
         {
             return await _carRepository
-                .AnyAsync(new GetCarWithMainCredentials(
+                .AnyAsync(new CarSpecification.GetWithMainCredentials(
                     newCar.RegistrationNumber,
                     newCar.Vin,
                     newCar.TechnicalPassport));;

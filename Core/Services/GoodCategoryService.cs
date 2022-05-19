@@ -33,7 +33,7 @@ namespace Core.Services
         public async Task<int> GetGoodCategoryByNameAsync(string goodCategoryName)
         {
             var goodCategory = await _goodCategoryRepository
-                .GetBySpecAsync(new GetGoodCategoryByName(goodCategoryName));
+                .GetBySpecAsync(new GoodCategorySpecification.GetByName(goodCategoryName));
 
             ExceptionMethods.GoodCategoryNullCheck(goodCategory);
 
