@@ -993,7 +993,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("OfferRoles");
 
                     b.HasData(
                         new

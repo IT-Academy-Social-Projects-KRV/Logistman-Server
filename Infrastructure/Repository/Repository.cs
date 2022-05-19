@@ -1,6 +1,8 @@
-﻿using Ardalis.Specification.EntityFrameworkCore;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
 using Core.Interfaces;
 using Infrastructure.Data;
+using System.Linq;
 
 namespace Infrastructure.Repository
 {
@@ -17,6 +19,17 @@ namespace Infrastructure.Repository
         public async Task<IEnumerable<TEntity>> FindWithSpecificationAsync(ISpecification<TEntity> specification)
         {
             return await SpecificationEvaluator<TEntity>.GetQueryAsync(_context.Set<TEntity>().AsQueryable(), specification);
+        }
+
+        public IQueryable<TEntity> GetListBySpecAsync(ISpecification<TEntity> specification)
+        {
+            return ApplySpecification(specification);
+        }
+
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
+        {
+            var evaluator = new SpecificationEvaluator();
+            return evaluator.GetQuery(_context.Set<TEntity>(), specification);
         }
     }
 }

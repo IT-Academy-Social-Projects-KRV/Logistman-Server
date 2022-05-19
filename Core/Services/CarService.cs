@@ -13,7 +13,6 @@ using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
@@ -39,13 +38,13 @@ namespace Core.Services
         public async Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId)
         {
             var car = _mapper.Map<Car>(createCarDTO);
-            if (IsCarExist(car))
+            if (await IsCarExist(car))
             {
                 throw new HttpException(ErrorMessages.AddingCarNotAllowed, HttpStatusCode.NotAcceptable);
             }
 
             car.CreationDate = DateTimeOffset.UtcNow;
-            car.Category = _categoryRepository.Query().First(c => c.Name == createCarDTO.CategoryName);
+            car.Category = await _categoryRepository.GetBySpecAsync(new CarCategorySpecification.GetByName(createCarDTO.CategoryName));
 
             var user = await _userManager.FindByIdAsync(userId);
             ExceptionMethods.UserNullCheck(user);
@@ -58,9 +57,7 @@ namespace Core.Services
 
         public IQueryable<CarDTO> GetAllUserCars(string userId)
         {
-            var userCars = _carRepository.Query()
-                                         .Where(c => c.UserId == userId)
-                                         .Include(c => c.Category);
+            var userCars = _carRepository.GetListBySpecAsync(new CarSpecification.GetByUserId(userId));
 
             return _mapper.ProjectTo<CarDTO>(userCars);
         }
