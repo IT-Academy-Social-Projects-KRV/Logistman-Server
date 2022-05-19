@@ -25,6 +25,6 @@ namespace Core.Entities.OfferEntity
         public string OfferCreatorId { get; set; }
         public User User { get; set; }
         public int CreatorRoleId { get; set; }
-        public Role Role { get; set; }
+        public OfferRole OfferRole { get; set; }
     }
 }

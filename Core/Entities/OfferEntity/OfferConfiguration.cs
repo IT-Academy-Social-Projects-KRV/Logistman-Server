@@ -11,7 +11,7 @@ namespace Core.Entities.OfferEntity
                 .Property(p => p.Description)
                 .IsRequired(false);
             builder
-                .HasOne(p => p.Role)
+                .HasOne(p => p.OfferRole)
                 .WithMany(p => p.Offers)
                 .HasForeignKey(p => p.CreatorRoleId);
             builder

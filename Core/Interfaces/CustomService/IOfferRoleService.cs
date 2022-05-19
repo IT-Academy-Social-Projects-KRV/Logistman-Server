@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService
 {
-    public interface IRoleService
+    public interface IOfferRoleService
     {
-        Task<IdentityRole> GetIdentityRoleByNameAsync(string roleName);
+        //Task<IdentityRole> GetIdentityRoleByNameAsync(string roleName);
         Task<int> GetRoleByNameAsync(string name);
     }
 }
