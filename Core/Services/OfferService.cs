@@ -12,6 +12,7 @@ using System;
 using System.Net;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Specifications;
 
 namespace Core.Services
 {
@@ -47,7 +48,7 @@ namespace Core.Services
         {
             if (offerCreate.Point.TripId != null)
             {
-                var isTripExists = _tripService.CheckIsTripExistsById((int)offerCreate.Point.TripId);
+                var isTripExists = await _tripService.CheckIsTripExistsById((int)offerCreate.Point.TripId);
 
                 if (!isTripExists)
                 {
@@ -72,12 +73,7 @@ namespace Core.Services
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
         {
-            var offer = await _offerRepository.Query()
-                .Where(o => o.Id == offerId && o.OfferCreatorId == userId)
-                .Include(offer => offer.Point)
-                .Include(offer => offer.Role)
-                .Include(offer => offer.GoodCategory)
-                .FirstOrDefaultAsync();
+            var offer = await _offerRepository.GetBySpecAsync(new OfferSpecification.GetById(offerId, userId));
 
             ExceptionMethods.OfferNullCheck(offer);
 

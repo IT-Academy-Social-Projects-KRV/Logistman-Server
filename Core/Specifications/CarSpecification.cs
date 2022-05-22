@@ -23,5 +23,21 @@ namespace Core.Specifications
                 Query.Where(c => c.UserId == userId).Include(c => c.Category);
             }
         }
+
+        internal class GetByIds : Specification<Car>
+        {
+            public GetByIds(int carId, string userId)
+            {
+                Query.Where(c => c.UserId.Equals(userId) && c.Id == carId);
+            }
+        }
+
+        internal class GetVerified : Specification<Car>
+        {
+            public GetVerified(int carId)
+            {
+                Query.Where(c => c.Id == carId && c.IsVerified);
+            }
+        }
     }
 }

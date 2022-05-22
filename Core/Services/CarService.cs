@@ -71,16 +71,14 @@ namespace Core.Services
                     newCar.TechnicalPassport));;
         }
 
-        public bool CheckIsCarBelongsToUserByIds(int carId, string userId)
+        public async Task<bool> CheckIsCarBelongsToUserByIds(int carId, string userId)
         {
-            return _carRepository.Query()
-                                 .Any(c => c.Id == carId && c.UserId == userId);
+            return await _carRepository.AnyAsync(new CarSpecification.GetByIds(carId, userId));
         }
 
-        public bool CheckIsCarVerifiedById(int carId)
+        public async Task<bool> CheckIsCarVerifiedById(int carId)
         {
-            return _carRepository.Query()
-                                 .Any(c => c.Id == carId && c.IsVerified);
+            return await _carRepository.AnyAsync(new CarSpecification.GetVerified(carId));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(offer => offer.OfferRole, dto => dto.Ignore())
                 .ForMember(offer => offer.GoodCategory, dto => dto.Ignore());
             CreateMap<OfferInfoDTO, Offer>().ReverseMap()
-                .ForMember(dest => dest.Role, opt => opt.MapFrom(role => role.Role.Name))
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(role => role.OfferRole.Name))
                 .ForMember(dest => dest.GoodCategory, opt => opt.MapFrom(category => category.GoodCategory.Name));
         }
     }
