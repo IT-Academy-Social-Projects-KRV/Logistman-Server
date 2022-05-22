@@ -10,8 +10,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
     [Migration("20220522154248_AddSeed")]
     partial class AddSeed
+========
+    [Migration("20220519142819_Renamed Role entities and added Seeds")]
+    partial class RenamedRoleentitiesandaddedSeeds
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,6 +124,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             CategoryId = 4,
                             Color = "Червоний",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
@@ -129,10 +135,23 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "O2DCWYTFPKEAF5GAHK1K",
                             UserId = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             Vin = "728D5F4WOH1CG1FHS"
+========
+                            CategoryId = 2,
+                            Color = "Синій",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 5, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 824.19965f,
+                            Model = "P 623 O",
+                            RegistrationNumber = "BK1EQN2X80O6E5XWHB2W",
+                            TechnicalPassport = "HA4NNRZVSG8YVSWAVV4D",
+                            UserId = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            Vin = "Y1FTNQHK70JO31GDR"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             CategoryId = 2,
                             Color = "Чорний",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
@@ -143,11 +162,24 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "X82PFV0SLXWOO24LDKQQ",
                             UserId = "e7a5c59a-b887-4043-bd3d-71b57733b5aa",
                             Vin = "WPT63D9M9IKN1VP2F"
+========
+                            CategoryId = 3,
+                            Color = "Синій",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 5, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 748.8656f,
+                            Model = "D 802 U",
+                            RegistrationNumber = "QAL8N1M6O7PC27U48E89",
+                            TechnicalPassport = "8F7PVTH45PIN69PI1IUJ",
+                            UserId = "fe0aae3f-c4b8-4e65-a9dd-37dc84f6395e",
+                            Vin = "UHDPD6XUFSWIJA3WD"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 3,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Color = "Жовтий",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
@@ -157,10 +189,22 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "E3108VA56K8MQYUZVEB6",
                             UserId = "a4ffba1f-2bad-451a-9ad3-a8e35f1b989f",
                             Vin = "ICDJD76SJSNHCV58Q"
+========
+                            Color = "Чорний",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 5, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 816.4727f,
+                            Model = "A 988 S",
+                            RegistrationNumber = "26SHB3QKOOFLQB6GA6B9",
+                            TechnicalPassport = "PQNQFF550Y2SUSBILOLR",
+                            UserId = "1229b494-9a5c-47af-9759-e987cbb1d4b2",
+                            Vin = "7U4OCK6D9BPPZCJ22"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 4,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             CategoryId = 3,
                             Color = "Сірий",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
@@ -171,10 +215,23 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "GZ8MZUNN80TK09CXZ6WW",
                             UserId = "e7a5c59a-b887-4043-bd3d-71b57733b5aa",
                             Vin = "V9W9GL2K2OZHL2DR0"
+========
+                            CategoryId = 2,
+                            Color = "Синій",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 4, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 787.02655f,
+                            Model = "O 752 P",
+                            RegistrationNumber = "MQY0NVMKKKGISLQ3LYNP",
+                            TechnicalPassport = "R35SZZIMQT3PH8HYDJJI",
+                            UserId = "fe0aae3f-c4b8-4e65-a9dd-37dc84f6395e",
+                            Vin = "54JTQGCRBNW0UIL61"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 5,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             CategoryId = 4,
                             Color = "Зелений",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
@@ -185,11 +242,24 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "5KJNAK76HNQL4U1P0AB1",
                             UserId = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             Vin = "IRPYE2A06ZBS9A1R0"
+========
+                            CategoryId = 3,
+                            Color = "Чорний",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 13, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 565.36066f,
+                            Model = "V 755 M",
+                            RegistrationNumber = "R0K4SP2E520Y095919YH",
+                            TechnicalPassport = "GSHDYC7IV5NWENRT5CK2",
+                            UserId = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            Vin = "QYUKLWVDAQV80YJ65"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 6,
                             CategoryId = 3,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Color = "Зелений",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
@@ -199,11 +269,23 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "RABLRN9A4QF0OSE0AEAM",
                             UserId = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             Vin = "O0P7ASO06U3C71NIW"
+========
+                            Color = "Червоний",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 760.6366f,
+                            Model = "N 999 K",
+                            RegistrationNumber = "4JDHC3PPW882IJEQAMIU",
+                            TechnicalPassport = "W06MS9Z74KQPQJQ08FJ9",
+                            UserId = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            Vin = "Y0SW0NQP6W05I3DQP"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 7,
                             CategoryId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Color = "Чорний",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 5, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
@@ -213,10 +295,22 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "LXBLCCSHWIZISN7TB8D5",
                             UserId = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             Vin = "8B4GCMC0NU2CRL2D7"
+========
+                            Color = "Синій",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 4, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 588.2732f,
+                            Model = "P 392 M",
+                            RegistrationNumber = "JBZTDIV388V16TW8BGFD",
+                            TechnicalPassport = "TOL0MNHQG53FNI9K1UD6",
+                            UserId = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            Vin = "SWM16XSTT16XOUQY6"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 8,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             CategoryId = 2,
                             Color = "Зелений",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
@@ -227,10 +321,23 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "4GGWLQX0E25LXALNPXMY",
                             UserId = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             Vin = "47FW2WBYX5RGW2CQ2"
+========
+                            CategoryId = 4,
+                            Color = "Жовтий",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 600.7593f,
+                            Model = "Q 179 D",
+                            RegistrationNumber = "GENJB7H2820VOELGKXMB",
+                            TechnicalPassport = "18PUEU3NN655PR6MIDGM",
+                            UserId = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            Vin = "YVNZ1KL9F70R37PT5"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 9,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             CategoryId = 3,
                             Color = "Зелений",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
@@ -241,11 +348,24 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "ZUGDIAYVLT6T87P4C11N",
                             UserId = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             Vin = "SZEQ2ADC3JCR0VACC"
+========
+                            CategoryId = 4,
+                            Color = "Синій",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 535.33105f,
+                            Model = "K 152 X",
+                            RegistrationNumber = "U5X7YY7G0Z2AT6FSJ2EQ",
+                            TechnicalPassport = "X5YNYXO7ZIIJVYST3CMA",
+                            UserId = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            Vin = "0R0WVNQOKR0BYP7A9"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 10,
                             CategoryId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Color = "Жовтий",
                             CreationDate = new DateTimeOffset(new DateTime(2016, 7, 4, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
@@ -255,6 +375,17 @@ namespace Infrastructure.Migrations
                             TechnicalPassport = "NGH7TU0P3BDROPPM0JS1",
                             UserId = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             Vin = "KCNUTDKQNUNDN8MUW"
+========
+                            Color = "Білий",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 5, 17, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            IsVerified = true,
+                            LoadCapacity = 619.53314f,
+                            Model = "M 542 M",
+                            RegistrationNumber = "IEVDLP7F3I646M121HBY",
+                            TechnicalPassport = "RJKZ3MT2M18AIAHI0A5Z",
+                            UserId = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            Vin = "XTSK1N7Y8I6JPZUVA"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         });
                 });
 
@@ -371,6 +502,7 @@ namespace Infrastructure.Migrations
                             Id = 1,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "collaborative compress Spur hard drive Tunnel copying multi-byte Soft Hill Shores Libyan Arab Jamahiriya Human payment engineer Home & Jewelery bypassing process improvement calculate Electronics & Shoes Moroccan Dirham Small Rubber Pants Data Heights Papua New Guinea revolutionize Kids, Automotive & Tools Global Intranet.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 6, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 7,
@@ -379,12 +511,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "762dd1e0-f2bb-4baa-8f2c-82d6d480df29",
                             OfferPointId = 1,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Markets innovate Balanced Baht communities Light Product Finland silver channels communities Baby & Books Wisconsin Tasty Frozen Soap Guyana Dollar Sleek Quality-focused Missouri.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 6, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 6,
+                            GoodsWeight = 126.26133f,
+                            IsClosed = false,
+                            OfferCreatorId = "a59f1cac-b55c-4177-867a-76ce07d54dbf",
+                            OfferPointId = 1,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 2,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "next-generation Shores redundant multi-byte Lead overriding silver budgetary management Lithuanian Litas bus Electronics composite reboot Awesome Fresh Computer Auto Loan Account Cambridgeshire Brazilian Real Checking Account Cliff Tools, Movies & Home pixel array Kids, Music & Outdoors Proactive knowledge user Sleek Soft Car Unbranded Concrete Shirt matrix Checking Account.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 9, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 1,
@@ -393,12 +536,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "e7a5c59a-b887-4043-bd3d-71b57733b5aa",
                             OfferPointId = 2,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "copying Missouri Planner rich New Israeli Sheqel Senior tan monitor Forges calculating.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 3,
+                            GoodsWeight = 600.98145f,
+                            IsClosed = false,
+                            OfferCreatorId = "fe0aae3f-c4b8-4e65-a9dd-37dc84f6395e",
+                            OfferPointId = 2,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 3,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "azure Garden fuchsia ability hard drive protocol primary Executive website Applications programming Music & Garden Specialist Bedfordshire Corporate hacking Checking Account violet SSL Savings Account deposit Optional Visionary Antigua and Barbuda Avon Incredible Plastic Chair.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 10, 22, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 7,
@@ -407,12 +561,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "875c647c-6b1a-468c-97c5-294de8507eb3",
                             OfferPointId = 3,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Practical Plastic Chicken Refined Producer Home Loan Account Cambridgeshire Fantastic Plastic Shirt Incredible Rubber Pants Administrator Object-based Sleek Practical Metal Pants Wallis and Futuna Point leading edge bandwidth digital Robust Intelligent Functionality cross-platform scalable calculating HTTP Branding indigo Home Loan Account multi-byte Gorgeous Grocery & Tools.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 8, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 4,
+                            GoodsWeight = 99.324585f,
+                            IsClosed = false,
+                            OfferCreatorId = "6ae73725-bd78-4bd1-ad55-c92ec6ae41c4",
+                            OfferPointId = 3,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 4,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Ranch Falls withdrawal Factors RAM bus Fords PCI Connecticut Assistant Stream JBOD San Marino Checking Account Bedfordshire Baby & Clothing Multi-lateral withdrawal Nevada Colorado Personal Loan Account.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 9, 13, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 3,
@@ -421,12 +586,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "944e6c2f-7692-4c93-9a9c-81c30905a158",
                             OfferPointId = 4,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Front-line Sports & Clothing Belize Dollar indexing primary Papua New Guinea Money Market Account deposit grey payment digital Street.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 10, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 2,
+                            GoodsWeight = 394.5672f,
+                            IsClosed = false,
+                            OfferCreatorId = "4eeb7de8-2ace-412e-8bd2-54ee369484ff",
+                            OfferPointId = 4,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 5,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "circuit Ergonomic Rubber Cheese Ranch Forward Division Checking Account eyeballs TCP mindshare salmon Forge concept Movies & Books IB Rubber hierarchy Borders Credit Card Account Handcrafted Metal Fish Credit Card Account Consultant Outdoors input.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 7, 23, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 6,
@@ -435,12 +611,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "8c17e1ba-57da-4b33-9559-badad2641fc3",
                             OfferPointId = 5,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "International strategic Sharable RAM communities digital e-business sensor e-services Bedfordshire Sleek Granite Hat bypassing Specialist Borders Baby payment Engineer maroon pink.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 23, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 1,
+                            GoodsWeight = 267.8336f,
+                            IsClosed = false,
+                            OfferCreatorId = "3bf717ed-c2ae-4393-9ff7-5bece832e240",
+                            OfferPointId = 5,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 6,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "back up Trail Security alliance mobile port scale payment International Credit Card Account Enhanced Texas Wooden Granite Wooden Sports & Electronics TCP Licensed.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 1,
@@ -449,12 +636,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "8b605fbc-b858-4225-8458-aa9715844640",
                             OfferPointId = 6,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "invoice Granite IB strategize fuchsia intuitive generating Auto Loan Account Proactive Pennsylvania optimizing Diverse Future Assistant 5th generation Sri Lanka Baby Lithuanian Litas Bedfordshire open-source ivory metrics exuding calculate ROI deploy open system Customer Investor.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 6, 13, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 3,
+                            GoodsWeight = 588.6934f,
+                            IsClosed = false,
+                            OfferCreatorId = "283e4baf-a46d-467e-8c3c-d7c58fa41046",
+                            OfferPointId = 6,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 7,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Money Market Account Representative Dynamic copy Wooden Montana input parsing programming invoice violet Refined Metal Table Unbranded Wooden Gloves definition Inlet Russian Federation Awesome Concrete Sausages demand-driven Aruban Guilder dot-com.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 8, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 1,
@@ -463,12 +661,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "8b605fbc-b858-4225-8458-aa9715844640",
                             OfferPointId = 7,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Soft Chief bricks-and-clicks enterprise Avon Consultant turn-key SSL Refined Soft Keyboard mindshare synergistic Awesome Fresh Fish Developer Movies & Tools Rubber calculating Sleek Handcrafted Fresh Tuna Mobility Walks.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 7, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 2,
+                            GoodsWeight = 702.2551f,
+                            IsClosed = false,
+                            OfferCreatorId = "283e4baf-a46d-467e-8c3c-d7c58fa41046",
+                            OfferPointId = 7,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 8,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Plastic teal Plastic Avon overriding programming 6th generation communities Soft needs-based feed International Granite Rustic Wooden Sausages San Marino well-modulated.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 8, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 2,
@@ -477,12 +686,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "8c17e1ba-57da-4b33-9559-badad2641fc3",
                             OfferPointId = 8,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "vortals indigo program Auto Loan Account back up repurpose Analyst functionalities Buckinghamshire asymmetric circuit.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 10, 22, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 1,
+                            GoodsWeight = 710.86816f,
+                            IsClosed = false,
+                            OfferCreatorId = "3bf717ed-c2ae-4393-9ff7-5bece832e240",
+                            OfferPointId = 8,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 9,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "AI Unbranded Small Granite Sausages optical open-source front-end Isle Avon Savings Account compelling Dynamic Generic Plastic Fish customized Spur Sports, Home & Sports mobile Buckinghamshire orange Handmade Turkmenistan exploit invoice Knoll Cotton Global.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 9, 20, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 4,
@@ -491,12 +711,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "8b605fbc-b858-4225-8458-aa9715844640",
                             OfferPointId = 9,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "neural-net system-worthy next generation Metal National withdrawal HTTP Parks Generic Granite Shirt Up-sized Corner Cotton Saint Helena niches parse Land Berkshire.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 9, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 6,
+                            GoodsWeight = 116.9796f,
+                            IsClosed = false,
+                            OfferCreatorId = "283e4baf-a46d-467e-8c3c-d7c58fa41046",
+                            OfferPointId = 9,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 10,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "24 hour Integrated panel Norway Wooden platforms Auto Loan Account Operations capacitor SMTP Ergonomic Cotton Salad West Virginia online Administrator matrix withdrawal calculating instruction set payment Wooden global Euro next generation Haven neural transmitting hacking Money Market Account.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 20, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 5,
@@ -505,12 +736,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "8b605fbc-b858-4225-8458-aa9715844640",
                             OfferPointId = 10,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "e-commerce invoice hacking pink strategize Savings Account optimize Handmade Fresh Mouse architect Mauritius invoice Borders violet Universal deposit Berkshire tan Borders Balboa green mesh Engineer.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 5,
+                            GoodsWeight = 110.36929f,
+                            IsClosed = false,
+                            OfferCreatorId = "283e4baf-a46d-467e-8c3c-d7c58fa41046",
+                            OfferPointId = 10,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 11,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Mews Versatile Diverse black Awesome Fresh Cheese Concrete neural-net Small payment Marketing quantify deposit Technician FTP Sleek invoice real-time Handmade Concrete Computer.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 6, 23, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 3,
@@ -519,12 +761,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "a4ffba1f-2bad-451a-9ad3-a8e35f1b989f",
                             OfferPointId = 11,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Bangladesh parsing copying uniform hack Buckinghamshire whiteboard Baby, Home & Garden Buckinghamshire Games & Music overriding Unions Avon Steel web services encompassing New York violet Kuwaiti Dinar Chief multi-byte Cliff solutions index Steel Namibia.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 1,
+                            GoodsWeight = 668.4513f,
+                            IsClosed = false,
+                            OfferCreatorId = "1229b494-9a5c-47af-9759-e987cbb1d4b2",
+                            OfferPointId = 11,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 12,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Rubber Plastic Small Steel Shoes object-oriented Money Market Account Intelligent Granite Shirt indexing partnerships upward-trending Netherlands Antilles wireless American Samoa supply-chains Prairie local RAM back up Kids & Tools Supervisor vortals.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 22, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 7,
@@ -533,12 +786,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "e7a5c59a-b887-4043-bd3d-71b57733b5aa",
                             OfferPointId = 12,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Director matrix application Connecticut deposit Ergonomic Rubber Hat empowering Polarised syndicate grey Bond Markets Units European Composite Unit (EURCO) deploy payment alarm Generic Metal Mouse.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 8, 22, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 3,
+                            GoodsWeight = 952.275f,
+                            IsClosed = false,
+                            OfferCreatorId = "fe0aae3f-c4b8-4e65-a9dd-37dc84f6395e",
+                            OfferPointId = 12,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 13,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "demand-driven red Cambridgeshire human-resource Small Soft Ball Solutions Hill systems connect Optimization programming Bedfordshire USB Personal Loan Account multimedia Curve Specialist deposit asynchronous parse.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 9, 17, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 4,
@@ -547,12 +811,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "762dd1e0-f2bb-4baa-8f2c-82d6d480df29",
                             OfferPointId = 13,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Rustic Concrete Computer Representative Fantastic Buckinghamshire Iraq Bahamas Ports generating array AI Liaison portals e-markets Pound Sterling Auto Loan Account Generic Steel Bike schemas convergence Fort Universal Czech Republic yellow ubiquitous Automated Hawaii Producer Wooden Rial Omani.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 6, 13, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 6,
+                            GoodsWeight = 546.89856f,
+                            IsClosed = false,
+                            OfferCreatorId = "a59f1cac-b55c-4177-867a-76ce07d54dbf",
+                            OfferPointId = 13,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 14,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Radial Avon interfaces index interactive analyzing Taiwan Licensed Handcrafted Soft Chair multi-state viral Solomon Islands Dollar Representative Portugal monitor Garden Gorgeous Soft Soap plum Team-oriented.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 1,
@@ -561,12 +836,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "e7a5c59a-b887-4043-bd3d-71b57733b5aa",
                             OfferPointId = 14,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "TCP architect Intelligent Soft Hat Estate Generic Intelligent Plastic Bike bypass Hawaii THX archive artificial intelligence parse Awesome Shoes, Outdoors & Garden Tasty Colombian Peso USB.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 4,
+                            GoodsWeight = 684.08136f,
+                            IsClosed = false,
+                            OfferCreatorId = "fe0aae3f-c4b8-4e65-a9dd-37dc84f6395e",
+                            OfferPointId = 14,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 15,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Center Generic Cotton Mouse National Cotton Malaysian Ringgit programming South Dakota New York Stand-alone parsing Nebraska Secured ROI cross-platform withdrawal Central Branding Bermudian Dollar (customarily known as Bermuda Dollar) Music.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 7, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 3,
@@ -575,12 +861,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "944e6c2f-7692-4c93-9a9c-81c30905a158",
                             OfferPointId = 15,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "dedicated Directives Nevada Bedfordshire port Factors metrics Causeway orange SQL overriding analyzing SMS Drives Re-contextualized Licensed Rubber Pants Peso Uruguayo Street Diverse.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 9, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 2,
+                            GoodsWeight = 390.08023f,
+                            IsClosed = false,
+                            OfferCreatorId = "4eeb7de8-2ace-412e-8bd2-54ee369484ff",
+                            OfferPointId = 15,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 16,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "calculating Isle Kids Mill Iraq Auto Loan Account payment feed national productize Direct Plains Handcrafted Fresh Gloves proactive Managed content Unbranded Plastic Table Auto Loan Account strategic Handcrafted Cotton Ball Berkshire Operations pink Supervisor Investor Outdoors, Toys & Clothing capacity Bedfordshire maroon Object-based.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 5,
@@ -589,12 +886,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "8c17e1ba-57da-4b33-9559-badad2641fc3",
                             OfferPointId = 16,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Future 24/365 calculate Persevering Tasty Fresh Ball SDD website Manager Fantastic Steel Keyboard Lodge revolutionary invoice transmit Haven deposit Washington National benchmark enterprise.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 8, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 1,
+                            GoodsWeight = 618.17096f,
+                            IsClosed = false,
+                            OfferCreatorId = "3bf717ed-c2ae-4393-9ff7-5bece832e240",
+                            OfferPointId = 16,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 17,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Mobility Synergistic Open-source engineer programming Islands Ireland Global Arkansas Steel Developer Bedfordshire Future RAM Cotton heuristic initiatives Euro Albania mission-critical Tactics Money Market Account back up Bahraini Dinar Internal.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 8, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 2,
@@ -603,12 +911,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "875c647c-6b1a-468c-97c5-294de8507eb3",
                             OfferPointId = 17,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Fantastic Passage navigating feed HTTP invoice secured line Intuitive New York Home Loan Account evolve.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 4,
+                            GoodsWeight = 652.03516f,
+                            IsClosed = false,
+                            OfferCreatorId = "6ae73725-bd78-4bd1-ad55-c92ec6ae41c4",
+                            OfferPointId = 17,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 18,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 2,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Tasty Technician Progressive Borders Representative out-of-the-box deposit Oklahoma Direct deposit maroon EXE open-source actuating adapter.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 10, 17, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 1,
@@ -617,12 +936,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "875c647c-6b1a-468c-97c5-294de8507eb3",
                             OfferPointId = 18,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "transmit hard drive quantifying Creek transmitter neural 3rd generation migration Small Frozen Pants Dale Assurance Rest Beauty, Beauty & Sports Concrete Research upward-trending convergence Licensed Plastic Bacon neural Belarussian Ruble Fantastic Plastic Salad Director Gorgeous Rubber Pizza Games, Baby & Clothing Savings Account.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 6, 22, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 1,
+                            GoodsWeight = 976.43115f,
+                            IsClosed = false,
+                            OfferCreatorId = "6ae73725-bd78-4bd1-ad55-c92ec6ae41c4",
+                            OfferPointId = 18,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 19,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Ohio deposit Manat Fantastic 24/7 synthesizing hybrid Corners blue Burundi Franc e-business Tools & Home Executive Product payment Greenland strategize.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 8, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 2,
@@ -631,12 +961,23 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "e7a5c59a-b887-4043-bd3d-71b57733b5aa",
                             OfferPointId = 19,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "firewall multi-byte pink Fresh Customer Identity olive synthesizing Beauty, Tools & Outdoors Inlet Bhutan payment bypassing Licensed Incredible Rubber Keyboard Borders Checking Account optimizing Steel Ridges magnetic Cameroon Investor withdrawal.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 6, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 4,
+                            GoodsWeight = 652.57825f,
+                            IsClosed = false,
+                            OfferCreatorId = "fe0aae3f-c4b8-4e65-a9dd-37dc84f6395e",
+                            OfferPointId = 19,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         },
                         new
                         {
                             Id = 20,
                             CreationDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatorRoleId = 1,
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Description = "Architect adapter Israel 24/7 Legacy Usability payment radical revolutionize Architect Awesome Concrete Ball Research Home Circles data-warehouse Alley Security hierarchy payment.",
                             ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 8, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             GoodCategoryId = 5,
@@ -645,6 +986,16 @@ namespace Infrastructure.Migrations
                             OfferCreatorId = "a4ffba1f-2bad-451a-9ad3-a8e35f1b989f",
                             OfferPointId = 20,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+========
+                            Description = "Pound Sterling transmit transmitter Awesome Granite Pants maroon Fork invoice users 1080p blue Cape Verde Escudo Bedfordshire calculate optical didactic Awesome Rubber Shoes enhance programming tangible Clothing, Electronics & Movies Steel.",
+                            ExpirationDate = new DateTimeOffset(new DateTime(2022, 7, 7, 20, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            GoodCategoryId = 3,
+                            GoodsWeight = 41.65277f,
+                            IsClosed = false,
+                            OfferCreatorId = "1229b494-9a5c-47af-9759-e987cbb1d4b2",
+                            OfferPointId = 20,
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         });
                 });
 
@@ -1090,22 +1441,37 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "ecb9730e-36fb-4ca9-8ef8-e8bb5d5f0381",
                             ConcurrencyStamp = "ecb9730e-36fb-4ca9-8ef8-e8bb5d5f0381",
+========
+                            Id = "69fa01c1-e668-4614-a01d-e9716a07a2d5",
+                            ConcurrencyStamp = "69fa01c1-e668-4614-a01d-e9716a07a2d5",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "0af11548-2ad9-452b-82d3-008f6ec7bbbc",
                             ConcurrencyStamp = "0af11548-2ad9-452b-82d3-008f6ec7bbbc",
+========
+                            Id = "425a592e-8fc7-463f-87a7-77f5d5ac05a9",
+                            ConcurrencyStamp = "425a592e-8fc7-463f-87a7-77f5d5ac05a9",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "103c5f41-8d61-4fe3-b97e-9e683c666ea3",
                             ConcurrencyStamp = "103c5f41-8d61-4fe3-b97e-9e683c666ea3",
+========
+                            Id = "1d0fcc4b-3661-4313-9eb3-90ac13f5390a",
+                            ConcurrencyStamp = "1d0fcc4b-3661-4313-9eb3-90ac13f5390a",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Name = "Logist",
                             NormalizedName = "LOGIST"
                         });
@@ -1269,6 +1635,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             UserId = "e7a5c59a-b887-4043-bd3d-71b57733b5aa",
                             RoleId = "ecb9730e-36fb-4ca9-8ef8-e8bb5d5f0381"
                         },
@@ -1306,6 +1673,45 @@ namespace Infrastructure.Migrations
                         {
                             UserId = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             RoleId = "ecb9730e-36fb-4ca9-8ef8-e8bb5d5f0381"
+========
+                            UserId = "fe0aae3f-c4b8-4e65-a9dd-37dc84f6395e",
+                            RoleId = "69fa01c1-e668-4614-a01d-e9716a07a2d5"
+                        },
+                        new
+                        {
+                            UserId = "283e4baf-a46d-467e-8c3c-d7c58fa41046",
+                            RoleId = "69fa01c1-e668-4614-a01d-e9716a07a2d5"
+                        },
+                        new
+                        {
+                            UserId = "6ae73725-bd78-4bd1-ad55-c92ec6ae41c4",
+                            RoleId = "69fa01c1-e668-4614-a01d-e9716a07a2d5"
+                        },
+                        new
+                        {
+                            UserId = "3bf717ed-c2ae-4393-9ff7-5bece832e240",
+                            RoleId = "69fa01c1-e668-4614-a01d-e9716a07a2d5"
+                        },
+                        new
+                        {
+                            UserId = "4eeb7de8-2ace-412e-8bd2-54ee369484ff",
+                            RoleId = "69fa01c1-e668-4614-a01d-e9716a07a2d5"
+                        },
+                        new
+                        {
+                            UserId = "1229b494-9a5c-47af-9759-e987cbb1d4b2",
+                            RoleId = "69fa01c1-e668-4614-a01d-e9716a07a2d5"
+                        },
+                        new
+                        {
+                            UserId = "a59f1cac-b55c-4177-867a-76ce07d54dbf",
+                            RoleId = "69fa01c1-e668-4614-a01d-e9716a07a2d5"
+                        },
+                        new
+                        {
+                            UserId = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            RoleId = "69fa01c1-e668-4614-a01d-e9716a07a2d5"
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                         });
                 });
 
@@ -1354,162 +1760,290 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "e7a5c59a-b887-4043-bd3d-71b57733b5aa",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "f296b83c-7dbd-4dc9-902c-cb4c0db2fc4c",
+========
+                            Id = "fe0aae3f-c4b8-4e65-a9dd-37dc84f6395e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "66e23b16-717a-45f3-91b6-b7801cd29994",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Email = "chorrny228@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CHORRNY228@GMAIL.COM",
                             NormalizedUserName = "CHORRNY228@GMAIL.COM",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAEChq9vg2lx2bK57HBw5o3JxDORmpuFEaYXWKY7VYrNRl+YObdZApdJ5DcQP8S3BRQg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "4d6a94ef-6d6a-4954-9a9f-02fcc5e20fb8",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAEKrinxDfGhsESgCrZ7X/faPALOT6vF1I514WNAlo/W5YHx3ISwUmpM0ZzdWgm4jBRg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3bb613bd-69cb-467c-87b7-f1a0e860f426",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "chorrny228@gmail.com",
                             HasCar = false,
                             Name = "Vadym",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 15, 42, 47, 566, DateTimeKind.Unspecified).AddTicks(4435), new TimeSpan(0, 0, 0, 0, 0)),
+========
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 19, 14, 28, 18, 252, DateTimeKind.Unspecified).AddTicks(4967), new TimeSpan(0, 0, 0, 0, 0)),
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Surname = "Chorrny"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "8b605fbc-b858-4225-8458-aa9715844640",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "e168cea8-5413-4199-899d-0cbe6652471a",
+========
+                            Id = "283e4baf-a46d-467e-8c3c-d7c58fa41046",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "deeb1aac-dc76-44fa-b6b7-607380a11224",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Email = "oppaiarchmaster@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OPPAIARCHMASTER@GMAIL.COM",
                             NormalizedUserName = "OPPAIARCHMASTER@GMAIL.COM",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAEJ4NqdZjvoGntsU42/512QSu58SWo1bgc0GmK3cLgeuVC1nHetdz6/6Lz+bt+0Ageg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "cd880d2c-e349-4444-bfd0-73523394cdb0",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAEB3/Kpast7pb6ZCJmZu23Py3TIhQxdsYAnMxVJJ6ZsAFlg2yrFQ/C9b0Ye3+mVRgTg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5bfc7653-6fcd-4466-87c5-1f1ae4d7d9ed",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "oppaiarchmaster@gmail.com",
                             HasCar = false,
                             Name = "Vlad",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 15, 42, 47, 566, DateTimeKind.Unspecified).AddTicks(5627), new TimeSpan(0, 0, 0, 0, 0)),
+========
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 19, 14, 28, 18, 252, DateTimeKind.Unspecified).AddTicks(6645), new TimeSpan(0, 0, 0, 0, 0)),
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Surname = "Sevastyanov"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "a4ffba1f-2bad-451a-9ad3-a8e35f1b989f",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "1d3bef42-6fc1-4f81-8468-3c49a1010067",
+========
+                            Id = "1229b494-9a5c-47af-9759-e987cbb1d4b2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "fe842564-eb07-4889-bdb5-3772700c0fad",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Email = "andrewchepeliuk@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ANDREWCHEPELIUK@GMAIL.COM",
                             NormalizedUserName = "ANDREWCHEPELIUK@GMAIL.COM",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAECeci6a6UsJGxnKhbiuNDb4XBQhpbDdjhPdaELzMmWM+LXIaIFeM2LJ3EFcT8faxjQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "2d86e35f-e432-4975-bce1-b3339b6b9dc7",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAEPeNiGWr3vxfYnIuIzTe/MilrYlaeuH/4G516aAEV9AlwHTlrWcnu2I6dsCl1VcfrA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "886c952f-2ba3-4142-a45d-bc2e18cd08e8",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "andrewchepeliuk@gmail.com",
                             HasCar = false,
                             Name = "Andrii",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 15, 42, 47, 566, DateTimeKind.Unspecified).AddTicks(5680), new TimeSpan(0, 0, 0, 0, 0)),
+========
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 19, 14, 28, 18, 252, DateTimeKind.Unspecified).AddTicks(6709), new TimeSpan(0, 0, 0, 0, 0)),
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Surname = "Chepeliuk"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "8c17e1ba-57da-4b33-9559-badad2641fc3",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "32f29126-6f0e-4cd9-8847-9797ddfaad29",
+========
+                            Id = "3bf717ed-c2ae-4393-9ff7-5bece832e240",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1108343c-954e-42d3-a50c-affd980cdc0e",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Email = "marynakernychna@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MARYNAKERNYCHNA@GMAIL.COM",
                             NormalizedUserName = "MARYNAKERNYCHNA@GMAIL.COM",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAEI1F66xS4lGwk1VhvFO6IvCSLCKO4JyhROVI7jgVITqf3LjU6qxl1zXW8959MPtjJw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "b1d03fa9-2e05-46e5-b5e8-cde3a31cdd10",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ7gXNFV0R9IP8NgzAAe8uhccQY3iu8FF8tFP0NWu2cdL98aDwHH0+FS3gMkXE+Cwg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3f494238-2261-4def-9659-659534d1d98b",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "marynakernychna@gmail.com",
                             HasCar = false,
                             Name = "Maryna",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 15, 42, 47, 566, DateTimeKind.Unspecified).AddTicks(5690), new TimeSpan(0, 0, 0, 0, 0)),
+========
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 19, 14, 28, 18, 252, DateTimeKind.Unspecified).AddTicks(6727), new TimeSpan(0, 0, 0, 0, 0)),
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Surname = "Kernychna"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "762dd1e0-f2bb-4baa-8f2c-82d6d480df29",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "af517b83-d897-44e0-8ed0-1456f71d142d",
+========
+                            Id = "a59f1cac-b55c-4177-867a-76ce07d54dbf",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "88fb5fee-cd6d-47a7-bc9f-c624b8692e83",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Email = "yevhen.pasichnyk@oa.edu.ua",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "YEVHEN.PASICHNYK@OA.EDU.UA",
                             NormalizedUserName = "YEVHEN.PASICHNYK@OA.EDU.UA",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAEGfZdYx9MfOJbdY3G0J7+hBfdvRDlbVSh795FbygHhs+u2or02H3s7YOLC/0r/9P1Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "ed22e9f8-4710-43fd-b1c8-966ce6e19782",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAEOGhbB2v+wmTz8gCWHQVaXN0TWbWCMu8ekilsZ3bewzKGCouvgEg5PYoMbFWCtEGSA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f9c854dc-18a4-45ff-9e86-54a1a6011993",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "yevhen.pasichnyk@oa.edu.ua",
                             HasCar = false,
                             Name = "Eugen",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 15, 42, 47, 566, DateTimeKind.Unspecified).AddTicks(5700), new TimeSpan(0, 0, 0, 0, 0)),
+========
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 19, 14, 28, 18, 252, DateTimeKind.Unspecified).AddTicks(6743), new TimeSpan(0, 0, 0, 0, 0)),
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Surname = "Pasichnyk"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "875c647c-6b1a-468c-97c5-294de8507eb3",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "aa28b311-d2e0-4a40-bce0-7c677898ac49",
+========
+                            Id = "6ae73725-bd78-4bd1-ad55-c92ec6ae41c4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "25904b66-99d2-4fd6-bcd4-045b90b4a36d",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Email = "pashunskyi@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PASHUNSKYI@GMAIL.COM",
                             NormalizedUserName = "PASHUNSKYI@GMAIL.COM",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAECtncuy6W+xCqBdl6E3jBbssjTjTbFyBO6ia72+vUZp/l/vztez37dyrlpcDFh8rEQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "d12ee6b3-2fe7-48b7-9304-9f1cabdf8a1b",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAELVbhhl2QSjFAFg2edwEHgoFx6PSKUqtgw4yqvSryelsgU41qrRMwxoBuIsUw50Lyg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "bd0c5ece-2629-4be8-87f4-406d073acdf3",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "pashunskyi@gmail.com",
                             HasCar = false,
                             Name = "Volodya",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 15, 42, 47, 566, DateTimeKind.Unspecified).AddTicks(5712), new TimeSpan(0, 0, 0, 0, 0)),
+========
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 19, 14, 28, 18, 252, DateTimeKind.Unspecified).AddTicks(6840), new TimeSpan(0, 0, 0, 0, 0)),
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Surname = "Pashunskyi"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "944e6c2f-7692-4c93-9a9c-81c30905a158",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "80d0e30a-7c89-468c-ba1e-d6a65d34c9f9",
+========
+                            Id = "4eeb7de8-2ace-412e-8bd2-54ee369484ff",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c047eba9-c20e-4471-9e7b-ddb793f0e9e5",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Email = "antonina.loboda@oa.edu.ua",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ANTONINA.LOBODA@OA.EDU.UA",
                             NormalizedUserName = "ANTONINA.LOBODA@OA.EDU.UA",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAELJahAF+HA3XGUVks0e1fOkLrn6+Oc5sYP4GLSNZlv5S9v45Pm2AjbORaq+Hs4s7bw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "32904fce-068d-4e1e-be0a-b8dd581a3efc",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAEPkP/UALVXFuYAvPXwwr5o0cYizkiWVeYUp9CsoMEwnuX6kldtpUz7+Q5yM1jb/MvA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e827eee6-5499-4258-b0cd-6f203441b029",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "antonina.loboda@oa.edu.ua",
                             HasCar = false,
                             Name = "Antonina",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 15, 42, 47, 566, DateTimeKind.Unspecified).AddTicks(5722), new TimeSpan(0, 0, 0, 0, 0)),
+========
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 19, 14, 28, 18, 252, DateTimeKind.Unspecified).AddTicks(6854), new TimeSpan(0, 0, 0, 0, 0)),
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Surname = "Loboda"
                         },
                         new
                         {
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             Id = "50662ecc-f177-41fb-95b7-5ba272c2a4ce",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "531076e1-c2dc-4b87-bd9f-f744c6543d07",
+========
+                            Id = "07bd7727-f9d1-4258-a15d-a322adc28233",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "031166ce-9b33-4e34-801d-3a161ca1a45c",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Email = "sergeyeremenko@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SERGEYEREMENKO@GMAIL.COM",
                             NormalizedUserName = "SERGEYEREMENKO@GMAIL.COM",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             PasswordHash = "AQAAAAEAACcQAAAAECXwn6gQIXfDihQR4kgSFH7tiGbTQI6Ie0wd1KI4T0kJtCz3uNstghOyotJx/j4iRg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "866d6435-e8dc-465c-aab2-d98562eed5e6",
+========
+                            PasswordHash = "AQAAAAEAACcQAAAAEFjXuwi8t0aB5N+UPsJEDL0NfN+ltM7ezjDDkibTjcphuGOmnc9W5TttMXRyjwIJaw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b03b1b2e-9c41-486b-a21c-154a08af724e",
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "sergeyeremenko@gmail.com",
                             HasCar = false,
                             Name = "Sergey",
+<<<<<<<< HEAD:Infrastructure/Migrations/20220522154248_AddSeed.Designer.cs
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 15, 42, 47, 566, DateTimeKind.Unspecified).AddTicks(5731), new TimeSpan(0, 0, 0, 0, 0)),
+========
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 19, 14, 28, 18, 252, DateTimeKind.Unspecified).AddTicks(6869), new TimeSpan(0, 0, 0, 0, 0)),
+>>>>>>>> 47d92608795b289f469182b5cda3fce8c9961070:Infrastructure/Migrations/20220519142819_Renamed Role entities and added Seeds.Designer.cs
                             Surname = "Eremenko"
                         });
                 });

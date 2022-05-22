@@ -7,10 +7,8 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Net;
-using System.Linq;
 using System.Threading.Tasks;
 using Core.Specifications;
 
@@ -68,7 +66,6 @@ namespace Core.Services
             offer.OfferPointId = await _pointService.CreatePointForOfferAsync(offerCreate.Point);
 
             await _offerRepository.AddAsync(offer);
-            await _offerRepository.SaveChangesAsync();
         }
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
