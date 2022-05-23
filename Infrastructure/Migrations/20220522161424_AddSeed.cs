@@ -94,7 +94,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Points",
                 columns: new[] { "Id", "Address", "Latitude", "Longitude", "Order", "Region", "Settlement", "TripId" },
-                values: new object[] { 1, "місто Остріг, Рівненська область, вулиця Східна", 50.328792, 26.527293, 0, "Рівненська область", "Острог", null });
+                values: new object[] { 1, "місто Острог, Рівненська область, вулиця Східна", 50.328792, 26.527293, 0, "Рівненська область", "Острог", null });
 
             migrationBuilder.InsertData(
                 table: "Points",

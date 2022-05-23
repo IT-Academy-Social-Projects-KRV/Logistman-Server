@@ -34,5 +34,13 @@ namespace API.Controllers
             await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId);
             return Ok();
         }
+
+        [HttpGet("user-full-name")]
+        public async Task<ActionResult<UserFullNameDTO>> GetUserFullName()
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+
+            return Ok(await _userService.GetUserFullNameAsync(userId));
+        }
     }
 }

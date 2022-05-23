@@ -337,7 +337,7 @@ namespace Infrastructure.Data.SeedData
                    Id = 1,
                    Longitude = 26.527293,
                    Latitude = 50.328792,
-                   Address = "місто Остріг, Рівненська область, вулиця Східна",
+                   Address = "місто Острог, Рівненська область, вулиця Східна",
                    Settlement = "Острог",
                    Region = "Рівненська область",
                    Order = 0
