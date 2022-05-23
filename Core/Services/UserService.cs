@@ -38,7 +38,7 @@ namespace Core.Services
         {
             if (string.IsNullOrEmpty(userId))
             {
-                throw new HttpException(ErrorMessages.UserIdNotFound, System.Net.HttpStatusCode.NotFound);
+                throw new HttpException(ErrorMessages.UserIdNotFound, HttpStatusCode.NotFound);
             }
 
             var user = await _userRepository.GetByIdAsync(userId);
@@ -76,6 +76,15 @@ namespace Core.Services
                 updateUser.EmailConfirmed = false;
             }
             await _userManager.UpdateAsync(updateUser);
+        }
+        
+        public async Task<UserFullNameDTO> GetUserFullNameAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            ExceptionMethods.UserNullCheck(user);
+
+            return _mapper.Map<UserFullNameDTO>(user);
         }
     }
 }
