@@ -13,8 +13,14 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(offer => offer.Role, dto => dto.Ignore())
                 .ForMember(offer => offer.GoodCategory, dto => dto.Ignore());
             CreateMap<OfferInfoDTO, Offer>().ReverseMap()
-                .ForMember(dest => dest.Role, opt => opt.MapFrom(role => role.Role.Name))
-                .ForMember(dest => dest.GoodCategory, opt => opt.MapFrom(category => category.GoodCategory.Name));
+                .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(role => role.Role.Name))
+                .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(category => category.GoodCategory.Name));
+            CreateMap<Offer, OfferPreviewDTO>()
+                .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.Role.Name))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(offer => offer.Point.Address))
+                .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
+                .ForMember(dest => dest.Region, opt => opt.MapFrom(offer => offer.Point.Region))
+                .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
         }
     }
 }
