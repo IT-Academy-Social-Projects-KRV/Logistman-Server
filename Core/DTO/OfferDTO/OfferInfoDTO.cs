@@ -1,5 +1,6 @@
 ﻿using Core.DTO.PointDTO;
 using System;
+using Core.Entities.TripEntity;
 
 namespace Core.DTO.OfferDTO
 {
@@ -12,9 +13,10 @@ namespace Core.DTO.OfferDTO
         public float GoodsWeight { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset ExpirationDate { get; set; }
-        public string GoodCategory { get; set; }
-        public string Role { get; set; }
+        public string GoodCategoryName { get; set; }
+        public string CreatorRoleName { get; set; }
         public int? RelatedTripId { get; set; }
+        public Trip Trip { get; set; }
         public PointInfoDTO Point { get; set; }
     }
 }

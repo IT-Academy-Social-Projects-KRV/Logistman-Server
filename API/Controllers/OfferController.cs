@@ -39,5 +39,12 @@ namespace API.Controllers
 
             return Ok(offerDTO);
         }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetUserOffers()
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            return Ok(await _offerService.GetUsersOffers(userId));
+        }
     }
 }

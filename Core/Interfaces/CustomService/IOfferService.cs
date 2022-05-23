@@ -1,4 +1,5 @@
-﻿using Core.DTO.OfferDTO;
+﻿using System.Collections.Generic;
+using Core.DTO.OfferDTO;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService
@@ -7,5 +8,6 @@ namespace Core.Interfaces.CustomService
     {
         Task CreateOfferAsync(OfferCreateDTO offerCreate, string userId);
         Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId);
+        Task<IList<OfferPreviewDTO>> GetUsersOffers(string userId);
     }
 }
