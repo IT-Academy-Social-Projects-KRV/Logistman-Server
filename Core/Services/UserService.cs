@@ -80,12 +80,9 @@ namespace Core.Services
         
         public async Task<UserFullNameDTO> GetUserFullNameAsync(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new HttpException(ErrorMessages.UserIdNotFound, HttpStatusCode.NotFound);
-            }
-
             var user = await _userManager.FindByIdAsync(userId);
+
+            ExceptionMethods.UserNullCheck(user);
 
             return _mapper.Map<UserFullNameDTO>(user);
         }
