@@ -31,7 +31,8 @@ namespace API.Controllers
         public ActionResult GetAllUserCars()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            return Ok(_carService.GetAllUserCars(userId));
+            var userCars = _carService.GetAllUserCars(userId);
+            return Ok(userCars);
         }
     }
 }

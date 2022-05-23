@@ -10,10 +10,10 @@ namespace Core.Helpers.ApplicationProfiles
         {
             CreateMap<Offer, OfferCreateDTO>().ReverseMap()
                 .ForMember(offer => offer.Point, dto => dto.Ignore())
-                .ForMember(offer => offer.Role, dto => dto.Ignore())
+                .ForMember(offer => offer.OfferRole, dto => dto.Ignore())
                 .ForMember(offer => offer.GoodCategory, dto => dto.Ignore());
             CreateMap<OfferInfoDTO, Offer>().ReverseMap()
-                .ForMember(dest => dest.Role, opt => opt.MapFrom(role => role.Role.Name))
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(role => role.OfferRole.Name))
                 .ForMember(dest => dest.GoodCategory, opt => opt.MapFrom(category => category.GoodCategory.Name));
         }
     }

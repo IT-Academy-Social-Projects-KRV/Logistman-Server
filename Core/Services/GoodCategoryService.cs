@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO.GoodCategoryDTO;
 using Core.Entities.GoodCategoryEntity;
 using Core.Interfaces;
@@ -7,7 +6,7 @@ using Core.Interfaces.CustomService;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Exceptions;
-using Microsoft.EntityFrameworkCore;
+using Core.Specifications;
 
 namespace Core.Services
 {
@@ -26,15 +25,18 @@ namespace Core.Services
 
         public async Task<GoodCategoryListDTO> GetAllGoodCategoryAsync()
         {
-            var list = await _goodCategoryRepository.GetAllAsync();
+            var list = await _goodCategoryRepository.ListAsync();
             return new GoodCategoryListDTO
                 {GoodCategories = _mapper.ProjectTo<GoodCategoryDTO>(list.AsQueryable())};
         }
 
-        public int GetGoodCategoryByName(string goodCategoryName)
+        public async Task<int> GetGoodCategoryByNameAsync(string goodCategoryName)
         {
-            var goodCategory =  _goodCategoryRepository.Query().FirstOrDefault(goodCategory => goodCategory.Name == goodCategoryName.ToUpper());
+            var goodCategory = await _goodCategoryRepository
+                .GetBySpecAsync(new GoodCategorySpecification.GetByName(goodCategoryName));
+
             ExceptionMethods.GoodCategoryNullCheck(goodCategory);
+
             return goodCategory.Id;
         }
     }

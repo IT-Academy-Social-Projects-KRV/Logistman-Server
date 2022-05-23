@@ -9,35 +9,38 @@ using System.Threading.Tasks;
 using Core.Resources;
 using Core.Interfaces;
 using Core.Entities.RefreshTokenEntity;
-using System.Linq;
 using Microsoft.Extensions.Options;
 using Core.Helpers;
+using Core.Specifications;
 
 namespace Core.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
-        private readonly IRoleService _roleService;
+        private readonly IOfferRoleService _offerRoleService;
         private readonly IUserService _userService;
         private readonly IRepository<RefreshToken> _refreshTokenRepository;
         private readonly IOptions<RolesOptions> _rolesOptions;
 
         public AuthenticationService(
             UserManager<User> userManager,
+            RoleManager<IdentityRole> roleManager,
             IMapper mapper,
             IJwtService jwtService,
-            IRoleService roleService,
+            IOfferRoleService offerRoleService,
             IUserService userService,
             IRepository<RefreshToken> refreshTokenRepository,
             IOptions<RolesOptions> rolesOptions)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _mapper = mapper;
             _jwtService = jwtService;
-            _roleService = roleService;
+            _offerRoleService = offerRoleService;
             _userService = userService;
             _refreshTokenRepository = refreshTokenRepository;
             _rolesOptions = rolesOptions;
@@ -51,7 +54,10 @@ namespace Core.Services
             ExceptionMethods.CheckIdentityResult(createUserResult);
 
             var roleName = _rolesOptions.Value.User;
-            var userRole = _roleService.GetIdentityRoleByName(roleName);
+            var userRole = await _roleManager.FindByNameAsync(roleName);
+
+            ExceptionMethods.IdentityRoleNullCheck(userRole);
+
             var addToRoleResult = await _userManager.AddToRoleAsync(user, userRole.Name);
 
             ExceptionMethods.CheckIdentityResult(addToRoleResult);
@@ -73,15 +79,12 @@ namespace Core.Services
 
         public async Task LogoutAsync(UserLogoutDTO userLogoutDTO)
         {
-            var refreshToken = _refreshTokenRepository.Query().SingleOrDefault(t => t.Token == userLogoutDTO.RefreshToken);
+            var refreshToken = await _refreshTokenRepository
+                .GetBySpecAsync(new RefreshTokenSpecification.GetByToken(userLogoutDTO.RefreshToken));
 
-            if (refreshToken == null)
-            {
-                throw new HttpException(ErrorMessages.InvalidToken, HttpStatusCode.NotFound);
-            }
+            ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 
             await _refreshTokenRepository.DeleteAsync(refreshToken);
-            await _refreshTokenRepository.SaveChangesAsync();
         }
 
         private async Task<UserAutorizationDTO> GenerateUserTokens(User user, string userRole)
@@ -110,15 +113,18 @@ namespace Core.Services
                 UserId = userId
             };
 
-            await _refreshTokenRepository.InsertAsync(refreshTokenEntity);
-            await _refreshTokenRepository.SaveChangesAsync();
+            await _refreshTokenRepository.AddAsync(refreshTokenEntity);
 
             return refreshTokenEntity;
         }
 
         public async Task<UserAutorizationDTO> RefreshTokenAsync(UserAutorizationDTO userTokensDTO)
         {
-            var refreshToken = GetRefreshToken(userTokensDTO.RefreshToken);
+            var refreshToken = await _refreshTokenRepository
+                .GetBySpecAsync(new RefreshTokenSpecification.GetByToken(userTokensDTO.RefreshToken));
+
+            ExceptionMethods.RefreshTokenNullCheck(refreshToken);
+
             var claims = _jwtService.GetClaimsFromExpiredToken(userTokensDTO.Token);
             var newToken = _jwtService.CreateToken(claims);
             var newRefreshToken = _jwtService.GenerateRefreshToken();
@@ -126,7 +132,6 @@ namespace Core.Services
             refreshToken.Token = newRefreshToken;
 
             await _refreshTokenRepository.UpdateAsync(refreshToken);
-            await _refreshTokenRepository.SaveChangesAsync();
 
             var tokens = new UserAutorizationDTO()
             {
@@ -135,17 +140,6 @@ namespace Core.Services
             };
 
             return tokens;
-        }
-
-        private RefreshToken GetRefreshToken(string token)
-        {
-            var refreshToken = _refreshTokenRepository
-                .Query()
-                .FirstOrDefault(t => t.Token == token);
-
-            ExceptionMethods.RefreshTokenNullCheck(refreshToken);
-
-            return refreshToken;
         }
     }
 }

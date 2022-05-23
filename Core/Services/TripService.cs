@@ -5,6 +5,7 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Core.Specifications;
 using System;
 using System.Linq;
 using System.Net;
@@ -28,17 +29,16 @@ namespace Core.Services
             _mapper = mapper;
         }
 
-        public bool CheckIsTripExistsById(int tripId)
+        public async Task<bool> CheckIsTripExistsById(int tripId)
         {
-            return _tripRepository.Query()
-                                  .Any(p => p.Id == tripId);
+            return await _tripRepository.AnyAsync(new TripSpecification.GetById(tripId));
         }
 
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
         {
-            ValidateTripDate(createTripDTO.StartDate, createTripDTO.ExpirationDate, creatorId);
+            await ValidateTripDate(createTripDTO.StartDate, createTripDTO.ExpirationDate, creatorId);
 
-            var isCarValid = _carService
+            var isCarValid = await _carService
                                 .CheckIsCarBelongsToUserByIds(createTripDTO.TransportationCarId, creatorId);
 
             if (!isCarValid)
@@ -46,7 +46,7 @@ namespace Core.Services
                 throw new HttpException(ErrorMessages.CarNotFound, HttpStatusCode.NotFound);
             }
 
-            var isCarVerified = _carService.CheckIsCarVerifiedById(createTripDTO.TransportationCarId);
+            var isCarVerified = await _carService.CheckIsCarVerifiedById(createTripDTO.TransportationCarId);
 
             if (!isCarVerified)
             {
@@ -59,16 +59,12 @@ namespace Core.Services
             trip.IsEnded = false;
             trip.TripCreatorId = creatorId;
 
-            await _tripRepository.InsertAsync(trip);
-            await _tripRepository.SaveChangesAsync();
+            await _tripRepository.AddAsync(trip);
         }
 
-        private void ValidateTripDate(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
+        private async Task ValidateTripDate(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
         {
-            var isTimeSpaceBusy = _tripRepository.Query()
-                                                  .Any(t => t.TripCreatorId == creatorId && !t.IsEnded &&
-                                                       (t.StartDate >= startDate && t.StartDate < expirationDate) ||
-                                                       (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate));
+            var isTimeSpaceBusy = await _tripRepository.AnyAsync(new TripSpecification.GetByTimeSpace(startDate, expirationDate, creatorId));
 
             if (isTimeSpaceBusy)
             {

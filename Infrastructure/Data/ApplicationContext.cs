@@ -19,7 +19,7 @@ namespace Infrastructure.Data
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) 
             : base(options) {}
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<OfferRole> OfferRoles { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Offer> Offers { get; set; }
@@ -35,7 +35,7 @@ namespace Infrastructure.Data
             builder.ApplyConfiguration(new GoodCategoryConfiguration());
             builder.ApplyConfiguration(new PointConfiguration());
             builder.ApplyConfiguration(new ReportConfiguration());
-            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new OfferRoleConfiguration());
             builder.ApplyConfiguration(new CarCategoryConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new TripConfiguration());
