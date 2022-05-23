@@ -75,7 +75,7 @@ namespace Infrastructure.Data.SeedData
             {
                 Id = VLAD_ID,
                 Name = "Vlad",
-                Surname = "Sevastyanov",
+                Surname = "Sievostyanov",
                 UserName = "oppaiarchmaster@gmail.com",
                 NormalizedEmail = "oppaiarchmaster@gmail.com".ToUpper(),
                 EmailConfirmed = true,

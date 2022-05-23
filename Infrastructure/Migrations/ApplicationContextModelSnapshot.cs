@@ -1388,7 +1388,7 @@ namespace Infrastructure.Migrations
                             HasCar = false,
                             Name = "Vlad",
                             RegistrationDate = new DateTimeOffset(new DateTime(2022, 5, 22, 16, 14, 23, 418, DateTimeKind.Unspecified).AddTicks(3129), new TimeSpan(0, 0, 0, 0, 0)),
-                            Surname = "Sevastyanov"
+                            Surname = "Sievostyanov"
                         },
                         new
                         {
