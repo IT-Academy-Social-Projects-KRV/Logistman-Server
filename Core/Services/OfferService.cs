@@ -7,12 +7,11 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Linq;
 using System.Threading.Tasks;
+using Core.Specifications;
 
 namespace Core.Services
 {
@@ -21,8 +20,8 @@ namespace Core.Services
         private readonly IMapper _mapper;
         private readonly IRepository<Offer> _offerRepository;
         private readonly UserManager<User> _userManager;
-        private readonly IGoodCategoryService _goodCategoryRepository;
-        private readonly IRoleService _roleRepository;
+        private readonly IGoodCategoryService _goodCategoryService;
+        private readonly IOfferRoleService _offerRoleService;
         private readonly IPointService _pointService;
         private readonly ITripService _tripService;
 
@@ -30,17 +29,17 @@ namespace Core.Services
             IMapper mapper,
             IRepository<Offer> offerRepository,
             UserManager<User> userManager,
-            IGoodCategoryService goodCategoryRepository,
-            IRoleService roleRepository,
+            IGoodCategoryService goodCategoryService,
+            IOfferRoleService offerRoleService,
             IPointService pointService,
             ITripService tripService)
         {
             _pointService = pointService;
-            _roleRepository = roleRepository;
+            _offerRoleService = offerRoleService;
             _mapper = mapper;
             _offerRepository = offerRepository;
             _userManager = userManager;
-            _goodCategoryRepository = goodCategoryRepository;
+            _goodCategoryService = goodCategoryService;
             _tripService = tripService;
         }
 
@@ -48,7 +47,7 @@ namespace Core.Services
         {
             if (offerCreate.Point.TripId != null)
             {
-                var isTripExists = _tripService.CheckIsTripExistsById((int)offerCreate.Point.TripId);
+                var isTripExists = await _tripService.CheckIsTripExistsById((int)offerCreate.Point.TripId);
 
                 if (!isTripExists)
                 {
@@ -62,23 +61,17 @@ namespace Core.Services
             offer.OfferCreatorId = userId;
             offer.CreationDate = DateTimeOffset.UtcNow;
             offer.IsClosed = false;
-            offer.CreatorRoleId = _roleRepository.GetRoleByName(offerCreate.Role);
-            offer.GoodCategoryId = _goodCategoryRepository
-                .GetGoodCategoryByName(offerCreate.GoodCategory);
+            offer.CreatorRoleId = await _offerRoleService.GetRoleByNameAsync(offerCreate.Role);
+            offer.GoodCategoryId = await _goodCategoryService
+                .GetGoodCategoryByNameAsync(offerCreate.GoodCategory);
             offer.OfferPointId = await _pointService.CreatePointForOfferAsync(offerCreate.Point);
 
-            await _offerRepository.InsertAsync(offer);
-            await _offerRepository.SaveChangesAsync();
+            await _offerRepository.AddAsync(offer);
         }
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
         {
-            var offer = await _offerRepository.Query()
-                .Where(o => o.Id == offerId && o.OfferCreatorId == userId)
-                .Include(offer => offer.Point)
-                .Include(offer => offer.Role)
-                .Include(offer => offer.GoodCategory)
-                .FirstOrDefaultAsync();
+            var offer = await _offerRepository.GetBySpecAsync(new OfferSpecification.GetById(offerId, userId));
 
             ExceptionMethods.OfferNullCheck(offer);
 

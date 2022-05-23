@@ -5,7 +5,7 @@ namespace Core.Interfaces.CustomService
 {
     public interface ITripService
     {
-        bool CheckIsTripExistsById(int tripId);
+        Task<bool> CheckIsTripExistsById(int tripId);
         Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId);
     }
 }

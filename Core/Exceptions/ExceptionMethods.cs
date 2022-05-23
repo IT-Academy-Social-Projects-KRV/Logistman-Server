@@ -97,7 +97,7 @@ namespace Core.Exceptions
             }
         }
 
-        public static void RoleNullCheck(Role role)
+        public static void RoleNullCheck(OfferRole role)
         {
             if (role == null)
             {

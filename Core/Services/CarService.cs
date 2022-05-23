@@ -11,8 +11,8 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
@@ -38,53 +38,47 @@ namespace Core.Services
         public async Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId)
         {
             var car = _mapper.Map<Car>(createCarDTO);
-            if (IsCarExist(car))
+            if (await IsCarExist(car))
             {
                 throw new HttpException(ErrorMessages.AddingCarNotAllowed, HttpStatusCode.NotAcceptable);
             }
 
             car.CreationDate = DateTimeOffset.UtcNow;
-            car.Category = _categoryRepository.Query().First(c => c.Name == createCarDTO.CategoryName);
+            car.Category = await _categoryRepository.GetBySpecAsync(new CarCategorySpecification.GetByName(createCarDTO.CategoryName));
 
             var user = await _userManager.FindByIdAsync(userId);
             ExceptionMethods.UserNullCheck(user);
             car.User = user;
             car.User.HasCar = true;
 
-            car = await _carRepository.InsertAsync(car);
-            await _carRepository.SaveChangesAsync();
+            car = await _carRepository.AddAsync(car);
             return _mapper.Map<CarDTO>(car);
         }
 
         public IQueryable<CarDTO> GetAllUserCars(string userId)
         {
-            var userCars = _carRepository.Query()
-                                         .Where(c => c.UserId == userId)
-                                         .Include(c => c.Category);
+            var userCars = _carRepository.GetListBySpecAsync(new CarSpecification.GetByUserId(userId));
 
             return _mapper.ProjectTo<CarDTO>(userCars);
         }
 
-        private bool IsCarExist(Car newCar)
+        private async Task<bool> IsCarExist(Car newCar)
         {
-            return _carRepository
-                .Query()
-                .Any(c => 
-                    c.RegistrationNumber == newCar.RegistrationNumber ||
-                    c.Vin == newCar.Vin ||
-                    c.TechnicalPassport == newCar.TechnicalPassport);
+            return await _carRepository
+                .AnyAsync(new CarSpecification.GetWithMainCredentials(
+                    newCar.RegistrationNumber,
+                    newCar.Vin,
+                    newCar.TechnicalPassport));;
         }
 
-        public bool CheckIsCarBelongsToUserByIds(int carId, string userId)
+        public async Task<bool> CheckIsCarBelongsToUserByIds(int carId, string userId)
         {
-            return _carRepository.Query()
-                                 .Any(c => c.Id == carId && c.UserId == userId);
+            return await _carRepository.AnyAsync(new CarSpecification.GetByIds(carId, userId));
         }
 
-        public bool CheckIsCarVerifiedById(int carId)
+        public async Task<bool> CheckIsCarVerifiedById(int carId)
         {
-            return _carRepository.Query()
-                                 .Any(c => c.Id == carId && c.IsVerified);
+            return await _carRepository.AnyAsync(new CarSpecification.GetVerified(carId));
         }
     }
 }
