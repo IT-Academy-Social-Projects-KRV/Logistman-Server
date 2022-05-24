@@ -9,11 +9,11 @@ namespace API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class OfferController : ControllerBase
+    public class OffersController : ControllerBase
     {
         private readonly IOfferService _offerService;
         private readonly IUserService _userService;
-        public OfferController(
+        public OffersController(
             IOfferService offerService, 
             IUserService userService)
         {
@@ -38,6 +38,13 @@ namespace API.Controllers
             var offerDTO = await _offerService.GetOfferByIdAsync(offerId, userId);
 
             return Ok(offerDTO);
+        }
+
+        [HttpGet]
+        public IActionResult GetUserOffers()
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            return Ok(_offerService.GetUsersOffers(userId));
         }
     }
 }

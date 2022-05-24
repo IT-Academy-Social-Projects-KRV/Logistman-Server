@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Core.Constants;
 using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
 using Core.Entities.GoodCategoryEntity;
@@ -6,7 +7,6 @@ using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
 using Core.Entities.RoleEntity;
 using Core.Entities.UserEntity;
-using Core.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -37,8 +37,22 @@ namespace Infrastructure.Data.SeedData
 
         #endregion
 
-        private static readonly string[] _colors = new[] 
+        private static readonly string[] _colors = new[]
             {"Червоний","Чорний","Білий","Сірий","Зелений","Синій","Жовтий"};
+
+        private static readonly string[] _cars = new[]
+            {
+                "Jeep,Wrangler, SUV",
+                "Jeep,Wrangler Unlimited, SUV",
+                "Ford,F250 Super Duty Super Cab, Pickup",
+                "Ford,F350 Super Duty Crew Cab, Pickup",
+                "Ford,F350 Super Duty Super Cab, Pickup",
+                "Nissan,Titan Crew Cab, Pickup",
+                "Nissan,Titan King Cab, Pickup",
+                "Nissan,TITAN XD Crew Cab, Pickup",
+                "Porsche,911, Convertible, Coupe",
+                "Porsche,Cayenne, SUV"
+            };
         private static readonly PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
         private static readonly Faker _faker = new Faker();
         private static readonly float _maxWeight = 1000f;
@@ -542,7 +556,7 @@ namespace Infrastructure.Data.SeedData
                 new Offer()
                 {
                     Id = 1,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -550,12 +564,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 1,
                     OfferCreatorId = EUGEN_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 2,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -563,12 +578,14 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 2,
                     OfferCreatorId = VADIM_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
+
                 },
                 new Offer()
                 {
                     Id = 3,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -576,12 +593,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 3,
                     OfferCreatorId = VOLODYA_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 4,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -589,12 +607,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 4,
                     OfferCreatorId = ANTONINA_ID,
-                    CreatorRoleId =1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 5,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -602,12 +621,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 5,
                     OfferCreatorId = MARYNA_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 6,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -615,13 +635,14 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 6,
                     OfferCreatorId = VLAD_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 }
                 ,
                 new Offer()
                 {
                     Id = 7,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -629,12 +650,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 7,
                     OfferCreatorId = VLAD_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 8,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -642,12 +664,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 8,
                     OfferCreatorId = MARYNA_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 9,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -655,12 +678,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 9,
                     OfferCreatorId = VLAD_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 10,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -668,13 +692,14 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 10,
                     OfferCreatorId = VLAD_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 }
                 ,
                 new Offer()
                 {
                     Id = 11,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -682,12 +707,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 11,
                     OfferCreatorId = ANDREW_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 12,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -695,12 +721,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 12,
                     OfferCreatorId = VADIM_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 13,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -708,12 +735,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 13,
                     OfferCreatorId = EUGEN_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 14,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -721,12 +749,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 14,
                     OfferCreatorId = VADIM_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 15,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -734,12 +763,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 15,
                     OfferCreatorId = ANTONINA_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 16,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -747,12 +777,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 16,
                     OfferCreatorId = MARYNA_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 17,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -760,12 +791,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 17,
                     OfferCreatorId = VOLODYA_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 18,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -773,12 +805,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 18,
                     OfferCreatorId = VOLODYA_ID,
-                    CreatorRoleId = 2
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 19,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -786,12 +819,13 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 19,
                     OfferCreatorId = VADIM_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
                 new Offer()
                 {
                     Id = 20,
-                    Description = $"{_faker.Random.Words(_faker.Random.Int(10, 30))}.",
+                    Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
                     StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
@@ -799,7 +833,8 @@ namespace Infrastructure.Data.SeedData
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 20,
                     OfferCreatorId = ANDREW_ID,
-                    CreatorRoleId = 1
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 });
 
         #endregion
@@ -811,7 +846,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 1,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -825,7 +860,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 2,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -839,7 +874,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 3,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -853,7 +888,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 4,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -867,7 +902,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 5,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -881,7 +916,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 6,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -895,7 +930,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 7,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -909,7 +944,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 8,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -923,7 +958,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 9,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),
@@ -937,7 +972,7 @@ namespace Infrastructure.Data.SeedData
                new Car()
                {
                    Id = 10,
-                   Model = $"{_faker.Random.Char('A', 'Z')} {_faker.Random.Int(100, 999)} {_faker.Random.Char('A', 'Z')}",
+                   Model = $"{_cars[_faker.Random.Int(0, 9)]}",
                    RegistrationNumber = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    TechnicalPassport = $"{_faker.Random.AlphaNumeric(20).ToUpper()}",
                    LoadCapacity = _faker.Random.Float(400, 1000),

@@ -8,6 +8,8 @@ using Core.Interfaces.CustomService;
 using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Core.Specifications;
@@ -77,6 +79,16 @@ namespace Core.Services
             var offerInfo = _mapper.Map<OfferInfoDTO>(offer);
 
             return offerInfo;
+        }
+
+        public List<OfferPreviewDTO> GetUsersOffers(string userId)
+        {
+            var offersList = _offerRepository.GetListBySpecAsync(new OfferSpecification.GetByUserId(userId));
+            if (!offersList.Any())
+            {
+                return null;
+            }
+            return _mapper.ProjectTo<OfferPreviewDTO>(offersList).ToList();
         }
     }
 }
