@@ -1,5 +1,4 @@
 ﻿using System;
-using Core.Entities.PointEntity;
 
 namespace Core.DTO.OfferDTO
 {
@@ -7,6 +6,7 @@ namespace Core.DTO.OfferDTO
     {
         public int Id { get; set; }
         public string CreatorRoleName { get; set; }
+        public DateTimeOffset CreationDate { get; set; }
         public string GoodCategoryName { get; set; }
         public string Description { get; set; }
         public bool IsClosed { get; set; }
@@ -15,5 +15,6 @@ namespace Core.DTO.OfferDTO
         public DateTimeOffset ExpirationDate { get; set; }
         public string Address { get; set; }
         public string Settlement { get; set; }
-        public string Region { get; set; }    }
+        public string Region { get; set; }   
+    }
 }
