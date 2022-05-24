@@ -8,6 +8,6 @@ namespace Core.Interfaces.CustomService
     {
         Task CreateOfferAsync(OfferCreateDTO offerCreate, string userId);
         Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId);
-        Task<IList<OfferPreviewDTO>> GetUsersOffers(string userId);
+        List<OfferPreviewDTO> GetUsersOffers(string userId);
     }
 }

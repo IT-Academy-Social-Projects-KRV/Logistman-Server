@@ -81,14 +81,14 @@ namespace Core.Services
             return offerInfo;
         }
 
-        public async Task<IList<OfferPreviewDTO>> GetUsersOffers(string userId)
+        public List<OfferPreviewDTO> GetUsersOffers(string userId)
         {
-            var offersList = await _offerRepository.ListAsync(new OfferSpecification.GetByUserId(userId));
+            var offersList = _offerRepository.GetListBySpecAsync(new OfferSpecification.GetByUserId(userId));
             if (!offersList.Any())
             {
                 return null;
             }
-            return _mapper.ProjectTo<OfferPreviewDTO>(offersList.AsQueryable()).ToList();
+            return _mapper.ProjectTo<OfferPreviewDTO>(offersList).ToList();
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Core.DTO.OfferDTO
         public string GoodCategoryName { get; set; }
         public string CreatorRoleName { get; set; }
         public int? RelatedTripId { get; set; }
-        public Trip Trip { get; set; }
         public PointInfoDTO Point { get; set; }
     }
 }

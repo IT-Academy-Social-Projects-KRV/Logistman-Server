@@ -41,10 +41,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserOffers()
+        public IActionResult GetUserOffers()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            return Ok(await _offerService.GetUsersOffers(userId));
+            return Ok(_offerService.GetUsersOffers(userId));
         }
     }
 }
