@@ -9,11 +9,11 @@ namespace API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class OfferController : ControllerBase
+    public class OffersController : ControllerBase
     {
         private readonly IOfferService _offerService;
         private readonly IUserService _userService;
-        public OfferController(
+        public OffersController(
             IOfferService offerService, 
             IUserService userService)
         {
@@ -40,7 +40,7 @@ namespace API.Controllers
             return Ok(offerDTO);
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         public async Task<IActionResult> GetUserOffers()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);

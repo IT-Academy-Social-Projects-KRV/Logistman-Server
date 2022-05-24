@@ -15,5 +15,16 @@ namespace Core.Specifications
                      .Include(offer => offer.GoodCategory);
             }
         }
+        
+        internal class GetByUserId: Specification<Offer>
+        {
+            public GetByUserId(string userId)
+            {
+                Query.Where(o => o.OfferCreatorId == userId)
+                    .Include(offer => offer.Point)
+                    .Include(offer => offer.OfferRole)
+                    .Include(offer => offer.GoodCategory);
+            }
+        }
     }
 }

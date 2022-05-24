@@ -9,6 +9,7 @@ using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Core.Specifications;
@@ -82,13 +83,7 @@ namespace Core.Services
 
         public async Task<IList<OfferPreviewDTO>> GetUsersOffers(string userId)
         {
-            var offersList = await _offerRepository.Query()
-                .Where(o => o.OfferCreatorId == userId)
-                .Include(offer => offer.Point)
-                .Include(offer => offer.Role)
-                .Include(offer => offer.GoodCategory)
-                .ToListAsync();
-            
+            var offersList = await _offerRepository.ListAsync(new OfferSpecification.GetByUserId(userId));
             if (!offersList.Any())
             {
                 return null;
