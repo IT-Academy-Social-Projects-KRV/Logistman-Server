@@ -70,7 +70,7 @@ namespace Core.Services
                     throw new HttpException(ErrorMessages.EmailAlreadyExists, HttpStatusCode.BadRequest);
                 }
 
-                updateUser.Name = userEditProfileInfo.Email;
+                updateUser.Email = userEditProfileInfo.Email;
                 updateUser.UserName = userEditProfileInfo.Email;
                 updateUser.NormalizedEmail = userEditProfileInfo.Email.ToUpper();
                 updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();

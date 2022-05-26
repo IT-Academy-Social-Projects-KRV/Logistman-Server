@@ -38,7 +38,7 @@ namespace Infrastructure.Data.SeedData
         #endregion
 
         private static readonly string[] _colors = new[]
-            {"Червоний","Чорний","Білий","Сірий","Зелений","Синій","Жовтий"};
+            {"Red","Black","White","Grey","Green","Blue","Yellow"};
 
         private static readonly string[] _cars = new[]
             {
