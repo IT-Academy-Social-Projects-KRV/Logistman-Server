@@ -5,6 +5,7 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Net;
@@ -36,12 +37,9 @@ namespace Core.Services
 
         public async Task<UserProfileInfoDTO> GetUserProfileInfoAsync(string userId)
         {
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new HttpException(ErrorMessages.UserIdNotFound, HttpStatusCode.NotFound);
-            }
-
             var user = await _userRepository.GetByIdAsync(userId);
+
+            ExceptionMethods.UserNullCheck(user);
 
             return _mapper.Map<UserProfileInfoDTO>(user);
         }
@@ -60,22 +58,26 @@ namespace Core.Services
 
         public async Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId)
         {
-            var updateUser = await _userManager.FindByIdAsync(userId);
+            var updateUser = await _userRepository.GetByIdAsync(userId);
             ExceptionMethods.UserNullCheck(updateUser);
 
             updateUser.Name = userEditProfileInfo.Name;
             updateUser.Surname = userEditProfileInfo.Surname;
             if (!userEditProfileInfo.Email.Equals(updateUser.Email))
             {
-                if (_userManager.FindByEmailAsync(userEditProfileInfo.Email) == null)
+                if (await _userRepository.AnyAsync(new UserSpecification.GetByEmail(userEditProfileInfo.Email)))
                 {
                     throw new HttpException(ErrorMessages.EmailAlreadyExists, HttpStatusCode.BadRequest);
                 }
-                await _userManager.SetEmailAsync(updateUser, userEditProfileInfo.Email);
-                await _userManager.SetUserNameAsync(updateUser, userEditProfileInfo.Email);
+
+                updateUser.Name = userEditProfileInfo.Email;
+                updateUser.UserName = userEditProfileInfo.Email;
+                updateUser.NormalizedEmail = userEditProfileInfo.Email.ToUpper();
+                updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();
+
                 updateUser.EmailConfirmed = false;
             }
-            await _userManager.UpdateAsync(updateUser);
+            await _userRepository.UpdateAsync(updateUser);
         }
         
         public async Task<UserFullNameDTO> GetUserFullNameAsync(string userId)

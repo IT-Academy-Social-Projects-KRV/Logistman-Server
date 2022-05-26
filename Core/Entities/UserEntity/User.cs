@@ -24,6 +24,6 @@ namespace Core.Entities.UserEntity
         public ICollection<Rating> EstimatorRatings { get; set; }
         public ICollection<Report> ViolationReports { get; set; }
         public ICollection<Report> ReporterReports { get; set; }
-        public ICollection<RefreshToken> RefreshTokens { get; set; }
+        public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     }
 }

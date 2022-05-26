@@ -9,12 +9,12 @@ namespace API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class TripController : ControllerBase
+    public class TripsController : ControllerBase
     {
         private readonly ITripService _tripService;
         private readonly IUserService _userService;
 
-        public TripController(
+        public TripsController(
             ITripService tripService,
             IUserService userService)
         {
