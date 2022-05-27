@@ -9,12 +9,12 @@ namespace API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CarController : ControllerBase
+    public class CarsController : ControllerBase
     {
         private readonly ICarService _carService;
         private readonly IUserService _userService;
 
-        public CarController(ICarService carService, IUserService userService)
+        public CarsController(ICarService carService, IUserService userService)
         {
             _carService = carService;
             _userService = userService;
@@ -27,7 +27,7 @@ namespace API.Controllers
             return Ok(await _carService.AddCarAsync(carDTO, userId));
         }
 
-        [HttpGet("user-cars")]
+        [HttpGet]
         public ActionResult GetAllUserCars()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);

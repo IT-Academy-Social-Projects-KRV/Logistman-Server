@@ -30,7 +30,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("offer-info")]
+        [HttpGet("user-offer")]
         public async Task<IActionResult> GetOfferInfo(int offerId)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);

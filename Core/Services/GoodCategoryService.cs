@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Exceptions;
 using Core.Specifications;
+using System.Collections.Generic;
 
 namespace Core.Services
 {
@@ -23,11 +24,10 @@ namespace Core.Services
             _goodCategoryRepository = goodCategoryRepository;
         }
 
-        public async Task<GoodCategoryListDTO> GetAllGoodCategoryAsync()
+        public async Task<List<GoodCategoryDTO>> GetAllGoodCategoryAsync()
         {
             var list = await _goodCategoryRepository.ListAsync();
-            return new GoodCategoryListDTO
-                {GoodCategories = _mapper.ProjectTo<GoodCategoryDTO>(list.AsQueryable())};
+            return _mapper.ProjectTo<GoodCategoryDTO>(list.AsQueryable()).ToList();
         }
 
         public async Task<int> GetGoodCategoryByNameAsync(string goodCategoryName)

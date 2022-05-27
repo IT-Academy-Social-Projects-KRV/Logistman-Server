@@ -90,13 +90,13 @@ namespace Core.Services
         private async Task<UserAutorizationDTO> GenerateUserTokens(User user, string userRole)
         {
             var claims = _jwtService.SetClaims(user, userRole);
-            var token = _jwtService.CreateToken(claims);
+            var accessToken = _jwtService.CreateToken(claims);
             var refreshToken = await CreateRefreshToken(user.Id);
             user.RefreshTokens.Add(refreshToken);
 
             var tokens = new UserAutorizationDTO()
             {
-                Token = token,
+                AccessToken = accessToken,
                 RefreshToken = refreshToken.Token
             };
 
@@ -125,8 +125,8 @@ namespace Core.Services
 
             ExceptionMethods.RefreshTokenNullCheck(refreshToken);
 
-            var claims = _jwtService.GetClaimsFromExpiredToken(userTokensDTO.Token);
-            var newToken = _jwtService.CreateToken(claims);
+            var claims = _jwtService.GetClaimsFromExpiredToken(userTokensDTO.AccessToken);
+            var newAccessToken = _jwtService.CreateToken(claims);
             var newRefreshToken = _jwtService.GenerateRefreshToken();
 
             refreshToken.Token = newRefreshToken;
@@ -135,7 +135,7 @@ namespace Core.Services
 
             var tokens = new UserAutorizationDTO()
             {
-                Token = newToken,
+                AccessToken = newAccessToken,
                 RefreshToken = refreshToken.Token
             };
 

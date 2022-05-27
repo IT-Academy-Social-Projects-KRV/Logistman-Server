@@ -2,6 +2,7 @@
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -9,16 +10,16 @@ namespace API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class GoodCategoryController : ControllerBase
+    public class GoodCategoriesController : ControllerBase
     {
         public readonly IGoodCategoryService _goodCategoryService;
-        public GoodCategoryController(IGoodCategoryService goodCategoryService)
+        public GoodCategoriesController(IGoodCategoryService goodCategoryService)
         {
             _goodCategoryService = goodCategoryService;
         }
 
-        [HttpGet("get/all")]
-        public async Task<GoodCategoryListDTO> GetAllGoodCategory()
+        [HttpGet]
+        public async Task<List<GoodCategoryDTO>> GetAllGoodCategory()
         { 
             return await _goodCategoryService.GetAllGoodCategoryAsync();
         }

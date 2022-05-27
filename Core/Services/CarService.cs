@@ -57,7 +57,8 @@ namespace Core.Services
 
         public IQueryable<CarDTO> GetAllUserCars(string userId)
         {
-            var userCars = _carRepository.GetListBySpecAsync(new CarSpecification.GetByUserId(userId));
+            var userCars = _carRepository
+                .GetIQuaryableBySpec(new CarSpecification.GetByUserId(userId));
 
             return _mapper.ProjectTo<CarDTO>(userCars);
         }

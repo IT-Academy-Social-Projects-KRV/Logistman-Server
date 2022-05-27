@@ -5,6 +5,6 @@ namespace Core.Interfaces
 {
     public interface IRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
-        IQueryable<TEntity> GetListBySpecAsync(ISpecification<TEntity> specification);
+        IQueryable<TEntity> GetIQuaryableBySpec(ISpecification<TEntity> specification);
     }
 }

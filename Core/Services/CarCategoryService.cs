@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -23,18 +24,15 @@ namespace Core.Services
             _mapper = mapper;
         }
         
-        public async Task<CarCategoriesListDTO> GetAllCarCategoriesAsync()
+        public async Task<List<CarCategoryDTO>> GetAllCarCategoriesAsync()
         {
             var carCategories = await _carCategoryRepository.ListAsync();
             if (!carCategories.Any())
             {
                 throw new HttpException(ErrorMessages.CarCategoryNotFound, HttpStatusCode.NotFound);
             }
-            
-            return new CarCategoriesListDTO
-            {
-                CarCategories = _mapper.ProjectTo<CarCategoryDTO>(carCategories.AsQueryable())
-            };
+
+            return _mapper.ProjectTo<CarCategoryDTO>(carCategories.AsQueryable()).ToList();
         }
     }
 }

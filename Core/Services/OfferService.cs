@@ -83,7 +83,7 @@ namespace Core.Services
 
         public List<OfferPreviewDTO> GetUsersOffers(string userId)
         {
-            var offersList = _offerRepository.GetListBySpecAsync(new OfferSpecification.GetByUserId(userId));
+            var offersList = _offerRepository.GetIQuaryableBySpec(new OfferSpecification.GetByUserId(userId));
             if (!offersList.Any())
             {
                 return null;
