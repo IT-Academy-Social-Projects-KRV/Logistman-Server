@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -55,12 +56,12 @@ namespace Core.Services
             return _mapper.Map<CarDTO>(car);
         }
 
-        public IQueryable<CarDTO> GetAllUserCars(string userId)
+        public List<CarDTO> GetAllUserCars(string userId)
         {
             var userCars = _carRepository
                 .GetIQuaryableBySpec(new CarSpecification.GetByUserId(userId));
 
-            return _mapper.ProjectTo<CarDTO>(userCars);
+            return _mapper.ProjectTo<CarDTO>(userCars).ToList();
         }
 
         private async Task<bool> IsCarExist(Car newCar)
@@ -69,7 +70,7 @@ namespace Core.Services
                 .AnyAsync(new CarSpecification.GetWithMainCredentials(
                     newCar.RegistrationNumber,
                     newCar.Vin,
-                    newCar.TechnicalPassport));;
+                    newCar.TechnicalPassport));
         }
 
         public async Task<bool> CheckIsCarBelongsToUserByIds(int carId, string userId)
