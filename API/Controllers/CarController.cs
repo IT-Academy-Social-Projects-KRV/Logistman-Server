@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Core.DTO.CarDTO;
+using Core.DTO;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

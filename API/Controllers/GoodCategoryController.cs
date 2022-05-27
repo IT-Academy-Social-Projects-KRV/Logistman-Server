@@ -1,4 +1,4 @@
-﻿using Core.DTO.GoodCategoryDTO;
+﻿using Core.DTO;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

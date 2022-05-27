@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTO.CarCategoryDTO;
+using Core.DTO;
 using Core.Entities.CarCategoryEntity;
 
 namespace Core.Helpers.ApplicationProfiles

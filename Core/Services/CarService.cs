@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
-using Core.DTO.CarDTO;
+using Core.DTO;
 using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
 using Core.Entities.UserEntity;

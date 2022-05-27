@@ -1,4 +1,4 @@
-﻿namespace Core.DTO.CarCategoryDTO
+﻿namespace Core.DTO
 {
     public class CarCategoryDTO
     {
