@@ -1,6 +1,7 @@
 using API.Middlewares;
 using API.ServiceExtension;
 using Core;
+using Core.Constants;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +29,7 @@ namespace API
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddIdentityDbContext();
-            
+
             services.AddAuthentication();
 
             services.AddCustomServices();
@@ -42,8 +43,14 @@ namespace API
             services.ConfigJwtOptions(Configuration);
 
             services.AddJwtAuthentication(Configuration);
-            
+
             services.AddSwagger();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ElevatedRights", policy =>
+                          policy.RequireRole($"{IdentityRoleNames.Admin}", $"{IdentityRoleNames.Logist}"));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

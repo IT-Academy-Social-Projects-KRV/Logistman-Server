@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Core.DTO.UserDTO;
 using Microsoft.AspNetCore.Authorization;
+using Core.Constants;
 
 namespace API.Controllers
 {
@@ -41,6 +42,13 @@ namespace API.Controllers
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
             return Ok(await _userService.GetUserFullNameAsync(userId));
+        }
+
+        [HttpGet]
+        [Authorize(Policy = "ElevatedRights")]
+        public async Task<ActionResult> GetAllUsersAsync()
+        {
+            return Ok(await _userService.GetAllUsersAsync());
         }
     }
 }

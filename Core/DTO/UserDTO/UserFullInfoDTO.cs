@@ -9,7 +9,9 @@ namespace Core.DTO.UserDTO
         public string Surname { get; set; }
         public float? Rating { get; set; }
         public bool HasCar { get; set; }
+        public string Email { get; set; }
+        public bool EmailConfirmed { get; set; }
         public DateTimeOffset RegistrationDate { get; set; } = DateTimeOffset.UtcNow;
-        public ICollection<CarDTO> Cars { get; set; }
+        public List<CarDTO> Cars { get; set; }
     }
 }

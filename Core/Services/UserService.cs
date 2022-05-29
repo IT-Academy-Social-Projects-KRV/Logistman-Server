@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.DTO.UserDTO;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
@@ -7,9 +8,11 @@ using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -87,6 +90,14 @@ namespace Core.Services
             ExceptionMethods.UserNullCheck(user);
 
             return _mapper.Map<UserFullNameDTO>(user);
+        }
+
+        public async Task<List<UserFullInfoDTO>> GetAllUsersAsync()
+        {
+            var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User);
+            var users = _userRepository.GetIQuaryableBySpec(new UserSpecification.GetAllUsers(usersList));
+            
+            return _mapper.ProjectTo<UserFullInfoDTO>(users).ToList();
         }
     }
 }
