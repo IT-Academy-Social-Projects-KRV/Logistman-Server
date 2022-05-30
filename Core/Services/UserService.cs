@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -82,7 +81,7 @@ namespace Core.Services
             }
             await _userRepository.UpdateAsync(updateUser);
         }
-        
+
         public async Task<UserFullNameDTO> GetUserFullNameAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -95,9 +94,8 @@ namespace Core.Services
         public async Task<List<UserFullInfoDTO>> GetAllUsersAsync()
         {
             var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
-            var users = _userRepository.GetIQuaryableBySpec(new UserSpecification.GetAllUsers(usersList));
-            
-            return _mapper.ProjectTo<UserFullInfoDTO>(users).ToList();
+
+            return _mapper.Map<List<UserFullInfoDTO>>(usersList);
         }
     }
 }

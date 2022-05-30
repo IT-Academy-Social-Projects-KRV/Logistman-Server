@@ -1,7 +1,6 @@
 using API.Middlewares;
 using API.ServiceExtension;
 using Core;
-using Core.Constants;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

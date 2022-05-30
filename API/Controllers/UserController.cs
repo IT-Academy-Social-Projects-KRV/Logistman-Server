@@ -47,9 +47,8 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Policy = "ElevatedRights")]
         [AuthorizeByRole(IdentityRoleNames.Logist, IdentityRoleNames.Admin)]
-        public async Task<ActionResult> GetAllUsers()
+        public async Task<ActionResult> GetAllUsersAsync()
         {
             return Ok(await _userService.GetAllUsersAsync());
         }
