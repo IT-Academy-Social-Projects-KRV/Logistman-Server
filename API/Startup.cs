@@ -45,12 +45,6 @@ namespace API
             services.AddJwtAuthentication(Configuration);
 
             services.AddSwagger();
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("ElevatedRights", policy =>
-                          policy.RequireRole($"{IdentityRoleNames.Admin}", $"{IdentityRoleNames.Logist}"));
-            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

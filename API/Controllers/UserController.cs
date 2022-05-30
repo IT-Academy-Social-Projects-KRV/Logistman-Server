@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Core.DTO.UserDTO;
 using Microsoft.AspNetCore.Authorization;
 using Core.Constants;
+using System;
+using Core.Helpers;
 
 namespace API.Controllers
 {
@@ -45,8 +47,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "ElevatedRights")]
-        public async Task<ActionResult> GetAllUsersAsync()
+        //[Authorize(Policy = "ElevatedRights")]
+        [AuthorizeByRole(IdentityRoleNames.Logist, IdentityRoleNames.Admin)]
+        public async Task<ActionResult> GetAllUsers()
         {
             return Ok(await _userService.GetAllUsersAsync());
         }

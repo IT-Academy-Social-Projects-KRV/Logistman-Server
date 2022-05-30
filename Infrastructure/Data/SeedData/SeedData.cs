@@ -200,22 +200,22 @@ namespace Infrastructure.Data.SeedData
                 new IdentityRole()
                 {
                     Id = ROLE_USER_ID,
-                    Name = IdentityRoleNames.User,
-                    NormalizedName = IdentityRoleNames.User.ToUpper(),
+                    Name = IdentityRoleNames.User.ToString(),
+                    NormalizedName = IdentityRoleNames.User.ToString().ToUpper(),
                     ConcurrencyStamp = ROLE_USER_ID
                 },
                 new IdentityRole()
                 {
                     Id = ROLE_ADMIN_ID,
-                    Name = IdentityRoleNames.Admin,
-                    NormalizedName = IdentityRoleNames.Admin.ToUpper(),
+                    Name = IdentityRoleNames.Admin.ToString(),
+                    NormalizedName = IdentityRoleNames.Admin.ToString().ToUpper(),
                     ConcurrencyStamp = ROLE_ADMIN_ID
                 },
                 new IdentityRole()
                 {
                     Id = ROLE_LOGIST_ID,
-                    Name = IdentityRoleNames.Logist,
-                    NormalizedName = IdentityRoleNames.Logist.ToUpper(),
+                    Name = IdentityRoleNames.Logist.ToString(),
+                    NormalizedName = IdentityRoleNames.Logist.ToString().ToUpper(),
                     ConcurrencyStamp = ROLE_LOGIST_ID
                 });
 

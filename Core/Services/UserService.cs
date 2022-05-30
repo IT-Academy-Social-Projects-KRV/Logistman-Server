@@ -94,7 +94,7 @@ namespace Core.Services
 
         public async Task<List<UserFullInfoDTO>> GetAllUsersAsync()
         {
-            var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User);
+            var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
             var users = _userRepository.GetIQuaryableBySpec(new UserSpecification.GetAllUsers(usersList));
             
             return _mapper.ProjectTo<UserFullInfoDTO>(users).ToList();
