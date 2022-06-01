@@ -95,7 +95,7 @@ namespace Core.Services
         {
             var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
 
-            if (usersList.Count == 0)
+            if (!usersList.Any())
             {
                 return null;
             }

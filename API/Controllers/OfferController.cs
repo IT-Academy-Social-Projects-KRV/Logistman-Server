@@ -3,6 +3,8 @@ using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Core.Helpers;
+using Core.Constants;
 
 namespace API.Controllers
 {
@@ -22,6 +24,7 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<IActionResult> Create([FromBody] OfferCreateDTO offer)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
@@ -31,6 +34,7 @@ namespace API.Controllers
         }
 
         [HttpGet("user-offer")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<IActionResult> GetOfferInfo(int offerId)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
@@ -41,6 +45,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AuthorizeByRole(IdentityRoleNames.User)]
         public IActionResult GetUserOffers()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);

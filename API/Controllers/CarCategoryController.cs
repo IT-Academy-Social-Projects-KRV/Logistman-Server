@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Core.Constants;
+using Core.Helpers;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +19,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<IActionResult> GetAllCarCategories()
         { 
             return Ok(await _carCategoryService.GetAllCarCategoriesAsync());

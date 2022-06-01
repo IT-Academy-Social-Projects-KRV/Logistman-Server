@@ -1,4 +1,6 @@
-﻿using Core.DTO;
+﻿using Core.Constants;
+using Core.DTO;
+using Core.Helpers;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +21,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<List<GoodCategoryDTO>> GetAllGoodCategory()
         { 
             return await _goodCategoryService.GetAllGoodCategoryAsync();
