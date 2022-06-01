@@ -95,6 +95,11 @@ namespace Core.Services
         {
             var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
 
+            if (usersList.Count == 0)
+            {
+                return null;
+            }
+
             return _mapper.Map<List<UserFullInfoDTO>>(usersList);
         }
     }
