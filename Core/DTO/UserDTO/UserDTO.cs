@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Core.DTO.UserDTO
+namespace Core.DTO
 {
-    public class UserFullInfoDTO
+    public class UserDTO
     {
         public string Name { get; set; }
         public string Surname { get; set; }

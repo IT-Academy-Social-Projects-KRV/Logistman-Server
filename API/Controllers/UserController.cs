@@ -1,10 +1,9 @@
 ﻿using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Core.DTO.UserDTO;
+using Core.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Core.Constants;
-using System;
 using Core.Helpers;
 
 namespace API.Controllers

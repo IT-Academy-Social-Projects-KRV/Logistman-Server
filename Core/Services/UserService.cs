@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Constants;
-using Core.DTO.UserDTO;
+using Core.DTO;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Interfaces;
@@ -91,7 +91,7 @@ namespace Core.Services
             return _mapper.Map<UserFullNameDTO>(user);
         }
 
-        public async Task<List<UserFullInfoDTO>> GetAllUsersAsync()
+        public async Task<List<UserDTO>> GetAllUsersAsync()
         {
             var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
 
@@ -100,7 +100,7 @@ namespace Core.Services
                 return null;
             }
 
-            return _mapper.Map<List<UserFullInfoDTO>>(usersList);
+            return _mapper.Map<List<UserDTO>>(usersList);
         }
     }
 }
