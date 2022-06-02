@@ -8,12 +8,12 @@ namespace Core.Validation
         public CreatePointValidation()
         {
             RuleFor(point => point.Latitude)
-                .NotEmpty()
+                .NotNull()
                 .InclusiveBetween(-90, 90)
                 .WithMessage("'{PropertyName}' must be between -90 & 90!");
 
             RuleFor(point => point.Longitude)
-                .NotEmpty()
+                .NotNull()
                 .InclusiveBetween(-180, 180)
                 .WithMessage("'{PropertyName}' must be between -180 & 180!");
 
@@ -34,8 +34,8 @@ namespace Core.Validation
 
             RuleFor(point => point.Order)
                 .NotEmpty()
-                .GreaterThanOrEqualTo(0)
-                .WithMessage("'{PropertyName}' must be greater than or equal to 0!");
+                .InclusiveBetween(2, 10)
+                .WithMessage("'{PropertyName}' must be between 2 & 10!");
         }
     }
 }

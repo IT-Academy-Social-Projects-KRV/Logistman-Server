@@ -23,7 +23,7 @@ namespace Core.Validation
             RuleFor(offer => offer.Description)
                 .MinimumLength(0)
                 .MaximumLength(1000)
-                .WithMessage("'{PropertyName}' must be between 0 and 1000 symbols!");
+                .WithMessage("'{PropertyName}' must be between 0 & 1000 symbols!");
 
             RuleFor(offer => offer.LoadCapacity)
                 .GreaterThan(0)
@@ -34,8 +34,8 @@ namespace Core.Validation
                 .WithMessage("Max route deviation must be from 1 to 25km!");
 
             RuleFor(trip => trip.Points.Count)
-                .GreaterThanOrEqualTo(2)
-                .WithMessage("The trip must contain at least 2 points!");
+                .InclusiveBetween(2, 10)
+                .WithMessage("The count of points must be between 2 & 10!");
 
             RuleForEach(trip => trip.Points)
                 .SetValidator(new CreatePointValidation());
