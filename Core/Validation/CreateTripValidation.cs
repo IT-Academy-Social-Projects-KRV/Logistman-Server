@@ -21,9 +21,9 @@ namespace Core.Validation
                     $"The difference between the start date and the expiration date must be at least {_hour.Hours} hours!");
 
             RuleFor(offer => offer.Description)
-                .MinimumLength(1)
+                .MinimumLength(0)
                 .MaximumLength(1000)
-                .WithMessage("'{PropertyName}' must be between 1 and 1000 symbols!");
+                .WithMessage("'{PropertyName}' must be between 0 and 1000 symbols!");
 
             RuleFor(offer => offer.LoadCapacity)
                 .GreaterThan(0)
@@ -36,6 +36,9 @@ namespace Core.Validation
             RuleFor(trip => trip.Points.Count)
                 .GreaterThanOrEqualTo(2)
                 .WithMessage("The trip must contain at least 2 points!");
+
+            RuleForEach(trip => trip.Points)
+                .SetValidator(new CreatePointValidation());
         }
     }
 }

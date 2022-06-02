@@ -44,9 +44,9 @@ namespace API.Controllers
         public ActionResult GetUserVerified()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var verifidCars = _carService.GetUserVerifiedByUserId(userId);
+            var verifiedCars = _carService.GetVerifiedByUserId(userId);
 
-            return Ok(verifidCars);
+            return Ok(verifiedCars);
         }
     }
 }

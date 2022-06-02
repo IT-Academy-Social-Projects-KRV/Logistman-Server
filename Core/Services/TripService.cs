@@ -38,7 +38,7 @@ namespace Core.Services
 
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
         {
-            await ValidateTripDate(createTripDTO.StartDate, createTripDTO.ExpirationDate, creatorId);
+            await ValidateTripDateAsync(createTripDTO.StartDate, createTripDTO.ExpirationDate, creatorId);
 
             var sortedPoints = _pointService.SortByOrder(createTripDTO.Points);
 
@@ -63,7 +63,7 @@ namespace Core.Services
             await _pointService.SetTripIdToListAsync(sortedPoints, tripFromDb.Id);
         }
 
-        private async Task ValidateTripDate(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
+        private async Task ValidateTripDateAsync(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
         {
             var isTimeSpaceBusy = await _tripRepository.AnyAsync(
                 new TripSpecification.GetByTimeSpace(startDate, expirationDate, creatorId));

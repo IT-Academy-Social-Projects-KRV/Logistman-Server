@@ -82,7 +82,7 @@ namespace Core.Services
             return car.IsVerified;
         }
 
-        public List<CarDTO> GetUserVerifiedByUserId(string userId)
+        public List<CarDTO> GetVerifiedByUserId(string userId)
         {
             var verifiedCars = _carRepository
                 .GetIQuaryableBySpec(new CarSpecification.GetVerifiedByUserId(userId));
