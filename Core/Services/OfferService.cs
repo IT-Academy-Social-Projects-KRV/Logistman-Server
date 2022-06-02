@@ -65,7 +65,7 @@ namespace Core.Services
             offer.CreatorRoleId = await _offerRoleService.GetRoleByNameAsync(offerCreate.Role);
             offer.GoodCategoryId = await _goodCategoryService
                 .GetGoodCategoryByNameAsync(offerCreate.GoodCategory);
-            offer.OfferPointId = await _pointService.CreatePointForOfferAsync(offerCreate.Point);
+            offer.OfferPointId = await _pointService.CreateAsync(offerCreate.Point);
 
             await _offerRepository.AddAsync(offer);
         }

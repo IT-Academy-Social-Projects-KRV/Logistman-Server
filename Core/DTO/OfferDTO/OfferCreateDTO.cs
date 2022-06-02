@@ -1,5 +1,4 @@
 ﻿using System;
-using Core.DTO.PointDTO;
 
 namespace Core.DTO.OfferDTO
 {
@@ -11,6 +10,6 @@ namespace Core.DTO.OfferDTO
         public DateTimeOffset ExpirationDate { get; set; }
         public string GoodCategory { get; set; }
         public string Role { get; set; }
-        public PointCreateDTO Point { get; set; }
+        public PointDTO Point { get; set; }
     }
 }

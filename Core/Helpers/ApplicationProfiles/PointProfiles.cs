@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTO.PointDTO;
+using Core.DTO;
 using Core.Entities.PointEntity;
 
 namespace Core.Helpers.ApplicationProfiles
@@ -8,8 +8,7 @@ namespace Core.Helpers.ApplicationProfiles
     {
         public PointProfiles()
         {
-            CreateMap<Point, PointCreateDTO>().ReverseMap();
-            CreateMap<Point, PointInfoDTO>().ReverseMap();
+            CreateMap<Point, PointDTO>().ReverseMap();
         }
     }
 }

@@ -225,4 +225,7 @@
   <data name="CarIsNotVerified" xml:space="preserve">
     <value>Car is not verified!</value>
   </data>
+  <data name="InvalidOrder" xml:space="preserve">
+    <value>Invalid point's order!</value>
+  </data>
 </root>

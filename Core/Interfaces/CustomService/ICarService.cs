@@ -8,7 +8,7 @@ namespace Core.Interfaces.CustomService
     {
         Task<CarDTO> AddCarAsync(CreateCarDTO createCarDTO, string userId);
         List<CarDTO> GetAllUserCars(string userId);
-        Task<bool> CheckIsCarBelongsToUserByIds(int carId, string userId);
-        Task<bool> CheckIsCarVerifiedById(int carId);
+        Task<bool> CheckIsUserVerifiedByIdsAsync(int carId, string userId);
+        List<CarDTO> GetVerifiedByUserId(string userId);
     }
 }
