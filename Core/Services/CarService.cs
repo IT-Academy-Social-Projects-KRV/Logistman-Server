@@ -73,14 +73,21 @@ namespace Core.Services
                     newCar.TechnicalPassport));
         }
 
-        public async Task<bool> CheckIsCarBelongsToUserByIds(int carId, string userId)
+        public async Task<bool> CheckIsUserVerifiedByIdsAsync(int carId, string userId)
         {
-            return await _carRepository.AnyAsync(new CarSpecification.GetByIds(carId, userId));
+            var car = await _carRepository.GetBySpecAsync(new CarSpecification.GetByIds(carId, userId));
+
+            ExceptionMethods.CarNullCheck(car);
+
+            return car.IsVerified;
         }
 
-        public async Task<bool> CheckIsCarVerifiedById(int carId)
+        public List<CarDTO> GetUserVerifiedByUserId(string userId)
         {
-            return await _carRepository.AnyAsync(new CarSpecification.GetVerified(carId));
+            var verifiedCars = _carRepository
+                .GetIQuaryableBySpec(new CarSpecification.GetVerifiedByUserId(userId));
+
+            return _mapper.ProjectTo<CarDTO>(verifiedCars).ToList();
         }
     }
 }

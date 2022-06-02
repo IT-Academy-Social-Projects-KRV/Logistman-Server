@@ -5,7 +5,7 @@ namespace Core.Specifications
 {
     public static class CarSpecification
     {
-        internal class GetWithMainCredentials: Specification<Car>
+        internal class GetWithMainCredentials : Specification<Car>
         {
             public GetWithMainCredentials(string registrationNumber, string vin, string technicalPassport)
             {
@@ -16,7 +16,7 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByUserId: Specification<Car>
+        internal class GetByUserId : Specification<Car>
         {
             public GetByUserId(string userId)
             {
@@ -24,7 +24,7 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByIds : Specification<Car>
+        internal class GetByIds : Specification<Car>, ISingleResultSpecification<Car>
         {
             public GetByIds(int carId, string userId)
             {
@@ -32,11 +32,11 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetVerified : Specification<Car>
+        internal class GetVerifiedByUserId : Specification<Car>
         {
-            public GetVerified(int carId)
+            public GetVerifiedByUserId(string userId)
             {
-                Query.Where(c => c.Id == carId && c.IsVerified);
+                Query.Where(c => c.UserId == userId && c.IsVerified);
             }
         }
     }

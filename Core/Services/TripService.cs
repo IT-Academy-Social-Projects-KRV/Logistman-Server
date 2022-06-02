@@ -42,15 +42,8 @@ namespace Core.Services
 
             var sortedPoints = _pointService.SortByOrder(createTripDTO.Points);
 
-            var isCarValid = await _carService
-                                .CheckIsCarBelongsToUserByIds(createTripDTO.TransportationCarId, creatorId);
-
-            if (!isCarValid)
-            {
-                throw new HttpException(ErrorMessages.CarNotFound, HttpStatusCode.NotFound);
-            }
-
-            var isCarVerified = await _carService.CheckIsCarVerifiedById(createTripDTO.TransportationCarId);
+            var isCarVerified = await _carService
+                .CheckIsUserVerifiedByIdsAsync(createTripDTO.TransportationCarId, creatorId);
 
             if (!isCarVerified)
             {

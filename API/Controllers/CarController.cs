@@ -38,5 +38,15 @@ namespace API.Controllers
             var userCars = _carService.GetAllUserCars(userId);
             return Ok(userCars);
         }
+
+        [HttpGet("user-verified")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public ActionResult GetUserVerified()
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            var verifidCars = _carService.GetUserVerifiedByUserId(userId);
+
+            return Ok(verifidCars);
+        }
     }
 }
