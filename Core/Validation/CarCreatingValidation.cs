@@ -1,4 +1,4 @@
-﻿using Core.DTO.CarDTO;
+﻿using Core.DTO;
 using FluentValidation;
 
 namespace Core.Validation

@@ -1,4 +1,4 @@
-﻿using Core.DTO.GoodCategoryDTO;
+﻿using Core.DTO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

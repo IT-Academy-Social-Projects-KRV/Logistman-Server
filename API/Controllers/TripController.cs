@@ -1,4 +1,6 @@
-﻿using Core.DTO.TripDTO;
+﻿using Core.Constants;
+using Core.DTO.TripDTO;
+using Core.Helpers;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +25,7 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<ActionResult> CreateTripAsync([FromBody] CreateTripDTO createTripDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);

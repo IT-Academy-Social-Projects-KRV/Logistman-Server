@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTO.UserDTO;
+using Core.DTO;
 using Core.Entities.UserEntity;
 
 namespace Core.Helpers.ApplicationProfiles
@@ -14,6 +14,7 @@ namespace Core.Helpers.ApplicationProfiles
                     act => act.MapFrom(src => src.Email));
             CreateMap<User, UserProfileInfoDTO>().ReverseMap();
             CreateMap<User, UserFullNameDTO>();
+            CreateMap<User, UserDTO>().ReverseMap();
         }
     }
 }

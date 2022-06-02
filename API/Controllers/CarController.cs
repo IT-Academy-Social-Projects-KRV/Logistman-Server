@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Core.DTO.CarDTO;
+using Core.Constants;
+using Core.DTO;
+using Core.Helpers;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +23,7 @@ namespace API.Controllers
         }
 
         [HttpPost("add")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<ActionResult> CreateCarAsync([FromBody] CreateCarDTO carDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
@@ -28,6 +31,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AuthorizeByRole(IdentityRoleNames.User)]
         public ActionResult GetAllUserCars()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);

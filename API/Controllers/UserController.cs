@@ -1,8 +1,10 @@
 ﻿using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Core.DTO.UserDTO;
+using Core.DTO;
 using Microsoft.AspNetCore.Authorization;
+using Core.Constants;
+using Core.Helpers;
 
 namespace API.Controllers
 {
@@ -41,6 +43,13 @@ namespace API.Controllers
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
             return Ok(await _userService.GetUserFullNameAsync(userId));
+        }
+
+        [HttpGet]
+        [AuthorizeByRole(IdentityRoleNames.Logist, IdentityRoleNames.Admin)]
+        public async Task<ActionResult> GetAllUsersAsync()
+        {
+            return Ok(await _userService.GetAllUsersAsync());
         }
     }
 }

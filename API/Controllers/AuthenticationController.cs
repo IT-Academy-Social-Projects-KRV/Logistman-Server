@@ -1,4 +1,4 @@
-﻿using Core.DTO.UserDTO;
+﻿using Core.DTO;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

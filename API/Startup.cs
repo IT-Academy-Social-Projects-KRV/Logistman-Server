@@ -28,7 +28,7 @@ namespace API
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddIdentityDbContext();
-            
+
             services.AddAuthentication();
 
             services.AddCustomServices();
@@ -42,7 +42,7 @@ namespace API
             services.ConfigJwtOptions(Configuration);
 
             services.AddJwtAuthentication(Configuration);
-            
+
             services.AddSwagger();
         }
 
