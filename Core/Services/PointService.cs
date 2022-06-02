@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTO.PointDTO;
+using Core.DTO;
 using Core.Entities.PointEntity;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
@@ -18,7 +18,7 @@ namespace Core.Services
             _pointRepository = pointRepository;
         }
 
-        public async Task<int> CreatePointForOfferAsync(PointCreateDTO offerCreate)
+        public async Task<int> CreatePointForOfferAsync(PointDTO offerCreate)
         {
             var point = _mapper.Map<Point>(offerCreate);
             await _pointRepository.AddAsync(point);

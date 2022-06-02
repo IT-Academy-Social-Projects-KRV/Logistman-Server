@@ -1,9 +1,9 @@
-﻿using Core.DTO.PointDTO;
+﻿using Core.DTO;
 using FluentValidation;
 
 namespace Core.Validation
 {
-    public class PointCreateValidation : AbstractValidator<PointCreateDTO>
+    public class PointCreateValidation : AbstractValidator<PointDTO>
     {
         public PointCreateValidation()
         {
