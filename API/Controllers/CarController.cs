@@ -32,10 +32,10 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public ActionResult GetAllUserCars()
+        public async Task<ActionResult> GetAllUserCars([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var userCars = _carService.GetAllUserCars(userId);
+            var userCars = await _carService.GetAllUserCars(userId, pageNumber, pageSize);
             return Ok(userCars);
         }
 

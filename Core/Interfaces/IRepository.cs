@@ -1,10 +1,12 @@
 ﻿using Ardalis.Specification;
+using Core.Helpers;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
     public interface IRepository<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
-        IQueryable<TEntity> GetIQuaryableBySpec(ISpecification<TEntity> specification);
+        Task<PaginatedIQueryable<TEntity>> GetPaginatedListAsync(ISpecification<TEntity> specification, int pageNumber, int pageSize);
     }
 }

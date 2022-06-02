@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Core.Specifications;
+using Core.Helpers;
 
 namespace Core.Services
 {
@@ -81,14 +82,16 @@ namespace Core.Services
             return offerInfo;
         }
 
-        public List<OfferPreviewDTO> GetUsersOffers(string userId)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffers(string userId, int pageNumber, int pageSize)
         {
-            var offersList = _offerRepository.GetIQuaryableBySpec(new OfferSpecification.GetByUserId(userId));
-            if (!offersList.Any())
+            var paginatedList = await _offerRepository.GetPaginatedListAsync(new OfferSpecification.GetByUserId(userId), pageNumber, pageSize);
+            
+            if (!paginatedList.PaginatedItems.Any())
             {
                 return null;
             }
-            return _mapper.ProjectTo<OfferPreviewDTO>(offersList).ToList();
+
+            return new PaginatedList<OfferPreviewDTO>(_mapper.Map<List<OfferPreviewDTO>>(paginatedList.PaginatedItems), paginatedList.Count, pageNumber, pageSize);
         }
     }
 }

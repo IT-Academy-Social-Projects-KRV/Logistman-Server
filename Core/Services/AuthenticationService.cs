@@ -12,6 +12,7 @@ using Core.Entities.RefreshTokenEntity;
 using Microsoft.Extensions.Options;
 using Core.Helpers;
 using Core.Specifications;
+using Core.Constants;
 
 namespace Core.Services
 {
@@ -24,7 +25,6 @@ namespace Core.Services
         private readonly IOfferRoleService _offerRoleService;
         private readonly IUserService _userService;
         private readonly IRepository<RefreshToken> _refreshTokenRepository;
-        private readonly IOptions<RolesOptions> _rolesOptions;
 
         public AuthenticationService(
             UserManager<User> userManager,
@@ -33,8 +33,7 @@ namespace Core.Services
             IJwtService jwtService,
             IOfferRoleService offerRoleService,
             IUserService userService,
-            IRepository<RefreshToken> refreshTokenRepository,
-            IOptions<RolesOptions> rolesOptions)
+            IRepository<RefreshToken> refreshTokenRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -43,7 +42,6 @@ namespace Core.Services
             _offerRoleService = offerRoleService;
             _userService = userService;
             _refreshTokenRepository = refreshTokenRepository;
-            _rolesOptions = rolesOptions;
         }
 
         public async Task RegisterAsync(UserRegistrationDTO userData)
@@ -53,7 +51,7 @@ namespace Core.Services
 
             ExceptionMethods.CheckIdentityResult(createUserResult);
 
-            var roleName = _rolesOptions.Value.User;
+            var roleName = IdentityRoleNames.User;
             var userRole = await _roleManager.FindByNameAsync(roleName);
 
             ExceptionMethods.IdentityRoleNullCheck(userRole);

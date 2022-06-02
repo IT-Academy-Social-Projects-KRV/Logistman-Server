@@ -9,6 +9,7 @@ using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
+using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
@@ -56,12 +57,17 @@ namespace Core.Services
             return _mapper.Map<CarDTO>(car);
         }
 
-        public List<CarDTO> GetAllUserCars(string userId)
+        public async Task<PaginatedList<CarDTO>> GetAllUserCars(string userId, int pageNumber, int pageSize)
         {
-            var userCars = _carRepository
-                .GetIQuaryableBySpec(new CarSpecification.GetByUserId(userId));
+            var userCars = await _carRepository
+                .GetPaginatedListAsync(new CarSpecification.GetByUserId(userId), pageNumber, pageSize);
 
-            return _mapper.ProjectTo<CarDTO>(userCars).ToList();
+            if(userCars.PaginatedItems.Any())
+            {
+                return null;
+            }
+
+            return new PaginatedList<CarDTO>(_mapper.Map<List<CarDTO>>(userCars.PaginatedItems), userCars.Count, pageNumber, pageSize);
         }
 
         private async Task<bool> IsCarExist(Car newCar)
