@@ -34,8 +34,8 @@ namespace Core.Validation
 
             RuleFor(point => point.Order)
                 .NotEmpty()
-                .InclusiveBetween(2, 10)
-                .WithMessage("'{PropertyName}' must be between 2 & 10!");
+                .GreaterThanOrEqualTo(1)
+                .WithMessage("'{PropertyName}' must be greater than or equal to 1!");
         }
     }
 }
