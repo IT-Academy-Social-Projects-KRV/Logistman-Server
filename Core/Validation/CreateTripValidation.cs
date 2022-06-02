@@ -30,8 +30,8 @@ namespace Core.Validation
                 .WithMessage("Load capacity must be greater than 0!");
 
             RuleFor(offer => offer.MaxRouteDeviationKm)
-                .InclusiveBetween(0, 25)
-                .WithMessage("Max route deviation must be from 0 to 25km!");
+                .InclusiveBetween(1, 25)
+                .WithMessage("Max route deviation must be from 1 to 25km!");
 
             RuleFor(trip => trip.Points.Count)
                 .GreaterThanOrEqualTo(2)

@@ -144,16 +144,6 @@ namespace Core.Exceptions
             }
         }
 
-        public static void PointDTONullCheck(PointDTO pointDTO)
-        {
-            if (pointDTO == null)
-            {
-                throw new HttpException(
-                    ErrorMessages.PointNotFound,
-                    HttpStatusCode.NotFound);
-            }
-        }
-
         public static void TripNullCheck(Trip trip)
         {
             if (trip == null)

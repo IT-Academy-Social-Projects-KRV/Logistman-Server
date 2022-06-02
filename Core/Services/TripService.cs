@@ -58,8 +58,6 @@ namespace Core.Services
 
             var tripFromDb = await _tripRepository.AddAsync(trip);
 
-            ExceptionMethods.TripNullCheck(tripFromDb);
-
             await _pointService.SetTripIdToListAsync(sortedPoints, tripFromDb.Id);
         }
 

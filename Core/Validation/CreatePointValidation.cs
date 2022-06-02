@@ -8,14 +8,14 @@ namespace Core.Validation
         public CreatePointValidation()
         {
             RuleFor(point => point.Latitude)
-                .GreaterThanOrEqualTo(0)
                 .NotEmpty()
-                .WithMessage("'{PropertyName}' must be greater than or equal to 0!");
+                .InclusiveBetween(-90, 90)
+                .WithMessage("'{PropertyName}' must be between -90 & 90!");
 
             RuleFor(point => point.Longitude)
-                .GreaterThanOrEqualTo(0)
                 .NotEmpty()
-                .WithMessage("'{PropertyName}' must be greater than or equal to 0!");
+                .InclusiveBetween(-180, 180)
+                .WithMessage("'{PropertyName}' must be between -180 & 180!");
 
             RuleFor(point => point.Address)
                 .NotEmpty()

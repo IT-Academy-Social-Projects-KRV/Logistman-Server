@@ -39,11 +39,6 @@ namespace Core.Services
 
         public List<PointDTO> SortByOrder(List<PointDTO> pointsDTOs)
         {
-            foreach (var pointDTO in pointsDTOs)
-            {
-                ExceptionMethods.PointDTONullCheck(pointDTO);
-            }
-
             var sortedPointsByOrder = pointsDTOs.OrderBy(p => p.Order).ToList();
 
             for (int i = 0; i < sortedPointsByOrder.Count(); i++)
@@ -65,7 +60,6 @@ namespace Core.Services
 
             foreach (var pointDTO in pointsDTOs)
             {
-                ExceptionMethods.PointDTONullCheck(pointDTO);
                 pointDTO.TripId = tripId;
             }
         }
