@@ -4,10 +4,11 @@ using System;
 
 namespace Core.Validation
 {
-    public class TripCreateValidation : AbstractValidator<CreateTripDTO>
+    public class CreateTripValidation : AbstractValidator<CreateTripDTO>
     {
         private readonly TimeSpan _hour = new TimeSpan(12, 0, 0);
-        public TripCreateValidation()
+
+        public CreateTripValidation()
         {
             RuleFor(offer => offer.StartDate)
                 .NotEmpty()
@@ -22,19 +23,19 @@ namespace Core.Validation
             RuleFor(offer => offer.Description)
                 .MinimumLength(1)
                 .MaximumLength(1000)
-                .WithMessage("The description must be between 1 and 1000 symbols!");
+                .WithMessage("'{PropertyName}' must be between 1 and 1000 symbols!");
 
             RuleFor(offer => offer.LoadCapacity)
                 .GreaterThan(0)
                 .WithMessage("Load capacity must be greater than 0!");
 
             RuleFor(offer => offer.MaxRouteDeviationKm)
-                .InclusiveBetween(1, 25)
-                .WithMessage("Max route deviation must be greater than 0 and less than 25 km!");
+                .InclusiveBetween(0, 25)
+                .WithMessage("Max route deviation must be from 0 to 25km!");
 
-            RuleFor(offer => offer.TransportationCarId)
-                .GreaterThan(0)
-                .WithMessage("Transportation car id must be greater than 0!");
+            RuleFor(trip => trip.Points.Count)
+                .GreaterThanOrEqualTo(2)
+                .WithMessage("The trip must contain at least 2 points!");
         }
     }
 }

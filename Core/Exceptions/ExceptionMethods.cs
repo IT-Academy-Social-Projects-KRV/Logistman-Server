@@ -12,6 +12,8 @@ using Core.Entities.RoleEntity;
 using Core.Entities.RefreshTokenEntity;
 using Microsoft.AspNetCore.Identity;
 using System.Text;
+using Core.Entities.TripEntity;
+using Core.DTO;
 
 namespace Core.Exceptions
 {
@@ -139,6 +141,26 @@ namespace Core.Exceptions
                 }
 
                 throw new HttpException(messageBuilder.ToString(), HttpStatusCode.BadRequest);
+            }
+        }
+
+        public static void PointDTONullCheck(PointDTO pointDTO)
+        {
+            if (pointDTO == null)
+            {
+                throw new HttpException(
+                    ErrorMessages.PointNotFound,
+                    HttpStatusCode.NotFound);
+            }
+        }
+
+        public static void TripNullCheck(Trip trip)
+        {
+            if (trip == null)
+            {
+                throw new HttpException(
+                    ErrorMessages.TripNotFound,
+                    HttpStatusCode.NotFound);
             }
         }
     }

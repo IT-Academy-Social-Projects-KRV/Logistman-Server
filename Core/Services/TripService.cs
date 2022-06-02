@@ -16,15 +16,18 @@ namespace Core.Services
     {
         private readonly IRepository<Trip> _tripRepository;
         private readonly ICarService _carService;
+        private readonly IPointService _pointService;
         private readonly IMapper _mapper;
 
         public TripService(
             IRepository<Trip> tripRepository,
             ICarService carService,
+            IPointService pointService,
             IMapper mapper)
         {
             _tripRepository = tripRepository;
             _carService = carService;
+            _pointService = pointService;
             _mapper = mapper;
         }
 
@@ -36,6 +39,8 @@ namespace Core.Services
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
         {
             await ValidateTripDate(createTripDTO.StartDate, createTripDTO.ExpirationDate, creatorId);
+
+            var sortedPoints = _pointService.SortByOrder(createTripDTO.Points);
 
             var isCarValid = await _carService
                                 .CheckIsCarBelongsToUserByIds(createTripDTO.TransportationCarId, creatorId);
@@ -58,12 +63,17 @@ namespace Core.Services
             trip.IsEnded = false;
             trip.TripCreatorId = creatorId;
 
-            await _tripRepository.AddAsync(trip);
+            var tripFromDb = await _tripRepository.AddAsync(trip);
+
+            ExceptionMethods.TripNullCheck(tripFromDb);
+
+            await _pointService.SetTripIdToListAsync(sortedPoints, tripFromDb.Id);
         }
 
         private async Task ValidateTripDate(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
         {
-            var isTimeSpaceBusy = await _tripRepository.AnyAsync(new TripSpecification.GetByTimeSpace(startDate, expirationDate, creatorId));
+            var isTimeSpaceBusy = await _tripRepository.AnyAsync(
+                new TripSpecification.GetByTimeSpace(startDate, expirationDate, creatorId));
 
             if (isTimeSpaceBusy)
             {

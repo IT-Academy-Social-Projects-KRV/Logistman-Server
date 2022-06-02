@@ -112,11 +112,11 @@ namespace Infrastructure.Data.SeedData
                 Id = MARYNA_ID,
                 Name = "Maryna",
                 Surname = "Kernychna",
-                UserName = "marynakernychna@gmail.com",
-                NormalizedEmail = "marynakernychna@gmail.com".ToUpper(),
+                UserName = "mapourse@gmail.com",
+                NormalizedEmail = "mapourse@gmail.com".ToUpper(),
                 EmailConfirmed = true,
-                NormalizedUserName = "marynakernychna@gmail.com".ToUpper(),
-                Email = "marynakernychna@gmail.com"
+                NormalizedUserName = "mapourse@gmail.com".ToUpper(),
+                Email = "mapourse@gmail.com"
             };
             var userEugen = new User()
             {
