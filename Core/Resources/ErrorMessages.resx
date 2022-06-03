@@ -234,5 +234,8 @@
   <data name="FailedSendEmail" xml:space="preserve">
     <value>Failed sending account confirmation email!</value>
   </data>
+  <data name="InvalidOrder" xml:space="preserve">
+    <value>Invalid point's order!</value>
+  </data>
 </root>
 

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Core.DTO.UserDTO;
 using Core.Entities.RefreshTokenEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
