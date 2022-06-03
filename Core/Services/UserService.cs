@@ -70,7 +70,7 @@ namespace Core.Services
             {
                 if (await _userRepository.AnyAsync(new UserSpecification.GetByEmail(userEditProfileInfo.Email)))
                 {
-                    throw new HttpException(ErrorMessages.EmailAlreadyExists, HttpStatusCode.BadRequest);
+                    throw new HttpException(ErrorMessages.FailedSendEmail, HttpStatusCode.BadRequest);
                 }
 
                 updateUser.Email = userEditProfileInfo.Email;

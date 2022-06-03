@@ -169,6 +169,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed sending account confirmation email!.
+        /// </summary>
+        internal static string FailedSendEmail {
+            get {
+                return ResourceManager.GetString("FailedSendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Good category not found.
         /// </summary>
         internal static string GoodCategoryNotFound {

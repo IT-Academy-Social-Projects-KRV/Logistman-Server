@@ -2,6 +2,8 @@
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Core.DTO.EmailDTO;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Controllers
 {
@@ -10,10 +12,14 @@ namespace API.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
+        private readonly IEmailService _emailService;
 
-        public AuthenticationController(IAuthenticationService authenticationService)
+        public AuthenticationController(
+            IAuthenticationService authenticationService,
+            IEmailService emailService)
         {
             _authenticationService = authenticationService;
+            _emailService = emailService;
         }
 
         [HttpPost("register")]
@@ -41,6 +47,13 @@ namespace API.Controllers
         public async Task<IActionResult> LogoutAsync([FromBody] UserLogoutDTO userLogoutDTO)
         {
             await _authenticationService.LogoutAsync(userLogoutDTO);
+            return Ok();
+        }
+
+        [HttpPost("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(EmailConfirmationRequestDTO request)
+        {
+            await _emailService.ConfirmEmailAsync(request);
             return Ok();
         }
     }

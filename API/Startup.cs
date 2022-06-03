@@ -33,6 +33,8 @@ namespace API
 
             services.AddCustomServices();
 
+            services.Configures(Configuration.GetSection("AppSettings"));
+
             services.AddFluentValidation();
 
             services.AddAutoMapper();
@@ -42,6 +44,8 @@ namespace API
             services.ConfigJwtOptions(Configuration);
 
             services.AddJwtAuthentication(Configuration);
+
+            services.AddMvcCore().AddRazorViewEngine();
 
             services.AddSwagger();
         }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>8630576e-1c6b-4551-8fb0-eb60a4ff1e85</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.16" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="SendGrid" Version="9.28.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="VueCliMiddleware" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
