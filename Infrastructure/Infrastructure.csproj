@@ -27,8 +27,4 @@
     <Folder Include="Repository\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\SeedData\" />
-  </ItemGroup>
-
 </Project>

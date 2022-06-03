@@ -1,4 +1,4 @@
-﻿namespace Core.DTO.GoodCategoryDTO
+﻿namespace Core.DTO
 {
     public class GoodCategoryDTO
     {

@@ -5,7 +5,7 @@ namespace Core.Specifications
 {
     public static class UserSpecification
     {
-        internal class GetByEmail: Specification<User>, ISingleResultSpecification<User>
+        internal class GetByEmail : Specification<User>, ISingleResultSpecification<User>
         {
             public GetByEmail(string email)
             {

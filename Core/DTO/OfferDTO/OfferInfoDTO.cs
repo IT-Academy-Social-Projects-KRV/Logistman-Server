@@ -1,6 +1,4 @@
-﻿using Core.DTO.PointDTO;
-using System;
-using Core.Entities.TripEntity;
+﻿using System;
 
 namespace Core.DTO.OfferDTO
 {
@@ -16,6 +14,6 @@ namespace Core.DTO.OfferDTO
         public string GoodCategoryName { get; set; }
         public string CreatorRoleName { get; set; }
         public int? RelatedTripId { get; set; }
-        public PointInfoDTO Point { get; set; }
+        public PointDTO Point { get; set; }
     }
 }

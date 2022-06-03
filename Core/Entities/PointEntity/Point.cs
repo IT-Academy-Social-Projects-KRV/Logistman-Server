@@ -16,6 +16,5 @@ namespace Core.Entities.PointEntity
         public int? TripId { get; set; }
         public Trip Trip { get; set; }
         public ICollection<Offer> Offers { get; set; }
-        public ICollection<Trip> Trips { get; set; }
     }
 }

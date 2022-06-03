@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTO.GoodCategoryDTO;
+using Core.DTO;
 using Core.Entities.GoodCategoryEntity;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;

@@ -112,11 +112,11 @@ namespace Infrastructure.Data.SeedData
                 Id = MARYNA_ID,
                 Name = "Maryna",
                 Surname = "Kernychna",
-                UserName = "marynakernychna@gmail.com",
-                NormalizedEmail = "marynakernychna@gmail.com".ToUpper(),
+                UserName = "mapourse@gmail.com",
+                NormalizedEmail = "mapourse@gmail.com".ToUpper(),
                 EmailConfirmed = true,
-                NormalizedUserName = "marynakernychna@gmail.com".ToUpper(),
-                Email = "marynakernychna@gmail.com"
+                NormalizedUserName = "mapourse@gmail.com".ToUpper(),
+                Email = "mapourse@gmail.com"
             };
             var userEugen = new User()
             {
@@ -200,22 +200,22 @@ namespace Infrastructure.Data.SeedData
                 new IdentityRole()
                 {
                     Id = ROLE_USER_ID,
-                    Name = IdentityRoleNames.User,
-                    NormalizedName = IdentityRoleNames.User.ToUpper(),
+                    Name = IdentityRoleNames.User.ToString(),
+                    NormalizedName = IdentityRoleNames.User.ToString().ToUpper(),
                     ConcurrencyStamp = ROLE_USER_ID
                 },
                 new IdentityRole()
                 {
                     Id = ROLE_ADMIN_ID,
-                    Name = IdentityRoleNames.Admin,
-                    NormalizedName = IdentityRoleNames.Admin.ToUpper(),
+                    Name = IdentityRoleNames.Admin.ToString(),
+                    NormalizedName = IdentityRoleNames.Admin.ToString().ToUpper(),
                     ConcurrencyStamp = ROLE_ADMIN_ID
                 },
                 new IdentityRole()
                 {
                     Id = ROLE_LOGIST_ID,
-                    Name = IdentityRoleNames.Logist,
-                    NormalizedName = IdentityRoleNames.Logist.ToUpper(),
+                    Name = IdentityRoleNames.Logist.ToString(),
+                    NormalizedName = IdentityRoleNames.Logist.ToString().ToUpper(),
                     ConcurrencyStamp = ROLE_LOGIST_ID
                 });
 
@@ -247,7 +247,7 @@ namespace Infrastructure.Data.SeedData
                     UserId = ANTONINA_ID
                 }, new IdentityUserRole<string>()
                 {
-                    RoleId = ROLE_USER_ID,
+                    RoleId = ROLE_LOGIST_ID,
                     UserId = ANDREW_ID
                 }, new IdentityUserRole<string>()
                 {
@@ -706,7 +706,7 @@ namespace Infrastructure.Data.SeedData
                     ExpirationDate = DateTimeOffset.Parse($"{_faker.Random.Int(5, 10)}.07.2022 {_faker.Random.Int(12, 23)}:00"),
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 11,
-                    OfferCreatorId = ANDREW_ID,
+                    OfferCreatorId = SERGEY_ID,
                     CreatorRoleId = 1,
                     CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 },
@@ -832,7 +832,7 @@ namespace Infrastructure.Data.SeedData
                     ExpirationDate = DateTimeOffset.Parse($"{_faker.Random.Int(5, 10)}.07.2022 {_faker.Random.Int(12, 23)}:00"),
                     GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 20,
-                    OfferCreatorId = ANDREW_ID,
+                    OfferCreatorId = ANTONINA_ID,
                     CreatorRoleId = 1,
                     CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
                 });
@@ -855,7 +855,7 @@ namespace Infrastructure.Data.SeedData
                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2016 {_faker.Random.Int(9, 18)}:00"),
                    CategoryId = _faker.Random.Int(2, 4),
                    IsVerified = true,
-                   UserId = SERGEY_ID
+                   UserId = ANTONINA_ID
                },
                new Car()
                {
@@ -883,7 +883,7 @@ namespace Infrastructure.Data.SeedData
                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2016 {_faker.Random.Int(9, 18)}:00"),
                    CategoryId = _faker.Random.Int(2, 4),
                    IsVerified = true,
-                   UserId = ANDREW_ID
+                   UserId = MARYNA_ID
                },
                new Car()
                {
@@ -925,7 +925,7 @@ namespace Infrastructure.Data.SeedData
                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2016 {_faker.Random.Int(9, 18)}:00"),
                    CategoryId = _faker.Random.Int(2, 4),
                    IsVerified = true,
-                   UserId = SERGEY_ID
+                   UserId = VLAD_ID
                },
                new Car()
                {
@@ -967,7 +967,7 @@ namespace Infrastructure.Data.SeedData
                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2016 {_faker.Random.Int(9, 18)}:00"),
                    CategoryId = _faker.Random.Int(2, 4),
                    IsVerified = true,
-                   UserId = SERGEY_ID
+                   UserId = MARYNA_ID
                },
                new Car()
                {
@@ -981,7 +981,7 @@ namespace Infrastructure.Data.SeedData
                    CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2016 {_faker.Random.Int(9, 18)}:00"),
                    CategoryId = _faker.Random.Int(2, 4),
                    IsVerified = true,
-                   UserId = SERGEY_ID
+                   UserId = EUGEN_ID
                }
 
                );

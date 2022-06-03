@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Core.DTO.UserDTO;
+using Core.Constants;
+using Core.DTO;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Interfaces;
@@ -7,6 +8,7 @@ using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -79,7 +81,7 @@ namespace Core.Services
             }
             await _userRepository.UpdateAsync(updateUser);
         }
-        
+
         public async Task<UserFullNameDTO> GetUserFullNameAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -87,6 +89,18 @@ namespace Core.Services
             ExceptionMethods.UserNullCheck(user);
 
             return _mapper.Map<UserFullNameDTO>(user);
+        }
+
+        public async Task<List<UserDTO>> GetAllUsersAsync()
+        {
+            var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
+
+            if (!usersList.Any())
+            {
+                return null;
+            }
+
+            return _mapper.Map<List<UserDTO>>(usersList);
         }
     }
 }

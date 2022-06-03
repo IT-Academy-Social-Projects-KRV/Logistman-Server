@@ -196,6 +196,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid point&apos;s order!.
+        /// </summary>
+        internal static string InvalidOrder {
+            get {
+                return ResourceManager.GetString("InvalidOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid request.
         /// </summary>
         internal static string InvalidRequest {

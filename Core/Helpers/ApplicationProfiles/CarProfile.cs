@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTO.CarDTO;
+using Core.DTO;
 using Core.Entities.CarEntity;
 using System.Linq;
 

@@ -28,7 +28,7 @@ namespace API
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddIdentityDbContext();
-            
+
             services.AddAuthentication();
 
             services.AddCustomServices();
