@@ -57,17 +57,21 @@ namespace Core.Services
             return _mapper.Map<CarDTO>(car);
         }
 
-        public async Task<PaginatedList<CarDTO>> GetAllUserCars(string userId, int pageNumber, int pageSize)
+        public async Task<PaginatedList<CarDTO>> GetAllUserCarsAsync(string userId, PaginationFilter paginationFilter)
         {
-            var userCars = await _carRepository
-                .GetPaginatedListAsync(new CarSpecification.GetByUserId(userId), pageNumber, pageSize);
+            var userCars = await _carRepository.ListAsync(new CarSpecification.GetByUserId(userId));
 
-            if(userCars.PaginatedItems.Any())
+            var paginatedUserCars = PaginatedList<Car>.Paginate(userCars, paginationFilter);
+
+            if (paginatedUserCars == null)
             {
                 return null;
             }
 
-            return new PaginatedList<CarDTO>(_mapper.Map<List<CarDTO>>(userCars.PaginatedItems), userCars.Count, pageNumber, pageSize);
+            return new PaginatedList<CarDTO>(
+                _mapper.Map<List<CarDTO>>(paginatedUserCars.Items), 
+                paginationFilter.PageNumber, 
+                paginatedUserCars.TotalPages);
         }
 
         private async Task<bool> IsCarExist(Car newCar)
@@ -88,12 +92,22 @@ namespace Core.Services
             return car.IsVerified;
         }
 
-        public List<CarDTO> GetVerifiedByUserId(string userId)
+        public async Task<PaginatedList<CarDTO>> GetVerifiedByUserIdAsync(string userId, PaginationFilter paginationFilter)
         {
-            var verifiedCars = _carRepository
-                .GetIQuaryableBySpec(new CarSpecification.GetVerifiedByUserId(userId));
+            var verifiedCars = await _carRepository
+                .ListAsync(new CarSpecification.GetVerifiedByUserId(userId));
 
-            return _mapper.ProjectTo<CarDTO>(verifiedCars).ToList();
+            var paginatedVerifiedCars = PaginatedList<Car>.Paginate(verifiedCars, paginationFilter);
+
+            if (paginatedVerifiedCars == null)
+            {
+                return null;
+            }
+
+            return new PaginatedList<CarDTO>(
+                _mapper.Map<List<CarDTO>>(paginatedVerifiedCars.Items),
+                paginationFilter.PageNumber,
+                paginatedVerifiedCars.TotalPages);
         }
     }
 }

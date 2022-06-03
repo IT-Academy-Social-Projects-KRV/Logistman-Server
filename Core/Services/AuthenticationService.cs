@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using Core.Resources;
 using Core.Interfaces;
 using Core.Entities.RefreshTokenEntity;
-using Microsoft.Extensions.Options;
-using Core.Helpers;
 using Core.Specifications;
 using Core.Constants;
 
@@ -51,7 +49,7 @@ namespace Core.Services
 
             ExceptionMethods.CheckIdentityResult(createUserResult);
 
-            var roleName = IdentityRoleNames.User;
+            var roleName = IdentityRoleNames.User.ToString();
             var userRole = await _roleManager.FindByNameAsync(roleName);
 
             ExceptionMethods.IdentityRoleNullCheck(userRole);

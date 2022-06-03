@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Helpers
 {
@@ -13,13 +14,37 @@ namespace Core.Helpers
 
         public bool HasNextPage => PageNumber < TotalPages;
 
-        public List<TEntity> PaginatedItems { get; set; }
+        public List<TEntity> Items { get; set; }
 
-        public PaginatedList(List<TEntity> items, int count, int pageNumber, int pageSize)
+        public PaginatedList(List<TEntity> items, int pageNumber, int totalPages)
         {
             PageNumber = pageNumber;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-            PaginatedItems = items;
+            TotalPages = totalPages;
+            Items = items;
+        }
+
+        public static PaginatedList<TEntity> Paginate(
+            IList<TEntity> source, PaginationFilter paginationFilter)
+        {
+            var count = source.Count();
+
+            if (count == 0)
+            {
+                return null;
+            }
+
+            var totalPages = (int)Math.Ceiling(count / (double)paginationFilter.PageSize);
+
+            if (paginationFilter.PageNumber > totalPages)
+            {
+                paginationFilter.PageNumber = totalPages;
+            }
+
+            var items = source
+                .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                .Take(paginationFilter.PageSize);
+
+            return new PaginatedList<TEntity>(items.ToList(), paginationFilter.PageNumber, totalPages);
         }
     }
 }

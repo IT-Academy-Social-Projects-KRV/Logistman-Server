@@ -46,10 +46,10 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> GetUserOffers([FromQuery] int pageNumber, [FromQuery] int pageSize)
+        public async Task<IActionResult> GetUserOffersAsync([FromQuery] PaginationFilter paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            return Ok(await _offerService.GetUsersOffers(userId, pageNumber, pageSize));
+            return Ok(await _offerService.GetUsersOffersAsync(userId, paginationFilter));
         }
     }
 }

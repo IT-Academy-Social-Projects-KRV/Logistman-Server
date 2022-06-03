@@ -9,7 +9,6 @@ using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Core.Specifications;
@@ -82,16 +81,21 @@ namespace Core.Services
             return offerInfo;
         }
 
-        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffers(string userId, int pageNumber, int pageSize)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilter paginationFilter)
         {
-            var paginatedList = await _offerRepository.GetPaginatedListAsync(new OfferSpecification.GetByUserId(userId), pageNumber, pageSize);
+            var offerList = await _offerRepository.ListAsync(new OfferSpecification.GetByUserId(userId));
+
+            var paginatedOfferList = PaginatedList<Offer>.Paginate(offerList, paginationFilter);
             
-            if (!paginatedList.PaginatedItems.Any())
+            if (paginatedOfferList == null)
             {
                 return null;
             }
 
-            return new PaginatedList<OfferPreviewDTO>(_mapper.Map<List<OfferPreviewDTO>>(paginatedList.PaginatedItems), paginatedList.Count, pageNumber, pageSize);
+            return new PaginatedList<OfferPreviewDTO>(
+                _mapper.Map<List<OfferPreviewDTO>>(paginatedOfferList.Items), 
+                paginationFilter.PageNumber,
+                paginatedOfferList.TotalPages);
         }
     }
 }
