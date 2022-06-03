@@ -1,0 +1,25 @@
+﻿@model Core.DTO.EmailDTO.ConfirmationEmailDTO
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body style="padding: 30px; background-color: black; color: #093545; text-align: center">
+<h2 style="margin-bottom: 50px">LOGIST</h2>
+    
+<p style="font-size: large">Hi,</p>
+
+<p>
+    This is a confirmation letter on the course website, if you have not done it so ignore the letter. <br /> <br />
+    Your's user name is <span style="font-style: italic; font-weight: 900">@Model.Name @Model.Surname</span>.
+    If it is correct press buttom in the bottom. <br />
+    Good day!
+</p>
+
+<br />
+
+<button style="background-color: white">
+    <a href=@Model.Link style="text-decoration: none; color: black; font-style: italic; font-weight: 900">Confirm email</a>
+</button>
+</body>
+</html>

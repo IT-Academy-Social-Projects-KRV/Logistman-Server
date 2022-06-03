@@ -1,6 +1,7 @@
 using AutoMapper;
 using Core.Helpers;
 using Core.Helpers.ApplicationProfiles;
+using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Services;
 using Core.Validation;
@@ -24,6 +25,8 @@ namespace Core
             services.AddScoped<ITripService, TripService>();
             services.AddScoped<ICarCategoryService, CarCategoryService>();
             services.AddScoped<IOfferRoleService, OfferRoleService>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ITemplateHelper, TemplateHelper>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
@@ -52,6 +55,11 @@ namespace Core
         {
             services.Configure<JwtOptions>(config.GetSection("JwtOptions"));
             services.Configure<RolesOptions>(config.GetSection("RolesOptions"));
+        }
+
+        public static void Configures(this IServiceCollection services, IConfiguration config)
+        {
+            services.Configure<AppSettings>(config);
         }
     }
 }
