@@ -1,7 +1,6 @@
 ﻿using Core.DTO.OfferDTO;
 using FluentValidation;
 using System;
-
 namespace Core.Validation
 {
     public class OfferCreateValidation : AbstractValidator<OfferCreateDTO>
@@ -15,7 +14,7 @@ namespace Core.Validation
                 .NotNull();
             
             RuleFor(offer => offer.Point)
-                .SetValidator(new PointCreateValidation());
+                .SetValidator(new CreatePointValidation());
 
             RuleFor(offer => offer.StartDate)
                 .NotEmpty()
