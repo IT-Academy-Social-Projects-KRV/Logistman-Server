@@ -13,6 +13,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Core.Specifications;
 using Core.Helpers;
+using Core.DTO;
 
 namespace Core.Services
 {
@@ -81,7 +82,7 @@ namespace Core.Services
             return offerInfo;
         }
 
-        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilter paginationFilter)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter)
         {
             var offerList = await _offerRepository.ListAsync(new OfferSpecification.GetByUserId(userId));
 
@@ -95,7 +96,8 @@ namespace Core.Services
             return new PaginatedList<OfferPreviewDTO>(
                 _mapper.Map<List<OfferPreviewDTO>>(paginatedOfferList.Items), 
                 paginationFilter.PageNumber,
-                paginatedOfferList.TotalPages);
+                paginatedOfferList.TotalPages,
+                paginatedOfferList.TotalItems);
         }
     }
 }

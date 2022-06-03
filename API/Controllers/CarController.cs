@@ -32,7 +32,7 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<ActionResult> GetAllUserCarsAsync([FromQuery] PaginationFilter paginationFilter)
+        public async Task<ActionResult> GetAllUserCarsAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             var userCars = await _carService.GetAllUserCarsAsync(userId, paginationFilter);
@@ -41,7 +41,7 @@ namespace API.Controllers
 
         [HttpGet("user-verified")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<ActionResult> GetUserVerifiedAsync([FromQuery] PaginationFilter paginationFilter)
+        public async Task<ActionResult> GetUserVerifiedAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             var verifiedCars = await _carService.GetVerifiedByUserIdAsync(userId, paginationFilter);

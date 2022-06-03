@@ -92,7 +92,7 @@ namespace Core.Services
             return _mapper.Map<UserFullNameDTO>(user);
         }
 
-        public async Task<PaginatedList<UserDTO>> GetAllUsersAsync(PaginationFilter paginationFilter)
+        public async Task<PaginatedList<UserDTO>> GetAllUsersAsync(PaginationFilterDTO paginationFilter)
         {
             var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
 
@@ -106,7 +106,8 @@ namespace Core.Services
             return new PaginatedList<UserDTO>(
                 _mapper.Map<List<UserDTO>>(paginatedUserList.Items), 
                 paginationFilter.PageNumber, 
-                paginatedUserList.TotalPages);
+                paginatedUserList.TotalPages, 
+                paginatedUserList.TotalItems);
         }
     }
 }
