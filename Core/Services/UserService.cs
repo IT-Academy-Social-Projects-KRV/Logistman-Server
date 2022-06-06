@@ -112,5 +112,14 @@ namespace Core.Services
             await _userManager.DeleteAsync(user);
             await _userRepository.SaveChangesAsync();
         }
+
+        public async Task<string> GetUserIdByEmailAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            ExceptionMethods.UserNullCheck(user);
+
+            return await _userManager.GetUserIdAsync(user);
+        }
     }
 }

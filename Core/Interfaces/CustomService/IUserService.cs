@@ -15,5 +15,6 @@ namespace Core.Interfaces.CustomService
         Task<UserFullNameDTO> GetUserFullNameAsync(string userId);
         Task<List<UserDTO>> GetAllUsersAsync();
         Task DeleteUserAsync(string email);
+        Task<string> GetUserIdByEmailAsync(string email);
     }
 }
