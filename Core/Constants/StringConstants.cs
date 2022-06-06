@@ -2,6 +2,6 @@
 {
     public static class StringConstants
     {
-        public static string EmailConfirmationCallbackUrl { get; } = "https://localhost:3000/confirm-email";
+        public static string EmailConfirmationCallbackUrl { get; } = "http://localhost:3000/confirm-email";
     }
 }

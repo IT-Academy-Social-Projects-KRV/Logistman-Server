@@ -1,9 +1,8 @@
 ﻿using Core.DTO;
+using Core.DTO.EmailDTO;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Core.DTO.EmailDTO;
-using Microsoft.Extensions.Configuration;
 
 namespace API.Controllers
 {
@@ -51,7 +50,7 @@ namespace API.Controllers
         }
 
         [HttpPost("confirm-email")]
-        public async Task<IActionResult> ConfirmEmail(EmailConfirmationRequestDTO request)
+        public async Task<IActionResult> ConfirmEmailAsync(EmailConfirmationRequestDTO request)
         {
             await _emailService.ConfirmEmailAsync(request);
             return Ok();

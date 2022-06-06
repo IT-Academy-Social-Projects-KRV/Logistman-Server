@@ -22,15 +22,18 @@ namespace Core.Services
         private readonly IRepository<User> _userRepository;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly IEmailService _emailService;
 
         public UserService(
             IRepository<User> userRepository,
             IMapper mapper,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IEmailService emailService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _userManager = userManager;
+            _emailService = emailService;
         }
 
         public string GetCurrentUserNameIdentifier(ClaimsPrincipal currentUser)
@@ -79,6 +82,7 @@ namespace Core.Services
                 updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();
 
                 updateUser.EmailConfirmed = false;
+                await _emailService.SendConfirmationEmailAsync(updateUser);
             }
             await _userRepository.UpdateAsync(updateUser);
         }
