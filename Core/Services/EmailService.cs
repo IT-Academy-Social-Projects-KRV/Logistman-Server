@@ -6,6 +6,7 @@ using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using SendGrid;
@@ -13,8 +14,6 @@ using SendGrid.Helpers.Mail;
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Core.Specifications;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
@@ -35,11 +34,14 @@ namespace Core.Services
             _appSettings = appSettings.Value;
             _userRepository = userRepository;
         }
+
         public async Task SendConfirmationEmailAsync(User user)
         {
             user.ConfirmEmailToken = await _userManager
                 .GenerateEmailConfirmationTokenAsync(user);
-            user.ConfirmEmailTokenExpirationDate = DateTimeOffset.Now + TimeSpan.FromDays(7);
+            user.ConfirmEmailTokenExpirationDate = DateTimeOffset.UtcNow + TimeSpan.FromDays(7);
+
+            await _userManager.UpdateAsync(user);
 
             var message = await _templateHelper
                 .GetTemplateHtmlAsStringAsync<ConfirmationEmailDTO>(
@@ -49,11 +51,12 @@ namespace Core.Services
                     Name = user.Name,
                     Surname = user.Surname,
                     Link = StringConstants.EmailConfirmationCallbackUrl + "/" +
-                           user.ConfirmEmailToken /*+ "/" + user.Email*/
+                           user.ConfirmEmailToken + "/" 
                 });
 
             await SendEmailAsync(user.Email, "Confirm your account", message);
         }
+
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             var client = new SendGridClient(_appSettings.SendGridKey);
@@ -72,13 +75,15 @@ namespace Core.Services
                     HttpStatusCode.InternalServerError);
             }
         }
+
         public async Task ConfirmEmailAsync(EmailConfirmationRequestDTO request)
         {
-            var user = await _userRepository.GetBySpecAsync(new UserSpecification.GetByConfirmToken(request.Token));
+            var user = await _userRepository.GetBySpecAsync(
+                new UserSpecification.GetByConfirmToken(request.Token));
 
             ExceptionMethods.UserNullCheck(user);
 
-            if (user.ConfirmEmailTokenExpirationDate > DateTimeOffset.Now)
+            if (user.ConfirmEmailTokenExpirationDate > DateTimeOffset.UtcNow)
             {
                 await _userManager.ConfirmEmailAsync(user, request.Token);
                 user.ConfirmEmailToken = null;
