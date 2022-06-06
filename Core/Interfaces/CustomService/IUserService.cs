@@ -14,5 +14,6 @@ namespace Core.Interfaces.CustomService
         Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId);
         Task<UserFullNameDTO> GetUserFullNameAsync(string userId);
         Task<List<UserDTO>> GetAllUsersAsync();
+        Task DeleteUserAsync(string email);
     }
 }

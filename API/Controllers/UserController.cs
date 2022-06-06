@@ -51,5 +51,14 @@ namespace API.Controllers
         {
             return Ok(await _userService.GetAllUsersAsync());
         }
+
+        [HttpDelete("delete")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<ActionResult> DeleteAsync(string email)
+        {
+            await _userService.DeleteUserAsync(email);
+
+            return Ok();
+        }
     }
 }

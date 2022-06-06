@@ -102,5 +102,15 @@ namespace Core.Services
 
             return _mapper.Map<List<UserDTO>>(usersList);
         }
+
+        public async Task DeleteUserAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            ExceptionMethods.UserNullCheck(user);
+
+            await _userManager.DeleteAsync(user);
+            await _userRepository.SaveChangesAsync();
+        }
     }
 }
