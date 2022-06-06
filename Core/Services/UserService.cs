@@ -109,6 +109,11 @@ namespace Core.Services
 
             ExceptionMethods.UserNullCheck(user);
 
+            if (!await _userManager.IsInRoleAsync(user, IdentityRoleNames.User.ToString()))
+            {
+                throw new HttpException(ErrorMessages.NotEnoughPermissions, HttpStatusCode.Forbidden);
+            }
+
             await _userManager.DeleteAsync(user);
         }
 
