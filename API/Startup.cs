@@ -1,6 +1,7 @@
 using API.Middlewares;
 using API.ServiceExtension;
 using Core;
+using Core.Helpers;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,7 +34,9 @@ namespace API
 
             services.AddCustomServices();
 
-            services.Configures(Configuration.GetSection("AppSettings"));
+            services.Configures(Configuration.GetSection(nameof(AppSettings)));
+            
+            services.Configures(Configuration.GetSection(nameof(Links)));
 
             services.AddFluentValidation();
 

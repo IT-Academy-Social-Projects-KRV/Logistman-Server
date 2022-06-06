@@ -1,6 +1,7 @@
 ﻿using Core.DTO.OfferDTO;
 using FluentValidation;
 using System;
+
 namespace Core.Validation
 {
     public class OfferCreateValidation : AbstractValidator<OfferCreateDTO>
@@ -10,6 +11,7 @@ namespace Core.Validation
         {
             RuleFor(offer => offer.GoodsWeight)
                 .GreaterThan(0);
+
             RuleFor(offer => offer.Point)
                 .NotNull();
             
@@ -28,7 +30,6 @@ namespace Core.Validation
                 .Must(date => !date)
                 .WithMessage(
                     $"The difference between the StartDate and the ExpirationDate must be at least {_hour.Hours} hours!");
-
         }
     }
 }

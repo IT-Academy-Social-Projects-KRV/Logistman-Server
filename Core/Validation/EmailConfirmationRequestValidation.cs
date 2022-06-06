@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Core.Validation
 {
-    public class EmailConfirmationRequestValidation : AbstractValidator<EmailConfirmationRequestDTO>
+    public class EmailConfirmationRequestValidation : AbstractValidator<EmailConfirmationTokenRequestDTO>
     {
         public EmailConfirmationRequestValidation()
         {
