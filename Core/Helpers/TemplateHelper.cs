@@ -42,7 +42,7 @@ namespace Core.Helpers
                 new RouteData(), 
                 new ActionDescriptor());
 
-            using (StringWriter sw = new StringWriter())
+            using (StringWriter stringWriter = new StringWriter())
             {
                 var viewResult = _razorViewEngine.FindView(
                     actionContext, 
@@ -66,13 +66,13 @@ namespace Core.Helpers
                     viewResult.View,
                     viewDataDictionary,
                     new TempDataDictionary(actionContext.HttpContext, _tempDataProvider),
-                    sw,
+                    stringWriter,
                     new HtmlHelperOptions()
                 );
 
                 await viewResult.View.RenderAsync(viewContext);
 
-                return sw.ToString();
+                return stringWriter.ToString();
             }
         }
     }

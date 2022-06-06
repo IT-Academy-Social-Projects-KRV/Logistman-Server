@@ -11,9 +11,6 @@ namespace Core.Validation
                 .NotEmpty()
                 .NotNull()
                 .WithMessage("Token is null !");
-            RuleFor(x => x.Email)
-                .EmailAddress()
-                .WithMessage("Invalid email!");
         }
     }
 }

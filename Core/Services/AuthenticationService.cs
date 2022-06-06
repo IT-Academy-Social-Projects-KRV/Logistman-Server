@@ -58,7 +58,6 @@ namespace Core.Services
 
             ExceptionMethods.CheckIdentityResult(createUserResult);
 
-
             var roleName = _rolesOptions.Value.User;
             var userRole = await _roleManager.FindByNameAsync(roleName);
 
