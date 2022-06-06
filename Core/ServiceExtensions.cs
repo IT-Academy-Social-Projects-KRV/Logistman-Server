@@ -59,6 +59,7 @@ namespace Core
         public static void Configures(this IServiceCollection services, IConfiguration config)
         {
             services.Configure<AppSettings>(config);
+            services.Configure<Links>(config);
         }
     }
 }

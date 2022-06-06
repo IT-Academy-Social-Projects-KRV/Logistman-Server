@@ -8,6 +8,6 @@ namespace Core.Interfaces.CustomService
     {
         Task SendConfirmationEmailAsync(User user);
         Task SendEmailAsync(string email, string subject, string message);
-        Task ConfirmEmailAsync(EmailConfirmationRequestDTO request);
+        Task ConfirmEmailAsync(EmailConfirmationTokenRequestDTO request);
     }
 }

@@ -1,5 +1,4 @@
-﻿using Core.Constants;
-using Core.DTO.EmailDTO;
+﻿using Core.DTO.EmailDTO;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Helpers;
@@ -22,17 +21,20 @@ namespace Core.Services
         private readonly ITemplateHelper _templateHelper;
         private readonly UserManager<User> _userManager;
         private readonly AppSettings _appSettings;
+        private readonly Links _links;
         private readonly IRepository<User> _userRepository;
         public EmailService(
             ITemplateHelper templateHelper,
             UserManager<User> userManager,
             IOptions<AppSettings> appSettings,
+            IOptions<Links> links,
             IRepository<User> userRepository)
         {
             _templateHelper = templateHelper;
             _userManager = userManager;
             _appSettings = appSettings.Value;
             _userRepository = userRepository;
+            _links = links.Value;
         }
 
         public async Task SendConfirmationEmailAsync(User user)
@@ -50,7 +52,7 @@ namespace Core.Services
                 {
                     Name = user.Name,
                     Surname = user.Surname,
-                    Link = StringConstants.EmailConfirmationCallbackUrl + "/" +
+                    Link = _links.EmailConfirmationCallbackUrl + "/" +
                            user.ConfirmEmailToken + "/" 
                 });
 
@@ -71,12 +73,12 @@ namespace Core.Services
             if (!result.IsSuccessStatusCode)
             {
                 throw new HttpException(
-                    ErrorMessages.EmailNotConfirm, 
+                    ErrorMessages.FailedSendEmail, 
                     HttpStatusCode.InternalServerError);
             }
         }
 
-        public async Task ConfirmEmailAsync(EmailConfirmationRequestDTO request)
+        public async Task ConfirmEmailAsync(EmailConfirmationTokenRequestDTO request)
         {
             var user = await _userRepository.GetBySpecAsync(
                 new UserSpecification.GetByConfirmToken(request.Token));
@@ -85,9 +87,16 @@ namespace Core.Services
 
             if (user.ConfirmEmailTokenExpirationDate > DateTimeOffset.UtcNow)
             {
-                await _userManager.ConfirmEmailAsync(user, request.Token);
+                var confirm = await _userManager.ConfirmEmailAsync(user, request.Token);
+
+                if (!confirm.Succeeded)
+                {
+                    new HttpException(ErrorMessages.FailedSendEmail, HttpStatusCode.BadRequest);
+                }
+
                 user.ConfirmEmailToken = null;
                 user.ConfirmEmailTokenExpirationDate = null;
+
                 await _userManager.UpdateAsync(user);
             }
             else

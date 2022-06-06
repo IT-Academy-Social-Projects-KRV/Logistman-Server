@@ -50,7 +50,7 @@ namespace API.Controllers
         }
 
         [HttpPost("confirm-email")]
-        public async Task<IActionResult> ConfirmEmailAsync(EmailConfirmationRequestDTO request)
+        public async Task<IActionResult> ConfirmEmailAsync(EmailConfirmationTokenRequestDTO request)
         {
             await _emailService.ConfirmEmailAsync(request);
             return Ok();
