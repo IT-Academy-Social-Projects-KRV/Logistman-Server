@@ -110,7 +110,6 @@ namespace Core.Services
             ExceptionMethods.UserNullCheck(user);
 
             await _userManager.DeleteAsync(user);
-            await _userRepository.SaveChangesAsync();
         }
 
         public async Task<string> GetUserIdByEmailAsync(string email)
@@ -119,7 +118,7 @@ namespace Core.Services
 
             ExceptionMethods.UserNullCheck(user);
 
-            return await _userManager.GetUserIdAsync(user);
+            return user.Id;
         }
     }
 }

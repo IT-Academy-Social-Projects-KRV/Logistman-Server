@@ -41,7 +41,6 @@ namespace API.Controllers
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<ActionResult> UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo, string email)
         {
-
             var userId = await _userService.GetUserIdByEmailAsync(email);
             await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId);
             return Ok();
@@ -64,10 +63,9 @@ namespace API.Controllers
 
         [HttpDelete("delete")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> DeleteAsync(string email)
+        public async Task<ActionResult> DeleteUserAsync(string email)
         {
             await _userService.DeleteUserAsync(email);
-
             return Ok();
         }
     }
