@@ -3,18 +3,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class ConfirmEmailToken : Migration
+    public partial class ConfirmationEmailToken : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "ConfirmEmailToken",
+                name: "ConfirmationEmailToken",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: true);
 
             migrationBuilder.AddColumn<DateTimeOffset>(
-                name: "ConfirmEmailTokenExpirationDate",
+                name: "ConfirmationEmailTokenExpirationDate",
                 table: "AspNetUsers",
                 type: "datetimeoffset",
                 nullable: true);
@@ -23,11 +23,11 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ConfirmEmailToken",
+                name: "ConfirmationEmailToken",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "ConfirmEmailTokenExpirationDate",
+                name: "ConfirmationEmailTokenExpirationDate",
                 table: "AspNetUsers");
         }
     }

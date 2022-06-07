@@ -48,7 +48,7 @@ namespace Core.Services
             _emailService = emailService;
         }
 
-        public async Task RegisterAsync(UserRegistrationDTO userData)
+        public async Task RegisterAsync(UserRegistrationDTO userData, string callbackUrl)
         {
             var user = _mapper.Map<User>(userData);
             var createUserResult = await _userManager.CreateAsync(user, userData.Password);
@@ -64,7 +64,7 @@ namespace Core.Services
 
             ExceptionMethods.CheckIdentityResult(addToRoleResult);
 
-            await _emailService.SendConfirmationEmailAsync(user);
+            await _emailService.SendConfirmationEmailAsync(user, callbackUrl);
         }
 
         public async Task<UserAutorizationDTO> LoginAsync(UserLoginDTO data)

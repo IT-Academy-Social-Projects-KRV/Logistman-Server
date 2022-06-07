@@ -38,26 +38,29 @@ namespace Core.Services
             _links = links.Value;
         }
 
-        public async Task SendConfirmationEmailAsync(User user)
+        public async Task SendConfirmationEmailAsync(User user, string callbackUrl)
         {
-            user.ConfirmEmailToken = await _userManager
+            user.ConfirmationEmailToken = await _userManager
                 .GenerateEmailConfirmationTokenAsync(user);
-            user.ConfirmEmailTokenExpirationDate = DateTimeOffset.UtcNow + TimeSpan.FromDays(7);
+            user.ConfirmationEmailTokenExpirationDate = DateTimeOffset.UtcNow + TimeSpan.FromDays(7);
 
             await _userManager.UpdateAsync(user);
 
-            var message = await _templateHelper
+                var message = await _templateHelper
                 .GetTemplateHtmlAsStringAsync<ConfirmationEmailDTO>(
                 "ConfirmationEmail",
                 new ConfirmationEmailDTO
                 {
                     Name = user.Name,
                     Surname = user.Surname,
-                    Link = _links.EmailConfirmationCallbackUrl + "/" +
-                           user.ConfirmEmailToken + "/" 
+                    Link = callbackUrl + "confirm-email/" +
+                           user.ConfirmationEmailToken + "/" 
                 });
 
-            await SendEmailAsync(user.Email, "Confirm your account", message);
+                if (!callbackUrl.Contains("swagger"))
+                {
+                    await SendEmailAsync(user.Email, "Confirm your account", message);
+                }
         }
 
         public async Task SendEmailAsync(string email, string subject, string message)
@@ -82,27 +85,27 @@ namespace Core.Services
         public async Task ConfirmEmailAsync(EmailConfirmationTokenRequestDTO request)
         {
             var user = await _userRepository.GetBySpecAsync(
-                new UserSpecification.GetByConfirmToken(request.Token));
+                new UserSpecification.GetByConfirmationToken(request.Token));
 
             ExceptionMethods.UserNullCheck(user);
 
-            if (user.ConfirmEmailTokenExpirationDate > DateTimeOffset.UtcNow)
+            if (user.ConfirmationEmailTokenExpirationDate > DateTimeOffset.UtcNow)
             {
                 var confirm = await _userManager.ConfirmEmailAsync(user, request.Token);
 
                 if (!confirm.Succeeded)
                 {
-                    new HttpException(ErrorMessages.FailedSendEmail, HttpStatusCode.BadRequest);
+                   throw new HttpException(ErrorMessages.FailedSendEmail, HttpStatusCode.BadRequest);
                 }
 
-                user.ConfirmEmailToken = null;
-                user.ConfirmEmailTokenExpirationDate = null;
+                user.ConfirmationEmailToken = null;
+                user.ConfirmationEmailTokenExpirationDate = null;
 
                 await _userManager.UpdateAsync(user);
             }
             else
             {
-                new HttpException(ErrorMessages.FailedSendEmail, HttpStatusCode.BadRequest);
+                throw new HttpException(ErrorMessages.FailedSendEmail, HttpStatusCode.BadRequest);
             }
         }
     }

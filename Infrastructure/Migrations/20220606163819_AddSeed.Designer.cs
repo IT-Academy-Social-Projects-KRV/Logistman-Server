@@ -1327,10 +1327,10 @@ namespace Infrastructure.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("ConfirmEmailToken")
+                    b.Property<string>("ConfirmationEmailToken")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTimeOffset?>("ConfirmEmailTokenExpirationDate")
+                    b.Property<DateTimeOffset?>("ConfirmationEmailTokenExpirationDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("HasCar")

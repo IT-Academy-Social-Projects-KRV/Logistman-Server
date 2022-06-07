@@ -9,8 +9,7 @@ namespace Core.Validation
         {
             RuleFor(x => x.Token)
                 .NotEmpty()
-                .NotNull()
-                .WithMessage("Token is null !");
+                .NotNull();
         }
     }
 }
