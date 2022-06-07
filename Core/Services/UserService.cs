@@ -103,20 +103,6 @@ namespace Core.Services
             return _mapper.Map<List<UserDTO>>(usersList);
         }
 
-        public async Task DeleteUserAsync(string email)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-
-            ExceptionMethods.UserNullCheck(user);
-
-            if (!await _userManager.IsInRoleAsync(user, IdentityRoleNames.User.ToString()))
-            {
-                throw new HttpException(ErrorMessages.NotEnoughPermissions, HttpStatusCode.Forbidden);
-            }
-
-            await _userManager.DeleteAsync(user);
-        }
-
         public async Task<string> GetUserIdByEmailAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
