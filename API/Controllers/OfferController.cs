@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Core.Helpers;
 using Core.Constants;
+using Core.DTO;
 
 namespace API.Controllers
 {
@@ -46,10 +47,10 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public IActionResult GetUserOffers()
+        public async Task<IActionResult> GetUserOffersAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            return Ok(_offerService.GetUsersOffers(userId));
+            return Ok(await _offerService.GetUsersOffersAsync(userId, paginationFilter));
         }
     }
 }

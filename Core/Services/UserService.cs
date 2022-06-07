@@ -3,6 +3,7 @@ using Core.Constants;
 using Core.DTO;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
+using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
@@ -91,16 +92,22 @@ namespace Core.Services
             return _mapper.Map<UserFullNameDTO>(user);
         }
 
-        public async Task<List<UserDTO>> GetAllUsersAsync()
+        public async Task<PaginatedList<UserDTO>> GetAllUsersAsync(PaginationFilterDTO paginationFilter)
         {
             var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
 
-            if (!usersList.Any())
+            var paginatedUserList = PaginatedList<User>.Paginate(usersList, paginationFilter);
+
+            if (paginatedUserList == null)
             {
                 return null;
             }
 
-            return _mapper.Map<List<UserDTO>>(usersList);
+            return new PaginatedList<UserDTO>(
+                _mapper.Map<List<UserDTO>>(paginatedUserList.Items), 
+                paginationFilter.PageNumber, 
+                paginatedUserList.TotalPages, 
+                paginatedUserList.TotalItems);
         }
 
         public async Task<string> GetUserIdByEmailAsync(string email)
