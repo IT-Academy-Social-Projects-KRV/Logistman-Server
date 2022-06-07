@@ -250,6 +250,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are not allowed to do this!.
+        /// </summary>
+        internal static string NotEnoughPermissions {
+            get {
+                return ResourceManager.GetString("NotEnoughPermissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Offer not found.
         /// </summary>
         internal static string OfferNotFound {

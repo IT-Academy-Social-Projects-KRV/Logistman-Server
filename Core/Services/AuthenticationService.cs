@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Threading.Tasks;
+using Core.Specifications;
+using Core.Constants;
 
 namespace Core.Services
 {
@@ -34,11 +36,10 @@ namespace Core.Services
             IJwtService jwtService,
             IOfferRoleService offerRoleService,
             IUserService userService,
+
             IRepository<RefreshToken> refreshTokenRepository,
             IOptions<RolesOptions> rolesOptions,
-            IEmailService emailService
-            
-           )
+            IEmailService emailService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -49,6 +50,7 @@ namespace Core.Services
             _refreshTokenRepository = refreshTokenRepository;
             _rolesOptions = rolesOptions;
             _emailService = emailService;
+
         }
 
         public async Task RegisterAsync(UserRegistrationDTO userData, string callbackUrl)
@@ -58,7 +60,7 @@ namespace Core.Services
 
             ExceptionMethods.CheckIdentityResult(createUserResult);
 
-            var roleName = _rolesOptions.Value.User;
+            var roleName = IdentityRoleNames.User.ToString();
             var userRole = await _roleManager.FindByNameAsync(roleName);
 
             ExceptionMethods.IdentityRoleNullCheck(userRole);

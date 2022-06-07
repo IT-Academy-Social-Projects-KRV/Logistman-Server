@@ -1,5 +1,6 @@
 ﻿using Core.DTO;
 using Core.Entities.UserEntity;
+using Core.Helpers;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Core.Interfaces.CustomService
         Task<string> GetUserRoleAsync(User user);
         Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId, string callbackUrl);
         Task<UserFullNameDTO> GetUserFullNameAsync(string userId);
-        Task<List<UserDTO>> GetAllUsersAsync();
+        Task<string> GetUserIdByEmailAsync(string email);
+        Task<PaginatedList<UserDTO>> GetAllUsersAsync(PaginationFilterDTO paginationFilter);
     }
 }

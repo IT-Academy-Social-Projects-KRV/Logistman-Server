@@ -231,4 +231,7 @@
   <data name="InvalidOrder" xml:space="preserve">
     <value>Invalid point's order!</value>
   </data>
+  <data name="NotEnoughPermissions" xml:space="preserve">
+    <value>You are not allowed to do this!</value>
+  </data>
 </root>

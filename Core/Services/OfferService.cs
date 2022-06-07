@@ -9,10 +9,11 @@ using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Core.Specifications;
+using Core.Helpers;
+using Core.DTO;
 
 namespace Core.Services
 {
@@ -81,14 +82,22 @@ namespace Core.Services
             return offerInfo;
         }
 
-        public List<OfferPreviewDTO> GetUsersOffers(string userId)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter)
         {
-            var offersList = _offerRepository.GetIQuaryableBySpec(new OfferSpecification.GetByUserId(userId));
-            if (!offersList.Any())
+            var offerList = await _offerRepository.ListAsync(new OfferSpecification.GetByUserId(userId));
+
+            var paginatedOfferList = PaginatedList<Offer>.Paginate(offerList, paginationFilter);
+            
+            if (paginatedOfferList == null)
             {
                 return null;
             }
-            return _mapper.ProjectTo<OfferPreviewDTO>(offersList).ToList();
+
+            return new PaginatedList<OfferPreviewDTO>(
+                _mapper.Map<List<OfferPreviewDTO>>(paginatedOfferList.Items), 
+                paginationFilter.PageNumber,
+                paginatedOfferList.TotalPages,
+                paginatedOfferList.TotalItems);
         }
     }
 }

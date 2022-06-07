@@ -27,7 +27,7 @@ namespace Core.Services
         public async Task<List<GoodCategoryDTO>> GetAllGoodCategoryAsync()
         {
             var list = await _goodCategoryRepository.ListAsync();
-            return _mapper.ProjectTo<GoodCategoryDTO>(list.AsQueryable()).ToList();
+            return _mapper.Map<List<GoodCategoryDTO>>(list);
         }
 
         public async Task<int> GetGoodCategoryByNameAsync(string goodCategoryName)
