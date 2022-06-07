@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
+using Core.Constants;
+using Core.DTO;
 using Core.Entities.RefreshTokenEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
-using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -33,10 +33,7 @@ namespace Core.Services
             IOfferRoleService offerRoleService,
             IUserService userService,
             IRepository<RefreshToken> refreshTokenRepository,
-            IOptions<RolesOptions> rolesOptions,
-            IEmailService emailService
-            
-           )
+            IEmailService emailService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
