@@ -61,13 +61,15 @@ namespace Core.Services
             return userRoles.First(); // we get only the first role, because the user will have only one
         }
 
-        public async Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId)
+        public async Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId, string callbackUrl)
         {
             var updateUser = await _userRepository.GetByIdAsync(userId);
+
             ExceptionMethods.UserNullCheck(updateUser);
 
             updateUser.Name = userEditProfileInfo.Name;
             updateUser.Surname = userEditProfileInfo.Surname;
+
             if (!userEditProfileInfo.Email.Equals(updateUser.Email))
             {
                 if (await _userRepository.AnyAsync(new UserSpecification.GetByEmail(userEditProfileInfo.Email)))
@@ -79,10 +81,11 @@ namespace Core.Services
                 updateUser.UserName = userEditProfileInfo.Email;
                 updateUser.NormalizedEmail = userEditProfileInfo.Email.ToUpper();
                 updateUser.NormalizedUserName = userEditProfileInfo.Email.ToUpper();
-
                 updateUser.EmailConfirmed = false;
-                await _emailService.SendConfirmationEmailAsync(updateUser);
+                
+                await _emailService.SendConfirmationEmailAsync(updateUser, callbackUrl);
             }
+
             await _userRepository.UpdateAsync(updateUser);
         }
 

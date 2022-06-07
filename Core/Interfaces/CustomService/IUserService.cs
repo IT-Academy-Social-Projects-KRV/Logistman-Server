@@ -11,7 +11,7 @@ namespace Core.Interfaces.CustomService
         Task<UserProfileInfoDTO> GetUserProfileInfoAsync(string userId);
         string GetCurrentUserNameIdentifier(ClaimsPrincipal currentUser);
         Task<string> GetUserRoleAsync(User user);
-        Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId);
+        Task UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string userId, string callbackUrl);
         Task<UserFullNameDTO> GetUserFullNameAsync(string userId);
         Task<List<UserDTO>> GetAllUsersAsync();
     }

@@ -1,8 +1,12 @@
-﻿using Core.DTO;
+﻿using System;
+using System.Linq;
+using Core.DTO;
 using Core.DTO.EmailDTO;
 using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace API.Controllers
 {
@@ -24,7 +28,8 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] UserRegistrationDTO data)
         {
-            await _authenticationService.RegisterAsync(data);
+            var callbackUrl = Request.GetTypedHeaders().Referer.ToString();
+            await _authenticationService.RegisterAsync(data, callbackUrl);
             return Ok();
         }
 
