@@ -21,21 +21,18 @@ namespace Core.Services
         private readonly ITemplateHelper _templateHelper;
         private readonly UserManager<User> _userManager;
         private readonly AppSettings _appSettings;
-        private readonly Links _links;
         private readonly IRepository<User> _userRepository;
 
         public EmailService(
             ITemplateHelper templateHelper,
             UserManager<User> userManager,
             IOptions<AppSettings> appSettings,
-            IOptions<Links> links,
             IRepository<User> userRepository)
         {
             _templateHelper = templateHelper;
             _userManager = userManager;
             _appSettings = appSettings.Value;
             _userRepository = userRepository;
-            _links = links.Value;
         }
 
         public async Task SendConfirmationEmailAsync(User user, string callbackUrl)

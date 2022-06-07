@@ -35,8 +35,6 @@ namespace API
             services.AddCustomServices();
 
             services.Configures(Configuration.GetSection(nameof(AppSettings)));
-            
-            services.Configures(Configuration.GetSection(nameof(Links)));
 
             services.AddFluentValidation();
 

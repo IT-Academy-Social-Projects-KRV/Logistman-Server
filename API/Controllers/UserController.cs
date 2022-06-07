@@ -43,8 +43,9 @@ namespace API.Controllers
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<ActionResult> UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string email)
         {
+            var callbackUrl = Request.GetTypedHeaders().Referer.ToString();
             var userId = await _userService.GetUserIdByEmailAsync(email);
-            await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId);
+            await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId, callbackUrl);
             return Ok();
         }
 
