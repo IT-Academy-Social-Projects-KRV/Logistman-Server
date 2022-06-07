@@ -23,6 +23,7 @@ namespace Core.Services
         private readonly AppSettings _appSettings;
         private readonly Links _links;
         private readonly IRepository<User> _userRepository;
+
         public EmailService(
             ITemplateHelper templateHelper,
             UserManager<User> userManager,
