@@ -225,6 +225,9 @@
   <data name="CarIsNotVerified" xml:space="preserve">
     <value>Car is not verified!</value>
   </data>
+  <data name="FailedSendEmail" xml:space="preserve">
+    <value>Failed sending account confirmation email!</value>
+  </data>
   <data name="InvalidOrder" xml:space="preserve">
     <value>Invalid point's order!</value>
   </data>
