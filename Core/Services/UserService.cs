@@ -109,5 +109,14 @@ namespace Core.Services
                 paginatedUserList.TotalPages, 
                 paginatedUserList.TotalItems);
         }
+
+        public async Task<string> GetUserIdByEmailAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            ExceptionMethods.UserNullCheck(user);
+
+            return user.Id;
+        }
     }
 }

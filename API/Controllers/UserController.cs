@@ -37,6 +37,15 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpPost("user-edit-info")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<ActionResult> UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string email)
+        {
+            var userId = await _userService.GetUserIdByEmailAsync(email);
+            await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId);
+            return Ok();
+        }
+
         [HttpGet("user-full-name")]
         public async Task<ActionResult<UserFullNameDTO>> GetUserFullName()
         {
