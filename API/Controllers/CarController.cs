@@ -32,19 +32,19 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public ActionResult GetAllUserCars()
+        public async Task<ActionResult> GetAllUserCarsAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var userCars = _carService.GetAllUserCars(userId);
+            var userCars = await _carService.GetAllUserCarsAsync(userId, paginationFilter);
             return Ok(userCars);
         }
 
         [HttpGet("user-verified")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public ActionResult GetUserVerified()
+        public async Task<ActionResult> GetUserVerifiedAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var verifiedCars = _carService.GetVerifiedByUserId(userId);
+            var verifiedCars = await _carService.GetVerifiedByUserIdAsync(userId, paginationFilter);
 
             return Ok(verifiedCars);
         }

@@ -47,9 +47,9 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.Logist, IdentityRoleNames.Admin)]
-        public async Task<ActionResult> GetAllUsersAsync()
+        public async Task<ActionResult> GetAllUsersAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
-            return Ok(await _userService.GetAllUsersAsync());
+            return Ok(await _userService.GetAllUsersAsync(paginationFilter));
         }
     }
 }

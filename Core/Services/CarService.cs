@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,6 +8,7 @@ using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
+using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
@@ -56,12 +56,22 @@ namespace Core.Services
             return _mapper.Map<CarDTO>(car);
         }
 
-        public List<CarDTO> GetAllUserCars(string userId)
+        public async Task<PaginatedList<CarDTO>> GetAllUserCarsAsync(string userId, PaginationFilterDTO paginationFilter)
         {
-            var userCars = _carRepository
-                .GetIQuaryableBySpec(new CarSpecification.GetByUserId(userId));
+            var userCars = await _carRepository.ListAsync(new CarSpecification.GetByUserId(userId));
 
-            return _mapper.ProjectTo<CarDTO>(userCars).ToList();
+            var paginatedUserCars = PaginatedList<Car>.Paginate(userCars, paginationFilter);
+
+            if (paginatedUserCars == null)
+            {
+                return null;
+            }
+
+            return new PaginatedList<CarDTO>(
+                _mapper.Map<List<CarDTO>>(paginatedUserCars.Items), 
+                paginationFilter.PageNumber, 
+                paginatedUserCars.TotalPages,
+                paginatedUserCars.TotalItems);
         }
 
         private async Task<bool> IsCarExist(Car newCar)
@@ -82,12 +92,23 @@ namespace Core.Services
             return car.IsVerified;
         }
 
-        public List<CarDTO> GetVerifiedByUserId(string userId)
+        public async Task<PaginatedList<CarDTO>> GetVerifiedByUserIdAsync(string userId, PaginationFilterDTO paginationFilter)
         {
-            var verifiedCars = _carRepository
-                .GetIQuaryableBySpec(new CarSpecification.GetVerifiedByUserId(userId));
+            var verifiedCars = await _carRepository
+                .ListAsync(new CarSpecification.GetVerifiedByUserId(userId));
 
-            return _mapper.ProjectTo<CarDTO>(verifiedCars).ToList();
+            var paginatedVerifiedCars = PaginatedList<Car>.Paginate(verifiedCars, paginationFilter);
+
+            if (paginatedVerifiedCars == null)
+            {
+                return null;
+            }
+
+            return new PaginatedList<CarDTO>(
+                _mapper.Map<List<CarDTO>>(paginatedVerifiedCars.Items),
+                paginationFilter.PageNumber,
+                paginatedVerifiedCars.TotalPages,
+                paginatedVerifiedCars.TotalItems);
         }
     }
 }
