@@ -39,7 +39,7 @@ namespace API.Controllers
 
         [HttpPost("user-edit-info")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo, string email)
+        public async Task<ActionResult> UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string email)
         {
             var userId = await _userService.GetUserIdByEmailAsync(email);
             await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId);
