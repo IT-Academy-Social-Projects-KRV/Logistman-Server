@@ -5,6 +5,7 @@ using Core.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Core.Constants;
 using Core.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Controllers
 {
@@ -32,8 +33,9 @@ namespace API.Controllers
         [HttpPost("edit-info")]
         public async Task<ActionResult> UserEditProfileInfo(UserEditProfileInfoDTO userEditProfileInfo)
         {
+            var callbackUrl = Request.GetTypedHeaders().Referer.ToString();
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId);
+            await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId, callbackUrl);
             return Ok();
         }
 
@@ -41,8 +43,9 @@ namespace API.Controllers
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<ActionResult> UserEditProfileInfoAsync(UserEditProfileInfoDTO userEditProfileInfo, string email)
         {
+            var callbackUrl = Request.GetTypedHeaders().Referer.ToString();
             var userId = await _userService.GetUserIdByEmailAsync(email);
-            await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId);
+            await _userService.UserEditProfileInfoAsync(userEditProfileInfo, userId, callbackUrl);
             return Ok();
         }
 

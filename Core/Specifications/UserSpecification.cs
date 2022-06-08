@@ -12,5 +12,12 @@ namespace Core.Specifications
                 Query.Where(u => u.Email == email);
             }
         }
+        internal class GetByConfirmationToken : Specification<User>, ISingleResultSpecification<User>
+        {
+            public GetByConfirmationToken(string token)
+            {
+                Query.Where(u => u.ConfirmationEmailToken == token);
+            }
+        }
     }
 }

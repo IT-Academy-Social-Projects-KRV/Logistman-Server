@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.DTO;
+using Core.Entities.RefreshTokenEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
+using Core.Interfaces;
 using Core.Interfaces.CustomService;
+using Core.Resources;
+using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
 using System.Threading.Tasks;
-using Core.Resources;
-using Core.Interfaces;
-using Core.Entities.RefreshTokenEntity;
-using Core.Specifications;
-using Core.Constants;
 
 namespace Core.Services
 {
@@ -23,6 +23,7 @@ namespace Core.Services
         private readonly IOfferRoleService _offerRoleService;
         private readonly IUserService _userService;
         private readonly IRepository<RefreshToken> _refreshTokenRepository;
+        private readonly IEmailService _emailService;
 
         public AuthenticationService(
             UserManager<User> userManager,
@@ -31,7 +32,8 @@ namespace Core.Services
             IJwtService jwtService,
             IOfferRoleService offerRoleService,
             IUserService userService,
-            IRepository<RefreshToken> refreshTokenRepository)
+            IRepository<RefreshToken> refreshTokenRepository,
+            IEmailService emailService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -40,9 +42,10 @@ namespace Core.Services
             _offerRoleService = offerRoleService;
             _userService = userService;
             _refreshTokenRepository = refreshTokenRepository;
+            _emailService = emailService;
         }
 
-        public async Task RegisterAsync(UserRegistrationDTO userData)
+        public async Task RegisterAsync(UserRegistrationDTO userData, string callbackUrl)
         {
             var user = _mapper.Map<User>(userData);
             var createUserResult = await _userManager.CreateAsync(user, userData.Password);
@@ -57,6 +60,8 @@ namespace Core.Services
             var addToRoleResult = await _userManager.AddToRoleAsync(user, userRole.Name);
 
             ExceptionMethods.CheckIdentityResult(addToRoleResult);
+
+            await _emailService.SendConfirmationEmailAsync(user, callbackUrl);
         }
 
         public async Task<UserAutorizationDTO> LoginAsync(UserLoginDTO data)

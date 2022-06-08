@@ -1,19 +1,18 @@
-﻿using System.Net;
-using Core.Resources;
-using Core.Entities.UserEntity;
+﻿using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
+using Core.Entities.GoodCategoryEntity;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
-using Core.Entities.CarCategoryEntity;
-using Core.Entities.GoodCategoryEntity;
 using Core.Entities.RatingEntity;
+using Core.Entities.RefreshTokenEntity;
 using Core.Entities.ReportEntity;
 using Core.Entities.RoleEntity;
-using Core.Entities.RefreshTokenEntity;
-using Microsoft.AspNetCore.Identity;
-using System.Text;
 using Core.Entities.TripEntity;
-using Core.DTO;
+using Core.Entities.UserEntity;
+using Core.Resources;
+using Microsoft.AspNetCore.Identity;
+using System.Net;
+using System.Text;
 
 namespace Core.Exceptions
 {

@@ -1,6 +1,7 @@
 using API.Middlewares;
 using API.ServiceExtension;
 using Core;
+using Core.Helpers;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,8 @@ namespace API
 
             services.AddCustomServices();
 
+            services.Configures(Configuration.GetSection(nameof(AppSettings)));
+
             services.AddFluentValidation();
 
             services.AddAutoMapper();
@@ -42,6 +45,8 @@ namespace API
             services.ConfigJwtOptions(Configuration);
 
             services.AddJwtAuthentication(Configuration);
+
+            services.AddMvcCore().AddRazorViewEngine();
 
             services.AddSwagger();
         }

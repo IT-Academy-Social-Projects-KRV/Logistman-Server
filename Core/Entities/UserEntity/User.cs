@@ -16,6 +16,8 @@ namespace Core.Entities.UserEntity
         public string Surname { get; set; }
         public float? Rating  { get; set; }
         public bool HasCar { get; set; }
+        public string ConfirmationEmailToken { get; set; }
+        public DateTimeOffset? ConfirmationEmailTokenExpirationDate { get; set; }
         public DateTimeOffset RegistrationDate { get; set; } = DateTimeOffset.UtcNow;
         public ICollection<Car> Cars { get; set; }
         public ICollection<Offer> Offers { get; set; }
