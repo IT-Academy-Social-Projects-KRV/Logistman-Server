@@ -64,7 +64,7 @@ namespace Core.Services
         {
             var client = new SendGridClient(_appSettings.SendGridKey);
             var from = new EmailAddress(
-                _appSettings.SendGridEmail, 
+                _appSettings.SendGridEmail,
                 _appSettings.SendGridSenderName);
             var to = new EmailAddress(email, email);
             var plainTextContent = "";
@@ -96,7 +96,7 @@ namespace Core.Services
                 if (!confirm.Succeeded)
                 {
                     throw new HttpException(
-                        ErrorMessages.FailedSendEmail, 
+                        ErrorMessages.FailedSendEmail,
                         HttpStatusCode.BadRequest);
                 }
 
@@ -108,7 +108,7 @@ namespace Core.Services
             else
             {
                 throw new HttpException(
-                    ErrorMessages.FailedSendEmail, 
+                    ErrorMessages.FailedSendEmail,
                     HttpStatusCode.BadRequest);
             }
         }
