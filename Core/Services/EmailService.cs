@@ -39,7 +39,7 @@ namespace Core.Services
         {
             user.ConfirmationEmailToken = await _userManager
                 .GenerateEmailConfirmationTokenAsync(user);
-            user.ConfirmationEmailTokenExpirationDate = DateTimeOffset.UtcNow + TimeSpan.FromDays(7);
+            user.ConfirmationEmailTokenExpirationDate = DateTimeOffset.UtcNow + TimeSpan.FromDays(1);
 
             await _userManager.UpdateAsync(user);
 
