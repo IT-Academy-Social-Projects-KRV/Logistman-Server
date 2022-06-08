@@ -43,27 +43,29 @@ namespace Core.Services
 
             await _userManager.UpdateAsync(user);
 
+            if (!callbackUrl.Contains("swagger"))
+            {
                 var message = await _templateHelper
-                .GetTemplateHtmlAsStringAsync<ConfirmationEmailDTO>(
-                "ConfirmationEmail",
-                new ConfirmationEmailDTO
-                {
-                    Name = user.Name,
-                    Surname = user.Surname,
-                    Link = callbackUrl + "confirm-email/" +
-                           user.ConfirmationEmailToken + "/" 
-                });
+            .GetTemplateHtmlAsStringAsync<ConfirmationEmailDTO>(
+            "ConfirmationEmail",
+            new ConfirmationEmailDTO
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Link = callbackUrl + "confirm-email/" +
+                       user.ConfirmationEmailToken + "/"
+            });
 
-                if (!callbackUrl.Contains("swagger"))
-                {
-                    await SendEmailAsync(user.Email, "Confirm your account", message);
-                }
+                await SendEmailAsync(user.Email, "Confirm your account", message);
+            }
         }
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             var client = new SendGridClient(_appSettings.SendGridKey);
-            var from = new EmailAddress(_appSettings.SendGridEmail, _appSettings.SendGridSenderName);
+            var from = new EmailAddress(
+                _appSettings.SendGridEmail, 
+                _appSettings.SendGridSenderName);
             var to = new EmailAddress(email, email);
             var plainTextContent = "";
             var msg = MailHelper
@@ -74,7 +76,7 @@ namespace Core.Services
             if (!result.IsSuccessStatusCode)
             {
                 throw new HttpException(
-                    ErrorMessages.FailedSendEmail, 
+                    ErrorMessages.FailedSendEmail,
                     HttpStatusCode.InternalServerError);
             }
         }
@@ -88,11 +90,14 @@ namespace Core.Services
 
             if (user.ConfirmationEmailTokenExpirationDate > DateTimeOffset.UtcNow)
             {
-                var confirm = await _userManager.ConfirmEmailAsync(user, request.Token);
+                var confirm = await _userManager
+                    .ConfirmEmailAsync(user, request.Token);
 
                 if (!confirm.Succeeded)
                 {
-                   throw new HttpException(ErrorMessages.FailedSendEmail, HttpStatusCode.BadRequest);
+                    throw new HttpException(
+                        ErrorMessages.FailedSendEmail, 
+                        HttpStatusCode.BadRequest);
                 }
 
                 user.ConfirmationEmailToken = null;
@@ -102,7 +107,9 @@ namespace Core.Services
             }
             else
             {
-                throw new HttpException(ErrorMessages.FailedSendEmail, HttpStatusCode.BadRequest);
+                throw new HttpException(
+                    ErrorMessages.FailedSendEmail, 
+                    HttpStatusCode.BadRequest);
             }
         }
     }
