@@ -56,7 +56,7 @@ namespace Core.Services
                        user.ConfirmationEmailToken + "/"
             });
 
-                await SendEmailAsync(user.Email, "Confirm your account", message);
+                await SendEmailAsync(user.Email, "Confirm your email", message);
             }
         }
 
@@ -65,7 +65,8 @@ namespace Core.Services
             var client = new SendGridClient(_appSettings.SendGridKey);
             var from = new EmailAddress(
                 _appSettings.SendGridEmail,
-                _appSettings.SendGridSenderName);
+                _appSettings.SendGridSenderName
+                );
             var to = new EmailAddress(email, email);
             var plainTextContent = "";
             var msg = MailHelper
