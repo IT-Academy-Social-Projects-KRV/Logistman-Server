@@ -111,34 +111,22 @@ namespace Core.Services
                 paginatedVerifiedCars.TotalItems);
         }
         
-        public async Task VerifyAsync(string vin)
+        public async Task VerifyAsync(VinDTO vinDTO)
         {
             var car = await _carRepository.GetBySpecAsync(
-                new CarSpecification.GetWithVin(vin));
+                new CarSpecification.GetWithVin(vinDTO.vin));
             ExceptionMethods.CarNullCheck(car);
             car.IsVerified = true;
             await _carRepository.UpdateAsync(car);
         }
 
-        public async Task UnverifyAsync(string vin)
+        public async Task UnverifyAsync(VinDTO vinDTO)
         {
             var car = await _carRepository.GetBySpecAsync(
-                new CarSpecification.GetWithVin(vin));
+                new CarSpecification.GetWithVin(vinDTO.vin));
             ExceptionMethods.CarNullCheck(car);
             car.IsVerified = false;
             await _carRepository.UpdateAsync(car);
-        }
-
-        public async Task DeleteAsync(string vin)
-        {
-            var car = await _carRepository.GetBySpecAsync(
-                new CarSpecification.GetWithVin(vin));
-            ExceptionMethods.CarNullCheck(car);
-            if (car.IsVerified)
-            {
-                throw new HttpException(ErrorMessages.NotEnoughPermissions, HttpStatusCode.MethodNotAllowed);
-            }
-            await _carRepository.DeleteAsync(car);
         }
     }
 }

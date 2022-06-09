@@ -11,8 +11,7 @@ namespace Core.Interfaces.CustomService
         Task<PaginatedList<CarDTO>> GetAllUserCarsAsync(string userId, PaginationFilterDTO paginationFilter);
         Task<bool> CheckIsUserVerifiedByIdsAsync(int carId, string userId);
         Task<PaginatedList<CarDTO>> GetVerifiedByUserIdAsync(string userId, PaginationFilterDTO paginationFilter);
-        Task VerifyAsync(string vin);
-        Task UnverifyAsync(string vin);
-        Task DeleteAsync(string vin);
+        Task VerifyAsync(VinDTO vinDTO);
+        Task UnverifyAsync(VinDTO vinDTO);
     }
 }

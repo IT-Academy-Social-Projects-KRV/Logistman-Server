@@ -60,25 +60,17 @@ namespace API.Controllers
         
         [HttpPost("verify")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<OkResult> VerifyCarAsync(string vin)
+        public async Task<OkResult> VerifyCarAsync(VinDTO vinDTO)
         {
-            await _carService.VerifyAsync(vin);
+            await _carService.VerifyAsync(vinDTO);
             return Ok();
         }
         
         [HttpPost("unverify")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<OkResult> UnverifyCarAsync(string vin)
+        public async Task<OkResult> UnverifyCarAsync(VinDTO vinDTO)
         {
-            await _carService.UnverifyAsync(vin);
-            return Ok();
-        }
-
-        [HttpPost("delete")]
-        [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<OkResult> DeleteCarAsync(string vin)
-        {
-            await _carService.DeleteAsync(vin);
+            await _carService.UnverifyAsync(vinDTO);
             return Ok();
         }
     }
