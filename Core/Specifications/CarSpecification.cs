@@ -16,6 +16,14 @@ namespace Core.Specifications
             }
         }
 
+        internal class GetWithVin : Specification<Car>, ISingleResultSpecification<Car>
+        {
+            public GetWithVin(string vin)
+            {
+                Query.Where(c => c.Vin.Equals(vin));
+            }
+        }
+
         internal class GetByUserId : Specification<Car>
         {
             public GetByUserId(string userId)
