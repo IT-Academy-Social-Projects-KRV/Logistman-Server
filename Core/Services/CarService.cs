@@ -110,5 +110,23 @@ namespace Core.Services
                 paginatedVerifiedCars.TotalPages,
                 paginatedVerifiedCars.TotalItems);
         }
+        
+        public async Task VerifyAsync(VinDTO vinDTO)
+        {
+            var car = await _carRepository.GetBySpecAsync(
+                new CarSpecification.GetWithVin(vinDTO.vin));
+            ExceptionMethods.CarNullCheck(car);
+            car.IsVerified = true;
+            await _carRepository.UpdateAsync(car);
+        }
+
+        public async Task UnverifyAsync(VinDTO vinDTO)
+        {
+            var car = await _carRepository.GetBySpecAsync(
+                new CarSpecification.GetWithVin(vinDTO.vin));
+            ExceptionMethods.CarNullCheck(car);
+            car.IsVerified = false;
+            await _carRepository.UpdateAsync(car);
+        }
     }
 }
