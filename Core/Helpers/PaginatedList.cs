@@ -24,11 +24,9 @@ namespace Core.Helpers
             Items = items;
         }
 
-        public static PaginatedList<TEntity> Paginate(
-            IList<TEntity> source, PaginationFilterDTO paginationFilter)
+        public static PaginatedList<TEntity> Evaluate(
+            List<TEntity> items, PaginationFilterDTO paginationFilter, int count)
         {
-            var count = source.Count();
-
             if (count == 0)
             {
                 return null;
@@ -41,11 +39,7 @@ namespace Core.Helpers
                 paginationFilter.PageNumber = totalPages;
             }
 
-            var items = source
-                .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
-                .Take(paginationFilter.PageSize);
-
-            return new PaginatedList<TEntity>(items.ToList(), paginationFilter.PageNumber, totalPages, count);
+            return new PaginatedList<TEntity>(items, paginationFilter.PageNumber, totalPages, count);
         }
     }
 }

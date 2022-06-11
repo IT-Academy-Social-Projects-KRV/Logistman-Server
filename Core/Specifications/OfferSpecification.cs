@@ -1,4 +1,5 @@
 ﻿using Ardalis.Specification;
+using Core.DTO;
 using Core.Entities.OfferEntity;
 
 namespace Core.Specifications
@@ -15,15 +16,18 @@ namespace Core.Specifications
                      .Include(offer => offer.GoodCategory);
             }
         }
-        
+
         internal class GetByUserId: Specification<Offer>
         {
-            public GetByUserId(string userId)
+            public GetByUserId(string userId, PaginationFilterDTO paginationFilter)
             {
-                Query.Where(o => o.OfferCreatorId == userId)
+                Query
+                    .Where(o => o.OfferCreatorId == userId)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
-                    .Include(offer => offer.GoodCategory);
+                    .Include(offer => offer.GoodCategory)
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize);
             }
         }
     }

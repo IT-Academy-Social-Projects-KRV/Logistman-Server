@@ -84,20 +84,15 @@ namespace Core.Services
 
         public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter)
         {
-            var offerList = await _offerRepository.ListAsync(new OfferSpecification.GetByUserId(userId));
+            var offerList = await _offerRepository
+                .ListAsync(
+                new OfferSpecification.GetByUserId(userId, paginationFilter));
 
-            var paginatedOfferList = PaginatedList<Offer>.Paginate(offerList, paginationFilter);
-            
-            if (paginatedOfferList == null)
-            {
-                return null;
-            }
+            var offerListCount = await _offerRepository
+                .CountAsync(new OfferSpecification.GetByUserId(userId, paginationFilter));
 
-            return new PaginatedList<OfferPreviewDTO>(
-                _mapper.Map<List<OfferPreviewDTO>>(paginatedOfferList.Items), 
-                paginationFilter.PageNumber,
-                paginatedOfferList.TotalPages,
-                paginatedOfferList.TotalItems);
+            return PaginatedList<OfferPreviewDTO>.Evaluate(
+                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
         }
     }
 }

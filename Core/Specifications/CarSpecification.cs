@@ -1,4 +1,5 @@
 ﻿using Ardalis.Specification;
+using Core.DTO;
 using Core.Entities.CarEntity;
 
 namespace Core.Specifications
@@ -18,9 +19,13 @@ namespace Core.Specifications
 
         internal class GetByUserId : Specification<Car>
         {
-            public GetByUserId(string userId)
+            public GetByUserId(string userId, PaginationFilterDTO paginationFilter)
             {
-                Query.Where(c => c.UserId == userId).Include(c => c.Category);
+                Query
+                    .Where(c => c.UserId == userId)
+                    .Include(c => c.Category)
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize);
             }
         }
 
