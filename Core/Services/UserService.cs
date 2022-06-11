@@ -124,9 +124,11 @@ namespace Core.Services
                 userIds.Add(userRole.UserId);
             }
 
-            var userList = await _userRepository.ListAsync(new UserSpecification.GetByIds(userIds));
+            var userList = await _userRepository
+                .ListAsync(new UserSpecification.GetByIds(userIds));
 
-            return PaginatedList<UserDTO>.Evaluate(_mapper.Map<List<UserDTO>>(userList), paginationFilter, userRolesCount);
+            return PaginatedList<UserDTO>
+                .Evaluate(_mapper.Map<List<UserDTO>>(userList), paginationFilter, userRolesCount);
         }
 
         public async Task<string> GetUserIdByEmailAsync(string email)

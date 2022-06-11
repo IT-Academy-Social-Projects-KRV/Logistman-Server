@@ -14,7 +14,8 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByConfirmationToken : Specification<User>, ISingleResultSpecification<User>
+        internal class GetByConfirmationToken : 
+            Specification<User>, ISingleResultSpecification<User>
         {
             public GetByConfirmationToken(string token)
             {
