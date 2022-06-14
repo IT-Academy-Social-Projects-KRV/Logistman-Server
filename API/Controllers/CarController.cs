@@ -41,10 +41,10 @@ namespace API.Controllers
 
         [HttpGet("user-verified")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<ActionResult> GetUserVerifiedAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        public async Task<ActionResult> GetUserVerifiedAsync()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var verifiedCars = await _carService.GetVerifiedByUserIdAsync(userId, paginationFilter);
+            var verifiedCars = await _carService.GetVerifiedByUserIdAsync(userId);
 
             return Ok(verifiedCars);
         }

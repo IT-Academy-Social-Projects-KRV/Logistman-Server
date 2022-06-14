@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Core.Constants;
 using Core.DTO;
+using Core.Constants;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Helpers;
@@ -9,30 +9,36 @@ using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Core.Services
 {
     public class UserService : IUserService
     {
         private readonly IRepository<User> _userRepository;
+        private readonly IRepository<IdentityUserRole<string>> _userRoleRepository;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailService _emailService;
 
         public UserService(
             IRepository<User> userRepository,
+            IRepository<IdentityUserRole<string>> userRoleRepository,
             IMapper mapper,
             UserManager<User> userManager,
+            RoleManager<IdentityRole> roleManager,
             IEmailService emailService)
         {
             _userRepository = userRepository;
+            _userRoleRepository = userRoleRepository;
             _mapper = mapper;
             _userManager = userManager;
+            _roleManager = roleManager;
             _emailService = emailService;
         }
 
@@ -101,20 +107,28 @@ namespace Core.Services
 
         public async Task<PaginatedList<UserDTO>> GetAllUsersAsync(PaginationFilterDTO paginationFilter)
         {
-            var usersList = await _userManager.GetUsersInRoleAsync(IdentityRoleNames.User.ToString());
+            var roleId = (await _roleManager.FindByNameAsync(IdentityRoleNames.User.ToString())).Id;
 
-            var paginatedUserList = PaginatedList<User>.Paginate(usersList, paginationFilter);
+            var userRoles = await _userRoleRepository
+                .ListAsync(
+                new IdentityUserRoleSpecification
+                .GetUserRoleByRoleId(roleId, paginationFilter));
 
-            if (paginatedUserList == null)
+            var userRolesCount = await _userRoleRepository
+                .CountAsync(new IdentityUserRoleSpecification.GetUserRoleByRoleId(roleId, paginationFilter));
+
+            List<string> userIds = new List<string>();
+
+            foreach(var userRole in userRoles)
             {
-                return null;
+                userIds.Add(userRole.UserId);
             }
 
-            return new PaginatedList<UserDTO>(
-                _mapper.Map<List<UserDTO>>(paginatedUserList.Items), 
-                paginationFilter.PageNumber, 
-                paginatedUserList.TotalPages, 
-                paginatedUserList.TotalItems);
+            var userList = await _userRepository
+                .ListAsync(new UserSpecification.GetByIds(userIds));
+
+            return PaginatedList<UserDTO>
+                .Evaluate(_mapper.Map<List<UserDTO>>(userList), paginationFilter, userRolesCount);
         }
 
         public async Task<string> GetUserIdByEmailAsync(string email)

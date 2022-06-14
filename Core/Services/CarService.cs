@@ -56,22 +56,18 @@ namespace Core.Services
             return _mapper.Map<CarDTO>(car);
         }
 
-        public async Task<PaginatedList<CarDTO>> GetAllUserCarsAsync(string userId, PaginationFilterDTO paginationFilter)
+        public async Task<PaginatedList<CarDTO>> GetAllUserCarsAsync(
+            string userId, PaginationFilterDTO paginationFilter)
         {
-            var userCars = await _carRepository.ListAsync(new CarSpecification.GetByUserId(userId));
+            var userCars = await _carRepository
+                .ListAsync(
+                new CarSpecification.GetByUserId(userId, paginationFilter));
 
-            var paginatedUserCars = PaginatedList<Car>.Paginate(userCars, paginationFilter);
+            var userCarsCount = await _carRepository
+                .CountAsync(new CarSpecification.GetByUserId(userId, paginationFilter));
 
-            if (paginatedUserCars == null)
-            {
-                return null;
-            }
-
-            return new PaginatedList<CarDTO>(
-                _mapper.Map<List<CarDTO>>(paginatedUserCars.Items), 
-                paginationFilter.PageNumber, 
-                paginatedUserCars.TotalPages,
-                paginatedUserCars.TotalItems);
+            return PaginatedList<CarDTO>.Evaluate(
+                _mapper.Map<List<CarDTO>>(userCars), paginationFilter, userCarsCount);
         }
 
         private async Task<bool> IsCarExist(Car newCar)
@@ -92,23 +88,12 @@ namespace Core.Services
             return car.IsVerified;
         }
 
-        public async Task<PaginatedList<CarDTO>> GetVerifiedByUserIdAsync(string userId, PaginationFilterDTO paginationFilter)
+        public async Task<List<CarDTO>> GetVerifiedByUserIdAsync(string userId)
         {
             var verifiedCars = await _carRepository
                 .ListAsync(new CarSpecification.GetVerifiedByUserId(userId));
 
-            var paginatedVerifiedCars = PaginatedList<Car>.Paginate(verifiedCars, paginationFilter);
-
-            if (paginatedVerifiedCars == null)
-            {
-                return null;
-            }
-
-            return new PaginatedList<CarDTO>(
-                _mapper.Map<List<CarDTO>>(paginatedVerifiedCars.Items),
-                paginationFilter.PageNumber,
-                paginatedVerifiedCars.TotalPages,
-                paginatedVerifiedCars.TotalItems);
+            return _mapper.Map<List<CarDTO>>(verifiedCars);
         }
         
         public async Task VerifyAsync(VinDTO vinDTO)
