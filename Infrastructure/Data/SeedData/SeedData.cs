@@ -9,6 +9,7 @@ using Core.Entities.RoleEntity;
 using Core.Entities.UserEntity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
 using System;
 
 namespace Infrastructure.Data.SeedData
@@ -345,202 +346,222 @@ namespace Infrastructure.Data.SeedData
         #region SeedPoint
 
         public static void SeedPoint(ModelBuilder builder) =>
-           builder.Entity<Point>().HasData(
-               new Point()
+           builder.Entity<PointData>().HasData(
+               new PointData()
                {
                    Id = 1,
                    Longitude = 26.527293,
                    Latitude = 50.328792,
+                   Location = new Point(26.527293, 50.328792) { SRID = 4326},
                    Address = "місто Острог, Рівненська область, вулиця Східна",
                    Settlement = "Острог",
                    Region = "Рівненська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 2,
                    Longitude = 26.257569,
                    Latitude = 50.663542,
+                   Location = new Point(26.257569, 50.663542) { SRID = 4326 },
                    Address = "місто Шпанів, Рівненська область, вулиця Вереснева",
                    Settlement = "Шпанів",
                    Region = " Рівненська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 3,
                    Longitude = 25.386282,
                    Latitude = 50.723971,
+                   Location = new Point(25.386282, 50.723971) { SRID = 4326 },
                    Address = "місто Луцьк, Волинська область, вулиця Хрещата",
                    Settlement = "Луцьк",
                    Region = "Волинська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 4,
                    Longitude = 35.0215734,
                    Latitude = 48.46232227,
+                   Location = new Point(35.0215734, 48.46232227) { SRID = 4326 },
                    Address = "місто Дніпро, Дніпропетровська область, вулиця Юрія Савченко",
                    Settlement = "Дніпро",
                    Region = "Дніпропетровська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 5,
                    Longitude = 37.3148804,
                    Latitude = 47.20073235,
+                   Location = new Point(37.3148804, 47.20073235) { SRID = 4326 },
                    Address = "місто Нікольське, Донецька область, вулиця Пушкіна",
                    Settlement = "Нікольське",
                    Region = "Донецька область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 6,
                    Longitude = 36.801641,
                    Latitude = 47.779212,
+                   Location = new Point(36.801641, 47.779212) { SRID = 4326 },
                    Address = "Макаровка, Донецька область",
                    Settlement = "Макаровка",
                    Region = "Донецька область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 7,
                    Longitude = 35.660035,
                    Latitude = 49.672878,
+                   Location = new Point(35.660035, 49.672878) { SRID = 4326 },
                    Address = "Гаврилівка, Харківська область, вулиця Коцюбинського",
                    Settlement = "Дніпро",
                    Region = "Харківська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 8,
                    Longitude = 35.513638,
                    Latitude = 49.371446,
+                   Location = new Point(35.513638, 49.371446) { SRID = 4326 },
                    Address = "Ульянівка, Харківська область",
                    Settlement = "Ульянівка",
                    Region = "Харківська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 9,
                    Longitude = 36.980500,
                    Latitude = 48.633740,
+                   Location = new Point(36.980500, 48.633740) { SRID = 4326 },
                    Address = "Новодонецьк, Донецька область, вулиця Благовісна",
                    Settlement = "Новодонецьк",
                    Region = "Донецька область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 10,
                    Longitude = 35.018729,
                    Latitude = 48.460257,
+                   Location = new Point(35.018729, 48.460257) { SRID = 4326 },
                    Address = "місто Дніпро, Дніпропетровська область, вулиця Юрія Савченко",
                    Settlement = "Дніпро",
                    Region = "Дніпропетровська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 11,
-                   Longitude = 4.0253361,
+                   Longitude = 34.0253361,
                    Latitude = 49.8468949,
+                   Location = new Point(34.0253361, 49.8468949) { SRID = 4326 },
                    Address = "місто Львів, Львівська область, просп. Вячеслава Черновола, 11",
                    Settlement = "Львів",
                    Region = "Львівська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 12,
                    Longitude = 22.317773,
                    Latitude = 48.610623,
+                   Location = new Point(22.317773, 48.610623) { SRID = 4326 },
                    Address = "місто Ужгород, Закарпатская область, вулиця Шишкіна, 1",
                    Settlement = "Ужгород",
                    Region = "Закарпатская область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 13,
                    Longitude = 26.703000,
                    Latitude = 48.784157,
+                   Location = new Point(26.703000, 48.784157) { SRID = 4326 },
                    Address = "Маків, Хмельницька  область, провулок Прорізний",
                    Settlement = "Маків",
                    Region = "Хмельницька  область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 14,
                    Longitude = 28.494244,
                    Latitude = 49.232585,
+                   Location = new Point(28.494244, 49.232585) { SRID = 4326 },
                    Address = "місто Вінниця, Вінницька область, вулиця Братславська",
                    Settlement = "Вінниця",
                    Region = "Вінницька область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 15,
                    Longitude = 32.00718275,
                    Latitude = 47.032940848,
+                   Location = new Point(32.00718275, 47.032940848) { SRID = 4326 },
                    Address = "місто Миколаїв, Миколаївська область, вулиця Слов'янська",
                    Settlement = "Миколаїв",
                    Region = "Миколаївська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 16,
                    Longitude = 32.030367,
                    Latitude = 47.044604,
+                   Location = new Point(32.030367, 47.044604) { SRID = 4326 },
                    Address = "Центральний пайон, місто Миколаїв, Миколаївська область, вулиця Дачна",
                    Settlement = "Миколаїв",
                    Region = "Миколаївська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 17,
                    Longitude = 32.158811,
                    Latitude = 48.061315,
+                   Location = new Point(32.158811, 48.061315) { SRID = 4326 },
                    Address = "Бобринець, Кіровоградська  область, вулиця Орджонікідзе",
                    Settlement = "Бобринець",
                    Region = "Кіровоградська  область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 18,
                    Longitude = 31.561633,
                    Latitude = 51.459840,
+                   Location = new Point(31.561633, 51.459840) { SRID = 4326 },
                    Address = "Горбово, Чернігівська область, 16311",
                    Settlement = "Горбово",
                    Region = "Чернігівська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 19,
                    Longitude = 30.11449580,
                    Latitude = 49.807687087,
+                   Location = new Point(30.11449580, 49.807687087) { SRID = 4326 },
                    Address = "місто Біла церква, Київська область, вулиця Кірова",
                    Settlement = "Біла церква",
                    Region = "Київська область",
                    Order = 0
                },
-               new Point()
+               new PointData()
                {
                    Id = 20,
                    Longitude = 28.649230,
                    Latitude = 50.259730,
+                   Location = new Point(28.649230, 50.259730) { SRID = 4326 },
                    Address = "місто Житомир, Житомирська область, Богунський район",
                    Settlement = "Житомир",
                    Region = "Житомирська область",
