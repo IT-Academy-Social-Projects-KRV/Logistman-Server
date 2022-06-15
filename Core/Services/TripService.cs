@@ -6,6 +6,7 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
+using NetTopologySuite.Geometries;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -48,6 +49,11 @@ namespace Core.Services
             if (!isCarVerified)
             {
                 throw new HttpException(ErrorMessages.CarIsNotVerified, HttpStatusCode.BadRequest);
+            }
+
+            foreach (var point in createTripDTO.Points)
+            {
+                point.Location = new Point(point.Longitude, point.Latitude) { SRID = 4326 };
             }
 
             var trip = _mapper.Map<Trip>(createTripDTO);

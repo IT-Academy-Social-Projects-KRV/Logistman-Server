@@ -20,6 +20,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.16" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.17.0" />
+    <PackageReference Include="ProjNet" Version="2.0.0" />
     <PackageReference Include="SendGrid" Version="9.28.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.17.0" />
     <PackageReference Include="System.Linq" Version="4.3.0" />

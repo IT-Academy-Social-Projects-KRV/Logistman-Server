@@ -1,6 +1,7 @@
 ﻿using Ardalis.Specification;
 using Core.DTO;
 using Core.Entities.OfferEntity;
+using NetTopologySuite.Geometries;
 
 namespace Core.Specifications
 {
@@ -28,6 +29,15 @@ namespace Core.Specifications
                     .Include(offer => offer.GoodCategory)
                     .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
                     .Take(paginationFilter.PageSize);
+            }
+        }
+
+        internal class GetNearTheTrip: Specification<Offer>
+        {
+            public GetNearTheTrip(Point myLocation, double dist)
+            {
+                Query
+                    .Where(offer => offer.Point.Location.IsWithinDistance(myLocation, dist));
             }
         }
     }

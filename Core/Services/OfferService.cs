@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Core.Specifications;
 using Core.Helpers;
 using Core.DTO;
+using NetTopologySuite.Geometries;
 
 namespace Core.Services
 {
@@ -93,6 +94,14 @@ namespace Core.Services
 
             return PaginatedList<OfferPreviewDTO>.Evaluate(
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
+        }
+
+        public async Task<List<Offer>> GetOffersNearByTrip()
+        {
+            var myLoct = new Point(26.513173, 50.329641) { SRID = 4326 };
+            var ofList = await _offerRepository.ListAsync(new OfferSpecification.GetNearTheTrip(myLoct, 200000));
+
+            return ofList;
         }
     }
 }
