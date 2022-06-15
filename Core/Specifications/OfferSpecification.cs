@@ -34,10 +34,13 @@ namespace Core.Specifications
 
         internal class GetNearTheTrip: Specification<Offer>
         {
-            public GetNearTheTrip(Point myLocation, double dist)
+            public GetNearTheTrip(Geometry myLocation, double dist)
             {
                 Query
-                    .Where(offer => offer.Point.Location.IsWithinDistance(myLocation, dist));
+                    .Where(offer => offer.Point.Location.IsWithinDistance(myLocation, dist))
+                    .Include(offer => offer.Point)
+                    .Include(offer => offer.OfferRole)
+                    .Include(offer => offer.GoodCategory);
             }
         }
     }

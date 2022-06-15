@@ -12,6 +12,6 @@ namespace Core.Interfaces.CustomService
         Task CreateOfferAsync(OfferCreateDTO offerCreate, string userId);
         Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId);
         Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter);
-        Task<List<Offer>> GetOffersNearByTrip();
+        Task<List<OfferPreviewDTO>> GetOffersNearRouteAsync(int tripId);
     }
 }

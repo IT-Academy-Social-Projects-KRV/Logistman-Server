@@ -15,6 +15,9 @@ using Core.Specifications;
 using Core.Helpers;
 using Core.DTO;
 using NetTopologySuite.Geometries;
+using Core.Entities.TripEntity;
+using NetTopologySuite;
+using Core.Entities.PointEntity;
 
 namespace Core.Services
 {
@@ -22,6 +25,8 @@ namespace Core.Services
     {
         private readonly IMapper _mapper;
         private readonly IRepository<Offer> _offerRepository;
+        private readonly IRepository<Trip> _tripRepository;
+        private readonly IRepository<PointData> _pointDataRepository;
         private readonly UserManager<User> _userManager;
         private readonly IGoodCategoryService _goodCategoryService;
         private readonly IOfferRoleService _offerRoleService;
@@ -31,6 +36,8 @@ namespace Core.Services
         public OfferService(
             IMapper mapper,
             IRepository<Offer> offerRepository,
+            IRepository<Trip> tripRepository,
+            IRepository<PointData> pointDataRepository,
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryService,
             IOfferRoleService offerRoleService,
@@ -41,6 +48,8 @@ namespace Core.Services
             _offerRoleService = offerRoleService;
             _mapper = mapper;
             _offerRepository = offerRepository;
+            _tripRepository = tripRepository;
+            _pointDataRepository = pointDataRepository;
             _userManager = userManager;
             _goodCategoryService = goodCategoryService;
             _tripService = tripService;
@@ -96,12 +105,25 @@ namespace Core.Services
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
         }
 
-        public async Task<List<Offer>> GetOffersNearByTrip()
+        public async Task<List<OfferPreviewDTO>> GetOffersNearRouteAsync(int routeId)
         {
-            var myLoct = new Point(26.513173, 50.329641) { SRID = 4326 };
-            var ofList = await _offerRepository.ListAsync(new OfferSpecification.GetNearTheTrip(myLoct, 200000));
+            ExceptionMethods.TripNullCheck(await _tripRepository.GetByIdAsync(routeId));
+            var maxRouteDeviationMeters = (await _tripRepository.GetByIdAsync(routeId)).MaxRouteDeviationKm * 1000;
 
-            return ofList;
+            var routPoints = await _pointDataRepository.ListAsync(new PointDataSpecification.GetByRouteId(routeId));
+            var listOfPointsCoordinates = new List<Coordinate>();
+
+            foreach (var point in routPoints)
+            {
+                listOfPointsCoordinates.Add(new Coordinate(point.Longitude, point.Latitude));
+            }
+
+            Coordinate[] routeCoordinates = listOfPointsCoordinates.ToArray();
+            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+            var rout = geometryFactory.CreateLineString(routeCoordinates);
+            var offerList = await _offerRepository.ListAsync(new OfferSpecification.GetNearTheTrip(rout, maxRouteDeviationMeters));
+
+            return _mapper.Map<List<OfferPreviewDTO>>(offerList);
         }
     }
 }
