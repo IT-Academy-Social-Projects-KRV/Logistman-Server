@@ -11,6 +11,5 @@ namespace Core.DTO
         public string Region { get; set; }
         public int Order { get; set; }
         public int? TripId { get; set; }
-        public Point Location { get; set; }
     }
 }

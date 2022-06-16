@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.DTO.TripDTO;
 using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
@@ -93,7 +94,7 @@ namespace Core.Services
             var listOfRouteCoordinates = new List<Coordinate>();
             routPoints.ForEach(x => listOfRouteCoordinates.Add(new Coordinate(x.Longitude, x.Latitude)));
 
-            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: GeodeticSystem.WGS84);
             return geometryFactory.CreateLineString(listOfRouteCoordinates.ToArray());
         }
     }

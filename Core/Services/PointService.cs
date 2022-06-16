@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.DTO;
 using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
@@ -33,7 +34,7 @@ namespace Core.Services
         public async Task<int> CreateAsync(PointDTO pointDTO)
         {
             var point = _mapper.Map<PointData>(pointDTO);
-            point.Location = new Point(pointDTO.Longitude, pointDTO.Latitude) { SRID = 4326 };
+            point.Location = new Point(pointDTO.Longitude, pointDTO.Latitude) { SRID = GeodeticSystem.WGS84 };
             await _pointRepository.AddAsync(point);
 
             return point.Id;
