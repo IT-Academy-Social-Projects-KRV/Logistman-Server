@@ -9,6 +9,8 @@ using Core.Specifications;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Core.DTO.OfferDTO;
+using Core.Entities.OfferEntity;
 
 namespace Core.Services
 {
@@ -18,17 +20,20 @@ namespace Core.Services
         private readonly ICarService _carService;
         private readonly IPointService _pointService;
         private readonly IMapper _mapper;
+        private readonly IRepository<Offer> _offerRepository;
 
         public TripService(
             IRepository<Trip> tripRepository,
             ICarService carService,
             IPointService pointService,
-            IMapper mapper)
+            IMapper mapper,
+            IRepository<Offer> offerRepository)
         {
             _tripRepository = tripRepository;
             _carService = carService;
             _pointService = pointService;
             _mapper = mapper;
+            _offerRepository = offerRepository;
         }
 
         public async Task<bool> CheckIsTripExistsById(int tripId)
@@ -73,6 +78,26 @@ namespace Core.Services
                 throw new HttpException(
                             ErrorMessages.TripIsAlreadyExistsInTheTimeSpace,
                             HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task AddOffersToTripAsync(OffersForTripDTO offersForTrip)
+        {
+            var trip = await _tripRepository.GetByIdAsync(offersForTrip.TripId);
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            foreach (var offerId in offersForTrip.OffersIdList)
+            {
+               var offer = await _offerRepository.GetByIdAsync(offerId);
+
+               ExceptionMethods.OfferNullCheck(offer);
+
+               trip.IsActive = true;
+               offer.RelatedTripId = offersForTrip.TripId;
+
+               await _offerRepository.UpdateAsync(offer);
+               await _tripRepository.UpdateAsync(trip);
             }
         }
     }

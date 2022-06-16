@@ -5,6 +5,7 @@ using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Core.DTO.OfferDTO;
 
 namespace API.Controllers
 {
@@ -31,6 +32,14 @@ namespace API.Controllers
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             await _tripService.CreateTripAsync(createTripDTO, userId);
 
+            return Ok();
+        }
+
+        [HttpPost("add-offers")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<ActionResult> AddOfferToTrip([FromBody] OffersForTripDTO offersForTrip)
+        {
+            await _tripService.AddOffersToTripAsync(offersForTrip);
             return Ok();
         }
     }
