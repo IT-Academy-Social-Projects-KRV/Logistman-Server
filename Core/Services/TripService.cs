@@ -100,5 +100,36 @@ namespace Core.Services
                await _tripRepository.UpdateAsync(trip);
             }
         }
+
+        public async Task ManageOffersTripAsync(OffersForTripDTO offersForTrip)
+        {
+            var trip = await _tripRepository.GetByIdAsync(offersForTrip.TripId);
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            var offers = await _offerRepository
+                .ListAsync(new OfferSpecification
+                    .GetByTripId(offersForTrip.TripId));
+
+            if (offers.Count == 0)
+            {
+                trip.IsActive = false;
+                await _tripRepository.UpdateAsync(trip);
+                return;
+            }
+
+            offersForTrip
+                .OffersIdList
+                .ForEach(offerId => offers
+                    .RemoveAll(x => x.Id == offerId));
+
+            foreach (var offer in offers)
+            {
+                ExceptionMethods.OfferNullCheck(offer);
+
+                offer.Trip = null;
+                await _offerRepository.UpdateAsync(offer);
+            }
+        }
     }
 }

@@ -30,5 +30,16 @@ namespace Core.Specifications
                     .Take(paginationFilter.PageSize);
             }
         }
+
+        internal class GetByTripId : Specification<Offer>
+        {
+            public GetByTripId(int tripId)
+            {
+                Query.Where(o => o.RelatedTripId == tripId)
+                    .Include(offer => offer.Point)
+                    .Include(offer => offer.OfferRole)
+                    .Include(offer => offer.GoodCategory);
+            }
+        }
     }
 }

@@ -49,7 +49,8 @@ namespace Core.Services
         {
             if (offerCreate.Point.TripId != null)
             {
-                var isTripExists = await _tripService.CheckIsTripExistsById((int)offerCreate.Point.TripId);
+                var isTripExists = await _tripService
+                    .CheckIsTripExistsById((int)offerCreate.Point.TripId);
 
                 if (!isTripExists)
                 {
@@ -73,7 +74,8 @@ namespace Core.Services
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
         {
-            var offer = await _offerRepository.GetBySpecAsync(new OfferSpecification.GetById(offerId, userId));
+            var offer = await _offerRepository
+                .GetBySpecAsync(new OfferSpecification.GetById(offerId, userId));
 
             ExceptionMethods.OfferNullCheck(offer);
 
@@ -82,7 +84,9 @@ namespace Core.Services
             return offerInfo;
         }
 
-        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(
+            string userId, 
+            PaginationFilterDTO paginationFilter)
         {
             var offerList = await _offerRepository
                 .ListAsync(
@@ -93,6 +97,13 @@ namespace Core.Services
 
             return PaginatedList<OfferPreviewDTO>.Evaluate(
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
+        }
+
+        public async Task<List<OfferTripDTO>> GetOfferByTripAsync(int tripId)
+        {
+            var offers = await _offerRepository
+                .ListAsync(new OfferSpecification.GetByTripId(tripId));
+            return _mapper.Map<List<OfferTripDTO>>(offers);
         }
     }
 }

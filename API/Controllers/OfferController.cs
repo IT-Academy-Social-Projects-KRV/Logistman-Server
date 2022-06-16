@@ -52,5 +52,13 @@ namespace API.Controllers
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             return Ok(await _offerService.GetUsersOffersAsync(userId, paginationFilter));
         }
+
+        [HttpGet("trip-offers")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<IActionResult> GetOfferByTrip(int tripId)
+        {
+            var offers = await _offerService.GetOfferByTripAsync(tripId);
+            return Ok(offers);
+        }
     }
 }

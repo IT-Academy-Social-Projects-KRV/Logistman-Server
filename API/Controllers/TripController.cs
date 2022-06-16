@@ -42,5 +42,13 @@ namespace API.Controllers
             await _tripService.AddOffersToTripAsync(offersForTrip);
             return Ok();
         }
+
+        [HttpPost("manage-offers")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<ActionResult> ManageOfferTrip([FromBody] OffersForTripDTO offersForTrip)
+        {
+            await _tripService.ManageOffersTripAsync(offersForTrip);
+            return Ok();
+        }
     }
 }

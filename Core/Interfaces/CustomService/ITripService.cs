@@ -9,5 +9,6 @@ namespace Core.Interfaces.CustomService
         Task<bool> CheckIsTripExistsById(int tripId);
         Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId);
         Task AddOffersToTripAsync(OffersForTripDTO offersForTrip);
+        Task ManageOffersTripAsync(OffersForTripDTO offersForTrip);
     }
 }
