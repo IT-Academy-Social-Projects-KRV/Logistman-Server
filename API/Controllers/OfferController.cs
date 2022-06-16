@@ -54,7 +54,7 @@ namespace API.Controllers
         }
 
         [HttpGet("offers-near-route")]
-        [AuthorizeByRole(IdentityRoleNames.User)]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<IActionResult> GetOffersNearRouteAsync(int routeId)
         {
             return Ok(await _offerService.GetOffersNearRouteAsync(routeId));

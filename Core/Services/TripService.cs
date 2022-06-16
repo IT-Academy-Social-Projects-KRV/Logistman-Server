@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using Core.DTO.TripDTO;
+using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
 using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
+using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -16,17 +19,20 @@ namespace Core.Services
     public class TripService : ITripService
     {
         private readonly IRepository<Trip> _tripRepository;
+        private readonly IRepository<PointData> _pointDataRepository;
         private readonly ICarService _carService;
         private readonly IPointService _pointService;
         private readonly IMapper _mapper;
 
         public TripService(
             IRepository<Trip> tripRepository,
+            IRepository<PointData> pointDataRepository,
             ICarService carService,
             IPointService pointService,
             IMapper mapper)
         {
             _tripRepository = tripRepository;
+            _pointDataRepository = pointDataRepository;
             _carService = carService;
             _pointService = pointService;
             _mapper = mapper;
@@ -49,11 +55,6 @@ namespace Core.Services
             if (!isCarVerified)
             {
                 throw new HttpException(ErrorMessages.CarIsNotVerified, HttpStatusCode.BadRequest);
-            }
-
-            foreach (var point in createTripDTO.Points)
-            {
-                point.Location = new Point(point.Longitude, point.Latitude) { SRID = 4326 };
             }
 
             var trip = _mapper.Map<Trip>(createTripDTO);
@@ -80,6 +81,20 @@ namespace Core.Services
                             ErrorMessages.TripIsAlreadyExistsInTheTimeSpace,
                             HttpStatusCode.BadRequest);
             }
+        }
+
+        public async Task<LineString> GetRouteGeographyData(int routeId)
+        {
+            ExceptionMethods.TripNullCheck(await _tripRepository.GetByIdAsync(routeId));
+
+            var routPoints = await _pointDataRepository
+                .ListAsync(new PointDataSpecification.GetByRouteId(routeId));
+
+            var listOfRouteCoordinates = new List<Coordinate>();
+            routPoints.ForEach(x => listOfRouteCoordinates.Add(new Coordinate(x.Longitude, x.Latitude)));
+
+            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+            return geometryFactory.CreateLineString(listOfRouteCoordinates.ToArray());
         }
     }
 }
