@@ -21,8 +21,8 @@ namespace Core.Specifications
             public GetByTimeSpace(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
             {
                 Query.Where(t => t.TripCreatorId == creatorId && !t.IsEnded &&
-                                                       (t.StartDate >= startDate && t.StartDate < expirationDate) ||
-                                                       (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate));
+                                                       ((t.StartDate >= startDate && t.StartDate < expirationDate) ||
+                                                       (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate)));
             }
         }
 

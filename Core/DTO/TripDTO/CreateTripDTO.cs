@@ -11,6 +11,7 @@ namespace Core.DTO.TripDTO
         public float LoadCapacity { get; set; }
         public int MaxRouteDeviationKm { get; set; }
         public int TransportationCarId { get; set; }
+        public float Distance { get; set; }
         public List<PointDTO> Points { get; set; }
     }
 }
