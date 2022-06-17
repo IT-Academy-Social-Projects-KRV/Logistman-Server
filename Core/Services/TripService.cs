@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Core.DTO;
 using Core.DTO.TripDTO;
 using Core.Entities.TripEntity;
 using Core.Exceptions;
+using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -74,6 +77,18 @@ namespace Core.Services
                             ErrorMessages.TripIsAlreadyExistsInTheTimeSpace,
                             HttpStatusCode.BadRequest);
             }
+        }
+
+        public async Task<PaginatedList<RouteDTO>> GetAllRoutes(PaginationFilterDTO paginationFilter)
+        {
+            var routes = await _tripRepository
+                .ListAsync(new TripSpecification.GetRoutes(paginationFilter));
+
+            var routesCount = await _tripRepository
+                .CountAsync(new TripSpecification.GetRoutes(paginationFilter));
+
+            return PaginatedList<RouteDTO>.Evaluate(
+                _mapper.Map<List<RouteDTO>>(routes), paginationFilter, routesCount);
         }
     }
 }

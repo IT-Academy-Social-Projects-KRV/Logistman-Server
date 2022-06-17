@@ -1,4 +1,6 @@
-﻿using Core.DTO.TripDTO;
+﻿using Core.DTO;
+using Core.DTO.TripDTO;
+using Core.Helpers;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService
@@ -7,5 +9,6 @@ namespace Core.Interfaces.CustomService
     {
         Task<bool> CheckIsTripExistsById(int tripId);
         Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId);
+        Task<PaginatedList<RouteDTO>> GetAllRoutes(PaginationFilterDTO paginationFilter);
     }
 }
