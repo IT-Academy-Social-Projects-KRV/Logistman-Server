@@ -37,9 +37,9 @@ namespace API.Controllers
 
         [HttpGet("routes")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<IActionResult> GetAllRoutes([FromQuery] PaginationFilterDTO paginationFilter)
+        public async Task<IActionResult> GetAllRoutesAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
-            return Ok(await _tripService.GetAllRoutes(paginationFilter));
+            return Ok(await _tripService.GetAllRoutesAsync(paginationFilter));
         }
     }
 }

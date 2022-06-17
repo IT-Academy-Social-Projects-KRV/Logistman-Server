@@ -9,6 +9,6 @@ namespace Core.Interfaces.CustomService
     {
         Task<bool> CheckIsTripExistsById(int tripId);
         Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId);
-        Task<PaginatedList<RouteDTO>> GetAllRoutes(PaginationFilterDTO paginationFilter);
+        Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter);
     }
 }

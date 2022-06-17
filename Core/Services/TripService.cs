@@ -79,7 +79,7 @@ namespace Core.Services
             }
         }
 
-        public async Task<PaginatedList<RouteDTO>> GetAllRoutes(PaginationFilterDTO paginationFilter)
+        public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter)
         {
             var routes = await _tripRepository
                 .ListAsync(new TripSpecification.GetRoutes(paginationFilter));
