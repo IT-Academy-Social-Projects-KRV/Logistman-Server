@@ -84,19 +84,20 @@ namespace Core.Services
             }
         }
 
-        public async Task<LineString> GetRouteGeographyData(int routeId)
+        public async Task<LineString> GetRouteGeographyDataAsync(int routeId)
         {
-            ExceptionMethods.TripNullCheck(await _tripRepository.GetByIdAsync(routeId));
-
-            var routPoints = await _pointDataRepository
+            var routePoints = await _pointDataRepository
                 .ListAsync(new PointDataSpecification.GetByRouteId(routeId));
 
             var listOfRouteCoordinates = new List<Coordinate>();
-            routPoints.ForEach(x => listOfRouteCoordinates
-            .Add(new Coordinate(x.Longitude, x.Latitude)));
+
+            routePoints
+                .ForEach(x => listOfRouteCoordinates
+                .Add(new Coordinate(x.Longitude, x.Latitude)));
 
             var geometryFactory = NtsGeometryServices.Instance
-                .CreateGeometryFactory(srid: GeodeticSystem.WGS84);
+                .CreateGeometryFactory(GeodeticSystem.WGS84);
+
             return geometryFactory.CreateLineString(listOfRouteCoordinates.ToArray());
         }
     }

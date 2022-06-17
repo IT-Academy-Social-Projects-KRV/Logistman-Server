@@ -108,7 +108,7 @@ namespace Core.Services
             var maxRouteDeviationMeters = route.MaxRouteDeviationKm * 1000;
             var offerList = await _offerRepository
                 .ListAsync(new OfferSpecification.GetOffersNearRoute(await _tripService
-                .GetRouteGeographyData(routeId), maxRouteDeviationMeters, 
+                .GetRouteGeographyDataAsync(routeId), maxRouteDeviationMeters, 
                 route.StartDate, route.ExpirationDate));
 
             return _mapper.Map<List<OfferPreviewDTO>>(offerList);

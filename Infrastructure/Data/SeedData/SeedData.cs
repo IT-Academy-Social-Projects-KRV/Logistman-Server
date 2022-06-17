@@ -566,6 +566,102 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Житомир",
                    Region = "Житомирська область",
                    Order = 0
+               },
+
+               new PointData()
+               {
+                   Id = 21,
+                   Longitude = 30.45704659882904,
+                   Latitude = 48.38800234656958,
+                   Location = new Point(30.45704659882904, 48.38800234656958) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вул Соборна 44б, Голованівськ, Кіровоградська область, 26500",
+                   Settlement = "Голованівськ",
+                   Region = "Кіровоградська область",
+                   Order = 0
+               },
+
+               new PointData()
+               {
+                   Id = 22,
+                   Longitude = 30.164117207748024,
+                   Latitude = 48.1413224868577,
+                   Location = new Point(30.164117207748024, 48.1413224868577) { SRID = GeodeticSystem.WGS84 },
+                   Address = "Р54, 119, Вільшанка, Одеська область, 66221",
+                   Settlement = "Вільшанка",
+                   Region = "Одеська область",
+                   Order = 0
+               },
+
+               new PointData()
+               {
+                   Id = 23,
+                   Longitude = 30.344302712523117,
+                   Latitude = 47.948440524775656,
+                   Location = new Point(30.344302712523117, 47.948440524775656) { SRID = GeodeticSystem.WGS84 },
+                   Address = "Криве Озеро, Миколаївська область, 55100",
+                   Settlement = "Криве Озеро",
+                   Region = "Миколаївська область",
+                   Order = 0
+               },
+
+               new PointData()
+               {
+                   Id = 24,
+                   Longitude = 30.911616773891865,
+                   Latitude = 47.19911938506771,
+                   Location = new Point(30.911616773891865, 47.19911938506771) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Шевченка, 10, Березівка, Одеська область, 67301",
+                   Settlement = "Березівка",
+                   Region = "Одеська область",
+                   Order = 0
+               },
+
+               new PointData()
+               {
+                   Id = 25,
+                   Longitude = 30.317371060250917,
+                   Latitude = 47.0234622881908,
+                   Location = new Point(30.317371060250917, 47.0234622881908) { SRID = GeodeticSystem.WGS84 },
+                   Address = "Трасса Е 95, Знам'янка, Одеська область, 67211",
+                   Settlement = "Знам'янка",
+                   Region = "Одеська область",
+                   Order = 0
+               },
+
+               new PointData()
+               {
+                   Id = 26,
+                   Longitude = 30.301719955968146,
+                   Latitude = 48.139092436783365,
+                   Location = new Point(30.301719955968146, 48.139092436783365) { SRID = GeodeticSystem.WGS84 },
+                   Address = "48Q2+JJ Дубинове, Одеська область",
+                   Settlement = "Дубинове",
+                   Region = "Одеська область",
+                   Order = 0
+               },
+
+               new PointData()
+               {
+                   Id = 27,
+                   Longitude = 33.38327,
+                   Latitude = 47.88769,
+                   Location = new Point(33.38327, 47.88769) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Медична, 19, Кривий Ріг, Дніпропетровська область, 50005",
+                   Settlement = "Кривий Ріг",
+                   Region = "Дніпропетровська область",
+                   Order = 0
+               },
+
+               new PointData()
+               {
+                   Id = 28,
+                   Longitude = 32.49742,
+                   Latitude = 47.54642,
+                   Location = new Point(32.49742, 47.54642) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вул. Станціонна, 1, Новополтавка, Миколаївська область, 55642",
+                   Settlement = "Новополтавка",
+                   Region = "Миколаївська область",
+                   Order = 0
                });
 
         #endregion
@@ -856,7 +952,120 @@ namespace Infrastructure.Data.SeedData
                     OfferCreatorId = ANTONINA_ID,
                     CreatorRoleId = 1,
                     CreationDate = DateTimeOffset.Parse($"{_faker.Random.Int(20, 30)}.06.2022 {_faker.Random.Int(5, 21)}:00")
-                });
+                },
+                new Offer()
+                {
+                    Id = 21,
+                    Description = "My 1 offer",
+                    IsClosed = false,
+                    GoodsWeight = 120,
+                    StartDate = DateTimeOffset.Parse("13.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("17.07.2022 12:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    OfferPointId = 21,
+                    OfferCreatorId = EUGEN_ID,
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse("13.07.2022 11:00")
+                },
+                new Offer()
+                {
+                    Id = 22,
+                    Description = "My 2 offer",
+                    IsClosed = false,
+                    GoodsWeight = 120,
+                    StartDate = DateTimeOffset.Parse("18.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("19.07.2022 12:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    OfferPointId = 22,
+                    OfferCreatorId = MARYNA_ID,
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse("18.07.2022 11:00")
+                },
+                new Offer()
+                {
+                    Id = 23,
+                    Description = "My 3 offer",
+                    IsClosed = false,
+                    GoodsWeight = 120,
+                    StartDate = DateTimeOffset.Parse("20.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("21.07.2022 12:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    OfferPointId = 23,
+                    OfferCreatorId = VLAD_ID,
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse("20.07.2022 11:00")
+                },
+                new Offer()
+                {
+                    Id = 24,
+                    Description = "My 4 offer",
+                    IsClosed = false,
+                    GoodsWeight = 120,
+                    StartDate = DateTimeOffset.Parse("22.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("23.07.2022 12:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    OfferPointId = 24,
+                    OfferCreatorId = ANTONINA_ID,
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse("22.07.2022 11:00")
+                },
+                new Offer()
+                {
+                    Id = 25,
+                    Description = "My 5 offer",
+                    IsClosed = false,
+                    GoodsWeight = 120,
+                    StartDate = DateTimeOffset.Parse("24.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("25.07.2022 12:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    OfferPointId = 25,
+                    OfferCreatorId = EUGEN_ID,
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse("24.07.2022 11:00")
+                },
+                new Offer()
+                {
+                    Id = 26,
+                    Description = "My 6 offer",
+                    IsClosed = false,
+                    GoodsWeight = 120,
+                    StartDate = DateTimeOffset.Parse("01.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("07.07.2022 12:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    OfferPointId = 26,
+                    OfferCreatorId = MARYNA_ID,
+                    CreatorRoleId = 2,
+                    CreationDate = DateTimeOffset.Parse("01.07.2022 11:00")
+                },
+                new Offer()
+                {
+                    Id = 27,
+                    Description = "My 7 offer",
+                    IsClosed = false,
+                    GoodsWeight = 120,
+                    StartDate = DateTimeOffset.Parse("28.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("29.07.2022 12:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    OfferPointId = 27,
+                    OfferCreatorId = VLAD_ID,
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse("28.07.2022 11:00")
+                },
+                new Offer()
+                {
+                    Id = 28,
+                    Description = "My 8 offer",
+                    IsClosed = false,
+                    GoodsWeight = 120,
+                    StartDate = DateTimeOffset.Parse("01.08.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("03.08.2022 12:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    OfferPointId = 28,
+                    OfferCreatorId = ANTONINA_ID,
+                    CreatorRoleId = 1,
+                    CreationDate = DateTimeOffset.Parse("01.08.2022 11:00")
+                }
+                );
 
         #endregion
 

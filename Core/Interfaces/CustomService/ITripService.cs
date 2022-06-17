@@ -8,6 +8,6 @@ namespace Core.Interfaces.CustomService
     {
         Task<bool> CheckIsTripExistsById(int tripId);
         Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId);
-        Task<LineString> GetRouteGeographyData(int routeId);
+        Task<LineString> GetRouteGeographyDataAsync(int routeId);
     }
 }
