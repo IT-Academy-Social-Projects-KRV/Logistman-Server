@@ -55,9 +55,9 @@ namespace API.Controllers
 
         [HttpGet("offers-near-route")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<IActionResult> GetOffersNearRouteAsync(int routeId)
+        public async Task<IActionResult> GetOffersNearRouteAsync([FromQuery] PaginationFilterDTO paginationFilter, int routeId)
         {
-            return Ok(await _offerService.GetOffersNearRouteAsync(routeId));
+            return Ok(await _offerService.GetOffersNearRouteAsync(paginationFilter, routeId));
         }
     }
 }

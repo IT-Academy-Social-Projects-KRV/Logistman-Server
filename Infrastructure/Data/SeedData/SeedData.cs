@@ -6,6 +6,7 @@ using Core.Entities.GoodCategoryEntity;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
 using Core.Entities.RoleEntity;
+using Core.Entities.TripEntity;
 using Core.Entities.UserEntity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +68,7 @@ namespace Infrastructure.Data.SeedData
             SeedUser(builder);
             SeedIdentityUserRole(builder);
             SeedPoint(builder);
+            SeedRoute(builder);
             SeedOffer(builder);
             SeedCar(builder);
         }
@@ -350,8 +352,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 1,
-                   Latitude = 50.3288577,
-                   Longitude = 26.5283633,
                    Location = new Point(26.5283633, 50.3288577) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Східна, 32",
                    Settlement = "Острог",
@@ -364,8 +364,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 2,
-                   Latitude = 50.6175848,
-                   Longitude = 26.2614291,
                    Location = new Point(26.2614291, 50.6175848) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Соборна, 5",
                    Settlement = "Рівне",
@@ -378,8 +376,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 3,
-                   Latitude = 50.724626,
-                   Longitude = 25.3839251,
                    Location = new Point(25.3839251, 50.724626) { SRID = GeodeticSystem.WGS84 },
                    Address = "Вишнівецька вулиця, 30",
                    Settlement = "Луцьк",
@@ -392,8 +388,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 4,
-                   Latitude = 48.4674516,
-                   Longitude = 35.0256349,
                    Location = new Point(35.0256349, 48.4674516) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Юрія Савченко, 1",
                    Settlement = "Дніпро",
@@ -406,8 +400,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 5,
-                   Latitude = 47.1917281,
-                   Longitude = 37.3386598,
                    Location = new Point(37.3386598, 47.1917281) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Пушкіна, 1",
                    Settlement = "Нікольське",
@@ -420,8 +412,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 6,
-                   Latitude = 46.9690278,
-                   Longitude = 32.0033648,
                    Location = new Point(32.0033648, 46.9690278) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Садова, 1",
                    Settlement = "Миколаїв",
@@ -434,8 +424,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 7,
-                   Latitude = 48.5175858,
-                   Longitude = 32.2345305,
                    Location = new Point(32.2345305, 48.5175858) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Павлова, 1",
                    Settlement = "Кропивницький",
@@ -448,8 +436,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 8,
-                   Latitude = 48.5183484,
-                   Longitude = 32.2277797,
                    Location = new Point(32.2277797, 48.5183484) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Чкалова, 20",
                    Settlement = "Кропивницький",
@@ -462,8 +448,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 9,
-                   Latitude = 48.5181244,
-                   Longitude = 32.2269653,
                    Location = new Point(32.2269653, 48.5181244) { SRID = GeodeticSystem.WGS84 },
                    Address = "Посадочна вулиця, 5",
                    Settlement = "Кропивницький",
@@ -476,8 +460,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 10,
-                   Latitude = 48.4658504,
-                   Longitude = 35.0247707,
                    Location = new Point(35.0247707, 48.4658504) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Юрія Савченка, 3",
                    Settlement = "Дніпро",
@@ -490,8 +472,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 11,
-                   Latitude = 49.8468734,
-                   Longitude = 24.0253381,
                    Location = new Point(24.0253381, 49.8468734) { SRID = GeodeticSystem.WGS84 },
                    Address = "просп. Вячеслава Черновола, 11",
                    Settlement = "Львів",
@@ -504,8 +484,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 12,
-                   Latitude = 48.6102995,
-                   Longitude = 22.3178905,
                    Location = new Point(22.3178905, 48.6102995) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Шишкіна, 1",
                    Settlement = "Ужгород",
@@ -518,8 +496,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 13,
-                   Latitude = 49.4178562,
-                   Longitude = 26.9919167,
                    Location = new Point(26.9919167, 49.4178562) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Козацька, 1",
                    Settlement = "Хмельницький",
@@ -532,8 +508,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 14,
-                   Latitude = 47.8847308,
-                   Longitude = 33.3286723,
                    Location = new Point(33.3286723, 47.8847308) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Братиславська, 1",
                    Settlement = "Кривий Ріг",
@@ -546,8 +520,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 15,
-                   Latitude = 47.031949,
-                   Longitude = 32.0147107,
                    Location = new Point(32.0147107, 47.031949) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Слов'янська, 1",
                    Settlement = "Миколаїв",
@@ -560,8 +532,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 16,
-                   Latitude = 46.9858772,
-                   Longitude = 32.0222338,
                    Location = new Point(32.0222338, 46.9858772) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Привільна, 1",
                    Settlement = "Миколаїв",
@@ -574,8 +544,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 17,
-                   Latitude = 46.9880672,
-                   Longitude = 32.0210963,
                    Location = new Point(32.0210963, 46.9880672) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Привільна, 10",
                    Settlement = "Миколаїв",
@@ -588,8 +556,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 18,
-                   Latitude = 50.7556030,
-                   Longitude = 25.36196,
                    Location = new Point(25.36196, 50.7556030) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця В'ячеслава Чорновола, 1",
                    Settlement = "Луцьк",
@@ -602,8 +568,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 19,
-                   Latitude = 50.3006939,
-                   Longitude = 26.8544323,
                    Location = new Point(26.8544323, 50.3006939) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Острозька, 1",
                    Settlement = "Славута",
@@ -616,8 +580,6 @@ namespace Infrastructure.Data.SeedData
                new PointData()
                {
                    Id = 20,
-                   Latitude = 50.2541948,
-                   Longitude = 28.6727154,
                    Location = new Point(28.6727154, 50.2541948) { SRID = GeodeticSystem.WGS84 },
                    Address = "вулиця Бориса Тена, 2",
                    Settlement = "Житомир",
@@ -627,103 +589,326 @@ namespace Infrastructure.Data.SeedData
                    Postcode = "10001",
                    Order = 0
                },
-
                new PointData()
                {
                    Id = 21,
-                   Longitude = 30.45704659882904,
-                   Latitude = 48.38800234656958,
-                   Location = new Point(30.45704659882904, 48.38800234656958) { SRID = GeodeticSystem.WGS84 },
-                   Address = "вул Соборна 44б, Голованівськ, Кіровоградська область, 26500",
+                   Location = new Point(30.4570465, 48.3880023) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вул Соборна 44б",
                    Settlement = "Голованівськ",
                    Region = "Кіровоградська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "26500",
                    Order = 0
                },
-
                new PointData()
                {
                    Id = 22,
-                   Longitude = 30.164117207748024,
-                   Latitude = 48.1413224868577,
-                   Location = new Point(30.164117207748024, 48.1413224868577) { SRID = GeodeticSystem.WGS84 },
-                   Address = "Р54, 119, Вільшанка, Одеська область, 66221",
+                   Location = new Point(30.1641172, 48.1413224) { SRID = GeodeticSystem.WGS84 },
+                   Address = "Центральна 119",
                    Settlement = "Вільшанка",
                    Region = "Одеська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "66221",
                    Order = 0
                },
-
                new PointData()
                {
                    Id = 23,
-                   Longitude = 30.344302712523117,
-                   Latitude = 47.948440524775656,
-                   Location = new Point(30.344302712523117, 47.948440524775656) { SRID = GeodeticSystem.WGS84 },
-                   Address = "Криве Озеро, Миколаївська область, 55100",
+                   Location = new Point(30.3443027, 47.9484405) { SRID = GeodeticSystem.WGS84 },
+                   Address = "Криве Озеро",
                    Settlement = "Криве Озеро",
                    Region = "Миколаївська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "55100",
                    Order = 0
                },
-
                new PointData()
                {
                    Id = 24,
-                   Longitude = 30.911616773891865,
-                   Latitude = 47.19911938506771,
-                   Location = new Point(30.911616773891865, 47.19911938506771) { SRID = GeodeticSystem.WGS84 },
-                   Address = "вулиця Шевченка, 10, Березівка, Одеська область, 67301",
+                   Location = new Point(30.9116167, 47.1991193) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Шевченка, 10",
                    Settlement = "Березівка",
                    Region = "Одеська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "67301",
                    Order = 0
                },
-
                new PointData()
                {
                    Id = 25,
-                   Longitude = 30.317371060250917,
-                   Latitude = 47.0234622881908,
-                   Location = new Point(30.317371060250917, 47.0234622881908) { SRID = GeodeticSystem.WGS84 },
-                   Address = "Трасса Е 95, Знам'янка, Одеська область, 67211",
+                   Location = new Point(30.3173710, 47.0234622) { SRID = GeodeticSystem.WGS84 },
+                   Address = "Трасса Е 95",
                    Settlement = "Знам'янка",
                    Region = "Одеська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "67211",
                    Order = 0
                },
-
                new PointData()
                {
                    Id = 26,
-                   Longitude = 30.301719955968146,
-                   Latitude = 48.139092436783365,
-                   Location = new Point(30.301719955968146, 48.139092436783365) { SRID = GeodeticSystem.WGS84 },
-                   Address = "48Q2+JJ Дубинове, Одеська область",
+                   Location = new Point(30.3017199, 48.1390924) { SRID = GeodeticSystem.WGS84 },
+                   Address = "48Q2+JJ Дубинове",
                    Settlement = "Дубинове",
                    Region = "Одеська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "66220",
                    Order = 0
                },
-
                new PointData()
                {
                    Id = 27,
-                   Longitude = 33.38327,
-                   Latitude = 47.88769,
-                   Location = new Point(33.38327, 47.88769) { SRID = GeodeticSystem.WGS84 },
-                   Address = "вулиця Медична, 19, Кривий Ріг, Дніпропетровська область, 50005",
+                   Location = new Point(33.3832712, 47.8876902) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Медична, 19",
                    Settlement = "Кривий Ріг",
                    Region = "Дніпропетровська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "50005",
                    Order = 0
                },
-
                new PointData()
                {
                    Id = 28,
-                   Longitude = 32.49742,
-                   Latitude = 47.54642,
-                   Location = new Point(32.49742, 47.54642) { SRID = GeodeticSystem.WGS84 },
-                   Address = "вул. Станціонна, 1, Новополтавка, Миколаївська область, 55642",
+                   Location = new Point(32.4974225, 47.5464278) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вул. Станціонна, 1",
                    Settlement = "Новополтавка",
                    Region = "Миколаївська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "55642",
                    Order = 0
+               },
+               new PointData()
+               {
+                   Id = 29,
+                   Location = new Point(30.2557039, 48.7424709) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Волкова, 2",
+                   Settlement = "Умань",
+                   Region = "Черкаська область",
+                   Country = "Україна",
+                   IsStopover = false,
+                   Postcode = "20300",
+                   Order = 1,
+                   TripId = 1
+               },
+               new PointData()
+               {
+                   Id = 30,
+                   Location = new Point(30.3017199, 48.1390924) { SRID = GeodeticSystem.WGS84 },
+                   Address = "48Q2+JJ",
+                   Settlement = "Дубинове",
+                   Region = "Одеська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "20300",
+                   Order = 2,
+                   TripId = 1
+               },
+               new PointData()
+               {
+                   Id = 31,
+                   Location = new Point(30.3174055, 47.0235592) { SRID = GeodeticSystem.WGS84 },
+                   Address = "28F8+9X",
+                   Settlement = "Знам'янка",
+                   Region = "Одеська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "20300",
+                   Order = 3,
+                   TripId = 1
+               },
+               new PointData()
+               {
+                   Id = 32,
+                   Location = new Point(30.6598914, 46.4932837) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Мічуріна, 41",
+                   Settlement = "Одеса",
+                   Region = "Одеська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "65000",
+                   Order = 4,
+                   TripId = 1
+               },
+               new PointData()
+               {
+                   Id = 33,
+                   Location = new Point(30.36545, 50.45624) { SRID = GeodeticSystem.WGS84 },
+                   Address = "проспект Перемоги, ст. метро Житомирська",
+                   Settlement = "Київ",
+                   Region = "Київcька область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "02000",
+                   Order = 1,
+                   TripId = 2
+               },
+               new PointData()
+               {
+                   Id = 34,
+                   Location = new Point(28.68603, 50.26679) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Київська, 77",
+                   Settlement = "Житомир",
+                   Region = "Житомирська область",
+                   Country = "Україна",
+                   IsStopover = false,
+                   Postcode = "10001",
+                   Order = 2,
+                   TripId = 2
+               },
+               new PointData()
+               {
+                   Id = 35,
+                   Location = new Point(27.62649, 50.58838) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Житомирська, 41-А",
+                   Settlement = "Новоград-Волинський",
+                   Region = "Житомирська область",
+                   Country = "Україна",
+                   IsStopover = false,
+                   Postcode = "11702",
+                   Order = 3,
+                   TripId = 2
+               },
+               new PointData()
+               {
+                   Id = 36,
+                   Location = new Point(26.2517, 50.62034) { SRID = GeodeticSystem.WGS84 },
+                   Address = "майдан Незалежності, 2, Рівне, Рівненська область, 33000",
+                   Settlement = "Рівне",
+                   Region = "Рівненська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "33000",
+                   Order = 4,
+                   TripId = 2
+               },
+               new PointData()
+               {
+                   Id = 37,
+                   Location = new Point(25.35595, 50.7553) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Сухомлинського, 1",
+                   Settlement = "Луцьк",
+                   Region = "Волинська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "43000",
+                   Order = 1,
+                   TripId = 3
+               },
+               new PointData()
+               {
+                   Id = 38,
+                   Location = new Point(24.76512, 50.50216) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Луцька, 27",
+                   Settlement = "Горохів",
+                   Region = "Волинська область",
+                   Country = "Україна",
+                   IsStopover = false,
+                   Postcode = "45700",
+                   Order = 2,
+                   TripId = 3
+               },
+               new PointData()
+               {
+                   Id = 39,
+                   Location = new Point(24.63097, 50.28358) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Витківська",
+                   Settlement = "Радехів",
+                   Region = "Львівська область",
+                   Country = "Україна",
+                   IsStopover = false,
+                   Postcode = "80200",
+                   Order = 3,
+                   TripId = 3
+               },
+               new PointData()
+               {
+                   Id = 40,
+                   Location = new Point(24.00991, 49.77351) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Стрийська, 30 ТРЦ King Cross Leopolis",
+                   Settlement = "Сокільники",
+                   Region = "Львівська область",
+                   Country = "Україна",
+                   IsStopover = false,
+                   Postcode = "81130",
+                   Order = 4,
+                   TripId = 3
+               },
+               new PointData()
+               {
+                   Id = 41,
+                   Location = new Point(23.85867, 49.26081) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Дубравського, 6",
+                   Settlement = "Стрий",
+                   Region = "Львівська область",
+                   Country = "Україна",
+                   IsStopover = false,
+                   Postcode = "82400",
+                   Order = 5,
+                   TripId = 3
+               },
+               new PointData()
+               {
+                   Id = 42,
+                   Location = new Point(22.3112, 48.60822) { SRID = GeodeticSystem.WGS84 },
+                   Address = "вулиця Верещагіна, 16",
+                   Settlement = "Ужгород",
+                   Region = "Закарпатська область",
+                   Country = "Україна",
+                   IsStopover = true,
+                   Postcode = "88000",
+                   Order = 6,
+                   TripId = 3
                });
 
+        #endregion
+
+        #region SeedRoute
+        public static void SeedRoute(ModelBuilder builder) =>
+            builder.Entity<Trip>().HasData(
+                new Trip()
+                {
+                    Id = 1,
+                    StartDate = DateTimeOffset.Parse("10.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("22.08.2022 12:00"),
+                    Description = "It`s my first offer!",
+                    LoadCapacity = 2000,
+                    MaxRouteDeviationKm = 20,
+                    TripCreatorId = ANTONINA_ID,
+                    TransportationCarId = 1,
+                    Distance = 150
+                },
+                new Trip()
+                {
+                    Id = 2,
+                    StartDate = DateTimeOffset.Parse("01.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("15.07.2022 12:00"),
+                    Description = "I'm going from Kyiv to Rivne. So welcome!",
+                    LoadCapacity = 2000,
+                    MaxRouteDeviationKm = 15,
+                    TripCreatorId = MARYNA_ID,
+                    TransportationCarId = 3,
+                    Distance = 400
+                },
+                new Trip()
+                {
+                    Id = 3,
+                    StartDate = DateTimeOffset.Parse("02.07.2022 12:00"),
+                    ExpirationDate = DateTimeOffset.Parse("18.07.2022 12:00"),
+                    Description = "I'm going from Lutsk to Uzhhorod. So welcome!",
+                    LoadCapacity = 2000,
+                    MaxRouteDeviationKm = 15,
+                    TripCreatorId = EUGEN_ID,
+                    TransportationCarId = 10,
+                    Distance = 400
+                });
         #endregion
 
         #region SeedOffer

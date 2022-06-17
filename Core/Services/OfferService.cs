@@ -99,19 +99,26 @@ namespace Core.Services
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
         }
 
-        public async Task<List<OfferPreviewDTO>> GetOffersNearRouteAsync(int routeId)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetOffersNearRouteAsync(PaginationFilterDTO paginationFilter, int routeId)
         {
             var route = await _tripRepository.GetByIdAsync(routeId);
 
             ExceptionMethods.TripNullCheck(route);
 
             var maxRouteDeviationMeters = route.MaxRouteDeviationKm * 1000;
+
             var offerList = await _offerRepository
                 .ListAsync(new OfferSpecification.GetOffersNearRoute(await _tripService
                 .GetRouteGeographyDataAsync(routeId), maxRouteDeviationMeters, 
                 route.StartDate, route.ExpirationDate));
 
-            return _mapper.Map<List<OfferPreviewDTO>>(offerList);
+            var offerListCount = await _offerRepository
+                .CountAsync(new OfferSpecification.GetOffersNearRoute(await _tripService
+                .GetRouteGeographyDataAsync(routeId), maxRouteDeviationMeters,
+                route.StartDate, route.ExpirationDate));
+
+            return PaginatedList<OfferPreviewDTO>.Evaluate(
+                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
         }
     }
 }

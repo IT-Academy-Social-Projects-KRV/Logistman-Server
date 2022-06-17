@@ -58,6 +58,11 @@ namespace Core.Services
                 throw new HttpException(ErrorMessages.CarIsNotVerified, HttpStatusCode.BadRequest);
             }
 
+            foreach (var point in createTripDTO.Points)
+            {
+                point.Location = new Point(point.Longitude, point.Latitude) { SRID = GeodeticSystem.WGS84 };
+            }
+
             var trip = _mapper.Map<Trip>(createTripDTO);
 
             trip.IsActive = false;
@@ -93,7 +98,7 @@ namespace Core.Services
 
             routePoints
                 .ForEach(x => listOfRouteCoordinates
-                .Add(new Coordinate(x.Longitude, x.Latitude)));
+                .Add(new Coordinate(x.Location.X, x.Location.Y)));
 
             var geometryFactory = NtsGeometryServices.Instance
                 .CreateGeometryFactory(GeodeticSystem.WGS84);
