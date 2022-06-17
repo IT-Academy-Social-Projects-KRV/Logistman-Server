@@ -10,32 +10,36 @@ namespace Core.Validation
 
         public CreateTripValidation()
         {
-            RuleFor(offer => offer.StartDate)
+            RuleFor(trip => trip.StartDate)
                 .NotEmpty()
                 .Must(date => date >= DateTimeOffset.UtcNow)
                 .WithMessage("Start date cannot be earlier than the current time!");
 
-            RuleFor(offer => offer.ExpirationDate.Subtract(offer.StartDate) < _hour)
+            RuleFor(trip => trip.ExpirationDate.Subtract(trip.StartDate) < _hour)
                 .Must(date => !date)
                 .WithMessage(
                     $"The difference between the start date and the expiration date must be at least {_hour.Hours} hours!");
 
-            RuleFor(offer => offer.Description)
+            RuleFor(trip => trip.Description)
                 .MinimumLength(0)
                 .MaximumLength(1000)
                 .WithMessage("'{PropertyName}' must be between 0 & 1000 symbols!");
 
-            RuleFor(offer => offer.LoadCapacity)
+            RuleFor(trip => trip.LoadCapacity)
                 .GreaterThan(0)
                 .WithMessage("Load capacity must be greater than 0!");
 
-            RuleFor(offer => offer.MaxRouteDeviationKm)
+            RuleFor(trip => trip.MaxRouteDeviationKm)
                 .InclusiveBetween(1, 25)
-                .WithMessage("Max route deviation must be from 1 to 25km!");
+                .WithMessage("Max route deviation must be from 1 to 25 km!");
+
+            RuleFor(trip => trip.Distance)
+                .GreaterThanOrEqualTo(1)
+                .WithMessage("Distance must be greater than or equal to 1 km!");
 
             RuleFor(trip => trip.Points.Count)
-                .InclusiveBetween(2, 10)
-                .WithMessage("The count of points must be between 2 & 10!");
+                .GreaterThanOrEqualTo(1)
+                .WithMessage("The count of points must be greater than or equal to 1!");
 
             RuleForEach(trip => trip.Points)
                 .SetValidator(new CreatePointValidation());
