@@ -770,6 +770,12 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsStopover")
+                        .HasColumnType("bit");
+
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
 
@@ -781,6 +787,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
+
+                    b.Property<string>("Postcode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Region")
                         .HasMaxLength(100)
@@ -808,6 +817,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (26.527293 50.328792)"),
                             Longitude = 26.527293,
                             Order = 0,
+                            Postcode = "35800",
                             Region = "Рівненська область",
                             Settlement = "Острог"
                         },
@@ -819,8 +829,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (26.257569 50.663542)"),
                             Longitude = 26.257569,
                             Order = 0,
-                            Region = " Рівненська область",
-                            Settlement = "Шпанів"
+                            Postcode = "33000",
+                            Region = "Рівненська область",
+                            Settlement = "Рівне"
                         },
                         new
                         {
@@ -830,6 +841,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (25.386282 50.723971)"),
                             Longitude = 25.386282000000001,
                             Order = 0,
+                            Postcode = "43000",
                             Region = "Волинська область",
                             Settlement = "Луцьк"
                         },
@@ -841,6 +853,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (35.0215734 48.46232227)"),
                             Longitude = 35.021573400000001,
                             Order = 0,
+                            Postcode = "49000",
                             Region = "Дніпропетровська область",
                             Settlement = "Дніпро"
                         },
@@ -852,6 +865,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (37.3148804 47.20073235)"),
                             Longitude = 37.3148804,
                             Order = 0,
+                            Postcode = "87000",
                             Region = "Донецька область",
                             Settlement = "Нікольське"
                         },
@@ -863,8 +877,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (36.801641 47.779212)"),
                             Longitude = 36.801640999999996,
                             Order = 0,
-                            Region = "Донецька область",
-                            Settlement = "Макаровка"
+                            Postcode = "54000",
+                            Region = "Миколаївська область",
+                            Settlement = "Миколаїв"
                         },
                         new
                         {
@@ -874,8 +889,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (35.660035 49.672878)"),
                             Longitude = 35.660035000000001,
                             Order = 0,
-                            Region = "Харківська область",
-                            Settlement = "Дніпро"
+                            Postcode = "25000",
+                            Region = "Кіровоградська область",
+                            Settlement = "Кропивницький"
                         },
                         new
                         {
@@ -885,8 +901,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (35.513638 49.371446)"),
                             Longitude = 35.513638,
                             Order = 0,
-                            Region = "Харківська область",
-                            Settlement = "Ульянівка"
+                            Postcode = "25000",
+                            Region = "Кіровоградська область",
+                            Settlement = "Кропивницький"
                         },
                         new
                         {
@@ -896,8 +913,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (36.9805 48.63374)"),
                             Longitude = 36.980499999999999,
                             Order = 0,
-                            Region = "Донецька область",
-                            Settlement = "Новодонецьк"
+                            Postcode = "25000",
+                            Region = "Кіровоградська область",
+                            Settlement = "Кропивницький"
                         },
                         new
                         {
@@ -907,6 +925,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (35.018729 48.460257)"),
                             Longitude = 35.018729,
                             Order = 0,
+                            Postcode = "49000",
                             Region = "Дніпропетровська область",
                             Settlement = "Дніпро"
                         },
@@ -918,6 +937,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (34.0253361 49.8468949)"),
                             Longitude = 34.025336099999997,
                             Order = 0,
+                            Postcode = "79000",
                             Region = "Львівська область",
                             Settlement = "Львів"
                         },
@@ -929,7 +949,8 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (22.317773 48.610623)"),
                             Longitude = 22.317772999999999,
                             Order = 0,
-                            Region = "Закарпатская область",
+                            Postcode = "88000",
+                            Region = "Закарпатська область",
                             Settlement = "Ужгород"
                         },
                         new
@@ -940,8 +961,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (26.703 48.784157)"),
                             Longitude = 26.702999999999999,
                             Order = 0,
+                            Postcode = "29000",
                             Region = "Хмельницька  область",
-                            Settlement = "Маків"
+                            Settlement = "Хмельницький"
                         },
                         new
                         {
@@ -951,8 +973,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (28.494244 49.232585)"),
                             Longitude = 28.494243999999998,
                             Order = 0,
-                            Region = "Вінницька область",
-                            Settlement = "Вінниця"
+                            Postcode = "50000",
+                            Region = "Дніпропетровська область",
+                            Settlement = "Кривий Ріг"
                         },
                         new
                         {
@@ -962,6 +985,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.00718275 47.032940848)"),
                             Longitude = 32.007182749999998,
                             Order = 0,
+                            Postcode = "54000",
                             Region = "Миколаївська область",
                             Settlement = "Миколаїв"
                         },
@@ -973,6 +997,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.030367 47.044604)"),
                             Longitude = 32.030366999999998,
                             Order = 0,
+                            Postcode = "54000",
                             Region = "Миколаївська область",
                             Settlement = "Миколаїв"
                         },
@@ -984,8 +1009,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.158811 48.061315)"),
                             Longitude = 32.158811,
                             Order = 0,
-                            Region = "Кіровоградська  область",
-                            Settlement = "Бобринець"
+                            Postcode = "54000",
+                            Region = "Миколаївська область",
+                            Settlement = "Миколаїв"
                         },
                         new
                         {
@@ -995,8 +1021,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (31.561633 51.45984)"),
                             Longitude = 31.561633,
                             Order = 0,
-                            Region = "Чернігівська область",
-                            Settlement = "Горбово"
+                            Postcode = "43000",
+                            Region = "Волинська область",
+                            Settlement = "Луцьк"
                         },
                         new
                         {
@@ -1006,8 +1033,9 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.1144958 49.807687087)"),
                             Longitude = 30.1144958,
                             Order = 0,
-                            Region = "Київська область",
-                            Settlement = "Біла церква"
+                            Postcode = "30000",
+                            Region = "Хмельницька область",
+                            Settlement = "Славута"
                         },
                         new
                         {
@@ -1017,6 +1045,7 @@ namespace Infrastructure.Migrations
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (28.64923 50.25973)"),
                             Longitude = 28.649229999999999,
                             Order = 0,
+                            Postcode = "10001",
                             Region = "Житомирська область",
                             Settlement = "Житомир"
                         },
@@ -1241,6 +1270,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Distance")
+                        .HasColumnType("real");
 
                     b.Property<DateTimeOffset?>("EndDate")
                         .HasColumnType("datetimeoffset");

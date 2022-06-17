@@ -9,6 +9,9 @@ namespace Core.DTO
         public string Address { get; set; }
         public string Settlement { get; set; }
         public string Region { get; set; }
+        public string Country { get; set; }
+        public bool IsStopover { get; set; }
+        public string Postcode { get; set; }
         public int Order { get; set; }
         public int? TripId { get; set; }
     }
