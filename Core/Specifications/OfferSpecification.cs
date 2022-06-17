@@ -35,13 +35,14 @@ namespace Core.Specifications
 
         internal class GetOffersNearRoute : Specification<Offer>
         {
-            public GetOffersNearRoute(Geometry routeGeography, double dist, DateTimeOffset startDate, DateTimeOffset expirationDate)
+            public GetOffersNearRoute(Geometry routeGeography, double dist,
+                DateTimeOffset startDate, DateTimeOffset expirationDate)
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
                     && !offer.IsClosed
                     && offer.RelatedTripId == null
-                    && startDate <= offer.ExpirationDate 
+                    && startDate <= offer.ExpirationDate
                     && offer.StartDate <= expirationDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)

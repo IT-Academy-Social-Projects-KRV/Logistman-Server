@@ -34,7 +34,8 @@ namespace Core.Services
         public async Task<int> CreateAsync(PointDTO pointDTO)
         {
             var point = _mapper.Map<PointData>(pointDTO);
-            point.Location = new Point(pointDTO.Longitude, pointDTO.Latitude) { SRID = GeodeticSystem.WGS84 };
+            point.Location = new Point(pointDTO.Longitude, pointDTO.Latitude) 
+            { SRID = GeodeticSystem.WGS84 };
             await _pointRepository.AddAsync(point);
 
             return point.Id;

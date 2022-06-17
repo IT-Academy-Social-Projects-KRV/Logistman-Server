@@ -92,9 +92,11 @@ namespace Core.Services
                 .ListAsync(new PointDataSpecification.GetByRouteId(routeId));
 
             var listOfRouteCoordinates = new List<Coordinate>();
-            routPoints.ForEach(x => listOfRouteCoordinates.Add(new Coordinate(x.Longitude, x.Latitude)));
+            routPoints.ForEach(x => listOfRouteCoordinates
+            .Add(new Coordinate(x.Longitude, x.Latitude)));
 
-            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: GeodeticSystem.WGS84);
+            var geometryFactory = NtsGeometryServices.Instance
+                .CreateGeometryFactory(srid: GeodeticSystem.WGS84);
             return geometryFactory.CreateLineString(listOfRouteCoordinates.ToArray());
         }
     }
