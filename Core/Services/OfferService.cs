@@ -107,10 +107,11 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(route);
 
             var maxRouteDeviationMeters = route.MaxRouteDeviationKm * 1000;
+            var geoRoute = await _tripService.GetRouteGeographyDataAsync(routeId);
 
             var offerList = await _offerRepository
                 .ListAsync(new OfferSpecification.GetOffersNearRoute(
-                    await _tripService.GetRouteGeographyDataAsync(routeId),
+                    geoRoute,
                     maxRouteDeviationMeters,
                     route.StartDate,
                     route.ExpirationDate,
@@ -119,7 +120,7 @@ namespace Core.Services
 
             var offerListCount = await _offerRepository
                 .CountAsync(new OfferSpecification.GetOffersNearRoute(
-                    await _tripService.GetRouteGeographyDataAsync(routeId),
+                    geoRoute,
                     maxRouteDeviationMeters,
                     route.StartDate,
                     route.ExpirationDate,
