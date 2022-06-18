@@ -99,7 +99,8 @@ namespace Core.Services
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
         }
 
-        public async Task<PaginatedList<OfferPreviewDTO>> GetOffersNearRouteAsync(PaginationFilterDTO paginationFilter, int routeId)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetNearRouteAsync(
+            PaginationFilterDTO paginationFilter, int routeId)
         {
             var route = await _tripRepository.GetByIdAsync(routeId);
 
@@ -108,14 +109,22 @@ namespace Core.Services
             var maxRouteDeviationMeters = route.MaxRouteDeviationKm * 1000;
 
             var offerList = await _offerRepository
-                .ListAsync(new OfferSpecification.GetOffersNearRoute(await _tripService
-                .GetRouteGeographyDataAsync(routeId), maxRouteDeviationMeters, 
-                route.StartDate, route.ExpirationDate));
+                .ListAsync(new OfferSpecification.GetOffersNearRoute(
+                    await _tripService.GetRouteGeographyDataAsync(routeId),
+                    maxRouteDeviationMeters,
+                    route.StartDate,
+                    route.ExpirationDate,
+                    paginationFilter
+                ));
 
             var offerListCount = await _offerRepository
-                .CountAsync(new OfferSpecification.GetOffersNearRoute(await _tripService
-                .GetRouteGeographyDataAsync(routeId), maxRouteDeviationMeters,
-                route.StartDate, route.ExpirationDate));
+                .CountAsync(new OfferSpecification.GetOffersNearRoute(
+                    await _tripService.GetRouteGeographyDataAsync(routeId),
+                    maxRouteDeviationMeters,
+                    route.StartDate,
+                    route.ExpirationDate,
+                    paginationFilter
+                ));
 
             return PaginatedList<OfferPreviewDTO>.Evaluate(
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);

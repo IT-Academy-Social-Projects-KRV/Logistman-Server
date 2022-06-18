@@ -35,8 +35,12 @@ namespace Core.Specifications
 
         internal class GetOffersNearRoute : Specification<Offer>
         {
-            public GetOffersNearRoute(Geometry routeGeography, double dist,
-                DateTimeOffset startDate, DateTimeOffset expirationDate)
+            public GetOffersNearRoute(
+                Geometry routeGeography, 
+                double dist,
+                DateTimeOffset startDate, 
+                DateTimeOffset expirationDate, 
+                PaginationFilterDTO paginationFilter)
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
@@ -46,7 +50,9 @@ namespace Core.Specifications
                     && offer.StartDate <= expirationDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
-                    .Include(offer => offer.GoodCategory);
+                    .Include(offer => offer.GoodCategory)
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize);
             }
         }
     }

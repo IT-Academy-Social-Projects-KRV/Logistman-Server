@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Core.Constants;
 using Core.DTO;
 using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
@@ -7,7 +6,6 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
-using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -34,8 +32,7 @@ namespace Core.Services
         public async Task<int> CreateAsync(PointDTO pointDTO)
         {
             var point = _mapper.Map<PointData>(pointDTO);
-            point.Location = new Point(pointDTO.Longitude, pointDTO.Latitude) 
-            { SRID = GeodeticSystem.WGS84 };
+            
             await _pointRepository.AddAsync(point);
 
             return point.Id;
