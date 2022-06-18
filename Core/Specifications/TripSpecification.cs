@@ -1,5 +1,4 @@
-﻿
-using Ardalis.Specification;
+﻿using Ardalis.Specification;
 using Core.Entities.TripEntity;
 using System;
 

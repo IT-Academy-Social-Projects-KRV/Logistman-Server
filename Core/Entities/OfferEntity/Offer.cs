@@ -19,7 +19,7 @@ namespace Core.Entities.OfferEntity
         public int GoodCategoryId { get; set; }
         public GoodCategory GoodCategory { get; set; }
         public int OfferPointId { get; set; }
-        public Point Point { get; set; }
+        public PointData Point { get; set; }
         public int? RelatedTripId { get; set; }
         public Trip Trip { get; set; }
         public string OfferCreatorId { get; set; }

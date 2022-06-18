@@ -23,7 +23,7 @@ namespace Infrastructure.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Offer> Offers { get; set; }
-        public DbSet<Point> Points { get; set; }
+        public DbSet<PointData> Points { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<GoodCategory> GoodCategories { get; set; }
