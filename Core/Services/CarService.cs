@@ -59,15 +59,22 @@ namespace Core.Services
         public async Task<PaginatedList<CarDTO>> GetAllUserCarsAsync(
             string userId, PaginationFilterDTO paginationFilter)
         {
+            var userCarsCount = await _carRepository
+                .CountAsync(new CarSpecification.GetByUserId(userId, paginationFilter));
+
+            int totalPages = PaginatedList<CarDTO>.GetTotalPages(paginationFilter, userCarsCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
             var userCars = await _carRepository
                 .ListAsync(
                 new CarSpecification.GetByUserId(userId, paginationFilter));
 
-            var userCarsCount = await _carRepository
-                .CountAsync(new CarSpecification.GetByUserId(userId, paginationFilter));
-
             return PaginatedList<CarDTO>.Evaluate(
-                _mapper.Map<List<CarDTO>>(userCars), paginationFilter, userCarsCount);
+                _mapper.Map<List<CarDTO>>(userCars), paginationFilter.PageNumber, userCarsCount, totalPages);
         }
 
         private async Task<bool> IsCarExist(Car newCar)

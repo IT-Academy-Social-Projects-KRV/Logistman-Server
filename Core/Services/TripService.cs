@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Core.Services
 {
@@ -105,14 +106,26 @@ namespace Core.Services
 
         public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter)
         {
-            var routes = await _tripRepository
-                .ListAsync(new TripSpecification.GetRoutes(paginationFilter));
-
             var routesCount = await _tripRepository
                 .CountAsync(new TripSpecification.GetRoutes(paginationFilter));
 
+            int totalPages = PaginatedList<RouteDTO>.GetTotalPages(paginationFilter, routesCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var routes = await _tripRepository
+                .ListAsync(new TripSpecification.GetRoutes(paginationFilter));
+
+            foreach(var route in routes)
+            {
+                route.Points = route.Points.OrderBy(p => p.Order).ToList();
+            }
+
             return PaginatedList<RouteDTO>.Evaluate(
-                _mapper.Map<List<RouteDTO>>(routes), paginationFilter, routesCount);
+                _mapper.Map<List<RouteDTO>>(routes), paginationFilter.PageNumber, routesCount, totalPages);
         }
     }
 }

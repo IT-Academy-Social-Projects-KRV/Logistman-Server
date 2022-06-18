@@ -2,6 +2,7 @@
 using Core.DTO.TripDTO;
 using Core.Helpers;
 using System.Threading.Tasks;
+using NetTopologySuite.Geometries;
 
 namespace Core.Interfaces.CustomService
 {

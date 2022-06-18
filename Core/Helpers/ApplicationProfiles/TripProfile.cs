@@ -9,7 +9,6 @@ namespace Core.Helpers.ApplicationProfiles
         public TripProfile()
         {
             CreateMap<CreateTripDTO, Trip>();
-
             CreateMap<Trip, RouteDTO>();
         }
     }
