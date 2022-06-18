@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NetTopologySuite.Geometries;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220617093913_ChangeTripAndPoint")]
+    [Migration("20220617123850_ChangeTripAndPoint")]
     partial class ChangeTripAndPoint
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -165,7 +166,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Offers");
                 });
 
-            modelBuilder.Entity("Core.Entities.PointEntity.Point", b =>
+            modelBuilder.Entity("Core.Entities.PointEntity.PointData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -184,6 +185,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
+
+                    b.Property<Point>("Location")
+                        .HasColumnType("geography");
 
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
@@ -638,7 +642,7 @@ namespace Infrastructure.Migrations
                         .WithMany("Offers")
                         .HasForeignKey("OfferCreatorId");
 
-                    b.HasOne("Core.Entities.PointEntity.Point", "Point")
+                    b.HasOne("Core.Entities.PointEntity.PointData", "Point")
                         .WithMany("Offers")
                         .HasForeignKey("OfferPointId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -659,7 +663,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Core.Entities.PointEntity.Point", b =>
+            modelBuilder.Entity("Core.Entities.PointEntity.PointData", b =>
                 {
                     b.HasOne("Core.Entities.TripEntity.Trip", "Trip")
                         .WithMany("Points")
@@ -808,7 +812,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Offers");
                 });
 
-            modelBuilder.Entity("Core.Entities.PointEntity.Point", b =>
+            modelBuilder.Entity("Core.Entities.PointEntity.PointData", b =>
                 {
                     b.Navigation("Offers");
                 });

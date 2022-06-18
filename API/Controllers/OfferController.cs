@@ -52,5 +52,12 @@ namespace API.Controllers
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             return Ok(await _offerService.GetUsersOffersAsync(userId, paginationFilter));
         }
+
+        [HttpGet("near-route")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<IActionResult> GetNearRouteAsync([FromQuery] PaginationFilterDTO paginationFilter, int routeId)
+        {
+            return Ok(await _offerService.GetNearRouteAsync(paginationFilter, routeId));
+        }
     }
 }

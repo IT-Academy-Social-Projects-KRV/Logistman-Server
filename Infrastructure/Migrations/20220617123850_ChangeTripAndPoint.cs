@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using NetTopologySuite.Geometries;
 
 namespace Infrastructure.Migrations
 {
@@ -26,6 +27,12 @@ namespace Infrastructure.Migrations
                 nullable: false,
                 defaultValue: false);
 
+            migrationBuilder.AddColumn<Point>(
+                name: "Location",
+                table: "Points",
+                type: "geography",
+                nullable: true);
+
             migrationBuilder.AddColumn<string>(
                 name: "Postcode",
                 table: "Points",
@@ -45,6 +52,10 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropColumn(
                 name: "IsStopover",
+                table: "Points");
+
+            migrationBuilder.DropColumn(
+                name: "Location",
                 table: "Points");
 
             migrationBuilder.DropColumn(

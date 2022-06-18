@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Core.Specifications;
 using Core.Helpers;
 using Core.DTO;
+using Core.Entities.TripEntity;
 
 namespace Core.Services
 {
@@ -21,6 +22,7 @@ namespace Core.Services
     {
         private readonly IMapper _mapper;
         private readonly IRepository<Offer> _offerRepository;
+        private readonly IRepository<Trip> _tripRepository;
         private readonly UserManager<User> _userManager;
         private readonly IGoodCategoryService _goodCategoryService;
         private readonly IOfferRoleService _offerRoleService;
@@ -30,6 +32,7 @@ namespace Core.Services
         public OfferService(
             IMapper mapper,
             IRepository<Offer> offerRepository,
+            IRepository<Trip> tripRepository,
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryService,
             IOfferRoleService offerRoleService,
@@ -40,6 +43,7 @@ namespace Core.Services
             _offerRoleService = offerRoleService;
             _mapper = mapper;
             _offerRepository = offerRepository;
+            _tripRepository = tripRepository;
             _userManager = userManager;
             _goodCategoryService = goodCategoryService;
             _tripService = tripService;
@@ -90,6 +94,38 @@ namespace Core.Services
 
             var offerListCount = await _offerRepository
                 .CountAsync(new OfferSpecification.GetByUserId(userId, paginationFilter));
+
+            return PaginatedList<OfferPreviewDTO>.Evaluate(
+                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
+        }
+
+        public async Task<PaginatedList<OfferPreviewDTO>> GetNearRouteAsync(
+            PaginationFilterDTO paginationFilter, int routeId)
+        {
+            var route = await _tripRepository.GetByIdAsync(routeId);
+
+            ExceptionMethods.TripNullCheck(route);
+
+            var maxRouteDeviationMeters = route.MaxRouteDeviationKm * 1000;
+            var geoRoute = await _tripService.GetRouteGeographyDataAsync(routeId);
+
+            var offerList = await _offerRepository
+                .ListAsync(new OfferSpecification.GetOffersNearRoute(
+                    geoRoute,
+                    maxRouteDeviationMeters,
+                    route.StartDate,
+                    route.ExpirationDate,
+                    paginationFilter
+                ));
+
+            var offerListCount = await _offerRepository
+                .CountAsync(new OfferSpecification.GetOffersNearRoute(
+                    geoRoute,
+                    maxRouteDeviationMeters,
+                    route.StartDate,
+                    route.ExpirationDate,
+                    paginationFilter
+                ));
 
             return PaginatedList<OfferPreviewDTO>.Evaluate(
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);

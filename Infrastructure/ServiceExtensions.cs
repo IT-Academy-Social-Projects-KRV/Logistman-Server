@@ -13,7 +13,7 @@ namespace Infrastructure
     {
         public static void AddDbContext(this IServiceCollection service, string connectionString)
         {
-            service.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+            service.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString, x => x.UseNetTopologySuite()));
         }
         public static void AddIdentityDbContext(this IServiceCollection service)
         {
