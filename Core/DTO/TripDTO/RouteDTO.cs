@@ -5,6 +5,7 @@ namespace Core.DTO.TripDTO
 {
     public class RouteDTO
     {
+        public int Id { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset ExpirationDate { get; set; }
         public string Description { get; set; }
