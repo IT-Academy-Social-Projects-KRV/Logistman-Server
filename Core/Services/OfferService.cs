@@ -88,15 +88,22 @@ namespace Core.Services
 
         public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter)
         {
+            var offerListCount = await _offerRepository
+                .CountAsync(new OfferSpecification.GetByUserId(userId, paginationFilter));
+
+            int totalPages = PaginatedList<OfferPreviewDTO>.GetTotalPages(paginationFilter, offerListCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
             var offerList = await _offerRepository
                 .ListAsync(
                 new OfferSpecification.GetByUserId(userId, paginationFilter));
 
-            var offerListCount = await _offerRepository
-                .CountAsync(new OfferSpecification.GetByUserId(userId, paginationFilter));
-
             return PaginatedList<OfferPreviewDTO>.Evaluate(
-                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
+                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
 
         public async Task<PaginatedList<OfferPreviewDTO>> GetNearRouteAsync(
@@ -109,15 +116,6 @@ namespace Core.Services
             var maxRouteDeviationMeters = route.MaxRouteDeviationKm * 1000;
             var geoRoute = await _tripService.GetRouteGeographyDataAsync(routeId);
 
-            var offerList = await _offerRepository
-                .ListAsync(new OfferSpecification.GetOffersNearRoute(
-                    geoRoute,
-                    maxRouteDeviationMeters,
-                    route.StartDate,
-                    route.ExpirationDate,
-                    paginationFilter
-                ));
-
             var offerListCount = await _offerRepository
                 .CountAsync(new OfferSpecification.GetOffersNearRoute(
                     geoRoute,
@@ -127,8 +125,24 @@ namespace Core.Services
                     paginationFilter
                 ));
 
+            int totalPages = PaginatedList<OfferPreviewDTO>.GetTotalPages(paginationFilter, offerListCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var offerList = await _offerRepository
+                .ListAsync(new OfferSpecification.GetOffersNearRoute(
+                    geoRoute,
+                    maxRouteDeviationMeters,
+                    route.StartDate,
+                    route.ExpirationDate,
+                    paginationFilter
+                ));
+
             return PaginatedList<OfferPreviewDTO>.Evaluate(
-                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter, offerListCount);
+                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Constants;
+using Core.DTO;
 using Core.DTO.TripDTO;
 using Core.Helpers;
 using Core.Interfaces.CustomService;
@@ -32,6 +33,13 @@ namespace API.Controllers
             await _tripService.CreateTripAsync(createTripDTO, userId);
 
             return Ok();
+        }
+
+        [HttpGet("routes")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<IActionResult> GetAllRoutesAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        {
+            return Ok(await _tripService.GetAllRoutesAsync(paginationFilter));
         }
     }
 }

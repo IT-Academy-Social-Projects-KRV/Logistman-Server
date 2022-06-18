@@ -24,14 +24,8 @@ namespace Core.Helpers
             Items = items;
         }
 
-        public static PaginatedList<TEntity> Evaluate(
-            List<TEntity> items, PaginationFilterDTO paginationFilter, int count)
+        public static int GetTotalPages(PaginationFilterDTO paginationFilter, int count)
         {
-            if (count == 0)
-            {
-                return null;
-            }
-
             var totalPages = (int)Math.Ceiling(count / (double)paginationFilter.PageSize);
 
             if (paginationFilter.PageNumber > totalPages)
@@ -39,7 +33,18 @@ namespace Core.Helpers
                 paginationFilter.PageNumber = totalPages;
             }
 
-            return new PaginatedList<TEntity>(items, paginationFilter.PageNumber, totalPages, count);
+            return totalPages;
+        }
+
+        public static PaginatedList<TEntity> Evaluate(
+            List<TEntity> items, int pageNumber, int count, int totalPages)
+        {
+            if (count == 0)
+            {
+                return null;
+            }
+
+            return new PaginatedList<TEntity>(items, pageNumber, totalPages, count);
         }
     }
 }

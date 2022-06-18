@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Core.DTO;
 using Core.Constants;
 using Core.DTO.TripDTO;
 using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
 using Core.Exceptions;
+using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
@@ -14,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Core.Services
 {
@@ -99,6 +102,30 @@ namespace Core.Services
                 .CreateGeometryFactory(GeodeticSystem.WGS84);
 
             return geometryFactory.CreateLineString(listOfRouteCoordinates.ToArray());
+        }
+
+        public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter)
+        {
+            var routesCount = await _tripRepository
+                .CountAsync(new TripSpecification.GetRoutes(paginationFilter));
+
+            int totalPages = PaginatedList<RouteDTO>.GetTotalPages(paginationFilter, routesCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var routes = await _tripRepository
+                .ListAsync(new TripSpecification.GetRoutes(paginationFilter));
+
+            foreach(var route in routes)
+            {
+                route.Points = route.Points.OrderBy(p => p.Order).ToList();
+            }
+
+            return PaginatedList<RouteDTO>.Evaluate(
+                _mapper.Map<List<RouteDTO>>(routes), paginationFilter.PageNumber, routesCount, totalPages);
         }
     }
 }

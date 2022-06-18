@@ -20,6 +20,7 @@ namespace Core.Helpers.ApplicationProfiles
             CreateMap<CarDTO, Car>().ReverseMap()
                 .ForMember(dest => dest.Category,
                     opt => opt.MapFrom(car => car.Category.Name));
+            CreateMap<Car, TripCarInfoDTO>();
         }
     }
 }

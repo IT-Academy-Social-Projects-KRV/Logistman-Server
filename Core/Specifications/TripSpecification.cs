@@ -1,4 +1,5 @@
 ﻿using Ardalis.Specification;
+using Core.DTO;
 using Core.Entities.TripEntity;
 using System;
 
@@ -21,6 +22,20 @@ namespace Core.Specifications
                 Query.Where(t => t.TripCreatorId == creatorId && !t.IsEnded &&
                                                        ((t.StartDate >= startDate && t.StartDate < expirationDate) ||
                                                        (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate)));
+            }
+        }
+
+        internal class GetRoutes : Specification<Trip>
+        {
+            public GetRoutes(PaginationFilterDTO paginationFilter)
+            {
+                Query
+                    .Where(t => !t.IsActive && !t.IsEnded)
+                    .Include(t => t.User)
+                    .Include(t => t.Points)
+                    .Include(t => t.Car)
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize);
             }
         }
     }
