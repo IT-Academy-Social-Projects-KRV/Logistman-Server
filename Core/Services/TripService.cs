@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Linq;
+using Core.DTO.OfferDTO;
+using Core.Entities.OfferEntity;
 
 namespace Core.Services
 {
@@ -27,19 +29,22 @@ namespace Core.Services
         private readonly ICarService _carService;
         private readonly IPointService _pointService;
         private readonly IMapper _mapper;
+        private readonly IRepository<Offer> _offerRepository;
 
         public TripService(
             IRepository<Trip> tripRepository,
             IRepository<PointData> pointDataRepository,
             ICarService carService,
             IPointService pointService,
-            IMapper mapper)
+            IMapper mapper,
+            IRepository<Offer> offerRepository)
         {
             _tripRepository = tripRepository;
             _pointDataRepository = pointDataRepository;
             _carService = carService;
             _pointService = pointService;
             _mapper = mapper;
+            _offerRepository = offerRepository;
         }
 
         public async Task<bool> CheckIsTripExistsById(int tripId)
@@ -127,5 +132,60 @@ namespace Core.Services
             return PaginatedList<RouteDTO>.Evaluate(
                 _mapper.Map<List<RouteDTO>>(routes), paginationFilter.PageNumber, routesCount, totalPages);
         }
+
+        public async Task ManageOffersTripAsync(OffersForTripDTO offersForTrip)
+        {
+            var trip = await _tripRepository.GetByIdAsync(offersForTrip.TripId);
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            if (trip.IsActive)
+            {
+                var offers = await _offerRepository
+                    .ListAsync(new OfferSpecification
+                        .GetByTripId(offersForTrip.TripId));
+
+                offersForTrip.OffersIdList.ForEach(offerId => offers
+                    .RemoveAll(x => x.Id == offerId));
+
+                foreach (var offer in offers)
+                {
+                    ExceptionMethods.OfferNullCheck(offer);
+
+                    offer.Trip = null;
+                    await _offerRepository.UpdateAsync(offer);
+                }
+
+                offersForTrip.OffersIdList.Remove(0);
+
+                if (offersForTrip.OffersIdList.Count == 0)
+                {
+                    trip.IsActive = false;
+                    await _tripRepository.UpdateAsync(trip);
+                    return;
+                }
+            }
+        }
+
+        public async Task AddOffersToTripAsync(OffersForTripDTO offersForTrip)
+        {
+            var trip = await _tripRepository.GetByIdAsync(offersForTrip.TripId);
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            foreach (var offerId in offersForTrip.OffersIdList)
+            {
+                var offer = await _offerRepository.GetByIdAsync(offerId);
+
+                ExceptionMethods.OfferNullCheck(offer);
+
+                offer.RelatedTripId = offersForTrip.TripId;
+
+                await _offerRepository.UpdateAsync(offer);
+            }
+            trip.IsActive = true;
+            await _tripRepository.UpdateAsync(trip);
+        }
+
     }
 }

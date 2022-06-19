@@ -36,10 +36,10 @@ namespace Core.Specifications
         internal class GetOffersNearRoute : Specification<Offer>
         {
             public GetOffersNearRoute(
-                Geometry routeGeography, 
+                Geometry routeGeography,
                 double dist,
-                DateTimeOffset startDate, 
-                DateTimeOffset expirationDate, 
+                DateTimeOffset startDate,
+                DateTimeOffset expirationDate,
                 PaginationFilterDTO paginationFilter)
             {
                 Query
@@ -53,6 +53,18 @@ namespace Core.Specifications
                     .Include(offer => offer.GoodCategory)
                     .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
                     .Take(paginationFilter.PageSize);
+            }
+        }
+
+        internal class GetByTripId : Specification<Offer>
+        {
+            public GetByTripId(int tripId)
+            {
+                Query
+                    .Where(o => o.RelatedTripId == tripId)
+                    .Include(offer => offer.Point)
+                    .Include(offer => offer.OfferRole)
+                    .Include(offer => offer.GoodCategory);
             }
         }
     }

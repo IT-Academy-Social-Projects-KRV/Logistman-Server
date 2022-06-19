@@ -1,4 +1,5 @@
-﻿using Core.DTO.OfferDTO;
+﻿using System.Collections.Generic;
+using Core.DTO.OfferDTO;
 using System.Threading.Tasks;
 using Core.DTO;
 using Core.Helpers;
