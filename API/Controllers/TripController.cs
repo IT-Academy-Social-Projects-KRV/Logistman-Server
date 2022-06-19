@@ -45,7 +45,7 @@ namespace API.Controllers
 
         [HttpPost("add-offers")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> AddOfferToTripAsync([FromBody] OffersForTripDTO offersForTrip)
+        public async Task<ActionResult> AddOffersToTripAsync([FromBody] OffersForTripDTO offersForTrip)
         {
             await _tripService.AddOffersToTripAsync(offersForTrip);
             return Ok();
@@ -53,7 +53,7 @@ namespace API.Controllers
 
         [HttpPost("manage-offers")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> ManageOfferTripAsync([FromBody] OffersForTripDTO offersForTrip)
+        public async Task<ActionResult> ManageOffersTripAsync([FromBody] OffersForTripDTO offersForTrip)
         {
             await _tripService.ManageOffersTripAsync(offersForTrip);
             return Ok();

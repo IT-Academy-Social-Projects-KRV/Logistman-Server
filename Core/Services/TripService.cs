@@ -162,7 +162,6 @@ namespace Core.Services
                 {
                     trip.IsActive = false;
                     await _tripRepository.UpdateAsync(trip);
-                    return;
                 }
             }
         }
@@ -183,6 +182,7 @@ namespace Core.Services
 
                 await _offerRepository.UpdateAsync(offer);
             }
+
             trip.IsActive = true;
             await _tripRepository.UpdateAsync(trip);
         }
