@@ -156,9 +156,19 @@ namespace Core.Services
                     await _offerRepository.UpdateAsync(offer);
                 }
 
+                foreach (var pointTrip in offersForTrip.PointsTripList)
+                {
+                    var pointData = await _pointDataRepository.GetByIdAsync(pointTrip.PointId);
+
+                    ExceptionMethods.PointNullCheck(pointData);
+
+                    pointData.Order = pointTrip.Order;
+                    await _pointDataRepository.UpdateAsync(pointData);
+                }
+
                 offersForTrip.OffersIdList.Remove(0);
 
-                if (offersForTrip.OffersIdList.Count == 0)
+                if (offersForTrip.PointsTripList.Count == 0)
                 {
                     trip.IsActive = false;
                     await _tripRepository.UpdateAsync(trip);
@@ -183,8 +193,15 @@ namespace Core.Services
                 await _offerRepository.UpdateAsync(offer);
             }
 
-            trip.IsActive = true;
-            await _tripRepository.UpdateAsync(trip);
+            foreach (var pointTrip in offersForTrip.PointsTripList)
+            {
+                var pointData = await _pointDataRepository.GetByIdAsync(pointTrip.PointId);
+
+                ExceptionMethods.PointNullCheck(pointData);
+
+                pointData.Order = pointTrip.Order;
+                await _pointDataRepository.UpdateAsync(pointData);
+            }
         }
 
     }
