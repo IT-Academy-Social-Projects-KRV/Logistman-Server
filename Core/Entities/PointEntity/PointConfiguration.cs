@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Core.Entities.PointEntity
 {
-    public class PointConfiguration : IEntityTypeConfiguration<Point>
+    public class PointConfiguration : IEntityTypeConfiguration<PointData>
     {
-        public void Configure(EntityTypeBuilder<Point> builder)
+        public void Configure(EntityTypeBuilder<PointData> builder)
         {
             builder
                 .Property(p => p.Address)

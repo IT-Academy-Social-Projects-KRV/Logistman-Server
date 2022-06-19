@@ -55,10 +55,17 @@ namespace API.Controllers
 
         [HttpGet("trip-offers")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<IActionResult> GetOfferByTrip(int tripId)
+        public async Task<IActionResult> GetOffersByTripAsync(int tripId)
         {
             var offers = await _offerService.GetOfferByTripAsync(tripId);
             return Ok(offers);
+        }
+        
+        [HttpGet("near-route")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<IActionResult> GetNearRouteAsync([FromQuery] PaginationFilterDTO paginationFilter, int routeId)
+        {
+            return Ok(await _offerService.GetNearRouteAsync(paginationFilter, routeId));
         }
     }
 }

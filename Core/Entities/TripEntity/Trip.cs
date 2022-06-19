@@ -24,9 +24,10 @@ namespace Core.Entities.TripEntity
         public User User { get; set; }
         public int TransportationCarId { get; set; }
         public Car Car { get; set; }
+        public float Distance { get; set; }
         public ICollection<Offer> Offers { get; set; }
         public ICollection<Rating> Ratings { get; set; }
         public ICollection<Report> Reports { get; set; }
-        public ICollection<Point> Points { get; set; }
+        public ICollection<PointData> Points { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace Core.Exceptions
             }
         }
 
-        public static void PointNullCheck(Point point)
+        public static void PointNullCheck(PointData point)
         {
             if (point == null)
             {

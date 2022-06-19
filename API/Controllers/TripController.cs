@@ -1,4 +1,5 @@
 ﻿using Core.Constants;
+using Core.DTO;
 using Core.DTO.TripDTO;
 using Core.Helpers;
 using Core.Interfaces.CustomService;
@@ -37,7 +38,7 @@ namespace API.Controllers
 
         [HttpPost("add-offers")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> AddOfferToTrip([FromBody] OffersForTripDTO offersForTrip)
+        public async Task<ActionResult> AddOfferToTripAsync([FromBody] OffersForTripDTO offersForTrip)
         {
             await _tripService.AddOffersToTripAsync(offersForTrip);
             return Ok();
@@ -45,10 +46,17 @@ namespace API.Controllers
 
         [HttpPost("manage-offers")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> ManageOfferTrip([FromBody] OffersForTripDTO offersForTrip)
+        public async Task<ActionResult> ManageOfferTripAsync([FromBody] OffersForTripDTO offersForTrip)
         {
             await _tripService.ManageOffersTripAsync(offersForTrip);
             return Ok();
+        }
+
+        [HttpGet("routes")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<IActionResult> GetAllRoutesAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        {
+            return Ok(await _tripService.GetAllRoutesAsync(paginationFilter));
         }
     }
 }

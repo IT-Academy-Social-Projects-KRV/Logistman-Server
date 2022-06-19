@@ -109,13 +109,20 @@ namespace Core.Services
         {
             var roleId = (await _roleManager.FindByNameAsync(IdentityRoleNames.User.ToString())).Id;
 
+            var userRolesCount = await _userRoleRepository
+                .CountAsync(new IdentityUserRoleSpecification.GetUserRoleByRoleId(roleId, paginationFilter));
+
+            int totalPages = PaginatedList<UserDTO>.GetTotalPages(paginationFilter, userRolesCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
             var userRoles = await _userRoleRepository
                 .ListAsync(
                 new IdentityUserRoleSpecification
                 .GetUserRoleByRoleId(roleId, paginationFilter));
-
-            var userRolesCount = await _userRoleRepository
-                .CountAsync(new IdentityUserRoleSpecification.GetUserRoleByRoleId(roleId, paginationFilter));
 
             List<string> userIds = new List<string>();
 
@@ -128,7 +135,7 @@ namespace Core.Services
                 .ListAsync(new UserSpecification.GetByIds(userIds));
 
             return PaginatedList<UserDTO>
-                .Evaluate(_mapper.Map<List<UserDTO>>(userList), paginationFilter, userRolesCount);
+                .Evaluate(_mapper.Map<List<UserDTO>>(userList), paginationFilter.PageNumber, userRolesCount, totalPages);
         }
 
         public async Task<string> GetUserIdByEmailAsync(string email)

@@ -16,12 +16,12 @@ namespace Core.Services
     public class PointService : IPointService
     {
         private readonly IMapper _mapper;
-        private readonly IRepository<Point> _pointRepository;
+        private readonly IRepository<PointData> _pointRepository;
         private readonly IRepository<Trip> _tripRepository;
 
         public PointService(
             IMapper mapper,
-            IRepository<Point> pointRepository,
+            IRepository<PointData> pointRepository,
             IRepository<Trip> tripRepository)
         {
             _mapper = mapper;
@@ -31,7 +31,8 @@ namespace Core.Services
 
         public async Task<int> CreateAsync(PointDTO pointDTO)
         {
-            var point = _mapper.Map<Point>(pointDTO);
+            var point = _mapper.Map<PointData>(pointDTO);
+            
             await _pointRepository.AddAsync(point);
 
             return point.Id;

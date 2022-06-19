@@ -48,7 +48,7 @@ namespace API.Controllers
 
             return Ok(verifiedCars);
         }
-        
+
         [HttpGet("user-cars")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<ActionResult> GetAllUserCars([FromQuery] PaginationFilterDTO paginationFilter, string email)
