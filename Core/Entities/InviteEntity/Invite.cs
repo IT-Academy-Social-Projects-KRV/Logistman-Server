@@ -11,7 +11,7 @@ namespace Core.Entities.InviteEntity
         public bool IsAnswered { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
-        public int OfferId { get; set; }
+        public int? OfferId { get; set; }
         public Offer Offer { get; set; }
         public int TripId { get; set; }
         public Trip Trip { get; set; }

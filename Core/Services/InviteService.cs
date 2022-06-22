@@ -73,6 +73,18 @@ namespace Core.Services
                 });
             }
 
+            if (previousTripInvites.Count == 0)
+            {
+                newInvites.Add(new Invite
+                {
+                    IsAccepted = false,
+                    IsAnswered = false,
+                    OfferId = null,
+                    TripId = createTripInvitesDTO.TripId,
+                    UserId = trip.TripCreatorId
+                });
+            }
+
             if (newInvites.Count > 0)
             {
                 await _inviteRepository.AddRangeAsync(newInvites);

@@ -10,7 +10,7 @@ namespace Core.Validation
             RuleFor(i => i.TripId)
                 .GreaterThan(0);
 
-            RuleFor(i => i.OffersId.Count)
+            RuleForEach(i => i.OffersId)
                 .GreaterThan(0);
         }
     }

@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220622124114_AddInviteEntity")]
+    [Migration("20220622174012_AddInviteEntity")]
     partial class AddInviteEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,7 +124,7 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsAnswered")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OfferId")
+                    b.Property<int?>("OfferId")
                         .HasColumnType("int");
 
                     b.Property<int>("TripId")
@@ -136,7 +136,8 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OfferId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[OfferId] IS NOT NULL");
 
                     b.HasIndex("TripId");
 
@@ -656,9 +657,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Entities.OfferEntity.Offer", "Offer")
                         .WithOne("Invite")
-                        .HasForeignKey("Core.Entities.InviteEntity.Invite", "OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Core.Entities.InviteEntity.Invite", "OfferId");
 
                     b.HasOne("Core.Entities.TripEntity.Trip", "Trip")
                         .WithMany("Invites")

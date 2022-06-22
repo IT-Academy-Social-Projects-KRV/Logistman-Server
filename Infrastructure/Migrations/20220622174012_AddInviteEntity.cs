@@ -15,7 +15,7 @@ namespace Infrastructure.Migrations
                     IsAccepted = table.Column<bool>(type: "bit", nullable: false),
                     IsAnswered = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    OfferId = table.Column<int>(type: "int", nullable: false),
+                    OfferId = table.Column<int>(type: "int", nullable: true),
                     TripId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -32,7 +32,7 @@ namespace Infrastructure.Migrations
                         column: x => x.OfferId,
                         principalTable: "Offers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Invites_Trips_TripId",
                         column: x => x.TripId,
@@ -45,7 +45,8 @@ namespace Infrastructure.Migrations
                 name: "IX_Invites_OfferId",
                 table: "Invites",
                 column: "OfferId",
-                unique: true);
+                unique: true,
+                filter: "[OfferId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Invites_TripId",
