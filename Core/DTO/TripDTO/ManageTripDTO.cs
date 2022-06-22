@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Core.DTO.TripDTO;
 
-namespace Core.DTO.OfferDTO
+namespace Core.DTO.TripDTO
 {
-    public class OffersForTripDTO
+    public class ManageTripDTO
     {
         public int TripId { get; set; }
         public List<PointsTripDTO> PointsTrip { get; set; }

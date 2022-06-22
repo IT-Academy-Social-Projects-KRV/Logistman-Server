@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core.Constants;
 using Core.DTO;
-using Core.DTO.OfferDTO;
 using Core.DTO.TripDTO;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
@@ -16,6 +15,7 @@ using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -133,35 +133,31 @@ namespace Core.Services
                 _mapper.Map<List<RouteDTO>>(routes), paginationFilter.PageNumber, routesCount, totalPages);
         }
 
-        public async Task ManageOffersTripAsync(OffersForTripDTO offersForTrip)
+        public async Task ManageOffersTripAsync(ManageTripDTO manageTrip)
         {
             var trip = await _tripRepository
-                .GetBySpecAsync(new TripSpecification.GetById(offersForTrip.TripId));
+                .GetBySpecAsync(new TripSpecification.GetById(manageTrip.TripId));
 
             ExceptionMethods.TripNullCheck(trip);
 
             trip.Offers = await _offerRepository
                 .ListAsync(new OfferSpecification
-                    .GetOfferByIds(offersForTrip.OffersId));
+                    .GetOfferByIds(manageTrip.OffersId));
 
-            var points = new List<int>();
+            var points = new Collection<PointData>();
 
-            foreach (var pointTrip in offersForTrip.PointsTrip)
+            foreach (var pointTrip in manageTrip.PointsTrip)
             {
                 var pointData = await _pointDataRepository.GetByIdAsync(pointTrip.PointId);
 
                 ExceptionMethods.PointNullCheck(pointData);
 
-                points.Add(pointTrip.PointId);
+                points.Add(pointData);
 
                 pointData.Order = pointTrip.Order;
-                await _pointDataRepository.UpdateAsync(pointData);
             }
 
-            trip.Points =
-                await _pointDataRepository
-                    .ListAsync(new PointDataSpecification
-                        .GetByIds(points));
+            trip.Points = points;
 
             await _tripRepository.UpdateAsync(trip);
         }

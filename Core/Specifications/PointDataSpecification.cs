@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Ardalis.Specification;
-using Core.DTO.TripDTO;
+﻿using Ardalis.Specification;
 using Core.Entities.PointEntity;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Specifications
 {

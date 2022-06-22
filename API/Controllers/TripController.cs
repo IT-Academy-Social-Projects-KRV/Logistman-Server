@@ -6,7 +6,6 @@ using Core.Interfaces.CustomService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Core.DTO.OfferDTO;
 
 namespace API.Controllers
 {
@@ -43,11 +42,11 @@ namespace API.Controllers
             return Ok(await _tripService.GetAllRoutesAsync(paginationFilter));
         }
 
-        [HttpPost("manage-offers")]
+        [HttpPost("manage-trip")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> ManageOffersTripAsync([FromBody] OffersForTripDTO offersForTrip)
+        public async Task<ActionResult> ManageOffersTripAsync([FromBody] ManageTripDTO manageTrip)
         {
-            await _tripService.ManageOffersTripAsync(offersForTrip);
+            await _tripService.ManageOffersTripAsync(manageTrip);
             return Ok();
         }
     }

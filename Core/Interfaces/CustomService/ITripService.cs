@@ -1,9 +1,8 @@
 ﻿using Core.DTO;
 using Core.DTO.TripDTO;
 using Core.Helpers;
-using System.Threading.Tasks;
-using Core.DTO.OfferDTO;
 using NetTopologySuite.Geometries;
+using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService
 {
@@ -13,6 +12,6 @@ namespace Core.Interfaces.CustomService
         Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId);
         Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter);
         Task<LineString> GetRouteGeographyDataAsync(int routeId);
-        Task ManageOffersTripAsync(OffersForTripDTO offersForTrip);
+        Task ManageOffersTripAsync(ManageTripDTO manageTrip);
     }
 }
