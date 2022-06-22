@@ -30,7 +30,8 @@ namespace Core.Services
 
         public async Task ManageTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO)
         {
-            var trip = await _tripRepository.GetByIdAsync(createTripInvitesDTO.TripId);
+            var trip = await _tripRepository
+                .GetBySpecAsync(new TripSpecification.GetUnactiveById(createTripInvitesDTO.TripId));
 
             ExceptionMethods.TripNullCheck(trip);
 
@@ -74,7 +75,10 @@ namespace Core.Services
 
             foreach (var offerId in createTripInvitesDTO.OffersId)
             {
-                var offer = await _offerRepository.GetByIdAsync(offerId);
+                var offer = await _offerRepository
+                    .GetBySpecAsync(new OfferSpecification.GetOpenById(
+                        offerId, 
+                        createTripInvitesDTO.TripId));
 
                 ExceptionMethods.OfferNullCheck(offer);
 

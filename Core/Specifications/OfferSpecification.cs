@@ -55,5 +55,15 @@ namespace Core.Specifications
                     .Take(paginationFilter.PageSize);
             }
         }
+
+        internal class GetOpenById : Specification<Offer>, ISingleResultSpecification<Offer>
+        {
+            public GetOpenById(int offerId, int tripId)
+            {
+                Query.Where(offer => offer.Id == offerId 
+                && !offer.IsClosed 
+                && offer.RelatedTripId == tripId);
+            }
+        }
     }
 }
