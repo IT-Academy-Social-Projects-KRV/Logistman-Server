@@ -13,7 +13,6 @@ namespace Core.Interfaces.CustomService
         Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId);
         Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter);
         Task<LineString> GetRouteGeographyDataAsync(int routeId);
-        Task AddOffersToTripAsync(OffersForTripDTO offersForTrip);
         Task ManageOffersTripAsync(OffersForTripDTO offersForTrip);
     }
 }

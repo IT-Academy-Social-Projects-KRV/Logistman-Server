@@ -3,6 +3,7 @@ using Core.DTO;
 using Core.Entities.OfferEntity;
 using NetTopologySuite.Geometries;
 using System;
+using System.Collections.Generic;
 
 namespace Core.Specifications
 {
@@ -65,6 +66,14 @@ namespace Core.Specifications
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
                     .Include(offer => offer.GoodCategory);
+            }
+        }
+        internal class GetOfferByIds : Specification<Offer>
+        {
+            public GetOfferByIds(List<int> offers)
+            {
+                Query
+                    .Where(o => offers.Contains(o.Id));
             }
         }
     }

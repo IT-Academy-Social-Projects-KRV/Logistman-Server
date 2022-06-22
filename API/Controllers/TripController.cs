@@ -43,14 +43,6 @@ namespace API.Controllers
             return Ok(await _tripService.GetAllRoutesAsync(paginationFilter));
         }
 
-        [HttpPost("add-offers")]
-        [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> AddOffersToTripAsync([FromBody] OffersForTripDTO offersForTrip)
-        {
-            await _tripService.AddOffersToTripAsync(offersForTrip);
-            return Ok();
-        }
-
         [HttpPost("manage-offers")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<ActionResult> ManageOffersTripAsync([FromBody] OffersForTripDTO offersForTrip)

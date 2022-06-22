@@ -11,7 +11,10 @@ namespace Core.Specifications
         {
             public GetById(int tripId)
             {
-                Query.Where(t => t.Id == tripId);
+                Query
+                    .Where(t => t.Id == tripId)
+                    .Include(t => t.Offers)
+                    .Include(t => t.Points);
             }
         }
 
