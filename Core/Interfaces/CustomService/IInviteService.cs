@@ -5,6 +5,6 @@ namespace Core.Interfaces.CustomService
 {
     public interface IInviteService
     {
-        Task CreateTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO);
+        Task ManageTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO);
     }
 }

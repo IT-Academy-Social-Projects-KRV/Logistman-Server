@@ -20,12 +20,12 @@ namespace API.Controllers
             _inviteService = inviteService;
         }
 
-        [HttpPost("create-list")]
+        [HttpPost("manage-list")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> CreateTripInvitesAsync(
+        public async Task<ActionResult> ManageTripInvitesAsync(
             [FromBody] CreateTripInvitesDTO createTripInvitesDTO)
         {
-            await _inviteService.CreateTripInvitesAsync(createTripInvitesDTO);
+            await _inviteService.ManageTripInvitesAsync(createTripInvitesDTO);
             return Ok();
         }
     }

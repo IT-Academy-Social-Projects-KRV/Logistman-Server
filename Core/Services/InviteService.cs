@@ -28,7 +28,7 @@ namespace Core.Services
             _offerRepository = offerRepository;
         }
 
-        public async Task CreateTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO)
+        public async Task ManageTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO)
         {
             var trip = await _tripRepository.GetByIdAsync(createTripInvitesDTO.TripId);
 
@@ -37,28 +37,43 @@ namespace Core.Services
             var previousTripInvites = await _inviteRepository.ListAsync(
                 new InviteSpecification.GetByTripId(createTripInvitesDTO.TripId));
             var newInvites = new List<Invite>();
+            var invitesIdsForDelete = new List<int>();
 
             createTripInvitesDTO.OffersId = createTripInvitesDTO.OffersId.Distinct().ToList();
 
-            foreach (var offerId in createTripInvitesDTO.OffersId)
+            if (previousTripInvites.Count == 0)
             {
-                bool isExists = false;
-
-                foreach (var previousInvite in previousTripInvites)
+                newInvites.Add(new Invite
                 {
-                    if (previousInvite.TripId == createTripInvitesDTO.TripId &&
-                        previousInvite.OfferId == offerId)
-                    {
-                        isExists = true;
-                        break;
-                    }
-                }
+                    IsAccepted = false,
+                    IsAnswered = false,
+                    OfferId = null,
+                    TripId = createTripInvitesDTO.TripId,
+                    UserId = trip.TripCreatorId
+                });
+            }
 
-                if (isExists)
+            foreach (var previousInvite in previousTripInvites)
+            {
+                if (previousInvite.OfferId == null)
                 {
                     continue;
                 }
 
+                var offerId = (int)previousInvite.OfferId;
+
+                if (createTripInvitesDTO.OffersId.Contains(offerId))
+                {
+                    createTripInvitesDTO.OffersId.Remove(offerId);
+                }
+                else
+                {
+                    invitesIdsForDelete.Add(previousInvite.Id);
+                }
+            }
+
+            foreach (var offerId in createTripInvitesDTO.OffersId)
+            {
                 var offer = await _offerRepository.GetByIdAsync(offerId);
 
                 ExceptionMethods.OfferNullCheck(offer);
@@ -73,16 +88,12 @@ namespace Core.Services
                 });
             }
 
-            if (previousTripInvites.Count == 0)
+            if (invitesIdsForDelete.Count > 0)
             {
-                newInvites.Add(new Invite
-                {
-                    IsAccepted = false,
-                    IsAnswered = false,
-                    OfferId = null,
-                    TripId = createTripInvitesDTO.TripId,
-                    UserId = trip.TripCreatorId
-                });
+                var invitesForDelete = await _inviteRepository.ListAsync(
+                    new InviteSpecification.GetByIds(invitesIdsForDelete));
+
+                await _inviteRepository.DeleteRangeAsync(invitesForDelete);
             }
 
             if (newInvites.Count > 0)
