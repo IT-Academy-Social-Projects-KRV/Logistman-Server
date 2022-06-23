@@ -10,6 +10,12 @@ namespace Core.Helpers.ApplicationProfiles
         {
             CreateMap<CreateTripDTO, Trip>();
             CreateMap<Trip, RouteDTO>();
+            CreateMap<Trip, TripPreviewForInviteDTO>()
+                .ForMember(dest => dest.CreatorFullName,
+                    opt => opt.MapFrom(trip =>
+                        string.Concat(trip.User.Name, ' ', trip.User.Surname)
+                    )
+                );
         }
     }
 }

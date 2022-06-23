@@ -26,7 +26,7 @@ namespace API.Controllers
 
         [HttpPost("manage-list")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> ManageTripInvitesAsync(
+        public async Task<IActionResult> ManageTripInvitesAsync(
             [FromBody] CreateTripInvitesDTO createTripInvitesDTO)
         {
             await _inviteService.ManageTripInvitesAsync(createTripInvitesDTO);
@@ -35,13 +35,23 @@ namespace API.Controllers
 
         [HttpPost("manage")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<ActionResult> ManageInviteAsync(
+        public async Task<IActionResult> ManageInviteAsync(
             [FromBody] ManageInviteDTO manageInviteDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-
             await _inviteService.ManageAsync(manageInviteDTO, userId);
+
             return Ok();
+        }
+
+        [HttpGet("offers")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> OffersInvitesAsync()
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            var invites = await _inviteService.OffersInvitesAsync(userId);
+
+            return Ok(invites);
         }
     }
 }

@@ -9,6 +9,9 @@ using Core.Exceptions;
 using Core.Specifications;
 using System.Linq;
 using Core.Entities.TripEntity;
+using AutoMapper;
+using Core.DTO.OfferDTO;
+using Core.DTO.TripDTO;
 
 namespace Core.Services
 {
@@ -17,15 +20,18 @@ namespace Core.Services
         private readonly IRepository<Invite> _inviteRepository;
         private readonly IRepository<Trip> _tripRepository;
         private readonly IRepository<Offer> _offerRepository;
+        private readonly IMapper _mapper;
 
         public InviteService(
             IRepository<Invite> inviteRepository,
             IRepository<Trip> tripRepository,
-            IRepository<Offer> offerRepository)
+            IRepository<Offer> offerRepository,
+            IMapper mapper)
         {
             _inviteRepository = inviteRepository;
             _tripRepository = tripRepository;
             _offerRepository = offerRepository;
+            _mapper = mapper;
         }
 
         public async Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId)
@@ -117,6 +123,26 @@ namespace Core.Services
             {
                 await _inviteRepository.AddRangeAsync(newInvites);
             }
+        }
+
+        public async Task<List<InvitePreviewDTO>> OffersInvitesAsync(string userId)
+        {
+            var invites = await _inviteRepository.ListAsync(
+                new InviteSpecification.GetOffersInvites(userId));
+
+            var invitesDTOs = new List<InvitePreviewDTO>();
+
+            foreach (var invite in invites)
+            {
+                invitesDTOs.Add(new InvitePreviewDTO
+                {
+                    Id = invite.Id,
+                    OfferInfo = _mapper.Map<OfferPreviewForInviteDTO>(invite.Offer),
+                    TripInfo = _mapper.Map<TripPreviewForInviteDTO>(invite.Trip)
+                });
+            }
+
+            return invitesDTOs;
         }
     }
 }
