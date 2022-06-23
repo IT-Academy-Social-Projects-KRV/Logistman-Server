@@ -28,6 +28,19 @@ namespace Core.Services
             _offerRepository = offerRepository;
         }
 
+        public async Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId)
+        {
+            var invite = await _inviteRepository.GetBySpecAsync(
+                new InviteSpecification.GetUnansweredByInviteAndUserIds(manageInviteDTO.InviteId, userId));
+
+            ExceptionMethods.InviteNullCheck(invite);
+
+            invite.IsAccepted = manageInviteDTO.IsAccepted;
+            invite.IsAnswered = true;
+
+            await _inviteRepository.SaveChangesAsync();
+        }
+
         public async Task ManageTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO)
         {
             var trip = await _tripRepository
@@ -77,7 +90,7 @@ namespace Core.Services
             {
                 var offer = await _offerRepository
                     .GetBySpecAsync(new OfferSpecification.GetOpenById(
-                        offerId, 
+                        offerId,
                         createTripInvitesDTO.TripId));
 
                 ExceptionMethods.OfferNullCheck(offer);
