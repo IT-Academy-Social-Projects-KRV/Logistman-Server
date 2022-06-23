@@ -21,5 +21,14 @@ namespace Core.Specifications
                 Query.Where(i => invitesIds.Contains(i.Id));
             }
         }
+
+        internal class GetUnansweredByInviteAndUserIds : Specification<Invite>,
+                                                         ISingleResultSpecification<Invite>
+        {
+            public GetUnansweredByInviteAndUserIds(int inviteId, string userId)
+            {
+                Query.Where(i => i.Id == inviteId && i.UserId == userId && i.IsAnswered == false);
+            }
+        }
     }
 }

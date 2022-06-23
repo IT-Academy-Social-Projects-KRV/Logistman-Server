@@ -1,6 +1,7 @@
 ﻿using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
 using Core.Entities.GoodCategoryEntity;
+using Core.Entities.InviteEntity;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
 using Core.Entities.RatingEntity;
@@ -149,6 +150,16 @@ namespace Core.Exceptions
             {
                 throw new HttpException(
                     ErrorMessages.TripNotFound,
+                    HttpStatusCode.NotFound);
+            }
+        }
+
+        public static void InviteNullCheck(Invite invite)
+        {
+            if (invite == null)
+            {
+                throw new HttpException(
+                    ErrorMessages.InviteNotFound,
                     HttpStatusCode.NotFound);
             }
         }
