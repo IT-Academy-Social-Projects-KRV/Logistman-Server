@@ -26,6 +26,7 @@ namespace Core
             services.AddScoped<ICarCategoryService, CarCategoryService>();
             services.AddScoped<IOfferRoleService, OfferRoleService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IInviteService, InviteService>();
             services.AddScoped<ITemplateHelper, TemplateHelper>();
         }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Entities.InviteEntity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Core.Entities.OfferEntity
@@ -31,6 +32,10 @@ namespace Core.Entities.OfferEntity
                 .HasOne(p => p.User)
                 .WithMany(p => p.Offers)
                 .HasForeignKey(p => p.OfferCreatorId);
+            builder
+                .HasOne(o => o.Invite)
+                .WithOne(i => i.Offer)
+                .HasForeignKey<Invite>(i => i.OfferId);
         }
     }
 }

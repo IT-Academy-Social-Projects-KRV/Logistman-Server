@@ -12,6 +12,7 @@ using Core.Entities.RefreshTokenEntity;
 using Infrastructure.Data.SeedData;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Core.Entities.InviteEntity;
 
 namespace Infrastructure.Data
 {
@@ -28,6 +29,8 @@ namespace Infrastructure.Data
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<GoodCategory> GoodCategories { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Invite> Invites { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new CarConfiguration());
