@@ -10,7 +10,6 @@ namespace Core.DTO.OfferDTO
         public bool IsClosed { get; set; }
         public float GoodsWeight { get; set; }
         public DateTimeOffset StartDate { get; set; }
-        public DateTimeOffset ExpirationDate { get; set; }
         public string GoodCategoryName { get; set; }
         public string CreatorRoleName { get; set; }
         public int? RelatedTripId { get; set; }

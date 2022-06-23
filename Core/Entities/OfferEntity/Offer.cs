@@ -16,7 +16,6 @@ namespace Core.Entities.OfferEntity
         public bool IsClosed { get; set; }
         public float GoodsWeight { get; set; }
         public DateTimeOffset StartDate { get; set; }
-        public DateTimeOffset ExpirationDate { get; set; }
         public int GoodCategoryId { get; set; }
         public GoodCategory GoodCategory { get; set; }
         public int OfferPointId { get; set; }

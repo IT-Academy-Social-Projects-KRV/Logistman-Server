@@ -45,7 +45,6 @@ namespace Core.Specifications
             public GetOffersNearRoute(
                 Geometry routeGeography,
                 double dist,
-                DateTimeOffset startDate,
                 DateTimeOffset expirationDate,
                 PaginationFilterDTO paginationFilter)
             {
@@ -53,7 +52,6 @@ namespace Core.Specifications
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
                     && !offer.IsClosed
                     && offer.RelatedTripId == null
-                    && startDate <= offer.ExpirationDate
                     && offer.StartDate <= expirationDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)

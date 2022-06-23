@@ -22,14 +22,6 @@ namespace Core.Validation
                 .NotEmpty()
                 .Must(date => date >= DateTimeOffset.UtcNow)
                 .WithMessage("StartDate cannot be created in the past");
-
-            RuleFor(offer => offer.ExpirationDate)
-                .NotEmpty();
-
-            RuleFor(offer => offer.ExpirationDate.Subtract(offer.StartDate) < _hour)
-                .Must(date => !date)
-                .WithMessage(
-                    $"The difference between the StartDate and the ExpirationDate must be at least {_hour.Hours} hours!");
         }
     }
 }
