@@ -63,34 +63,12 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByTripId : Specification<Offer>
-        {
-            public GetByTripId(int tripId)
-            {
-                Query
-                    .Where(o => o.RelatedTripId == tripId)
-                    .Include(offer => offer.Point)
-                    .Include(offer => offer.OfferRole)
-                    .Include(offer => offer.GoodCategory);
-            }
-        }
-
         internal class GetOfferByIds : Specification<Offer>
         {
             public GetOfferByIds(List<int> offers)
             {
                 Query
                     .Where(offer => offers.Contains(offer.Id));
-            }
-        }
-      
-        internal class GetOpenById : Specification<Offer>, ISingleResultSpecification<Offer>
-        {
-            public GetOpenById(int offerId, int tripId)
-            {
-                Query.Where(offer => offer.Id == offerId 
-                && !offer.IsClosed 
-                && offer.RelatedTripId == tripId);
             }
         }
     }

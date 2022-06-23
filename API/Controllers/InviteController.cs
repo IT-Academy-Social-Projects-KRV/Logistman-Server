@@ -19,14 +19,5 @@ namespace API.Controllers
         {
             _inviteService = inviteService;
         }
-
-        [HttpPost("manage-list")]
-        [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<ActionResult> ManageTripInvitesAsync(
-            [FromBody] CreateTripInvitesDTO createTripInvitesDTO)
-        {
-            await _inviteService.ManageTripInvitesAsync(createTripInvitesDTO);
-            return Ok();
-        }
     }
 }

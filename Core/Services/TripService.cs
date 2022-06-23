@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core.Constants;
 using Core.DTO;
-using Core.DTO.InviteDTO;
 using Core.DTO.TripDTO;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
@@ -139,6 +138,8 @@ namespace Core.Services
 
             ExceptionMethods.TripNullCheck(trip);
 
+            manageTrip.OffersId = manageTrip.OffersId.Distinct().ToList();
+
             await _tripValidationService.ValidOffersCheckAsync(
                 manageTrip.OffersId,
                 manageTrip.TripId,
@@ -160,17 +161,18 @@ namespace Core.Services
                 pointData.Order = pointTrip.Order;
             }
 
-            trip.Offers = await _offerRepository
+            var offers = await _offerRepository
                 .ListAsync(new OfferSpecification
                     .GetOfferByIds(manageTrip.OffersId));
+
+            trip.Offers = offers;
 
             trip.Points = points;
 
             trip.Distance = manageTrip.Distance;
             await _tripRepository.UpdateAsync(trip);
 
-            await _inviteService
-                    .ManageTripInvitesAsync(_mapper.Map<CreateTripInvitesDTO>(manageTrip));
+            await _inviteService.ManageTripInvitesAsync(trip, offers);
         }
     }
 }
