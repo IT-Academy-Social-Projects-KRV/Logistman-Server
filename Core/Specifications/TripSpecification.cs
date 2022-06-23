@@ -41,5 +41,13 @@ namespace Core.Specifications
                     .Take(paginationFilter.PageSize);
             }
         }
+
+        internal class GetUnactiveById : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetUnactiveById(int tripId)
+            {
+                Query.Where(t => t.Id == tripId && (!t.IsActive && !t.IsEnded));
+            }
+        }
     }
 }

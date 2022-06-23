@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using Core.Entities.CarEntity;
+using Core.Entities.InviteEntity;
 
 namespace Core.Entities.UserEntity
 {
@@ -19,6 +20,7 @@ namespace Core.Entities.UserEntity
         public string ConfirmationEmailToken { get; set; }
         public DateTimeOffset? ConfirmationEmailTokenExpirationDate { get; set; }
         public DateTimeOffset RegistrationDate { get; set; } = DateTimeOffset.UtcNow;
+        public ICollection<Invite> Invites { get; set; }
         public ICollection<Car> Cars { get; set; }
         public ICollection<Offer> Offers { get; set; }
         public ICollection<Trip> Trips { get; set; }
