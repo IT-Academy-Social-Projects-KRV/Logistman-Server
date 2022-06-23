@@ -2,6 +2,7 @@
 using Core.DTO;
 using Core.Entities.OfferEntity;
 using NetTopologySuite.Geometries;
+using System;
 
 namespace Core.Specifications
 {
@@ -37,12 +38,14 @@ namespace Core.Specifications
             public GetOffersNearRoute(
                 Geometry routeGeography, 
                 double dist,
+                DateTimeOffset expirationDate,
                 PaginationFilterDTO paginationFilter)
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
                     && !offer.IsClosed
-                    && offer.RelatedTripId == null)
+                    && offer.RelatedTripId == null
+                    && offer.StartDate <= expirationDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
                     .Include(offer => offer.GoodCategory)
