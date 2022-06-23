@@ -1,4 +1,5 @@
 ﻿using Core.Entities.GoodCategoryEntity;
+using Core.Entities.InviteEntity;
 using Core.Entities.PointEntity;
 using Core.Entities.RoleEntity;
 using Core.Entities.TripEntity;
@@ -24,6 +25,7 @@ namespace Core.Entities.OfferEntity
         public string OfferCreatorId { get; set; }
         public User User { get; set; }
         public int CreatorRoleId { get; set; }
+        public Invite Invite { get; set; }
         public OfferRole OfferRole { get; set; }
     }
 }
