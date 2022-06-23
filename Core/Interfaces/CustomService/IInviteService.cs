@@ -8,5 +8,6 @@ namespace Core.Interfaces.CustomService
     public interface IInviteService
     {
         Task ManageTripInvitesAsync(Trip trip, List<Offer> offers);
+        Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId);
     }
 }

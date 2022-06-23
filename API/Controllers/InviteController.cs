@@ -14,10 +14,25 @@ namespace API.Controllers
     public class InvitesController : ControllerBase
     {
         private readonly IInviteService _inviteService;
+        private readonly IUserService _userService;
 
-        public InvitesController(IInviteService inviteService)
+        public InvitesController(
+            IInviteService inviteService,
+            IUserService userService)
         {
             _inviteService = inviteService;
+            _userService = userService;
+        }
+
+        [HttpPost("manage")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<ActionResult> ManageInviteAsync(
+            [FromBody] ManageInviteDTO manageInviteDTO)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+
+            await _inviteService.ManageAsync(manageInviteDTO, userId);
+            return Ok();
         }
     }
 }

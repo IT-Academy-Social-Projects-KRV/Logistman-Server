@@ -20,6 +20,18 @@ namespace Core.Services
             _inviteRepository = inviteRepository;
         }
 
+        public async Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId)
+        {
+            var invite = await _inviteRepository.GetBySpecAsync(
+                new InviteSpecification.GetUnansweredByInviteAndUserIds(manageInviteDTO.InviteId, userId));
+
+            ExceptionMethods.InviteNullCheck(invite);
+
+            invite.IsAccepted = manageInviteDTO.IsAccepted;
+            invite.IsAnswered = true;
+
+            await _inviteRepository.SaveChangesAsync();
+        }
 
         public async Task ManageTripInvitesAsync(Trip trip, List<Offer> offers)
         {
