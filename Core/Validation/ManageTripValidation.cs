@@ -16,11 +16,13 @@ namespace Core.Validation
                 .GreaterThan(0);
 
             RuleFor(trip => trip.OffersId)
-                .NotEmpty();
-            
+                .NotEmpty()
+                .SetValidator(new OfferIdsValidation());
+
             RuleFor(trip => trip.PointsTrip)
-                .NotEmpty();
-           
+                .NotEmpty()
+                .SetValidator(new PiontTripValidation());
+
             RuleFor(trip => trip.TripId)
                 .NotEmpty()
                 .GreaterThan(0);

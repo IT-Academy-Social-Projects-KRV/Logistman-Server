@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.DTO;
-using Core.DTO.TripDTO;
 
 namespace Core.Interfaces.CustomService
 {

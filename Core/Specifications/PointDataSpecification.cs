@@ -16,6 +16,7 @@ namespace Core.Specifications
                     .OrderBy(p => p.Order);
             }
         }
+
         internal class GetByIds : Specification<PointData>
         {
             public GetByIds(List<int> pointIds)

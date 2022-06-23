@@ -5,6 +5,7 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Services;
 using Core.Validation;
+using Core.Validation.ValidationService;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,7 @@ namespace Core
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IInviteService, InviteService>();
             services.AddScoped<ITemplateHelper, TemplateHelper>();
+            services.AddScoped<ITripValidationService, TripValidationService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

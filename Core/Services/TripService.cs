@@ -14,7 +14,6 @@ using Core.Resources;
 using Core.Specifications;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -32,6 +31,7 @@ namespace Core.Services
         private readonly IMapper _mapper;
         private readonly IRepository<Offer> _offerRepository;
         private readonly IInviteService _inviteService;
+        private readonly ITripValidationService _tripValidationService;
 
         public TripService(
             IRepository<Trip> tripRepository,
@@ -40,7 +40,8 @@ namespace Core.Services
             IPointService pointService,
             IMapper mapper,
             IRepository<Offer> offerRepository,
-            IInviteService inviteService)
+            IInviteService inviteService,
+            ITripValidationService tripValidationService)
         {
             _tripRepository = tripRepository;
             _pointDataRepository = pointDataRepository;
@@ -49,6 +50,7 @@ namespace Core.Services
             _mapper = mapper;
             _offerRepository = offerRepository;
             _inviteService = inviteService;
+            _tripValidationService = tripValidationService;
         }
 
         public async Task<bool> CheckIsTripExistsById(int tripId)
@@ -58,7 +60,10 @@ namespace Core.Services
 
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
         {
-            await ValidateTripDateAsync(createTripDTO.StartDate, createTripDTO.ExpirationDate, creatorId);
+            await _tripValidationService.ValidateTripDateAsync(
+                createTripDTO.StartDate,
+                createTripDTO.ExpirationDate,
+                creatorId);
 
             var sortedPoints = _pointService.SortByOrder(createTripDTO.Points);
 
@@ -81,19 +86,6 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(tripFromDb);
 
             await _pointService.SetTripIdToListAsync(sortedPoints, tripFromDb.Id);
-        }
-
-        private async Task ValidateTripDateAsync(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
-        {
-            var isTimeSpaceBusy = await _tripRepository.AnyAsync(
-                new TripSpecification.GetByTimeSpace(startDate, expirationDate, creatorId));
-
-            if (isTimeSpaceBusy)
-            {
-                throw new HttpException(
-                            ErrorMessages.TripIsAlreadyExistsInTheTimeSpace,
-                            HttpStatusCode.BadRequest);
-            }
         }
 
         public async Task<LineString> GetRouteGeographyDataAsync(int routeId)
@@ -147,13 +139,13 @@ namespace Core.Services
 
             ExceptionMethods.TripNullCheck(trip);
 
-            await ValidOffersCheck(
-                manageTrip.OffersId, 
-                manageTrip.TripId, 
-                trip.StartDate, 
+            await _tripValidationService.ValidOffersCheckAsync(
+                manageTrip.OffersId,
+                manageTrip.TripId,
+                trip.StartDate,
                 trip.ExpirationDate);
 
-            await ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
+            await _tripValidationService.ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
 
             var points = new Collection<PointData>();
 
@@ -177,42 +169,8 @@ namespace Core.Services
             trip.Distance = manageTrip.Distance;
             await _tripRepository.UpdateAsync(trip);
 
-            if (!trip.IsActive)
-            {
-                await _inviteService
+            await _inviteService
                     .ManageTripInvitesAsync(_mapper.Map<CreateTripInvitesDTO>(manageTrip));
-            }
-        }
-
-        private async Task ValidOffersCheck(
-            List<int> offerIds, 
-            int tripId, 
-            DateTimeOffset startTrip, 
-            DateTimeOffset expirationTrip)
-        {
-            foreach (var id in offerIds)
-            {
-                if (!await _offerRepository
-                        .AnyAsync(new OfferSpecification
-                            .GetById(id, tripId, startTrip, expirationTrip)))
-                {
-                    throw new HttpException(
-                        ErrorMessages.OfferNotValid + $" Id: {id}", 
-                        HttpStatusCode.BadRequest);
-                }
-            }
-        }
-        private async Task ValidateTripAsync(int tripId, float totalWeight)
-        {
-            var isValid = await _tripRepository.AnyAsync(
-                new TripSpecification.GetByValidTrip(tripId, totalWeight));
-
-            if (!isValid)
-            {
-                throw new HttpException(
-                    ErrorMessages.TripNotValid,
-                    HttpStatusCode.BadRequest);
-            }
         }
     }
 }

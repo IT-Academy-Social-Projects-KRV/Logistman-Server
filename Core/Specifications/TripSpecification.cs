@@ -16,6 +16,15 @@ namespace Core.Specifications
                     .Include(t => t.Offers)
                     .Include(t => t.Points);
             }
+            public GetById(int tripId, float totalWeight)
+            {
+                Query
+                    .Where(t => tripId == t.Id 
+                                && !t.IsActive
+                                && !t.IsEnded
+                                && t.LoadCapacity >= totalWeight
+                                && DateTimeOffset.UtcNow <= t.ExpirationDate);
+            }
         }
 
         internal class GetByTimeSpace : Specification<Trip>, ISingleResultSpecification<Trip>
@@ -25,17 +34,6 @@ namespace Core.Specifications
                 Query.Where(t => t.TripCreatorId == creatorId && !t.IsEnded &&
                                                        ((t.StartDate >= startDate && t.StartDate < expirationDate) ||
                                                        (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate)));
-            }
-        }
-
-        internal class GetByValidTrip : Specification<Trip>, ISingleResultSpecification<Trip>
-        {
-            public GetByValidTrip(int tripId, float totalWeight)
-            {
-                Query.Where(t => tripId == t.Id 
-                                 && !t.IsEnded
-                                 && t.LoadCapacity >= totalWeight
-                                 && DateTimeOffset.UtcNow <= t.ExpirationDate);
             }
         }
 

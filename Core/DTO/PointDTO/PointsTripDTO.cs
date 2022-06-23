@@ -1,4 +1,4 @@
-﻿namespace Core.DTO.TripDTO
+﻿namespace Core.DTO
 {
     public class PointsTripDTO
     {
