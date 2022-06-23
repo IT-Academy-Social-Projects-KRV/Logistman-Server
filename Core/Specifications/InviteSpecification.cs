@@ -27,7 +27,7 @@ namespace Core.Specifications
         {
             public GetUnansweredByInviteAndUserIds(int inviteId, string userId)
             {
-                Query.Where(i => i.Id == inviteId && i.UserId == userId && i.IsAnswered == false);
+                Query.Where(i => i.Id == inviteId && i.UserId == userId && !i.IsAnswered);
             }
         }
     }
