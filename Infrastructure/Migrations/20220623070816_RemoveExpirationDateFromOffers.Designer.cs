@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220622184130_RemoveExpirationDateFromOffers")]
+    [Migration("20220623070816_RemoveExpirationDateFromOffers")]
     partial class RemoveExpirationDateFromOffers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,41 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GoodCategories");
+                });
+
+            modelBuilder.Entity("Core.Entities.InviteEntity.Invite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAnswered")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("OfferId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TripId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OfferId")
+                        .IsUnique()
+                        .HasFilter("[OfferId] IS NOT NULL");
+
+                    b.HasIndex("TripId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Invites");
                 });
 
             modelBuilder.Entity("Core.Entities.OfferEntity.Offer", b =>
@@ -615,6 +650,29 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Core.Entities.InviteEntity.Invite", b =>
+                {
+                    b.HasOne("Core.Entities.OfferEntity.Offer", "Offer")
+                        .WithOne("Invite")
+                        .HasForeignKey("Core.Entities.InviteEntity.Invite", "OfferId");
+
+                    b.HasOne("Core.Entities.TripEntity.Trip", "Trip")
+                        .WithMany("Invites")
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.UserEntity.User", "User")
+                        .WithMany("Invites")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Offer");
+
+                    b.Navigation("Trip");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Core.Entities.OfferEntity.Offer", b =>
                 {
                     b.HasOne("Core.Entities.RoleEntity.OfferRole", "OfferRole")
@@ -803,6 +861,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("Offers");
                 });
 
+            modelBuilder.Entity("Core.Entities.OfferEntity.Offer", b =>
+                {
+                    b.Navigation("Invite");
+                });
+
             modelBuilder.Entity("Core.Entities.PointEntity.PointData", b =>
                 {
                     b.Navigation("Offers");
@@ -815,6 +878,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.TripEntity.Trip", b =>
                 {
+                    b.Navigation("Invites");
+
                     b.Navigation("Offers");
 
                     b.Navigation("Points");
@@ -829,6 +894,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("Cars");
 
                     b.Navigation("EstimatorRatings");
+
+                    b.Navigation("Invites");
 
                     b.Navigation("Offers");
 
