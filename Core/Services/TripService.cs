@@ -139,14 +139,19 @@ namespace Core.Services
 
         public async Task ManageOffersTripAsync(ManageTripDTO manageTrip)
         {
-            await ValidOffersCheck(manageTrip.OffersId, manageTrip.TripId);
-
             var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
 
             var trip = await _tripRepository
-                .GetBySpecAsync(new TripSpecification.GetById(manageTrip.TripId));
+                .GetBySpecAsync(new TripSpecification
+                    .GetById(manageTrip.TripId));
 
             ExceptionMethods.TripNullCheck(trip);
+
+            await ValidOffersCheck(
+                manageTrip.OffersId, 
+                manageTrip.TripId, 
+                trip.StartDate, 
+                trip.ExpirationDate);
 
             await ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
 
@@ -179,15 +184,21 @@ namespace Core.Services
             }
         }
 
-        private async Task ValidOffersCheck(List<int> offerIds, int tripId)
+        private async Task ValidOffersCheck(
+            List<int> offerIds, 
+            int tripId, 
+            DateTimeOffset startTrip, 
+            DateTimeOffset expirationTrip)
         {
             foreach (var id in offerIds)
             {
                 if (!await _offerRepository
                         .AnyAsync(new OfferSpecification
-                            .GetById(id, tripId)))
+                            .GetById(id, tripId, startTrip, expirationTrip)))
                 {
-                    throw new HttpException(ErrorMessages.OfferNotValid + $" Id: {id}", HttpStatusCode.BadRequest);
+                    throw new HttpException(
+                        ErrorMessages.OfferNotValid + $" Id: {id}", 
+                        HttpStatusCode.BadRequest);
                 }
             }
         }

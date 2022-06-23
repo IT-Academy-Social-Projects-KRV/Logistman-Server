@@ -18,11 +18,13 @@ namespace Core.Specifications
                      .Include(offer => offer.OfferRole)
                      .Include(offer => offer.GoodCategory);
             }
-            public GetById(int offerId, int tripId)
+            public GetById(int offerId, int tripId, DateTimeOffset startTrip, DateTimeOffset expirationTrip)
             {
-                Query.Where(offer => offer.Id == offerId && !offer.IsClosed
-                                                          && (offer.RelatedTripId == tripId || offer.RelatedTripId == null)
-                                                          && offer.StartDate <= DateTimeOffset.UtcNow);
+                Query.Where(offer => offer.Id == offerId 
+                                     && !offer.IsClosed
+                                     && (offer.RelatedTripId == tripId || offer.RelatedTripId == null)
+                                     && offer.StartDate >= startTrip
+                                     && offer.StartDate <= expirationTrip );
             }
         }
 
