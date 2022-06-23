@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Core.DTO.TripDTO;
 
 namespace Core.Services
 {
@@ -39,6 +40,21 @@ namespace Core.Services
         }
 
         public List<PointDTO> SortByOrder(List<PointDTO> pointsDTOs)
+        {
+            var sortedPointsByOrder = pointsDTOs.OrderBy(p => p.Order).ToList();
+
+            for (int i = 0; i < sortedPointsByOrder.Count(); i++)
+            {
+                if (sortedPointsByOrder[i].Order != i + 1)
+                {
+                    throw new HttpException(ErrorMessages.InvalidOrder, HttpStatusCode.BadRequest);
+                }
+            }
+
+            return sortedPointsByOrder;
+        }
+
+        public List<PointsTripDTO> SortByOrder(List<PointsTripDTO> pointsDTOs)
         {
             var sortedPointsByOrder = pointsDTOs.OrderBy(p => p.Order).ToList();
 

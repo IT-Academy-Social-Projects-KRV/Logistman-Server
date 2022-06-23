@@ -268,6 +268,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offer is not valid!.
+        /// </summary>
+        internal static string OfferNotValid {
+            get {
+                return ResourceManager.GetString("OfferNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is already created.
         /// </summary>
         internal static string PasswordIsExist {
@@ -336,6 +345,15 @@ namespace Core.Resources {
         internal static string TripNotFound {
             get {
                 return ResourceManager.GetString("TripNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trip is not valid!.
+        /// </summary>
+        internal static string TripNotValid {
+            get {
+                return ResourceManager.GetString("TripNotValid", resourceCulture);
             }
         }
         

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Constants;
 using Core.DTO;
+using Core.DTO.InviteDTO;
 using Core.DTO.TripDTO;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
@@ -30,6 +31,7 @@ namespace Core.Services
         private readonly IPointService _pointService;
         private readonly IMapper _mapper;
         private readonly IRepository<Offer> _offerRepository;
+        private readonly IInviteService _inviteService;
 
         public TripService(
             IRepository<Trip> tripRepository,
@@ -37,7 +39,8 @@ namespace Core.Services
             ICarService carService,
             IPointService pointService,
             IMapper mapper,
-            IRepository<Offer> offerRepository)
+            IRepository<Offer> offerRepository,
+            IInviteService inviteService)
         {
             _tripRepository = tripRepository;
             _pointDataRepository = pointDataRepository;
@@ -45,6 +48,7 @@ namespace Core.Services
             _pointService = pointService;
             _mapper = mapper;
             _offerRepository = offerRepository;
+            _inviteService = inviteService;
         }
 
         public async Task<bool> CheckIsTripExistsById(int tripId)
@@ -135,18 +139,20 @@ namespace Core.Services
 
         public async Task ManageOffersTripAsync(ManageTripDTO manageTrip)
         {
+            await ValidOffersCheck(manageTrip.OffersId, manageTrip.TripId);
+
+            var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
+
             var trip = await _tripRepository
                 .GetBySpecAsync(new TripSpecification.GetById(manageTrip.TripId));
 
             ExceptionMethods.TripNullCheck(trip);
 
-            trip.Offers = await _offerRepository
-                .ListAsync(new OfferSpecification
-                    .GetOfferByIds(manageTrip.OffersId));
+            await ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
 
             var points = new Collection<PointData>();
 
-            foreach (var pointTrip in manageTrip.PointsTrip)
+            foreach (var pointTrip in sortedPoints)
             {
                 var pointData = await _pointDataRepository.GetByIdAsync(pointTrip.PointId);
 
@@ -157,9 +163,45 @@ namespace Core.Services
                 pointData.Order = pointTrip.Order;
             }
 
+            trip.Offers = await _offerRepository
+                .ListAsync(new OfferSpecification
+                    .GetOfferByIds(manageTrip.OffersId));
+
             trip.Points = points;
 
+            trip.Distance = manageTrip.Distance;
             await _tripRepository.UpdateAsync(trip);
+
+            if (!trip.IsActive)
+            {
+                await _inviteService
+                    .ManageTripInvitesAsync(_mapper.Map<CreateTripInvitesDTO>(manageTrip));
+            }
+        }
+
+        private async Task ValidOffersCheck(List<int> offerIds, int tripId)
+        {
+            foreach (var id in offerIds)
+            {
+                if (!await _offerRepository
+                        .AnyAsync(new OfferSpecification
+                            .GetById(id, tripId)))
+                {
+                    throw new HttpException(ErrorMessages.OfferNotValid + $" Id: {id}", HttpStatusCode.BadRequest);
+                }
+            }
+        }
+        private async Task ValidateTripAsync(int tripId, float totalWeight)
+        {
+            var isValid = await _tripRepository.AnyAsync(
+                new TripSpecification.GetByValidTrip(tripId, totalWeight));
+
+            if (!isValid)
+            {
+                throw new HttpException(
+                    ErrorMessages.TripNotValid,
+                    HttpStatusCode.BadRequest);
+            }
         }
     }
 }

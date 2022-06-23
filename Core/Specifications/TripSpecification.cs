@@ -28,6 +28,17 @@ namespace Core.Specifications
             }
         }
 
+        internal class GetByValidTrip : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetByValidTrip(int tripId, float totalWeight)
+            {
+                Query.Where(t => tripId == t.Id 
+                                 && !t.IsEnded
+                                 && t.LoadCapacity >= totalWeight
+                                 && DateTimeOffset.UtcNow <= t.ExpirationDate);
+            }
+        }
+
         internal class GetRoutes : Specification<Trip>
         {
             public GetRoutes(PaginationFilterDTO paginationFilter)

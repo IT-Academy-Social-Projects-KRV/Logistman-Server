@@ -18,6 +18,12 @@ namespace Core.Specifications
                      .Include(offer => offer.OfferRole)
                      .Include(offer => offer.GoodCategory);
             }
+            public GetById(int offerId, int tripId)
+            {
+                Query.Where(offer => offer.Id == offerId && !offer.IsClosed
+                                                          && (offer.RelatedTripId == tripId || offer.RelatedTripId == null)
+                                                          && offer.StartDate <= DateTimeOffset.UtcNow);
+            }
         }
 
         internal class GetByUserId : Specification<Offer>
@@ -73,7 +79,7 @@ namespace Core.Specifications
             public GetOfferByIds(List<int> offers)
             {
                 Query
-                    .Where(o => offers.Contains(o.Id));
+                    .Where(offer => offers.Contains(offer.Id));
             }
         }
       
