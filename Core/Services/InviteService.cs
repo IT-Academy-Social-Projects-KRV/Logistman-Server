@@ -10,8 +10,8 @@ using Core.Specifications;
 using System.Linq;
 using Core.Entities.TripEntity;
 using AutoMapper;
-using Core.DTO.OfferDTO;
-using Core.DTO.TripDTO;
+using Core.DTO;
+using Core.Helpers;
 
 namespace Core.Services
 {
@@ -125,24 +125,24 @@ namespace Core.Services
             }
         }
 
-        public async Task<List<InvitePreviewDTO>> OffersInvitesAsync(string userId)
+        public async Task<PaginatedList<InvitePreviewDTO>> OffersInvitesAsync(
+            string userId, PaginationFilterDTO paginationFilter)
         {
-            var invites = await _inviteRepository.ListAsync(
-                new InviteSpecification.GetOffersInvites(userId));
+            var invitesCount = await _inviteRepository.CountAsync(
+                new InviteSpecification.GetOffersInvites(userId, paginationFilter));
 
-            var invitesDTOs = new List<InvitePreviewDTO>();
+            int totalPages = PaginatedList<InvitePreviewDTO>.GetTotalPages(paginationFilter, invitesCount);
 
-            foreach (var invite in invites)
+            if (totalPages == 0)
             {
-                invitesDTOs.Add(new InvitePreviewDTO
-                {
-                    Id = invite.Id,
-                    OfferInfo = _mapper.Map<OfferPreviewForInviteDTO>(invite.Offer),
-                    TripInfo = _mapper.Map<TripPreviewForInviteDTO>(invite.Trip)
-                });
+                return null;
             }
 
-            return invitesDTOs;
+            var invites = await _inviteRepository.ListAsync(
+                new InviteSpecification.GetOffersInvites(userId, paginationFilter));
+
+            return PaginatedList<InvitePreviewDTO>.Evaluate(
+                _mapper.Map<List<InvitePreviewDTO>>(invites), paginationFilter.PageNumber, invitesCount, totalPages);
         }
     }
 }

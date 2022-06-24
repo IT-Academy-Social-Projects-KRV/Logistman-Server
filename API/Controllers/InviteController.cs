@@ -1,4 +1,5 @@
 ﻿using Core.Constants;
+using Core.DTO;
 using Core.DTO.InviteDTO;
 using Core.Helpers;
 using Core.Interfaces.CustomService;
@@ -46,10 +47,10 @@ namespace API.Controllers
 
         [HttpGet("offers")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> OffersInvitesAsync()
+        public async Task<IActionResult> OffersInvitesAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var invites = await _inviteService.OffersInvitesAsync(userId);
+            var invites = await _inviteService.OffersInvitesAsync(userId, paginationFilter);
 
             return Ok(invites);
         }
