@@ -8,17 +8,30 @@ using Core.Specifications;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Entities.TripEntity;
+using AutoMapper;
+using Core.DTO;
+using Core.Helpers;
 
 namespace Core.Services
 {
     public class InviteService : IInviteService
     {
         private readonly IRepository<Invite> _inviteRepository;
+        private readonly IRepository<Trip> _tripRepository;
+        private readonly IRepository<Offer> _offerRepository;
+        private readonly IMapper _mapper;
 
         public InviteService(
-            IRepository<Invite> inviteRepository)
+            IRepository<Invite> inviteRepository,
+            IRepository<Trip> tripRepository,
+            IRepository<Offer> offerRepository,
+            IMapper mapper)
         {
             _inviteRepository = inviteRepository;
+            _tripRepository = tripRepository;
+            _offerRepository = offerRepository;
+            _mapper = mapper;
         }
 
         public async Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId)
@@ -96,6 +109,26 @@ namespace Core.Services
             {
                 await _inviteRepository.AddRangeAsync(newInvites);
             }
+        }
+
+        public async Task<PaginatedList<InvitePreviewDTO>> OffersInvitesAsync(
+            string userId, PaginationFilterDTO paginationFilter)
+        {
+            var invitesCount = await _inviteRepository.CountAsync(
+                new InviteSpecification.GetOffersInvites(userId, paginationFilter));
+
+            int totalPages = PaginatedList<InvitePreviewDTO>.GetTotalPages(paginationFilter, invitesCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var invites = await _inviteRepository.ListAsync(
+                new InviteSpecification.GetOffersInvites(userId, paginationFilter));
+
+            return PaginatedList<InvitePreviewDTO>.Evaluate(
+                _mapper.Map<List<InvitePreviewDTO>>(invites), paginationFilter.PageNumber, invitesCount, totalPages);
         }
     }
 }

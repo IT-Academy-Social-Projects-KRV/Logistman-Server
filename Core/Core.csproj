@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="DTO\GoodCategoryDTO\" />
-    <Folder Include="Helpers\ApplicationProfiles\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using Core.Constants;
+using Core.DTO;
 using Core.DTO.InviteDTO;
 using Core.Helpers;
 using Core.Interfaces.CustomService;
@@ -26,13 +27,23 @@ namespace API.Controllers
 
         [HttpPost("manage")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<ActionResult> ManageInviteAsync(
+        public async Task<IActionResult> ManageInviteAsync(
             [FromBody] ManageInviteDTO manageInviteDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-
             await _inviteService.ManageAsync(manageInviteDTO, userId);
+
             return Ok();
+        }
+
+        [HttpGet("offers")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> OffersInvitesAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            var invites = await _inviteService.OffersInvitesAsync(userId, paginationFilter);
+
+            return Ok(invites);
         }
     }
 }
