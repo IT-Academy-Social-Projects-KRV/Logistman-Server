@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Core.DTO.InviteDTO;
 using Core.DTO.TripDTO;
 using Core.Entities.TripEntity;
 
@@ -11,7 +10,6 @@ namespace Core.Helpers.ApplicationProfiles
         {
             CreateMap<CreateTripDTO, Trip>();
             CreateMap<Trip, RouteDTO>();
-            CreateMap<ManageTripDTO, CreateTripInvitesDTO>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.DTO.InviteDTO;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
 
@@ -21,6 +22,8 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(offer => offer.Point.Region))
                 .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
+            CreateMap<Offer, OfferInviteDTO>();
+
         }
     }
 }

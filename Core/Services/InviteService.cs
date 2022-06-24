@@ -1,14 +1,13 @@
-﻿using Core.Entities.InviteEntity;
-using Core.Entities.OfferEntity;
+﻿using Core.DTO.InviteDTO;
+using Core.Entities.InviteEntity;
 using Core.Entities.TripEntity;
+using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Specifications;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.DTO.InviteDTO;
-using Core.Exceptions;
 
 namespace Core.Services
 {
@@ -35,7 +34,7 @@ namespace Core.Services
             await _inviteRepository.SaveChangesAsync();
         }
 
-        public async Task ManageTripInvitesAsync(Trip trip, List<Offer> offers)
+        public async Task ManageTripInvitesAsync(Trip trip, List<OfferInviteDTO> offers)
         {
             var previousTripInvites = await _inviteRepository.ListAsync(
                 new InviteSpecification.GetByTripId(trip.Id));
@@ -79,7 +78,7 @@ namespace Core.Services
                 {
                     IsAccepted = false,
                     IsAnswered = false,
-                    Offer = offer,
+                    OfferId = offer.Id,
                     UserId = offer.OfferCreatorId,
                     TripId = trip.Id
                 });

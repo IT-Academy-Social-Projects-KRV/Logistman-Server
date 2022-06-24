@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Constants;
 using Core.DTO;
+using Core.DTO.InviteDTO;
 using Core.DTO.TripDTO;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
@@ -172,7 +173,9 @@ namespace Core.Services
             trip.Distance = manageTrip.Distance;
             await _tripRepository.UpdateAsync(trip);
 
-            await _inviteService.ManageTripInvitesAsync(trip, offers);
+            await _inviteService.ManageTripInvitesAsync(
+                trip, 
+                _mapper.Map<List<OfferInviteDTO>>(offers));
         }
     }
 }
