@@ -46,5 +46,19 @@ namespace Core.Specifications
                 Query.Where(t => t.Id == tripId && (!t.IsActive && !t.IsEnded));
             }
         }
+
+        internal class GetByCreatorId : Specification<Trip>
+        {
+            public GetByCreatorId(PaginationFilterDTO paginationFilter, string tripCreatorId)
+            {
+                Query
+                    .Where(t => t.TripCreatorId == tripCreatorId)
+                    .Include(t => t.Points)
+                    .Include(t => t.Car)
+                    .OrderByDescending(t => t.Id)
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize);
+            }
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace Core.Interfaces.CustomService
         Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId);
         Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter);
         Task<LineString> GetRouteGeographyDataAsync(int routeId);
+        Task<PaginatedList<RoutePreviewDTO>> GetUserRoutesAsync(
+            PaginationFilterDTO paginationFilter, string tripCreatorId);
     }
 }
