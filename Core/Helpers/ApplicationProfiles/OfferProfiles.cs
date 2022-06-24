@@ -21,6 +21,12 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(offer => offer.Point.Region))
                 .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
+            CreateMap<Offer, OfferPreviewForInviteDTO>()
+                .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(offer => offer.Point.Address))
+                .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
+                .ForMember(dest => dest.Region, opt => opt.MapFrom(offer => offer.Point.Region))
+                .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
         }
     }
 }
