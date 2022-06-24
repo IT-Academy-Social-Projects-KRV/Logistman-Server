@@ -47,15 +47,14 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByCreatorId : Specification<Trip>
+        internal class GetRoutesByCreatorId : Specification<Trip>
         {
-            public GetByCreatorId(PaginationFilterDTO paginationFilter, string tripCreatorId)
+            public GetRoutesByCreatorId(PaginationFilterDTO paginationFilter, string tripCreatorId)
             {
                 Query
                     .Where(t => t.TripCreatorId == tripCreatorId && !t.IsActive && !t.IsEnded)
                     .Include(t => t.Points)
                     .Include(t => t.Car)
-                    .OrderByDescending(t => t.Id)
                     .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
                     .Take(paginationFilter.PageSize);
             }

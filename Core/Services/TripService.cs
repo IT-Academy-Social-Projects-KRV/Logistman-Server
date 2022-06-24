@@ -132,7 +132,7 @@ namespace Core.Services
             PaginationFilterDTO paginationFilter, string tripCreatorId)
         {
             var routesCount = await _tripRepository
-                .CountAsync(new TripSpecification.GetByCreatorId(paginationFilter, tripCreatorId));
+                .CountAsync(new TripSpecification.GetRoutesByCreatorId(paginationFilter, tripCreatorId));
 
             int totalPages = PaginatedList<RoutePreviewDTO>
                 .GetTotalPages(paginationFilter, routesCount);
@@ -143,7 +143,7 @@ namespace Core.Services
             }
 
             var routes = await _tripRepository
-                .ListAsync(new TripSpecification.GetByCreatorId(paginationFilter, tripCreatorId));
+                .ListAsync(new TripSpecification.GetRoutesByCreatorId(paginationFilter, tripCreatorId));
 
             foreach (var route in routes)
             {
