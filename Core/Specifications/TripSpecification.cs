@@ -16,6 +16,7 @@ namespace Core.Specifications
                     .Include(t => t.Offers)
                     .Include(t => t.Points);
             }
+
             public GetById(int tripId, float totalWeight)
             {
                 Query

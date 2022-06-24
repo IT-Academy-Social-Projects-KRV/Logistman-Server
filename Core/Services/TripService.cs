@@ -167,10 +167,9 @@ namespace Core.Services
                     .GetOfferByIds(manageTrip.OffersId));
 
             trip.Offers = offers;
-
             trip.Points = points;
-
             trip.Distance = manageTrip.Distance;
+
             await _tripRepository.UpdateAsync(trip);
 
             await _inviteService.ManageTripInvitesAsync(
