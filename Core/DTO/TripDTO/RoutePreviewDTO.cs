@@ -6,7 +6,6 @@ namespace Core.DTO.TripDTO
     public class RoutePreviewDTO
     {
         public int Id { get; set; }
-        public bool IsEnded { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset ExpirationDate { get; set; }
         public string Description { get; set; }

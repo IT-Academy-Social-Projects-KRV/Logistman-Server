@@ -30,7 +30,7 @@ namespace Core.Specifications
             public GetRoutes(PaginationFilterDTO paginationFilter)
             {
                 Query
-                    .Where(t => !t.IsActive && !t.IsEnded)
+                    .Where(t => !t.IsActive && !t.IsEnded && t.ExpirationDate > DateTimeOffset.UtcNow)
                     .Include(t => t.User)
                     .Include(t => t.Points)
                     .Include(t => t.Car)
@@ -52,7 +52,7 @@ namespace Core.Specifications
             public GetByCreatorId(PaginationFilterDTO paginationFilter, string tripCreatorId)
             {
                 Query
-                    .Where(t => t.TripCreatorId == tripCreatorId)
+                    .Where(t => t.TripCreatorId == tripCreatorId && !t.IsActive && !t.IsEnded)
                     .Include(t => t.Points)
                     .Include(t => t.Car)
                     .OrderByDescending(t => t.Id)
