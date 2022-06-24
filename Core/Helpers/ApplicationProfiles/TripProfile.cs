@@ -11,6 +11,8 @@ namespace Core.Helpers.ApplicationProfiles
             CreateMap<CreateTripDTO, Trip>();
             CreateMap<Trip, RouteDTO>();
             CreateMap<Trip, RoutePreviewDTO>();
+            CreateMap<Trip, TripPreviewForInviteDTO>()
+                .ForMember(dest => dest.CreatorFullName, dto => dto.MapFrom(trip => trip.User));
         }
     }
 }
