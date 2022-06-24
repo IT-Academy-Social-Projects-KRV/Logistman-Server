@@ -151,10 +151,7 @@ namespace Core.Services
             }
 
             return PaginatedList<RoutePreviewDTO>.Evaluate(
-                _mapper.Map<List<RoutePreviewDTO>>(routes), 
-                paginationFilter.PageNumber, 
-                routesCount, 
-                totalPages);
+                _mapper.Map<List<RoutePreviewDTO>>(routes), paginationFilter.PageNumber, routesCount, totalPages);
         }
     }
 }

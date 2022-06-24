@@ -13,6 +13,6 @@ namespace Core.DTO.TripDTO
         public int MaxRouteDeviationKm { get; set; }
         public float Distance { get; set; }
         public TripCarInfoDTO Car { get; set; }
-        public List<PointDTO> Points { get; set; }
+        public List<PointPreviewDTO> Points { get; set; }
     }
 }
