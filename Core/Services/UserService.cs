@@ -14,6 +14,11 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Core.Entities.CarEntity;
+using Core.Entities.InviteEntity;
+using Core.Entities.TripEntity;
+using Core.Entities.OfferEntity;
+using Core.Entities.PointEntity;
 
 namespace Core.Services
 {
@@ -21,6 +26,11 @@ namespace Core.Services
     {
         private readonly IRepository<User> _userRepository;
         private readonly IRepository<IdentityUserRole<string>> _userRoleRepository;
+        private readonly IRepository<Car> _carRepository;
+        private readonly IRepository<Trip> _tripRepository;
+        private readonly IRepository<Invite> _inviteRepository;
+        private readonly IRepository<Offer> _offerRepository;
+        private readonly IRepository<PointData> _pointDataRepository;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -29,6 +39,11 @@ namespace Core.Services
         public UserService(
             IRepository<User> userRepository,
             IRepository<IdentityUserRole<string>> userRoleRepository,
+            IRepository<Car> carRepository,
+            IRepository<Trip> tripRepository,
+            IRepository<Invite> inviteRepository,
+            IRepository<Offer> offerRepository,
+            IRepository<PointData> pointDataRepository,
             IMapper mapper,
             UserManager<User> userManager,
             RoleManager<IdentityRole> roleManager,
@@ -36,6 +51,11 @@ namespace Core.Services
         {
             _userRepository = userRepository;
             _userRoleRepository = userRoleRepository;
+            _carRepository = carRepository;
+            _tripRepository = tripRepository;
+            _inviteRepository = inviteRepository;
+            _offerRepository = offerRepository;
+            _pointDataRepository = pointDataRepository;
             _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -145,6 +165,82 @@ namespace Core.Services
             ExceptionMethods.UserNullCheck(user);
 
             return user.Id;
+        }
+
+        public async Task DeleteUserAsync(string userId)
+        {
+            var user = await _userRepository.GetBySpecAsync(new UserSpecification.GetById(userId));
+            var userCanBeDeleted = await CheckCanUserBeDeletedAsync(user);
+
+            if (!userCanBeDeleted)
+            {
+                throw new HttpException(
+                    ErrorMessages.UserCantBeDeleted,
+                    HttpStatusCode.Forbidden);
+            }
+
+            var userOffersToDelete = await _offerRepository
+                .ListAsync(new OfferSpecification.GetOpenByUserId(userId));
+            var userTripsToDelete = await _tripRepository
+                .ListAsync(new TripSpecification.GetRoutesByUserId(userId));
+            var pointsToDelete = new List<PointData>();
+            var userCarsToDelete = new List<Car>();
+
+            foreach (var userTrip in userTripsToDelete)
+            {
+                pointsToDelete.AddRange(userTrip.Points);
+            }
+
+            foreach (var userOffer in userOffersToDelete)
+            {
+                pointsToDelete.Add(userOffer.Point);
+            }
+
+            await _inviteRepository.DeleteRangeAsync(user.Invites);
+            await _tripRepository.DeleteRangeAsync(userTripsToDelete);
+            await _offerRepository.DeleteRangeAsync(userOffersToDelete);
+            await _pointDataRepository.DeleteRangeAsync(pointsToDelete);
+
+            var userCars = await _carRepository
+                .ListAsync(new CarSpecification.GetWithTripsByUserId(userId));
+
+            foreach (var userCar in userCars)
+            {
+                if (userCar.Trips.Count == 0)
+                {
+                    userCarsToDelete.Add(userCar);
+                }
+            }
+
+            await _carRepository.DeleteRangeAsync(userCarsToDelete);
+            await _userRepository.DeleteAsync(user);
+        }
+
+        private async Task<bool> CheckCanUserBeDeletedAsync(User user)
+        {
+            var userHasActiveTrip = await _tripRepository
+                .AnyAsync(new TripSpecification.GetActiveByUserId(user.Id));
+            
+            if (userHasActiveTrip)
+            {
+                return false;
+            }
+
+            foreach (var offer in user.Offers)
+            {
+                if (offer.RelatedTripId != null)
+                {
+                    var userHasActiveOffer = await _tripRepository
+                        .AnyAsync(new TripSpecification.GetActiveById((int)offer.RelatedTripId));
+                    
+                    if (userHasActiveOffer)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

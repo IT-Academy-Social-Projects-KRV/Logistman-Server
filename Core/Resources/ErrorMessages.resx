@@ -234,10 +234,7 @@
   <data name="NotEnoughPermissions" xml:space="preserve">
     <value>You are not allowed to do this!</value>
   </data>
-  <data name="FailedSendEmail" xml:space="preserve">
-    <value>Failed sending account confirmation email!</value>
-  </data>
-  <data name="InvalidOrder" xml:space="preserve">
-    <value>Invalid point's order!</value>
+  <data name="UserCantBeDeleted" xml:space="preserve">
+    <value>User with active offers or trips can`t be deleted</value>
   </data>
 </root>

@@ -16,5 +16,6 @@ namespace Core.Interfaces.CustomService
         Task<UserFullNameDTO> GetUserFullNameAsync(string userId);
         Task<string> GetUserIdByEmailAsync(string email);
         Task<PaginatedList<UserDTO>> GetAllUsersAsync(PaginationFilterDTO paginationFilter);
+        Task DeleteUserAsync(string userId);
     }
 }

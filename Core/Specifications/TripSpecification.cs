@@ -39,11 +39,40 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetUnactiveById : Specification<Trip>, ISingleResultSpecification<Trip>
+        internal class GetRoutesByUserId : Specification<Trip>
         {
-            public GetUnactiveById(int tripId)
+            public GetRoutesByUserId(string userId)
+            {
+                Query
+                    .Where(t => t.TripCreatorId == userId && !t.IsActive && !t.IsEnded)
+                    .Include(t => t.Points)
+                    .Include(t => t.Car)
+                    .Include(t => t.Offers);
+            }
+        }
+
+        internal class GetInactiveById : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetInactiveById(int tripId)
             {
                 Query.Where(t => t.Id == tripId && (!t.IsActive && !t.IsEnded));
+            }
+        }
+
+        internal class GetActiveByUserId : Specification<Trip>
+        {
+            public GetActiveByUserId(string userId)
+            {
+                Query.Where(t => t.TripCreatorId == userId && t.IsActive);
+            }
+        }
+
+        internal class GetActiveById : Specification<Trip>
+        {
+            public GetActiveById(int tripId)
+            {
+                Query
+                    .Where(t => t.Id == tripId && t.IsActive);
             }
         }
     }
