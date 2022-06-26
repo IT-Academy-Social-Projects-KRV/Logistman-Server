@@ -44,7 +44,7 @@ namespace Core.Services
         public async Task ManageTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO)
         {
             var trip = await _tripRepository
-                .GetBySpecAsync(new TripSpecification.GetInactiveById(createTripInvitesDTO.TripId));
+                .GetBySpecAsync(new TripSpecification.GetRouteById(createTripInvitesDTO.TripId));
 
             ExceptionMethods.TripNullCheck(trip);
 
