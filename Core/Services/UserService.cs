@@ -170,6 +170,9 @@ namespace Core.Services
         public async Task DeleteUserAsync(string userId)
         {
             var user = await _userRepository.GetBySpecAsync(new UserSpecification.GetById(userId));
+
+            ExceptionMethods.UserNullCheck(user);
+
             var userCanBeDeleted = await CheckCanUserBeDeletedAsync(user);
 
             if (!userCanBeDeleted)
