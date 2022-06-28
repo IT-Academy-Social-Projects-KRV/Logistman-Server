@@ -129,6 +129,32 @@ namespace Core.Services
                 _mapper.Map<List<RouteDTO>>(routes), paginationFilter.PageNumber, routesCount, totalPages);
         }
 
+        public async Task<PaginatedList<RoutePreviewDTO>> GetUserRoutesAsync(
+            PaginationFilterDTO paginationFilter, string tripCreatorId)
+        {
+            var routesCount = await _tripRepository
+                .CountAsync(new TripSpecification.GetRoutesByCreatorId(paginationFilter, tripCreatorId));
+
+            int totalPages = PaginatedList<RoutePreviewDTO>
+                .GetTotalPages(paginationFilter, routesCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var routes = await _tripRepository
+                .ListAsync(new TripSpecification.GetRoutesByCreatorId(paginationFilter, tripCreatorId));
+
+            foreach (var route in routes)
+            {
+                route.Points = route.Points.OrderBy(p => p.Order).ToList();
+            }
+
+            return PaginatedList<RoutePreviewDTO>.Evaluate(
+                _mapper.Map<List<RoutePreviewDTO>>(routes), paginationFilter.PageNumber, routesCount, totalPages);
+        }
+
         public async Task ManageOffersTripAsync(ManageTripDTO manageTrip)
         {
             var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);

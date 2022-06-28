@@ -49,5 +49,15 @@ namespace API.Controllers
             await _tripService.ManageOffersTripAsync(manageTrip);
             return Ok();
         }
+
+        [HttpGet("my-routes")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> GetUserRoutesAsync(
+            [FromQuery] PaginationFilterDTO paginationFilter)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+
+            return Ok(await _tripService.GetUserRoutesAsync(paginationFilter, userId));
+        }
     }
 }
