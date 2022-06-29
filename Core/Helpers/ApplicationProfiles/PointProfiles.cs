@@ -23,6 +23,7 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(
                 dest => dest.Latitude,
                 opt => opt.MapFrom(src => src.Location.Y));
+            CreateMap<PointData, PointPreviewDTO>();
         }
     }
 }

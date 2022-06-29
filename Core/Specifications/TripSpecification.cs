@@ -30,7 +30,7 @@ namespace Core.Specifications
             public GetRoutes(PaginationFilterDTO paginationFilter)
             {
                 Query
-                    .Where(t => !t.IsActive && !t.IsEnded)
+                    .Where(t => !t.IsActive && !t.IsEnded && t.ExpirationDate > DateTimeOffset.UtcNow)
                     .Include(t => t.User)
                     .Include(t => t.Points)
                     .Include(t => t.Car)
@@ -72,6 +72,19 @@ namespace Core.Specifications
             public GetActiveById(int tripId)
             {
                 Query.Where(t => t.Id == tripId && t.IsActive);
+            }
+        }
+
+        internal class GetRoutesByCreatorId : Specification<Trip>
+        {
+            public GetRoutesByCreatorId(PaginationFilterDTO paginationFilter, string tripCreatorId)
+            {
+                Query
+                    .Where(t => t.TripCreatorId == tripCreatorId && !t.IsActive && !t.IsEnded)
+                    .Include(t => t.Points)
+                    .Include(t => t.Car)
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize);
             }
         }
     }

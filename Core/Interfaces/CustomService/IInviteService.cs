@@ -1,4 +1,6 @@
-﻿using Core.DTO.InviteDTO;
+﻿using Core.DTO;
+using Core.DTO.InviteDTO;
+using Core.Helpers;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService
@@ -7,5 +9,6 @@ namespace Core.Interfaces.CustomService
     {
         Task ManageTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO);
         Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId);
+        Task<PaginatedList<InvitePreviewDTO>> OffersInvitesAsync(string userId, PaginationFilterDTO paginationFilter);
     }
 }
