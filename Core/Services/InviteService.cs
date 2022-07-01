@@ -144,5 +144,24 @@ namespace Core.Services
             return PaginatedList<InvitePreviewDTO>.Evaluate(
                 _mapper.Map<List<InvitePreviewDTO>>(invites), paginationFilter.PageNumber, invitesCount, totalPages);
         }
+
+        public async Task<PaginatedList<DriverInvitePreviewDTO>> DriversInvitesAsync(
+            string userId, PaginationFilterDTO paginationFilter)
+        {
+            var invites = await _inviteRepository.ListAsync(
+                new InviteSpecification.GetDriverInvites(userId, paginationFilter));
+            var invitesCount = invites.Count;
+
+            var totalPages = PaginatedList<DriverInvitePreviewDTO>.GetTotalPages(paginationFilter, invitesCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+            
+            return PaginatedList<DriverInvitePreviewDTO>.Evaluate(
+                _mapper.Map<List<DriverInvitePreviewDTO>>(invites), paginationFilter.PageNumber, invitesCount, totalPages);
+
+        }
     }
 }
