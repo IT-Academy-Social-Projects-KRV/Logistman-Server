@@ -57,7 +57,9 @@ namespace Core.Specifications
         {
             public GetWithTripsByUserId(string userId)
             {
-                Query.Where(c => c.UserId == userId).Include(c => c.Trips);
+                Query
+                    .Where(c => c.UserId == userId)
+                    .Include(c => c.Trips);
             }
         }
     }
