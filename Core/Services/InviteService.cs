@@ -2,7 +2,6 @@
 using Core.DTO;
 using Core.DTO.InviteDTO;
 using Core.Entities.InviteEntity;
-using Core.Entities.OfferEntity;
 using Core.Entities.TripEntity;
 using Core.Exceptions;
 using Core.Helpers;
@@ -18,19 +17,13 @@ namespace Core.Services
     public class InviteService : IInviteService
     {
         private readonly IRepository<Invite> _inviteRepository;
-        private readonly IRepository<Trip> _tripRepository;
-        private readonly IRepository<Offer> _offerRepository;
         private readonly IMapper _mapper;
 
         public InviteService(
             IRepository<Invite> inviteRepository,
-            IRepository<Trip> tripRepository,
-            IRepository<Offer> offerRepository,
             IMapper mapper)
         {
             _inviteRepository = inviteRepository;
-            _tripRepository = tripRepository;
-            _offerRepository = offerRepository;
             _mapper = mapper;
         }
 

@@ -6,17 +6,15 @@ namespace Core.Interfaces.CustomService
 {
     public interface ITripValidationService
     {
-        Task ValidOffersCheckAsync(
-            List<int> offerIds,
+        Task ValidateOffersCheckAsync(
+            List<int> offersIds,
             int tripId,
-            DateTimeOffset startTrip,
-            DateTimeOffset expirationTrip);
-
+            DateTimeOffset tripStartDate,
+            DateTimeOffset tripExpirationDate);
         Task ValidateTripAsync(int tripId, float totalWeight);
-
         Task ValidateTripDateAsync(
-            DateTimeOffset startDate,
-            DateTimeOffset expirationDate,
+            DateTimeOffset tripStartDate,
+            DateTimeOffset tripExpirationDate,
             string creatorId);
     }
 }

@@ -25,7 +25,7 @@ namespace Core.Validation.ValidationService
             _tripRepository = tripRepository;
         }
 
-        public async Task ValidOffersCheckAsync(
+        public async Task ValidateOffersCheckAsync(
             List<int> offerIds,
             int tripId,
             DateTimeOffset startTrip,
@@ -47,7 +47,7 @@ namespace Core.Validation.ValidationService
         public async Task ValidateTripAsync(int tripId, float totalWeight)
         {
             var isValid = await _tripRepository.AnyAsync(
-                new TripSpecification.GetById(tripId, totalWeight));
+                new TripSpecification.GetValidTripById(tripId, totalWeight));
 
             if (!isValid)
             {

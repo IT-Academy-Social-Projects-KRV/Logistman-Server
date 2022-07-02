@@ -16,8 +16,11 @@ namespace Core.Specifications
                     .Include(t => t.Offers)
                     .Include(t => t.Points);
             }
+        }
 
-            public GetById(int tripId, float totalWeight)
+        internal class GetValidTripById : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetValidTripById(int tripId, float totalWeight)
             {
                 Query
                     .Where(t => tripId == t.Id

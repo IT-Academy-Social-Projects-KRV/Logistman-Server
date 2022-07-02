@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Core.DTO.InviteDTO;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
@@ -29,6 +30,13 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(offer => offer.Point.Region))
                 .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
+            CreateMap<Offer, OfferCreateTripDTO>()
+                .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))
+                .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
+                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(offer => offer.Point.Location.Y))
+                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(offer => offer.Point.Location.X))
+                .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(offer => offer.CreationDate.ToString("yyyy/MM/dd HH:mm")))
+                .ForMember(dest => dest.key, opt => opt.MapFrom(offer => offer.Id));
         }
     }
 }

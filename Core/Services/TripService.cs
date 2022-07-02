@@ -157,17 +157,17 @@ namespace Core.Services
 
         public async Task ManageOffersTripAsync(ManageTripDTO manageTrip)
         {
-            var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
-
             var trip = await _tripRepository
                 .GetBySpecAsync(new TripSpecification
                     .GetById(manageTrip.TripId));
 
             ExceptionMethods.TripNullCheck(trip);
 
+            var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
+
             manageTrip.OffersId = manageTrip.OffersId.Distinct().ToList();
 
-            await _tripValidationService.ValidOffersCheckAsync(
+            await _tripValidationService.ValidateOffersCheckAsync(
                 manageTrip.OffersId,
                 manageTrip.TripId,
                 trip.StartDate,
@@ -177,15 +177,15 @@ namespace Core.Services
 
             var points = new Collection<PointData>();
 
-            foreach (var pointTrip in sortedPoints)
+            foreach (var point in sortedPoints)
             {
-                var pointData = await _pointDataRepository.GetByIdAsync(pointTrip.PointId);
+                var pointData = await _pointDataRepository.GetByIdAsync(point.PointId);
 
                 ExceptionMethods.PointNullCheck(pointData);
 
                 points.Add(pointData);
 
-                pointData.Order = pointTrip.Order;
+                pointData.Order = point.Order;
             }
 
             var offers = await _offerRepository

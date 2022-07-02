@@ -106,7 +106,7 @@ namespace Core.Services
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
 
-        public async Task<PaginatedList<OfferInfoDTO>> GetNearRouteAsync(
+        public async Task<PaginatedList<OfferCreateTripDTO>> GetNearRouteAsync(
             PaginationFilterDTO paginationFilter, int routeId)
         {
             var route = await _tripRepository.GetByIdAsync(routeId);
@@ -124,7 +124,7 @@ namespace Core.Services
                     paginationFilter
                 ));
 
-            int totalPages = PaginatedList<OfferPreviewDTO>.GetTotalPages(paginationFilter, offerListCount);
+            int totalPages = PaginatedList<OfferCreateTripDTO>.GetTotalPages(paginationFilter, offerListCount);
 
             if (totalPages == 0)
             {
@@ -139,8 +139,8 @@ namespace Core.Services
                     paginationFilter
                 ));
 
-            return PaginatedList<OfferInfoDTO>.Evaluate(
-                _mapper.Map<List<OfferInfoDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
+            return PaginatedList<OfferCreateTripDTO>.Evaluate(
+                _mapper.Map<List<OfferCreateTripDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
     }
 }

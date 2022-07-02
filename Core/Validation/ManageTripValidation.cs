@@ -21,7 +21,7 @@ namespace Core.Validation
 
             RuleFor(trip => trip.PointsTrip)
                 .NotEmpty()
-                .SetValidator(new PiontTripValidation());
+                .SetValidator(new PiontsTripValidation());
 
             RuleFor(trip => trip.TripId)
                 .NotEmpty()

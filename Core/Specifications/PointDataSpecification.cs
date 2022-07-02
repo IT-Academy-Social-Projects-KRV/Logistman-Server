@@ -19,9 +19,9 @@ namespace Core.Specifications
 
         internal class GetByIds : Specification<PointData>
         {
-            public GetByIds(List<int> pointIds)
+            public GetByIds(List<int> pointsIds)
             {
-                Query.Where(p => pointIds.Contains(p.Id));
+                Query.Where(p => pointsIds.Contains(p.Id));
             }
         }
     }

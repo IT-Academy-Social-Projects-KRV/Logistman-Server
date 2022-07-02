@@ -42,7 +42,7 @@ namespace API.Controllers
             return Ok(await _tripService.GetAllRoutesAsync(paginationFilter));
         }
 
-        [HttpPost("manage-trip")]
+        [HttpPost("manage")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<ActionResult> ManageOffersTripAsync([FromBody] ManageTripDTO manageTrip)
         {
