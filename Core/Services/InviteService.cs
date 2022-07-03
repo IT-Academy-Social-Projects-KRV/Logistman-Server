@@ -12,6 +12,8 @@ using Core.Entities.TripEntity;
 using AutoMapper;
 using Core.DTO;
 using Core.Helpers;
+using Core.DTO.OfferDTO;
+using Core.Entities.PointEntity;
 
 namespace Core.Services
 {
@@ -20,17 +22,20 @@ namespace Core.Services
         private readonly IRepository<Invite> _inviteRepository;
         private readonly IRepository<Trip> _tripRepository;
         private readonly IRepository<Offer> _offerRepository;
+        private readonly IRepository<PointData> _pointRepository;
         private readonly IMapper _mapper;
 
         public InviteService(
             IRepository<Invite> inviteRepository,
             IRepository<Trip> tripRepository,
             IRepository<Offer> offerRepository,
+            IRepository<PointData> pointRepository,
             IMapper mapper)
         {
             _inviteRepository = inviteRepository;
             _tripRepository = tripRepository;
             _offerRepository = offerRepository;
+            _pointRepository = pointRepository;
             _mapper = mapper;
         }
 
@@ -145,25 +150,53 @@ namespace Core.Services
                 _mapper.Map<List<InvitePreviewDTO>>(invites), paginationFilter.PageNumber, invitesCount, totalPages);
         }
 
-        public async Task<PaginatedList<DriverInvitePreviewDTO>> DriversInvitesAsync(
-            string userId, PaginationFilterDTO paginationFilter)
+        public async Task<List<DriverInvitePreviewDTO>> DriversInvitesAsync(string userId)
         {
             var invitesCount = await _inviteRepository.CountAsync(
-                new InviteSpecification.GetOffersInvites(userId, paginationFilter));;
+                new InviteSpecification.GetDriverInvites(userId));
 
-            var totalPages = PaginatedList<DriverInvitePreviewDTO>.GetTotalPages(paginationFilter, invitesCount);
+            var invites = await _inviteRepository.ListAsync(
+                new InviteSpecification.GetDriverInvites(userId));
 
-            if (totalPages == 0)
+            var driverInvites = new List<DriverInvitePreviewDTO>();
+
+            foreach (var invite in invites)
+            {
+                var offers = await _offerRepository.ListAsync(
+                    new OfferSpecification.GetByTripId(invite.TripId));
+
+                offers = offers.OrderBy(o => o.Point.Order).ToList();
+
+                float totalGoodsWeight = 0;
+
+                foreach (var offer in offers)
+                {
+                    totalGoodsWeight += offer.GoodsWeight;
+                }
+
+                var tripPoints = await _pointRepository.ListAsync(
+                    new PointDataSpecification.GetByTripId(invite.TripId));
+
+                driverInvites.Add(new DriverInvitePreviewDTO
+                {
+                    Id = invite.Id,
+                    PointFromInfo = _mapper.Map<PointPreviewDTO>(tripPoints.First()),
+                    PointToInfo = _mapper.Map<PointPreviewDTO>(tripPoints.Last()),
+                    IsAnswered = invite.IsAnswered,
+                    IsAccepted = invite.IsAccepted,
+                    TotalGoodsWeight = totalGoodsWeight,
+                    TotalDistance = invite.Trip.Distance,
+                    TotalOffersCount = offers.Count,
+                    OffersInfo = _mapper.Map<List<OfferPreviewInTripInviteDTO>>(offers.Take(4))
+                });
+            }
+
+            if (driverInvites.Count == 0)
             {
                 return null;
             }
-            
-            var invites = await _inviteRepository.ListAsync(
-                new InviteSpecification.GetDriverInvites(userId, paginationFilter));
-            
-            return PaginatedList<DriverInvitePreviewDTO>.Evaluate(
-                _mapper.Map<List<DriverInvitePreviewDTO>>(invites), paginationFilter.PageNumber, invitesCount, totalPages);
 
+            return driverInvites;
         }
     }
 }

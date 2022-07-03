@@ -11,7 +11,6 @@ namespace Core.Helpers.ApplicationProfiles
             CreateMap<Invite, InvitePreviewDTO>()
                 .ForMember(dest => dest.OfferInfo, opt => opt.MapFrom(invite => invite.Offer))
                 .ForMember(dest => dest.TripInfo, opt => opt.MapFrom(invite => invite.Trip));
-            CreateMap<Invite, DriverInvitePreviewDTO>();
         }
     }
 }

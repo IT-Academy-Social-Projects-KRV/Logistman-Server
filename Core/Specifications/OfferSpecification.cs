@@ -43,9 +43,9 @@ namespace Core.Specifications
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
-                    && !offer.IsClosed
-                    && offer.RelatedTripId == null
-                    && offer.StartDate <= expirationDate)
+                            && !offer.IsClosed
+                            && offer.RelatedTripId == null
+                            && offer.StartDate <= expirationDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
                     .Include(offer => offer.GoodCategory)
@@ -58,9 +58,23 @@ namespace Core.Specifications
         {
             public GetOpenById(int offerId, int tripId)
             {
-                Query.Where(offer => offer.Id == offerId 
-                && !offer.IsClosed 
-                && offer.RelatedTripId == tripId);
+                Query
+                    .Where(offer => offer.Id == offerId 
+                            && !offer.IsClosed 
+                            && offer.RelatedTripId == tripId);
+            }
+        }
+
+        internal class GetByTripId : Specification<Offer>
+        {
+            public GetByTripId(int tripId)
+            {
+                Query
+                    .Where(o => o.RelatedTripId == tripId)
+                    .Include(o => o.Point)
+                    .Include(o => o.OfferRole)
+                    .Include(o => o.GoodCategory)
+                    .AsNoTracking();
             }
         }
     }

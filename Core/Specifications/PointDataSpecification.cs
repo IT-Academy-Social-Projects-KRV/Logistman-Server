@@ -14,5 +14,15 @@ namespace Core.Specifications
                     .OrderBy(p => p.Order);
             }
         }
+
+        internal class GetByTripId : Specification<PointData>
+        {
+            public GetByTripId(int tripId)
+            {
+                Query
+                    .Where(p => p.TripId == tripId)
+                    .OrderBy(p => p.Order);
+            }
+        }
     }
 }
