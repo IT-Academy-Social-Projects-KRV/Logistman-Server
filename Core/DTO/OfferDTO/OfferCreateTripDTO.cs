@@ -4,8 +4,8 @@ namespace Core.DTO.OfferDTO
 {
     public class OfferCreateTripDTO
     {
-        //The key is Id. It is needed for the list on React
-        public int key { get; set; }
+        //The Key is Id. It is needed for the list on React
+        public int Key { get; set; }
         public string CreationDate { get; set; }
         public float GoodsWeight { get; set; }
         public string GoodCategoryName { get; set; }

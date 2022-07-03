@@ -36,7 +36,7 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.Latitude, opt => opt.MapFrom(offer => offer.Point.Location.Y))
                 .ForMember(dest => dest.Longitude, opt => opt.MapFrom(offer => offer.Point.Location.X))
                 .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(offer => offer.CreationDate.ToString("yyyy/MM/dd HH:mm")))
-                .ForMember(dest => dest.key, opt => opt.MapFrom(offer => offer.Id));
+                .ForMember(dest => dest.Key, opt => opt.MapFrom(offer => offer.Id));
         }
     }
 }
