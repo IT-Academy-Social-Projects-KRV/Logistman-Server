@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
-using Core.DTO;
 using Core.Constants;
+using Core.DTO;
+using Core.DTO.InviteDTO;
 using Core.DTO.TripDTO;
+using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
 using Core.Exceptions;
@@ -12,11 +14,11 @@ using Core.Resources;
 using Core.Specifications;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
-using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace Core.Services
 {
@@ -27,19 +29,28 @@ namespace Core.Services
         private readonly ICarService _carService;
         private readonly IPointService _pointService;
         private readonly IMapper _mapper;
+        private readonly IRepository<Offer> _offerRepository;
+        private readonly IInviteService _inviteService;
+        private readonly ITripValidationService _tripValidationService;
 
         public TripService(
             IRepository<Trip> tripRepository,
             IRepository<PointData> pointDataRepository,
             ICarService carService,
             IPointService pointService,
-            IMapper mapper)
+            IMapper mapper,
+            IRepository<Offer> offerRepository,
+            IInviteService inviteService,
+            ITripValidationService tripValidationService)
         {
             _tripRepository = tripRepository;
             _pointDataRepository = pointDataRepository;
             _carService = carService;
             _pointService = pointService;
             _mapper = mapper;
+            _offerRepository = offerRepository;
+            _inviteService = inviteService;
+            _tripValidationService = tripValidationService;
         }
 
         public async Task<bool> CheckIsTripExistsById(int tripId)
@@ -49,7 +60,10 @@ namespace Core.Services
 
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
         {
-            await ValidateTripDateAsync(createTripDTO.StartDate, createTripDTO.ExpirationDate, creatorId);
+            await _tripValidationService.ValidateTripDateAsync(
+                createTripDTO.StartDate,
+                createTripDTO.ExpirationDate,
+                creatorId);
 
             var sortedPoints = _pointService.SortByOrder(createTripDTO.Points);
 
@@ -72,19 +86,6 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(tripFromDb);
 
             await _pointService.SetTripIdToListAsync(sortedPoints, tripFromDb.Id);
-        }
-
-        private async Task ValidateTripDateAsync(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
-        {
-            var isTimeSpaceBusy = await _tripRepository.AnyAsync(
-                new TripSpecification.GetByTimeSpace(startDate, expirationDate, creatorId));
-
-            if (isTimeSpaceBusy)
-            {
-                throw new HttpException(
-                            ErrorMessages.TripIsAlreadyExistsInTheTimeSpace,
-                            HttpStatusCode.BadRequest);
-            }
         }
 
         public async Task<LineString> GetRouteGeographyDataAsync(int routeId)
@@ -152,6 +153,54 @@ namespace Core.Services
 
             return PaginatedList<RoutePreviewDTO>.Evaluate(
                 _mapper.Map<List<RoutePreviewDTO>>(routes), paginationFilter.PageNumber, routesCount, totalPages);
+        }
+
+        public async Task ManageOffersTripAsync(ManageTripDTO manageTrip)
+        {
+            var trip = await _tripRepository
+                .GetBySpecAsync(new TripSpecification
+                    .GetById(manageTrip.TripId));
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
+
+            manageTrip.OffersId = manageTrip.OffersId.Distinct().ToList();
+
+            await _tripValidationService.ValidateOffersCheckAsync(
+                manageTrip.OffersId,
+                manageTrip.TripId,
+                trip.StartDate,
+                trip.ExpirationDate);
+
+            await _tripValidationService.ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
+
+            var points = new Collection<PointData>();
+
+            foreach (var point in sortedPoints)
+            {
+                var pointData = await _pointDataRepository.GetByIdAsync(point.PointId);
+
+                ExceptionMethods.PointNullCheck(pointData);
+
+                points.Add(pointData);
+
+                pointData.Order = point.Order;
+            }
+
+            var offers = await _offerRepository
+                .ListAsync(new OfferSpecification
+                    .GetOfferByIds(manageTrip.OffersId));
+
+            trip.Offers = offers;
+            trip.Points = points;
+            trip.Distance = manageTrip.Distance;
+
+            await _tripRepository.UpdateAsync(trip);
+
+            await _inviteService.ManageTripInvitesAsync(
+                trip, 
+                _mapper.Map<List<OfferInviteDTO>>(offers));
         }
     }
 }

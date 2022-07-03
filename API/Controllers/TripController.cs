@@ -42,6 +42,14 @@ namespace API.Controllers
             return Ok(await _tripService.GetAllRoutesAsync(paginationFilter));
         }
 
+        [HttpPost("manage")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<ActionResult> ManageOffersTripAsync([FromBody] ManageTripDTO manageTrip)
+        {
+            await _tripService.ManageOffersTripAsync(manageTrip);
+            return Ok();
+        }
+
         [HttpGet("my-routes")]
         [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<IActionResult> GetUserRoutesAsync(

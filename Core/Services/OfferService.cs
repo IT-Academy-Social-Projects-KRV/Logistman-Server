@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
+using Core.DTO;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
+using Core.Entities.TripEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
+using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Core.Specifications;
-using Core.Helpers;
-using Core.DTO;
-using Core.Entities.TripEntity;
 
 namespace Core.Services
 {
@@ -106,7 +106,7 @@ namespace Core.Services
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
 
-        public async Task<PaginatedList<OfferPreviewDTO>> GetNearRouteAsync(
+        public async Task<PaginatedList<OfferCreateTripDTO>> GetNearRouteAsync(
             PaginationFilterDTO paginationFilter, int routeId)
         {
             var route = await _tripRepository.GetByIdAsync(routeId);
@@ -124,7 +124,7 @@ namespace Core.Services
                     paginationFilter
                 ));
 
-            int totalPages = PaginatedList<OfferPreviewDTO>.GetTotalPages(paginationFilter, offerListCount);
+            int totalPages = PaginatedList<OfferCreateTripDTO>.GetTotalPages(paginationFilter, offerListCount);
 
             if (totalPages == 0)
             {
@@ -139,8 +139,8 @@ namespace Core.Services
                     paginationFilter
                 ));
 
-            return PaginatedList<OfferPreviewDTO>.Evaluate(
-                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
+            return PaginatedList<OfferCreateTripDTO>.Evaluate(
+                _mapper.Map<List<OfferCreateTripDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
     }
 }

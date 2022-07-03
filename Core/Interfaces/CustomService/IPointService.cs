@@ -8,6 +8,7 @@ namespace Core.Interfaces.CustomService
     {
         Task<int> CreateAsync(PointDTO pointDTO);
         List<PointDTO> SortByOrder(List<PointDTO> points);
+        List<PointsTripDTO> SortByOrder(List<PointsTripDTO> points);
         Task SetTripIdToListAsync(List<PointDTO> points, int tripId);
     }
 }

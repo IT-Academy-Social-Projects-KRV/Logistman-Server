@@ -1,5 +1,7 @@
 ﻿using Ardalis.Specification;
 using Core.Entities.PointEntity;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Specifications
 {
@@ -12,6 +14,14 @@ namespace Core.Specifications
                 Query
                     .Where(p => p.TripId == tripId)
                     .OrderBy(p => p.Order);
+            }
+        }
+
+        internal class GetByIds : Specification<PointData>
+        {
+            public GetByIds(List<int> pointsIds)
+            {
+                Query.Where(p => pointsIds.Contains(p.Id));
             }
         }
     }
