@@ -13,26 +13,24 @@ using System.Linq;
 using Core.DTO.OfferDTO;
 using Core.Entities.PointEntity;
 using System.Threading.Tasks;
+using Core.Entities.OfferEntity;
 
 namespace Core.Services
 {
     public class InviteService : IInviteService
     {
         private readonly IRepository<Invite> _inviteRepository;
-        private readonly IRepository<Trip> _tripRepository;
         private readonly IRepository<Offer> _offerRepository;
         private readonly IRepository<PointData> _pointRepository;
         private readonly IMapper _mapper;
 
         public InviteService(
             IRepository<Invite> inviteRepository,
-            IRepository<Trip> tripRepository,
             IRepository<Offer> offerRepository,
             IRepository<PointData> pointRepository,
             IMapper mapper)
         {
             _inviteRepository = inviteRepository;
-            _tripRepository = tripRepository;
             _offerRepository = offerRepository;
             _pointRepository = pointRepository;
             _mapper = mapper;

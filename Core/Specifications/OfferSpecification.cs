@@ -21,7 +21,7 @@ namespace Core.Specifications
 
             public GetById(int offerId, int tripId, DateTimeOffset startTrip, DateTimeOffset expirationTrip)
             {
-                Query.Where(offer => offer.Id == offerId 
+                Query.Where(offer => offer.Id == offerId
                                      && !offer.IsClosed
                                      && (offer.RelatedTripId == tripId || offer.RelatedTripId == null)
                                      && offer.StartDate <= expirationTrip);
@@ -71,7 +71,7 @@ namespace Core.Specifications
                     .Where(offer => offers.Contains(offer.Id));
             }
         }
-        
+
         internal class GetByTripId : Specification<Offer>
         {
             public GetByTripId(int tripId)

@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO.InviteDTO;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
