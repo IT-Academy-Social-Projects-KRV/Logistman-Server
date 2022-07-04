@@ -11,17 +11,37 @@ namespace Core.Specifications
         {
             public GetById(int tripId)
             {
-                Query.Where(t => t.Id == tripId);
+                Query
+                    .Where(t => t.Id == tripId)
+                    .Include(t => t.Offers)
+                    .Include(t => t.Points);
+            }
+        }
+
+        internal class GetValidTripById : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetValidTripById(int tripId, float totalWeight)
+            {
+                Query
+                    .Where(t => tripId == t.Id
+                                && !t.IsActive
+                                && !t.IsEnded
+                                && t.LoadCapacity >= totalWeight
+                                && DateTimeOffset.UtcNow <= t.ExpirationDate);
             }
         }
 
         internal class GetByTimeSpace : Specification<Trip>, ISingleResultSpecification<Trip>
         {
-            public GetByTimeSpace(DateTimeOffset startDate, DateTimeOffset expirationDate, string creatorId)
+            public GetByTimeSpace(
+                DateTimeOffset startDate,
+                DateTimeOffset expirationDate,
+                string creatorId)
             {
-                Query.Where(t => t.TripCreatorId == creatorId && !t.IsEnded &&
-                                                       ((t.StartDate >= startDate && t.StartDate < expirationDate) ||
-                                                       (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate)));
+                Query.Where(t => t.TripCreatorId == creatorId
+                                 && !t.IsEnded
+                                 && ((t.StartDate >= startDate && t.StartDate < expirationDate) ||
+                                     (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate)));
             }
         }
 

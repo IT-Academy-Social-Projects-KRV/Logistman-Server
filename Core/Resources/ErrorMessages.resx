@@ -237,4 +237,10 @@
   <data name="UserCantBeDeleted" xml:space="preserve">
     <value>User with active offers or trips can`t be deleted</value>
   </data>
+  <data name="OfferNotValid" xml:space="preserve">
+    <value>Offer is not valid!</value>
+  </data>
+  <data name="TripNotValid" xml:space="preserve">
+    <value>Trip is not valid!</value>
+  </data>
 </root>

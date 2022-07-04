@@ -53,6 +53,21 @@ namespace Core.Services
             return sortedPointsByOrder;
         }
 
+        public List<PointsTripDTO> SortByOrder(List<PointsTripDTO> pointsDTOs)
+        {
+            var sortedPointsByOrder = pointsDTOs.OrderBy(p => p.Order).ToList();
+
+            for (int i = 0; i < sortedPointsByOrder.Count(); i++)
+            {
+                if (sortedPointsByOrder[i].Order != i + 1)
+                {
+                    throw new HttpException(ErrorMessages.InvalidOrder, HttpStatusCode.BadRequest);
+                }
+            }
+
+            return sortedPointsByOrder;
+        }
+
         public async Task SetTripIdToListAsync(List<PointDTO> pointsDTOs, int tripId)
         {
             var trip = await _tripRepository.GetByIdAsync(tripId);

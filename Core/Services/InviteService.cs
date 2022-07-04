@@ -1,36 +1,38 @@
-﻿using Core.Interfaces;
-using Core.Interfaces.CustomService;
-using System.Threading.Tasks;
-using Core.Entities.InviteEntity;
-using Core.DTO.InviteDTO;
-using System.Collections.Generic;
-using Core.Entities.OfferEntity;
-using Core.Exceptions;
-using Core.Specifications;
-using System.Linq;
-using Core.Entities.TripEntity;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO;
+using Core.DTO.InviteDTO;
+using Core.Entities.InviteEntity;
+using Core.Entities.TripEntity;
+using Core.Exceptions;
 using Core.Helpers;
+using Core.Interfaces;
+using Core.Interfaces.CustomService;
+using Core.Specifications;
+using System.Collections.Generic;
+using System.Linq;
+using Core.DTO.OfferDTO;
+using Core.Entities.PointEntity;
+using System.Threading.Tasks;
+using Core.Entities.OfferEntity;
 
 namespace Core.Services
 {
     public class InviteService : IInviteService
     {
         private readonly IRepository<Invite> _inviteRepository;
-        private readonly IRepository<Trip> _tripRepository;
         private readonly IRepository<Offer> _offerRepository;
+        private readonly IRepository<PointData> _pointRepository;
         private readonly IMapper _mapper;
 
         public InviteService(
             IRepository<Invite> inviteRepository,
-            IRepository<Trip> tripRepository,
             IRepository<Offer> offerRepository,
+            IRepository<PointData> pointRepository,
             IMapper mapper)
         {
             _inviteRepository = inviteRepository;
-            _tripRepository = tripRepository;
             _offerRepository = offerRepository;
+            _pointRepository = pointRepository;
             _mapper = mapper;
         }
 
@@ -47,19 +49,12 @@ namespace Core.Services
             await _inviteRepository.SaveChangesAsync();
         }
 
-        public async Task ManageTripInvitesAsync(CreateTripInvitesDTO createTripInvitesDTO)
+        public async Task ManageTripInvitesAsync(Trip trip, List<OfferInviteDTO> offers)
         {
-            var trip = await _tripRepository
-                .GetBySpecAsync(new TripSpecification.GetRouteById(createTripInvitesDTO.TripId));
-
-            ExceptionMethods.TripNullCheck(trip);
-
             var previousTripInvites = await _inviteRepository.ListAsync(
-                new InviteSpecification.GetByTripId(createTripInvitesDTO.TripId));
+                new InviteSpecification.GetByTripId(trip.Id));
             var newInvites = new List<Invite>();
             var invitesIdsForDelete = new List<int>();
-
-            createTripInvitesDTO.OffersId = createTripInvitesDTO.OffersId.Distinct().ToList();
 
             if (previousTripInvites.Count == 0)
             {
@@ -68,7 +63,7 @@ namespace Core.Services
                     IsAccepted = false,
                     IsAnswered = false,
                     OfferId = null,
-                    TripId = createTripInvitesDTO.TripId,
+                    TripId = trip.Id,
                     UserId = trip.TripCreatorId
                 });
             }
@@ -82,9 +77,9 @@ namespace Core.Services
 
                 var offerId = (int)previousInvite.OfferId;
 
-                if (createTripInvitesDTO.OffersId.Contains(offerId))
+                if (offers.Any(o => o.Id == offerId))
                 {
-                    createTripInvitesDTO.OffersId.Remove(offerId);
+                    offers.Remove(offers.First(o => o.Id == offerId));
                 }
                 else
                 {
@@ -92,22 +87,15 @@ namespace Core.Services
                 }
             }
 
-            foreach (var offerId in createTripInvitesDTO.OffersId)
+            foreach (var offer in offers)
             {
-                var offer = await _offerRepository
-                    .GetBySpecAsync(new OfferSpecification.GetOpenById(
-                        offerId,
-                        createTripInvitesDTO.TripId));
-
-                ExceptionMethods.OfferNullCheck(offer);
-
                 newInvites.Add(new Invite
                 {
                     IsAccepted = false,
                     IsAnswered = false,
-                    OfferId = offerId,
+                    OfferId = offer.Id,
                     UserId = offer.OfferCreatorId,
-                    TripId = createTripInvitesDTO.TripId
+                    TripId = trip.Id
                 });
             }
 
@@ -143,6 +131,64 @@ namespace Core.Services
 
             return PaginatedList<InvitePreviewDTO>.Evaluate(
                 _mapper.Map<List<InvitePreviewDTO>>(invites), paginationFilter.PageNumber, invitesCount, totalPages);
+        }
+
+        public async Task<PaginatedList<DriverInvitePreviewDTO>> DriversInvitesAsync(
+            string userId, PaginationFilterDTO paginationFilter)
+        {
+            var invitesCount = await _inviteRepository.CountAsync(
+                new InviteSpecification.GetDriverInvites(userId, paginationFilter));
+
+            int totalPages = PaginatedList<DriverInvitePreviewDTO>
+                .GetTotalPages(paginationFilter, invitesCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var invites = await _inviteRepository.ListAsync(
+                new InviteSpecification.GetDriverInvites(userId, paginationFilter));
+
+            var driverInvites = new List<DriverInvitePreviewDTO>();
+
+            foreach (var invite in invites)
+            {
+                var offers = await _offerRepository.ListAsync(
+                    new OfferSpecification.GetByTripId(invite.TripId));
+
+                offers = offers.OrderBy(o => o.Point.Order).ToList();
+
+                float totalGoodsWeight = 0;
+
+                foreach (var offer in offers)
+                {
+                    totalGoodsWeight += offer.GoodsWeight;
+                }
+
+                var tripPoints = await _pointRepository.ListAsync(
+                    new PointDataSpecification.GetByTripId(invite.TripId));
+
+                driverInvites.Add(new DriverInvitePreviewDTO
+                {
+                    Id = invite.Id,
+                    PointFromInfo = _mapper.Map<PointPreviewDTO>(tripPoints.First()),
+                    PointToInfo = _mapper.Map<PointPreviewDTO>(tripPoints.Last()),
+                    IsAnswered = invite.IsAnswered,
+                    IsAccepted = invite.IsAccepted,
+                    TotalGoodsWeight = totalGoodsWeight,
+                    TotalDistance = invite.Trip.Distance,
+                    TotalOffersCount = offers.Count,
+                    OffersInfo = _mapper.Map<List<OfferPreviewInTripInviteDTO>>(offers.Take(4))
+                });
+            }
+
+            return PaginatedList<DriverInvitePreviewDTO>.Evaluate(
+                    driverInvites,
+                    paginationFilter.PageNumber,
+                    invitesCount,
+                    totalPages
+                );
         }
     }
 }

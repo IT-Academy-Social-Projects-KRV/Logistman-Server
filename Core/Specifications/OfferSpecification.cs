@@ -3,6 +3,7 @@ using Core.DTO;
 using Core.Entities.OfferEntity;
 using NetTopologySuite.Geometries;
 using System;
+using System.Collections.Generic;
 
 namespace Core.Specifications
 {
@@ -16,6 +17,14 @@ namespace Core.Specifications
                      .Include(offer => offer.Point)
                      .Include(offer => offer.OfferRole)
                      .Include(offer => offer.GoodCategory);
+            }
+
+            public GetById(int offerId, int tripId, DateTimeOffset startTrip, DateTimeOffset expirationTrip)
+            {
+                Query.Where(offer => offer.Id == offerId
+                                     && !offer.IsClosed
+                                     && (offer.RelatedTripId == tripId || offer.RelatedTripId == null)
+                                     && offer.StartDate <= expirationTrip);
             }
         }
 
@@ -36,7 +45,7 @@ namespace Core.Specifications
         internal class GetOffersNearRoute : Specification<Offer>
         {
             public GetOffersNearRoute(
-                Geometry routeGeography, 
+                Geometry routeGeography,
                 double dist,
                 DateTimeOffset expirationDate,
                 PaginationFilterDTO paginationFilter)
@@ -54,13 +63,25 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetOpenById : Specification<Offer>, ISingleResultSpecification<Offer>
+        internal class GetOfferByIds : Specification<Offer>
         {
-            public GetOpenById(int offerId, int tripId)
+            public GetOfferByIds(List<int> offers)
             {
-                Query.Where(offer => offer.Id == offerId 
-                && !offer.IsClosed 
-                && offer.RelatedTripId == tripId);
+                Query
+                    .Where(offer => offers.Contains(offer.Id));
+            }
+        }
+
+        internal class GetByTripId : Specification<Offer>
+        {
+            public GetByTripId(int tripId)
+            {
+                Query
+                    .Where(o => o.RelatedTripId == tripId)
+                    .Include(o => o.Point)
+                    .Include(o => o.OfferRole)
+                    .Include(o => o.GoodCategory)
+                    .AsNoTracking();
             }
         }
 
