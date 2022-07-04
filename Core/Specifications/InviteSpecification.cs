@@ -50,5 +50,18 @@ namespace Core.Specifications
                      .AsNoTracking();
             }
         }
+
+        internal class GetDriverInvites : Specification<Invite>
+        {
+            public GetDriverInvites(string userId, PaginationFilterDTO paginationFilter)
+            {
+                Query
+                    .Where(i => i.UserId == userId && i.OfferId == null)
+                    .Include(i => i.Trip)
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize)
+                    .AsNoTracking();
+            }
+        }
     }
 }

@@ -24,5 +24,15 @@ namespace Core.Specifications
                 Query.Where(p => pointsIds.Contains(p.Id));
             }
         }
+
+        internal class GetByTripId : Specification<PointData>
+        {
+            public GetByTripId(int tripId)
+            {
+                Query
+                    .Where(p => p.TripId == tripId)
+                    .OrderBy(p => p.Order);
+            }
+        }
     }
 }

@@ -38,10 +38,22 @@ namespace API.Controllers
 
         [HttpGet("offers")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> OffersInvitesAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        public async Task<IActionResult> OffersInvitesAsync(
+            [FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             var invites = await _inviteService.OffersInvitesAsync(userId, paginationFilter);
+
+            return Ok(invites);
+        }
+
+        [HttpGet("drivers")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> DriversInvitesAsync(
+            [FromQuery] PaginationFilterDTO paginationFilter)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            var invites = await _inviteService.DriversInvitesAsync(userId, paginationFilter);
 
             return Ok(invites);
         }

@@ -11,6 +11,9 @@ namespace Core.Interfaces.CustomService
     {
         Task ManageTripInvitesAsync(Trip trip, List<OfferInviteDTO> offers);
         Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId);
-        Task<PaginatedList<InvitePreviewDTO>> OffersInvitesAsync(string userId, PaginationFilterDTO paginationFilter);
+        Task<PaginatedList<InvitePreviewDTO>> OffersInvitesAsync(
+            string userId, PaginationFilterDTO paginationFilter);
+        Task<PaginatedList<DriverInvitePreviewDTO>> DriversInvitesAsync(
+            string userId, PaginationFilterDTO paginationFilter);
     }
 }
