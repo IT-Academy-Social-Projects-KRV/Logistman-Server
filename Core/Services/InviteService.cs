@@ -150,13 +150,22 @@ namespace Core.Services
                 _mapper.Map<List<InvitePreviewDTO>>(invites), paginationFilter.PageNumber, invitesCount, totalPages);
         }
 
-        public async Task<List<DriverInvitePreviewDTO>> DriversInvitesAsync(string userId)
+        public async Task<PaginatedList<DriverInvitePreviewDTO>> DriversInvitesAsync(
+            string userId, PaginationFilterDTO paginationFilter)
         {
             var invitesCount = await _inviteRepository.CountAsync(
-                new InviteSpecification.GetDriverInvites(userId));
+                new InviteSpecification.GetDriverInvites(userId, paginationFilter));
+
+            int totalPages = PaginatedList<DriverInvitePreviewDTO>
+                .GetTotalPages(paginationFilter, invitesCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
 
             var invites = await _inviteRepository.ListAsync(
-                new InviteSpecification.GetDriverInvites(userId));
+                new InviteSpecification.GetDriverInvites(userId, paginationFilter));
 
             var driverInvites = new List<DriverInvitePreviewDTO>();
 
@@ -191,12 +200,12 @@ namespace Core.Services
                 });
             }
 
-            if (driverInvites.Count == 0)
-            {
-                return null;
-            }
-
-            return driverInvites;
+            return PaginatedList<DriverInvitePreviewDTO>.Evaluate(
+                    driverInvites,
+                    paginationFilter.PageNumber,
+                    invitesCount,
+                    totalPages
+                );
         }
     }
 }

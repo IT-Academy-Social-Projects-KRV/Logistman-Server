@@ -58,10 +58,11 @@ namespace API.Controllers
 
         [HttpGet("drivers")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> DriversInvitesAsync()
+        public async Task<IActionResult> DriversInvitesAsync(
+            [FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var invites = await _inviteService.DriversInvitesAsync(userId);
+            var invites = await _inviteService.DriversInvitesAsync(userId, paginationFilter);
 
             return Ok(invites);
         }
