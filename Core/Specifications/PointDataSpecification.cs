@@ -1,5 +1,7 @@
 ﻿using Ardalis.Specification;
 using Core.Entities.PointEntity;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Specifications
 {
@@ -15,6 +17,14 @@ namespace Core.Specifications
             }
         }
 
+        internal class GetByIds : Specification<PointData>
+        {
+            public GetByIds(List<int> pointsIds)
+            {
+                Query.Where(p => pointsIds.Contains(p.Id));
+            }
+        }
+        
         internal class GetByTripId : Specification<PointData>
         {
             public GetByTripId(int tripId)

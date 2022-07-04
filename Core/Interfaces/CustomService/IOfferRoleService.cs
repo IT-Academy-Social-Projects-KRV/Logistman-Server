@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces.CustomService

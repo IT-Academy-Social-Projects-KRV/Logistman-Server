@@ -25,15 +25,6 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        [HttpPost("manage-list")]
-        [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<IActionResult> ManageTripInvitesAsync(
-            [FromBody] CreateTripInvitesDTO createTripInvitesDTO)
-        {
-            await _inviteService.ManageTripInvitesAsync(createTripInvitesDTO);
-            return Ok();
-        }
-
         [HttpPost("manage")]
         [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<IActionResult> ManageInviteAsync(
