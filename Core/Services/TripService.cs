@@ -91,7 +91,7 @@ namespace Core.Services
         public async Task<LineString> GetRouteGeographyDataAsync(int routeId)
         {
             var routePoints = await _pointDataRepository
-                .ListAsync(new PointDataSpecification.GetByRouteId(routeId));
+                .ListAsync(new PointDataSpecification.GetByTripId(routeId));
 
             var listOfRouteCoordinates = new List<Coordinate>();
 
@@ -199,8 +199,22 @@ namespace Core.Services
             await _tripRepository.UpdateAsync(trip);
 
             await _inviteService.ManageTripInvitesAsync(
-                trip, 
+                trip,
                 _mapper.Map<List<OfferInviteDTO>>(offers));
+        }
+
+        public async Task DeleteRouteAsync(string userId, int tripId)
+        {
+            var route = await _tripRepository.GetBySpecAsync(
+                new TripSpecification.GetRouteByUserIdAndId(userId, tripId));
+
+            ExceptionMethods.TripNullCheck(route);
+
+            var points = await _pointDataRepository.ListAsync(
+                new PointDataSpecification.GetByTripId(tripId));
+
+            await _pointDataRepository.DeleteRangeAsync(points);
+            await _tripRepository.DeleteAsync(route);
         }
     }
 }
