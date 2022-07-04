@@ -59,6 +59,42 @@ namespace Core.Specifications
             }
         }
 
+        internal class GetRoutesByUserId : Specification<Trip>
+        {
+            public GetRoutesByUserId(string userId)
+            {
+                Query
+                    .Where(t => t.TripCreatorId == userId && !t.IsActive && !t.IsEnded)
+                    .Include(t => t.Points)
+                    .Include(t => t.Car)
+                    .Include(t => t.Offers);
+            }
+        }
+
+        internal class GetRouteById : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetRouteById(int tripId)
+            {
+                Query.Where(t => t.Id == tripId && !t.IsActive && !t.IsEnded);
+            }
+        }
+
+        internal class GetActiveByUserId : Specification<Trip>
+        {
+            public GetActiveByUserId(string userId)
+            {
+                Query.Where(t => t.TripCreatorId == userId && t.IsActive);
+            }
+        }
+
+        internal class GetActiveById : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetActiveById(int tripId)
+            {
+                Query.Where(t => t.Id == tripId && t.IsActive);
+            }
+        }
+
         internal class GetRoutesByCreatorId : Specification<Trip>
         {
             public GetRoutesByCreatorId(PaginationFilterDTO paginationFilter, string tripCreatorId)

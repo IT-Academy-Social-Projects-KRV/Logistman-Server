@@ -52,5 +52,15 @@ namespace Core.Specifications
                 Query.Where(c => c.UserId == userId && c.IsVerified);
             }
         }
+
+        internal class GetWithTripsByUserId : Specification<Car>
+        {
+            public GetWithTripsByUserId(string userId)
+            {
+                Query
+                    .Where(c => c.UserId == userId)
+                    .Include(c => c.Trips);
+            }
+        }
     }
 }

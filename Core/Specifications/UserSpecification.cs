@@ -30,5 +30,22 @@ namespace Core.Specifications
                 Query.Where(u => userIds.Contains(u.Id));
             }
         }
+
+        internal class GetById : Specification<User>, ISingleResultSpecification<User>
+        {
+            public GetById(string userId)
+            {
+                Query
+                    .Where(u => u.Id == userId)
+                    .Include(u => u.EstimatorRatings)
+                    .Include(u => u.Invites)
+                    .Include(u => u.Cars)
+                    .Include(u => u.Offers)
+                    .Include(u => u.RatedRatings)
+                    .Include(u => u.Trips)
+                    .Include(u => u.ViolationReports)
+                    .Include(u => u.ReporterReports);
+            }
+        }
     }
 }
