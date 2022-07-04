@@ -2,12 +2,16 @@ using API.Middlewares;
 using API.ServiceExtension;
 using Core;
 using Core.Helpers;
+using Hangfire;
+using Hangfire.SqlServer;
+using HangfireBasicAuthenticationFilter;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace API
 {
@@ -49,6 +53,25 @@ namespace API
             services.AddMvcCore().AddRazorViewEngine();
 
             services.AddSwagger();
+
+            services.AddHttpClient();
+
+            services.AddHangfire(configuration => configuration
+                    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                    .UseSimpleAssemblyNameTypeSerializer()
+                    .UseRecommendedSerializerSettings()
+                    .UseSqlServerStorage(
+                        Configuration.GetConnectionString("DefaultConnection"),
+                        new SqlServerStorageOptions
+                        {
+                            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                            QueuePollInterval = TimeSpan.Zero,
+                            UseRecommendedIsolationLevel = true,
+                            DisableGlobalLocks = true
+                        }));
+
+            services.AddHangfireServer();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -70,11 +93,30 @@ namespace API
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 
+            app.UseStaticFiles();
+
             app.UseAuthorization();
+
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+                DashboardTitle = "Logistman",
+                Authorization = new[]
+                    {
+                        new HangfireCustomBasicAuthenticationFilter{
+                            User = Configuration.GetSection("HangfireSettings:UserName").Value,
+                            Pass = Configuration.GetSection("HangfireSettings:Password").Value
+                        }
+                    }
+            });
+
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHangfireDashboard();
             });
         }
     }
