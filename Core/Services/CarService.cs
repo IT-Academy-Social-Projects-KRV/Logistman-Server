@@ -165,9 +165,16 @@ namespace Core.Services
                     await _pointDataRepository.DeleteRangeAsync(pointsToDelete);
                 }
 
-                car.UserId = null;
+                if (car.Trips.Count == 0)
+                {
+                    await _carRepository.DeleteAsync(car);
+                }
+                else
+                {
+                    car.UserId = null;
 
-                await _carRepository.UpdateAsync(car);
+                    await _carRepository.UpdateAsync(car);
+                }
             }
         }
 
