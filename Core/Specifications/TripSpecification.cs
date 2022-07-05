@@ -86,6 +86,14 @@ namespace Core.Specifications
                 Query.Where(t => t.TripCreatorId == userId && t.IsActive);
             }
         }
+        internal class GetActiveByCarId : Specification<Trip>
+        {
+            public GetActiveByCarId(int carId)
+            {
+                Query.Where(t => t.TransportationCarId == carId && t.IsActive);
+            }
+        }
+
 
         internal class GetActiveById : Specification<Trip>, ISingleResultSpecification<Trip>
         {
