@@ -112,7 +112,8 @@ namespace Core.Specifications
         {
             public GetRouteByUserIdAndId(string userId, int tripId)
             {
-                Query.Where(t => t.Id == tripId && !t.IsActive && !t.IsEnded);
+                Query.Where(t => t.Id == tripId && !t.IsActive && !t.IsEnded &&
+                                 t.TripCreatorId == userId);
             }
         }
     }
