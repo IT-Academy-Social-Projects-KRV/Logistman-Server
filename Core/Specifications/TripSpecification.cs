@@ -107,5 +107,14 @@ namespace Core.Specifications
                     .Take(paginationFilter.PageSize);
             }
         }
+
+        internal class GetRouteByUserIdAndId : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetRouteByUserIdAndId(string userId, int tripId)
+            {
+                Query.Where(t => t.Id == tripId && !t.IsActive && !t.IsEnded &&
+                                 t.TripCreatorId == userId);
+            }
+        }
     }
 }
