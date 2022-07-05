@@ -244,6 +244,6 @@
     <value>Trip is not valid!</value>
   </data>
   <data name="CarCantBeDeleted" xml:space="preserve">
-    <value>A car participating in an active trip cannot be deleted!</value>
+    <value>A car participating in an active trip or a trip for which the invitation has not been rejected cannot be deleted!</value>
   </data>
 </root>

@@ -97,7 +97,7 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A car participating in an active trip cannot be deleted!.
+        ///   Looks up a localized string similar to A car participating in an active trip or a trip for which the invitation has not been rejected cannot be deleted!.
         /// </summary>
         internal static string CarCantBeDeleted {
             get {
