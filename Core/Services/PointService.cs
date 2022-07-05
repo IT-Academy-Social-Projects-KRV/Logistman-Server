@@ -38,11 +38,6 @@ namespace Core.Services
             return point;
         }
 
-        public async Task UpdateAsync(PointData point)
-        {
-            await _pointRepository.UpdateAsync(point);
-        }
-
         public List<PointDTO> SortByOrder(List<PointDTO> pointsDTOs)
         {
             var sortedPointsByOrder = pointsDTOs.OrderBy(p => p.Order).ToList();

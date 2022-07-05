@@ -2,6 +2,7 @@
 using Core.DTO;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
+using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
@@ -23,6 +24,7 @@ namespace Core.Services
         private readonly IMapper _mapper;
         private readonly IRepository<Offer> _offerRepository;
         private readonly IRepository<Trip> _tripRepository;
+        private readonly IRepository<PointData> _pointRepository;
         private readonly UserManager<User> _userManager;
         private readonly IGoodCategoryService _goodCategoryService;
         private readonly IOfferRoleService _offerRoleService;
@@ -33,6 +35,7 @@ namespace Core.Services
             IMapper mapper,
             IRepository<Offer> offerRepository,
             IRepository<Trip> tripRepository,
+            IRepository<PointData> pointRepository,
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryService,
             IOfferRoleService offerRoleService,
@@ -41,6 +44,7 @@ namespace Core.Services
         {
             _pointService = pointService;
             _offerRoleService = offerRoleService;
+            _pointRepository = pointRepository;
             _mapper = mapper;
             _offerRepository = offerRepository;
             _tripRepository = tripRepository;
@@ -84,7 +88,7 @@ namespace Core.Services
 
             point.OfferId = offerFromDb.Id;
 
-            await _pointService.UpdateAsync(point);
+            await _pointRepository.UpdateAsync(point);
         }
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
