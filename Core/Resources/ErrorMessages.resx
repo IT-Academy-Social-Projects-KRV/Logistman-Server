@@ -243,4 +243,7 @@
   <data name="TripNotValid" xml:space="preserve">
     <value>Trip is not valid!</value>
   </data>
+  <data name="RouteHasInvites" xml:space="preserve">
+    <value>The route has already had invites! You can only decline the invite!</value>
+  </data>
 </root>
