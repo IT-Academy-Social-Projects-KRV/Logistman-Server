@@ -331,6 +331,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The route has already had invites! You can only decline the invite!.
+        /// </summary>
+        internal static string RouteHasInvites {
+            get {
+                return ResourceManager.GetString("RouteHasInvites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot send invite to your account.
         /// </summary>
         internal static string SendInviteYourself {
