@@ -64,15 +64,27 @@ namespace Core.Services
             ExceptionMethods.UserNullCheck(await _userManager.FindByIdAsync(userId));
 
             var offer = _mapper.Map<Offer>(offerCreate);
+
             offer.OfferCreatorId = userId;
             offer.CreationDate = DateTimeOffset.UtcNow;
             offer.IsClosed = false;
             offer.CreatorRoleId = await _offerRoleService.GetRoleByNameAsync(offerCreate.Role);
             offer.GoodCategoryId = await _goodCategoryService
                 .GetGoodCategoryByNameAsync(offerCreate.GoodCategory);
-            offer.OfferPointId = await _pointService.CreateAsync(offerCreate.Point);
 
-            await _offerRepository.AddAsync(offer);
+            var point = await _pointService.CreateAsync(offerCreate.Point);
+
+            ExceptionMethods.PointNullCheck(point);
+
+            offer.OfferPointId = point.Id;
+
+            var offerFromDb = await _offerRepository.AddAsync(offer);
+
+            ExceptionMethods.OfferNullCheck(offerFromDb);
+
+            point.OfferId = offerFromDb.Id;
+
+            await _pointService.UpdateAsync(point);
         }
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)

@@ -11,9 +11,10 @@ namespace Core.Specifications
             public GetWithMainCredentials(string registrationNumber, string vin, string technicalPassport)
             {
                 Query.Where(c =>
-                            c.RegistrationNumber.Equals(registrationNumber) ||
+                            (c.RegistrationNumber.Equals(registrationNumber) ||
                             c.Vin.Equals(vin) ||
-                            c.TechnicalPassport.Equals(technicalPassport));
+                            c.TechnicalPassport.Equals(technicalPassport)) &&
+                            c.UserId != null);
             }
         }
 

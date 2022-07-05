@@ -1,4 +1,5 @@
 ﻿using Core.Entities.InviteEntity;
+using Core.Entities.PointEntity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,8 +18,8 @@ namespace Core.Entities.OfferEntity
                 .HasForeignKey(p => p.CreatorRoleId);
             builder
                 .HasOne(p => p.Point)
-                .WithMany(p => p.Offers)
-                .HasForeignKey(p => p.OfferPointId);
+                .WithOne(p => p.Offer)
+                .HasForeignKey<PointData>(p => p.OfferId);
             builder
                 .HasOne(p => p.GoodCategory)
                 .WithMany(p => p.Offers)

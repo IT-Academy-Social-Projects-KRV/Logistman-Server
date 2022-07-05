@@ -29,13 +29,18 @@ namespace Core.Services
             _tripRepository = tripRepository;
         }
 
-        public async Task<int> CreateAsync(PointDTO pointDTO)
+        public async Task<PointData> CreateAsync(PointDTO pointDTO)
         {
             var point = _mapper.Map<PointData>(pointDTO);
             
             await _pointRepository.AddAsync(point);
 
-            return point.Id;
+            return point;
+        }
+
+        public async Task UpdateAsync(PointData point)
+        {
+            await _pointRepository.UpdateAsync(point);
         }
 
         public List<PointDTO> SortByOrder(List<PointDTO> pointsDTOs)
