@@ -136,45 +136,38 @@ namespace Core.Services
 
             ExceptionMethods.CarNullCheck(car);
 
+            if (!await CheckCanCarBeDeletedAsync(car))
+            {
+                throw new HttpException(
+                    ErrorMessages.CarCantBeDeleted,
+                    HttpStatusCode.Forbidden);
+            }
+
+            var routesWithCurrentCarToDelete = await _tripRepository
+                .ListAsync(new TripSpecification.GetRoutesWithoutRelatedOffersByCarId(car.Id));
+
+            if (routesWithCurrentCarToDelete.Count != 0)
+            {
+                var pointsToDelete = new List<PointData>();
+
+                foreach (var userRoute in routesWithCurrentCarToDelete)
+                {
+                    pointsToDelete.AddRange(userRoute.Points);
+                }
+
+                await _tripRepository.DeleteRangeAsync(routesWithCurrentCarToDelete);
+                await _pointDataRepository.DeleteRangeAsync(pointsToDelete);
+            }
+
             if (car.Trips.Count == 0)
             {
                 await _carRepository.DeleteAsync(car);
             }
             else
             {
-                if (!await CheckCanCarBeDeletedAsync(car))
-                {
-                    throw new HttpException(
-                        ErrorMessages.CarCantBeDeleted,
-                        HttpStatusCode.Forbidden);
-                }
+                car.UserId = null;
 
-                var routesWithCurrentCarToDelete = await _tripRepository
-                    .ListAsync(new TripSpecification.GetRoutesWithoutRelatedOffersByCarId(car.Id));
-
-                if (routesWithCurrentCarToDelete.Count != 0)
-                {
-                    var pointsToDelete = new List<PointData>();
-
-                    foreach (var userRoute in routesWithCurrentCarToDelete)
-                    {
-                        pointsToDelete.AddRange(userRoute.Points);
-                    }
-
-                    await _tripRepository.DeleteRangeAsync(routesWithCurrentCarToDelete);
-                    await _pointDataRepository.DeleteRangeAsync(pointsToDelete);
-                }
-
-                if (car.Trips.Count == 0)
-                {
-                    await _carRepository.DeleteAsync(car);
-                }
-                else
-                {
-                    car.UserId = null;
-
-                    await _carRepository.UpdateAsync(car);
-                }
+                await _carRepository.UpdateAsync(car);
             }
         }
 
