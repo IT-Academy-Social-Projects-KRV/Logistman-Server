@@ -202,5 +202,15 @@ namespace Core.Services
                 trip, 
                 _mapper.Map<List<OfferInviteDTO>>(offers));
         }
+
+        public async Task<TripInfoDTO> GetTripByIdAsync(int tripId)
+        {
+            var trip = await _tripRepository
+                .GetBySpecAsync(new TripSpecification.GetById(tripId));
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            return _mapper.Map<TripInfoDTO>(trip);
+        }
     }
 }

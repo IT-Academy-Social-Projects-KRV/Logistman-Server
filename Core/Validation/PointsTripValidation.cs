@@ -5,9 +5,9 @@ using FluentValidation;
 
 namespace Core.Validation
 {
-    public class PiontsTripValidation : AbstractValidator<List<PointsTripDTO>>
+    public class PointsTripValidation : AbstractValidator<List<PointsTripDTO>>
     {
-        public PiontsTripValidation()
+        public PointsTripValidation()
         {
             RuleFor(points => points)
                 .Must(points => !points.Any(point => point.Order < 0))

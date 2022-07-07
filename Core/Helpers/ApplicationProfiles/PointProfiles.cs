@@ -24,6 +24,24 @@ namespace Core.Helpers.ApplicationProfiles
                 dest => dest.Latitude,
                 opt => opt.MapFrom(src => src.Location.Y));
             CreateMap<PointData, PointPreviewDTO>();
+            CreateMap<PointData, PointTripInfoDTO>().ForMember(
+                    dest => dest.Longitude,
+                    opt => opt.MapFrom(src => src.Location.X))
+                .ForMember(
+                    dest => dest.Latitude,
+                    opt => opt.MapFrom(src => src.Location.Y));
+            CreateMap<PointData, PointOfferCreateTripDTO>()
+                .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(point => point.Offer.OfferRole.Name))
+                .ForMember(dest => dest.Settlement, opt => opt.MapFrom(point => point.Settlement))
+                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(point => point.Location.Y))
+                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(point => point.Location.X))
+                .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(point => point.Offer.CreationDate.ToString("yyyy/MM/dd HH:mm")))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(point => point.Address))
+                .ForMember(dest => dest.Region, opt => opt.MapFrom(point => point.Region))
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(point => point.Country))
+                .ForMember(dest => dest.Postcode, opt => opt.MapFrom(point => point.Postcode))
+                .ForMember(dest => dest.PointId, opt => opt.MapFrom(point => point.Id))
+                .ForMember(dest => dest.OfferId, opt => opt.MapFrom(point => point.Offer.Id));
         }
     }
 }
