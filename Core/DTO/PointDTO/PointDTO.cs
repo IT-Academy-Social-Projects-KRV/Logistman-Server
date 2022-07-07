@@ -12,5 +12,6 @@
         public string Postcode { get; set; }
         public int Order { get; set; }
         public int? TripId { get; set; }
+        public int? OfferId { get; set; }
     }
 }

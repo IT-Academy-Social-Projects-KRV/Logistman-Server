@@ -359,7 +359,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "35800",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 1
                },
                new PointData()
                {
@@ -371,7 +372,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "33000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 2
                },
                new PointData()
                {
@@ -383,7 +385,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "43000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 3
                },
                new PointData()
                {
@@ -395,7 +398,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "49000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 4
                },
                new PointData()
                {
@@ -407,7 +411,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "87000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 5
                },
                new PointData()
                {
@@ -419,7 +424,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "54000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 6
                },
                new PointData()
                {
@@ -431,7 +437,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "25000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 7
                },
                new PointData()
                {
@@ -443,7 +450,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "25000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 8
                },
                new PointData()
                {
@@ -455,7 +463,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "25000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 9
                },
                new PointData()
                {
@@ -467,7 +476,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "49000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 10
                },
                new PointData()
                {
@@ -479,7 +489,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "79000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 11
                },
                new PointData()
                {
@@ -491,7 +502,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "88000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 12
                },
                new PointData()
                {
@@ -503,7 +515,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "29000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 13
                },
                new PointData()
                {
@@ -515,7 +528,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "50000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 14
                },
                new PointData()
                {
@@ -527,7 +541,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "54000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 15
                },
                new PointData()
                {
@@ -539,7 +554,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "54000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 16
                },
                new PointData()
                {
@@ -551,7 +567,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "54000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 17
                },
                new PointData()
                {
@@ -563,7 +580,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "43000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 18
                },
                new PointData()
                {
@@ -575,7 +593,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "30000",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 19
                },
                new PointData()
                {
@@ -587,7 +606,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "10001",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 20
                },
                new PointData()
                {
@@ -599,7 +619,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "26500",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 21
                },
                new PointData()
                {
@@ -611,7 +632,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "66221",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 22
                },
                new PointData()
                {
@@ -623,7 +645,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "55100",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 23
                },
                new PointData()
                {
@@ -635,7 +658,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "67301",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 24
                },
                new PointData()
                {
@@ -647,7 +671,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "67211",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 25
                },
                new PointData()
                {
@@ -659,7 +684,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "66220",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 26
                },
                new PointData()
                {
@@ -671,7 +697,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "50005",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 27
                },
                new PointData()
                {
@@ -683,7 +710,8 @@ namespace Infrastructure.Data.SeedData
                    Country = "Україна",
                    IsStopover = true,
                    Postcode = "55642",
-                   Order = 0
+                   Order = 0,
+                   OfferId = 28
                },
                new PointData()
                {
