@@ -9,12 +9,10 @@ using Core.Exceptions;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
-using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -55,16 +53,6 @@ namespace Core.Services
 
         public async Task CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
         {
-            if (offerCreate.Point.TripId != null)
-            {
-                var isTripExists = await _tripService.CheckIsTripExistsById((int)offerCreate.Point.TripId);
-
-                if (!isTripExists)
-                {
-                    throw new HttpException(ErrorMessages.TripNotFound, HttpStatusCode.NotFound);
-                }
-            }
-
             ExceptionMethods.UserNullCheck(await _userManager.FindByIdAsync(userId));
 
             var offer = _mapper.Map<Offer>(offerCreate);
@@ -82,13 +70,11 @@ namespace Core.Services
 
             offer.OfferPointId = point.Id;
 
-            var offerFromDb = await _offerRepository.AddAsync(offer);
+            await _offerRepository.AddAsync(offer);
 
-            ExceptionMethods.OfferNullCheck(offerFromDb);
+            point.OfferId = offer.Id;
 
-            point.OfferId = offerFromDb.Id;
-
-            await _pointRepository.UpdateAsync(point);
+            await _pointRepository.SaveChangesAsync();
         }
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
