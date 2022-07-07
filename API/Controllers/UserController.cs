@@ -63,5 +63,15 @@ namespace API.Controllers
         {
             return Ok(await _userService.GetAllUsersAsync(paginationFilter));
         }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteUserAsync()
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+
+            await _userService.DeleteUserAsync(userId);
+
+            return Ok();
+        }
     }
 }

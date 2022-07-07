@@ -11,9 +11,10 @@ namespace Core.Specifications
             public GetWithMainCredentials(string registrationNumber, string vin, string technicalPassport)
             {
                 Query.Where(c =>
-                            c.RegistrationNumber.Equals(registrationNumber) ||
+                            (c.RegistrationNumber.Equals(registrationNumber) ||
                             c.Vin.Equals(vin) ||
-                            c.TechnicalPassport.Equals(technicalPassport));
+                            c.TechnicalPassport.Equals(technicalPassport)) &&
+                            c.UserId != null);
             }
         }
 
@@ -50,6 +51,16 @@ namespace Core.Specifications
             public GetVerifiedByUserId(string userId)
             {
                 Query.Where(c => c.UserId == userId && c.IsVerified);
+            }
+        }
+
+        internal class GetWithTripsByUserId : Specification<Car>
+        {
+            public GetWithTripsByUserId(string userId)
+            {
+                Query
+                    .Where(c => c.UserId == userId)
+                    .Include(c => c.Trips);
             }
         }
     }

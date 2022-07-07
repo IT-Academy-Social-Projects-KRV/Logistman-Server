@@ -234,10 +234,16 @@
   <data name="NotEnoughPermissions" xml:space="preserve">
     <value>You are not allowed to do this!</value>
   </data>
+  <data name="UserCantBeDeleted" xml:space="preserve">
+    <value>User with active offers or trips can`t be deleted</value>
+  </data>
   <data name="OfferNotValid" xml:space="preserve">
     <value>Offer is not valid!</value>
   </data>
   <data name="TripNotValid" xml:space="preserve">
     <value>Trip is not valid!</value>
+  </data>
+  <data name="RouteHasInvites" xml:space="preserve">
+    <value>The route has already had invites! You can only decline the invite!</value>
   </data>
 </root>

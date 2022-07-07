@@ -60,6 +60,16 @@ namespace API.Controllers
             return Ok(await _tripService.GetUserRoutesAsync(paginationFilter, userId));
         }
 
+        [HttpDelete("delete-route")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> DeleteRouteAsync(TripIdDTO tripIdDTO)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            await _tripService.DeleteRouteAsync(userId, tripIdDTO.TripId);
+
+            return Ok();
+        }
+
         [HttpGet("by-id")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<IActionResult> GetTripById(int tripId)

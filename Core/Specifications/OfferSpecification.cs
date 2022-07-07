@@ -84,5 +84,15 @@ namespace Core.Specifications
                     .AsNoTracking();
             }
         }
+
+        internal class GetOpenByUserId : Specification<Offer>
+        {
+            public GetOpenByUserId(string userId)
+            {
+                Query
+                    .Where(o => o.OfferCreatorId == userId && !o.IsClosed)
+                    .Include(o => o.Point);
+            }
+        }
     }
 }
