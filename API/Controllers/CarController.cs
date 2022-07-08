@@ -76,7 +76,7 @@ namespace API.Controllers
 
         [HttpDelete("delete-car")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> DeleteCarAsync(CarIdDTO carIdDTO)
+        public async Task<IActionResult> DeleteCarAsync([FromQuery] CarIdDTO carIdDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             await _carService.DeleteCarAsync(userId, carIdDTO.CarId);
