@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
 using Core.Entities.TripEntity;
 using Core.Exceptions;
@@ -26,19 +27,18 @@ namespace Core.Validation.ValidationService
         }
 
         public async Task ValidateOffersCheckAsync(
-            List<int> offerIds,
+            List<OfferIdDTO> offerIds,
             int tripId,
-            DateTimeOffset startTrip,
             DateTimeOffset expirationTrip)
         {
-            foreach (var id in offerIds)
+            foreach (var offerIdDTO in offerIds)
             {
                 if (!await _offerRepository
                         .AnyAsync(new OfferSpecification
-                            .GetById(id, tripId, startTrip, expirationTrip)))
+                            .GetById(offerIdDTO.OfferId, tripId, expirationTrip)))
                 {
                     throw new HttpException(
-                        ErrorMessages.OfferNotValid + $" Id: {id}",
+                        ErrorMessages.OfferNotValid + $" Id: {offerIdDTO.OfferId}",
                         HttpStatusCode.BadRequest);
                 }
             }

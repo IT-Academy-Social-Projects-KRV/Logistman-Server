@@ -174,7 +174,6 @@ namespace Core.Services
             await _tripValidationService.ValidateOffersCheckAsync(
                 manageTrip.OffersId,
                 manageTrip.TripId,
-                trip.StartDate,
                 trip.ExpirationDate);
 
             await _tripValidationService.ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);

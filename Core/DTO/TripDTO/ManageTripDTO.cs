@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Core.DTO.OfferDTO;
+using System.Collections.Generic;
 
 namespace Core.DTO.TripDTO
 {
@@ -8,6 +9,6 @@ namespace Core.DTO.TripDTO
         public float Distance { get; set; }
         public float TotalWeight { get; set; }
         public List<PointsTripDTO> PointsTrip { get; set; }
-        public List<int> OffersId { get; set; }
+        public List<OfferIdDTO> OffersId { get; set; }
     }
 }

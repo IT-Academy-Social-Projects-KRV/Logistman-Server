@@ -144,5 +144,18 @@ namespace Core.Services
             return PaginatedList<OfferCreateTripDTO>.Evaluate(
                 _mapper.Map<List<OfferCreateTripDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
+
+        public async Task DeleteAsync(OfferIdDTO offerIdDTO, string userId)
+        {
+            var offer = await _offerRepository
+                .GetBySpecAsync(new OfferSpecification
+                .GetOpenByIdAndUserIdWithoutTrip(offerIdDTO.OfferId, userId));
+
+            ExceptionMethods.OfferNullCheck(offer);
+            ExceptionMethods.PointNullCheck(offer.Point);
+
+            await _offerRepository.DeleteAsync(offer);
+            await _pointRepository.DeleteAsync(offer.Point);
+        }
     }
 }
