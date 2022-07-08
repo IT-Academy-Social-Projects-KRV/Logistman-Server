@@ -24,12 +24,6 @@ namespace Core.Helpers.ApplicationProfiles
                 dest => dest.Latitude,
                 opt => opt.MapFrom(src => src.Location.Y));
             CreateMap<PointData, PointPreviewDTO>();
-            CreateMap<PointData, PointTripInfoDTO>().ForMember(
-                    dest => dest.Longitude,
-                    opt => opt.MapFrom(src => src.Location.X))
-                .ForMember(
-                    dest => dest.Latitude,
-                    opt => opt.MapFrom(src => src.Location.Y));
             CreateMap<PointData, PointOfferCreateTripDTO>()
                 .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(point => point.Offer.OfferRole.Name))
                 .ForMember(dest => dest.Settlement, opt => opt.MapFrom(point => point.Settlement))
@@ -41,7 +35,16 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.Country, opt => opt.MapFrom(point => point.Country))
                 .ForMember(dest => dest.Postcode, opt => opt.MapFrom(point => point.Postcode))
                 .ForMember(dest => dest.PointId, opt => opt.MapFrom(point => point.Id))
-                .ForMember(dest => dest.OfferId, opt => opt.MapFrom(point => point.Offer.Id));
+                .ForMember(dest => dest.OfferId, opt => opt.MapFrom(point => point.OfferId))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(point => point.Offer.Description))
+                .ForMember(dest => dest.RelatedTripId, opt => opt.MapFrom(point => point.Offer.RelatedTripId))
+                .ForMember(dest => dest.GoodsWeight, opt => opt.MapFrom(point => point.Offer.GoodsWeight))
+                .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(point => point.Offer.GoodCategory.Name))
+                .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(point => point.Offer.OfferRole.Name))
+
+
+                ;
+
         }
     }
 }
