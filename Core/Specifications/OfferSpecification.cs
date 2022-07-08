@@ -108,6 +108,5 @@ namespace Core.Specifications
                     .Include(o => o.Point);
             }
         }
-
     }
 }
