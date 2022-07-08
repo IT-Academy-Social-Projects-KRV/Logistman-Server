@@ -13,5 +13,6 @@ namespace Core.Interfaces.CustomService
         Task VerifyAsync(VinDTO vinDTO);
         Task UnverifyAsync(VinDTO vinDTO);
         Task<List<CarDTO>> GetVerifiedByUserIdAsync(string userId);
+        Task DeleteCarAsync(string userId, int carId);
     }
 }

@@ -46,6 +46,16 @@ namespace Core.Specifications
             }
         }
 
+        internal class GetWithTripsByIds : Specification<Car>, ISingleResultSpecification<Car>
+        {
+            public GetWithTripsByIds(int carId, string userId)
+            {
+                Query
+                    .Where(c => c.UserId.Equals(userId) && c.Id == carId)
+                    .Include(c => c.Trips);
+            }
+        }
+
         internal class GetVerifiedByUserId : Specification<Car>
         {
             public GetVerifiedByUserId(string userId)

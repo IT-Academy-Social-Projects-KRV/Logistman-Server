@@ -62,7 +62,7 @@ namespace API.Controllers
 
         [HttpDelete("delete-route")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> DeleteRouteAsync(TripIdDTO tripIdDTO)
+        public async Task<IActionResult> DeleteRouteAsync([FromQuery] TripIdDTO tripIdDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             await _tripService.DeleteRouteAsync(userId, tripIdDTO.TripId);

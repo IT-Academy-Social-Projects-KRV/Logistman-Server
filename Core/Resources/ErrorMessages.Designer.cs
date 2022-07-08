@@ -97,6 +97,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A car participating in an active trip or a trip for which the invitation has not been rejected cannot be deleted!.
+        /// </summary>
+        internal static string CarCantBeDeleted {
+            get {
+                return ResourceManager.GetString("CarCantBeDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Car category not found.
         /// </summary>
         internal static string CarCategoryNotFound {
