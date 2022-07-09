@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Core.Services;
 
 namespace API
 {
@@ -74,7 +75,9 @@ namespace API
             services.AddHangfireServer();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app, 
+            IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -118,6 +121,8 @@ namespace API
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHangfireDashboard();
             });
+
+            RecurringJob.AddOrUpdate<TripService>(o => o.DeleteExpiredRoutesAsync(), Cron.Daily);
         }
     }
 }
