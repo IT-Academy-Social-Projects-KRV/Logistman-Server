@@ -66,10 +66,10 @@ namespace Core.Specifications
 
         internal class GetOfferByIds : Specification<Offer>
         {
-            public GetOfferByIds(List<OfferIdDTO> offers)
+            public GetOfferByIds(List<int> offers)
             {
                 Query
-                    .Where(offer => offers.Contains(new OfferIdDTO { OfferId = offer.Id }));
+                    .Where(offer => offers.Contains(offer.Id));
             }
         }
 
