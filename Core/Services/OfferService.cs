@@ -152,7 +152,6 @@ namespace Core.Services
                 .GetOpenByIdAndUserIdWithoutTrip(offerIdDTO.OfferId, userId));
 
             ExceptionMethods.OfferNullCheck(offer);
-            ExceptionMethods.PointNullCheck(offer.Point);
 
             await _offerRepository.DeleteAsync(offer);
             await _pointRepository.DeleteAsync(offer.Point);
