@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using Core.Services;
+using Core.Interfaces.CustomService;
 
 namespace API
 {
@@ -122,7 +122,7 @@ namespace API
                 endpoints.MapHangfireDashboard();
             });
 
-            RecurringJob.AddOrUpdate<TripService>(o => o.DeleteExpiredRoutesAsync(), Cron.Daily);
+            RecurringJob.AddOrUpdate<ITripService>(o => o.DeleteExpiredRoutesAsync(), Cron.Daily);
         }
     }
 }
