@@ -1,5 +1,6 @@
 ﻿using Ardalis.Specification;
 using Core.DTO;
+using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
 using NetTopologySuite.Geometries;
 using System;
@@ -19,7 +20,7 @@ namespace Core.Specifications
                      .Include(offer => offer.GoodCategory);
             }
 
-            public GetById(int offerId, int tripId, DateTimeOffset startTrip, DateTimeOffset expirationTrip)
+            public GetById(int offerId, int tripId, DateTimeOffset expirationTrip)
             {
                 Query.Where(offer => offer.Id == offerId
                                      && !offer.IsClosed
@@ -91,6 +92,19 @@ namespace Core.Specifications
             {
                 Query
                     .Where(o => o.OfferCreatorId == userId && !o.IsClosed)
+                    .Include(o => o.Point);
+            }
+        }
+
+        public class GetOpenByIdAndUserIdWithoutTrip : Specification<Offer>, ISingleResultSpecification<Offer>
+        {
+            public GetOpenByIdAndUserIdWithoutTrip(int offerId, string userId)
+            {
+                Query
+                    .Where(o => o.Id == offerId 
+                    && o.OfferCreatorId == userId 
+                    && !o.IsClosed 
+                    && o.RelatedTripId == null)
                     .Include(o => o.Point);
             }
         }

@@ -174,7 +174,6 @@ namespace Core.Services
             await _tripValidationService.ValidateOffersCheckAsync(
                 manageTrip.OffersId,
                 manageTrip.TripId,
-                trip.StartDate,
                 trip.ExpirationDate);
 
             await _tripValidationService.ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
@@ -192,9 +191,16 @@ namespace Core.Services
                 pointData.Order = point.Order;
             }
 
+            var offersIds = new List<int>();
+
+            foreach(var offerId in manageTrip.OffersId)
+            {
+                offersIds.Add(offerId.OfferId);
+            }
+
             var offers = await _offerRepository
                 .ListAsync(new OfferSpecification
-                    .GetOfferByIds(manageTrip.OffersId));
+                    .GetOfferByIds(offersIds));
 
             trip.Offers = offers;
             trip.Points = points;
