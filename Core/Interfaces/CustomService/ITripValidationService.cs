@@ -11,7 +11,6 @@ namespace Core.Interfaces.CustomService
         Task ValidateOffersCheckAsync(
             List<PointTripDTO> offersIds,
             int tripId,
-            DateTimeOffset tripStartDate,
             DateTimeOffset tripExpirationDate);
         Task ValidateTripAsync(int tripId, float totalWeight);
         Task ValidateTripDateAsync(

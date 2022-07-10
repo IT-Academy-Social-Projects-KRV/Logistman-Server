@@ -131,6 +131,19 @@ namespace Core.Specifications
             }
         }
 
+        internal class GetExpiredRoutes : Specification<Trip>
+        {
+            public GetExpiredRoutes()
+            {
+                Query
+                    .Where(t => !t.IsActive
+                        && !t.IsEnded
+                        && t.Offers.Count == 0
+                        && t.ExpirationDate <= DateTimeOffset.UtcNow)
+                    .Include(t => t.Points);
+            }
+        }
+        
         internal class GetRouteByUserIdAndId : Specification<Trip>, ISingleResultSpecification<Trip>
         {
             public GetRouteByUserIdAndId(string userId, int tripId)

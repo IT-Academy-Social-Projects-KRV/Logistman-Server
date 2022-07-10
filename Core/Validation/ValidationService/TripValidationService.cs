@@ -31,7 +31,6 @@ namespace Core.Validation.ValidationService
         public async Task ValidateOffersCheckAsync(
             List<PointTripDTO> points,
             int tripId,
-            DateTimeOffset startTrip,
             DateTimeOffset expirationTrip)
         {
             foreach (var point in points)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Core.DTO.OfferDTO;
+using System.Collections.Generic;
 
 namespace Core.DTO.TripDTO
 {
