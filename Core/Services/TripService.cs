@@ -16,7 +16,6 @@ using Core.Specifications;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -169,32 +168,54 @@ namespace Core.Services
 
             var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
 
-            manageTrip.OffersId = manageTrip.OffersId.Distinct().ToList();
+            _tripValidationService.ValidatePointsInTrip(trip, sortedPoints);
 
             await _tripValidationService.ValidateOffersCheckAsync(
-                manageTrip.OffersId,
+                manageTrip.PointsTrip,
                 manageTrip.TripId,
                 trip.StartDate,
                 trip.ExpirationDate);
 
             await _tripValidationService.ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
 
-            var points = new Collection<PointData>();
+            var points = new List<PointData>();
 
             foreach (var point in sortedPoints)
             {
-                var pointData = await _pointDataRepository.GetByIdAsync(point.PointId);
+                if (point.Id != null)
+                {
+                    var pointData = await _pointDataRepository.GetByIdAsync(point.Id);
 
-                ExceptionMethods.PointNullCheck(pointData);
+                    ExceptionMethods.PointNullCheck(pointData);
 
-                points.Add(pointData);
+                    pointData.Address = point.Address;
+                    pointData.Settlement = point.Settlement;
+                    pointData.Country = point.Country;
+                    pointData.Postcode = point.Postcode;
+                    pointData.Region = point.Region;
+                    pointData.Order = point.Order;
 
-                pointData.Order = point.Order;
+                    points.Add(pointData);
+                }
+            }
+
+            var pointsToCreate = sortedPoints.Where(point => point.Id == null);
+
+            points.AddRange(_mapper.Map<List<PointData>>(pointsToCreate));
+
+            var offersIds = new List<int>();
+
+            foreach (var point in sortedPoints)
+            {
+                if (point.OfferId != null)
+                {
+                    offersIds.Add((int)point.OfferId);
+                }
             }
 
             var offers = await _offerRepository
                 .ListAsync(new OfferSpecification
-                    .GetOfferByIds(manageTrip.OffersId));
+                    .GetOfferByIds(offersIds));
 
             trip.Offers = offers;
             trip.Points = points;
@@ -202,6 +223,10 @@ namespace Core.Services
 
             await _tripRepository.UpdateAsync(trip);
 
+            var auxiliaryPoints = await _pointDataRepository
+                .ListAsync(new PointDataSpecification.GetPointsWithoutTripAndOffer());
+
+            await _pointDataRepository.DeleteRangeAsync(auxiliaryPoints);
             await _inviteService.ManageTripInvitesAsync(
                 trip,
                 _mapper.Map<List<OfferInviteDTO>>(offers));

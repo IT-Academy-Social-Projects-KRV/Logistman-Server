@@ -24,6 +24,7 @@ namespace Core.Helpers.ApplicationProfiles
                 dest => dest.Latitude,
                 opt => opt.MapFrom(src => src.Location.Y));
             CreateMap<PointData, PointPreviewDTO>();
+            CreateMap<PointTripDTO, PointData>();
         }
     }
 }

@@ -4,6 +4,7 @@ using Core.Entities.OfferEntity;
 using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Specifications
 {
@@ -13,18 +14,21 @@ namespace Core.Specifications
         {
             public GetById(int offerId, string userId)
             {
-                Query.Where(o => o.Id == offerId && o.OfferCreatorId == userId)
-                     .Include(offer => offer.Point)
-                     .Include(offer => offer.OfferRole)
-                     .Include(offer => offer.GoodCategory);
+                Query
+                    .Where(o => o.Id == offerId && o.OfferCreatorId == userId)
+                    .Include(o => o.Point)
+                    .Include(o => o.OfferRole)
+                    .Include(o => o.GoodCategory);
             }
 
             public GetById(int offerId, int tripId, DateTimeOffset startTrip, DateTimeOffset expirationTrip)
             {
-                Query.Where(offer => offer.Id == offerId
-                                     && !offer.IsClosed
-                                     && (offer.RelatedTripId == tripId || offer.RelatedTripId == null)
-                                     && offer.StartDate <= expirationTrip);
+                Query
+                    .Where(o => o.Id == offerId
+                                     && !o.IsClosed
+                                     && (o.RelatedTripId == tripId || o.RelatedTripId == null)
+                                     && o.StartDate <= expirationTrip)
+                    .Include(o => o.Point);
             }
         }
 
@@ -34,9 +38,9 @@ namespace Core.Specifications
             {
                 Query
                     .Where(o => o.OfferCreatorId == userId)
-                    .Include(offer => offer.Point)
-                    .Include(offer => offer.OfferRole)
-                    .Include(offer => offer.GoodCategory)
+                    .Include(o => o.Point)
+                    .Include(o => o.OfferRole)
+                    .Include(o => o.GoodCategory)
                     .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
                     .Take(paginationFilter.PageSize);
             }
@@ -65,10 +69,10 @@ namespace Core.Specifications
 
         internal class GetOfferByIds : Specification<Offer>
         {
-            public GetOfferByIds(List<int> offers)
+            public GetOfferByIds(List<int> offersIds)
             {
                 Query
-                    .Where(offer => offers.Contains(offer.Id));
+                    .Where(offer => offersIds.Contains(offer.Id));
             }
         }
 

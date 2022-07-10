@@ -15,13 +15,9 @@ namespace Core.Validation
                 .NotEmpty()
                 .GreaterThan(0);
 
-            RuleFor(trip => trip.OffersId)
+            RuleForEach(trip => trip.PointsTrip)
                 .NotEmpty()
-                .SetValidator(new OfferIdsValidation());
-
-            RuleFor(trip => trip.PointsTrip)
-                .NotEmpty()
-                .SetValidator(new PiontsTripValidation());
+                .SetValidator(new PointsTripValidation());
 
             RuleFor(trip => trip.TripId)
                 .NotEmpty()

@@ -55,6 +55,7 @@ namespace Infrastructure.Data.SeedData
                 "Porsche,911, Convertible, Coupe",
                 "Porsche,Cayenne, SUV"
             };
+
         private static readonly PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
         private static readonly Faker _faker = new Faker();
         private static readonly float _maxWeight = 1000f;
@@ -281,7 +282,7 @@ namespace Infrastructure.Data.SeedData
 
         #endregion
 
-        #region MyRegion
+        #region SeedGoodCategory
 
         public static void SeedGoodCategory(ModelBuilder builder) =>
             builder.Entity<GoodCategory>().HasData(
@@ -721,7 +722,7 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Умань",
                    Region = "Черкаська область",
                    Country = "Україна",
-                   IsStopover = false,
+                   IsStopover = true,
                    Postcode = "20300",
                    Order = 1,
                    TripId = 1
@@ -734,7 +735,7 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Дубинове",
                    Region = "Одеська область",
                    Country = "Україна",
-                   IsStopover = true,
+                   IsStopover = false,
                    Postcode = "20300",
                    Order = 2,
                    TripId = 1
@@ -851,7 +852,7 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Радехів",
                    Region = "Львівська область",
                    Country = "Україна",
-                   IsStopover = false,
+                   IsStopover = true,
                    Postcode = "80200",
                    Order = 3,
                    TripId = 3
@@ -949,7 +950,8 @@ namespace Infrastructure.Data.SeedData
                     Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
-                    StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),                    
+                    GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 1,
                     OfferCreatorId = EUGEN_ID,
                     CreatorRoleId = 1,
