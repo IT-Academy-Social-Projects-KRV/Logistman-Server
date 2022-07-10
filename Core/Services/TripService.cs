@@ -199,7 +199,7 @@ namespace Core.Services
             await _tripRepository.UpdateAsync(trip);
 
             await _inviteService.ManageTripInvitesAsync(
-                trip, 
+                trip,
                 _mapper.Map<List<OfferInviteDTO>>(offers));
         }
 
@@ -208,7 +208,7 @@ namespace Core.Services
             var trips = await _tripRepository.ListAsync(new TripSpecification.GetExpiredRoutes());
             var points = new List<PointData>();
 
-            foreach(var trip in trips)
+            foreach (var trip in trips)
             {
                 points.AddRange(trip.Points);
             }

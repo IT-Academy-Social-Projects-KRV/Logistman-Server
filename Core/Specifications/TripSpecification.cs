@@ -113,10 +113,10 @@ namespace Core.Specifications
             public GetExpiredRoutes()
             {
                 Query
-                    .Where(t => !t.IsActive 
-                    && !t.IsEnded 
-                    && t.Offers.Count == 0 
-                    && t.ExpirationDate <= DateTimeOffset.UtcNow)
+                    .Where(t => !t.IsActive
+                        && !t.IsEnded
+                        && t.Offers.Count == 0
+                        && t.ExpirationDate <= DateTimeOffset.UtcNow)
                     .Include(t => t.Points);
             }
         }
