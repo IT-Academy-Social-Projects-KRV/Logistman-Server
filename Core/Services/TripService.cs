@@ -207,6 +207,20 @@ namespace Core.Services
                 _mapper.Map<List<OfferInviteDTO>>(offers));
         }
 
+        public async Task DeleteExpiredRoutesAsync()
+        {
+            var trips = await _tripRepository.ListAsync(new TripSpecification.GetExpiredRoutes());
+            var points = new List<PointData>();
+
+            foreach (var trip in trips)
+            {
+                points.AddRange(trip.Points);
+            }
+
+            await _pointDataRepository.DeleteRangeAsync(points);
+            await _tripRepository.DeleteRangeAsync(trips);
+        }
+        
         public async Task DeleteRouteAsync(string userId, int tripId)
         {
             var route = await _tripRepository.GetBySpecAsync(
