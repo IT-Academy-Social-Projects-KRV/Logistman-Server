@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Entities.OfferEntity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Core.Entities.PointEntity
@@ -17,9 +18,9 @@ namespace Core.Entities.PointEntity
                 .Property(p => p.Region)
                 .HasMaxLength(100);
             builder
-                .HasMany(p => p.Offers)
+                .HasOne(p => p.Offer)
                 .WithOne(p => p.Point)
-                .HasForeignKey(p => p.OfferPointId);
+                .HasForeignKey<Offer>(p => p.OfferPointId);
             builder
                 .HasOne(p => p.Trip)
                 .WithMany(p => p.Points)

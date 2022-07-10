@@ -3,6 +3,7 @@ using Core.Constants;
 using Core.DTO;
 using Core.DTO.InviteDTO;
 using Core.DTO.TripDTO;
+using Core.Entities.InviteEntity;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
@@ -26,6 +27,7 @@ namespace Core.Services
     {
         private readonly IRepository<Trip> _tripRepository;
         private readonly IRepository<PointData> _pointDataRepository;
+        private readonly IRepository<Invite> _inviteRepository;
         private readonly ICarService _carService;
         private readonly IPointService _pointService;
         private readonly IMapper _mapper;
@@ -36,6 +38,7 @@ namespace Core.Services
         public TripService(
             IRepository<Trip> tripRepository,
             IRepository<PointData> pointDataRepository,
+            IRepository<Invite> inviteRepository,
             ICarService carService,
             IPointService pointService,
             IMapper mapper,
@@ -45,6 +48,7 @@ namespace Core.Services
         {
             _tripRepository = tripRepository;
             _pointDataRepository = pointDataRepository;
+            _inviteRepository = inviteRepository;
             _carService = carService;
             _pointService = pointService;
             _mapper = mapper;
@@ -91,7 +95,7 @@ namespace Core.Services
         public async Task<LineString> GetRouteGeographyDataAsync(int routeId)
         {
             var routePoints = await _pointDataRepository
-                .ListAsync(new PointDataSpecification.GetByRouteId(routeId));
+                .ListAsync(new PointDataSpecification.GetByTripId(routeId));
 
             var listOfRouteCoordinates = new List<Coordinate>();
 
@@ -215,6 +219,29 @@ namespace Core.Services
 
             await _pointDataRepository.DeleteRangeAsync(points);
             await _tripRepository.DeleteRangeAsync(trips);
+        }
+        
+        public async Task DeleteRouteAsync(string userId, int tripId)
+        {
+            var route = await _tripRepository.GetBySpecAsync(
+                new TripSpecification.GetRouteByUserIdAndId(userId, tripId));
+
+            ExceptionMethods.TripNullCheck(route);
+
+            if (await _inviteRepository.AnyAsync(
+                new InviteSpecification.GetByTripId(route.Id)))
+            {
+                throw new HttpException(
+                        ErrorMessages.RouteHasInvites,
+                        HttpStatusCode.BadRequest
+                    );
+            }
+
+            var points = await _pointDataRepository.ListAsync(
+                new PointDataSpecification.GetByTripId(tripId));
+
+            await _pointDataRepository.DeleteRangeAsync(points);
+            await _tripRepository.DeleteAsync(route);
         }
     }
 }

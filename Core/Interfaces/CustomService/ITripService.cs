@@ -16,5 +16,6 @@ namespace Core.Interfaces.CustomService
             PaginationFilterDTO paginationFilter, string tripCreatorId);
         Task ManageOffersTripAsync(ManageTripDTO manageTrip);
         Task DeleteExpiredRoutesAsync();
+        Task DeleteRouteAsync(string userId, int tripId);
     }
 }

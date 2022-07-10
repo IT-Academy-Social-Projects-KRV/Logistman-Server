@@ -6,6 +6,7 @@ using AutoMapper;
 using Core.DTO;
 using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
+using Core.Entities.TripEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
 using Core.Helpers;
@@ -21,16 +22,19 @@ namespace Core.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IRepository<Car> _carRepository;
+        private readonly IRepository<Trip> _tripRepository;
         private readonly IRepository<CarCategory> _categoryRepository;
         private readonly IMapper _mapper;
 
         public CarService(
             IRepository<Car> carRepository,
+            IRepository<Trip> tripRepository,
             IRepository<CarCategory> categoryRepository,
             IMapper mapper,
             UserManager<User> userManager)
         {
             _carRepository = carRepository;
+            _tripRepository = tripRepository;
             _categoryRepository = categoryRepository;
             _mapper = mapper;
             _userManager = userManager;
@@ -102,7 +106,7 @@ namespace Core.Services
 
             return _mapper.Map<List<CarDTO>>(verifiedCars);
         }
-        
+
         public async Task VerifyAsync(VinDTO vinDTO)
         {
             var car = await _carRepository.GetBySpecAsync(
@@ -119,6 +123,53 @@ namespace Core.Services
             ExceptionMethods.CarNullCheck(car);
             car.IsVerified = false;
             await _carRepository.UpdateAsync(car);
+        }
+
+        public async Task DeleteCarAsync(string userId, int carId)
+        {
+            var car = await _carRepository.GetBySpecAsync(
+                new CarSpecification.GetWithTripsByIds(carId, userId));
+
+            ExceptionMethods.CarNullCheck(car);
+
+            if (!await CheckCanCarBeDeletedAsync(car))
+            {
+                throw new HttpException(
+                    ErrorMessages.CarCantBeDeleted,
+                    HttpStatusCode.Forbidden);
+            }
+
+            var routesWithCurrentCarToDelete = await _tripRepository
+                .ListAsync(new TripSpecification.GetRoutesWithoutRelatedOffersByCarId(car.Id));
+
+            if (routesWithCurrentCarToDelete.Count != 0)
+            {
+                await _tripRepository.DeleteRangeAsync(routesWithCurrentCarToDelete);
+            }
+
+            if (car.Trips.Count == 0)
+            {
+                await _carRepository.DeleteAsync(car);
+            }
+            else
+            {
+                car.UserId = null;
+
+                await _carRepository.SaveChangesAsync();
+            }
+        }
+
+        private async Task<bool> CheckCanCarBeDeletedAsync(Car car)
+        {
+            var deletionBlockedByRoute = await _tripRepository
+                .AnyAsync(new TripSpecification.GetActiveOrWithRelatedOffersByCarId(car.Id));
+
+            if (deletionBlockedByRoute)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

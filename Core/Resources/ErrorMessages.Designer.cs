@@ -19,7 +19,7 @@ namespace Core.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class ErrorMessages {
@@ -93,6 +93,15 @@ namespace Core.Resources {
         internal static string CannotDenyInvite {
             get {
                 return ResourceManager.GetString("CannotDenyInvite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A car participating in an active trip or a trip for which the invitation has not been rejected cannot be deleted!.
+        /// </summary>
+        internal static string CarCantBeDeleted {
+            get {
+                return ResourceManager.GetString("CarCantBeDeleted", resourceCulture);
             }
         }
         
@@ -318,6 +327,15 @@ namespace Core.Resources {
         internal static string RoleNotFound {
             get {
                 return ResourceManager.GetString("RoleNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The route has already had invites! You can only decline the invite!.
+        /// </summary>
+        internal static string RouteHasInvites {
+            get {
+                return ResourceManager.GetString("RouteHasInvites", resourceCulture);
             }
         }
         

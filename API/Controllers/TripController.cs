@@ -59,5 +59,15 @@ namespace API.Controllers
 
             return Ok(await _tripService.GetUserRoutesAsync(paginationFilter, userId));
         }
+
+        [HttpDelete("delete-route")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> DeleteRouteAsync([FromQuery] TripIdDTO tripIdDTO)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            await _tripService.DeleteRouteAsync(userId, tripIdDTO.TripId);
+
+            return Ok();
+        }
     }
 }
