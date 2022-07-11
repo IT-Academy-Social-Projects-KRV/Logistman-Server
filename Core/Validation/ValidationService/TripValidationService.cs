@@ -39,7 +39,7 @@ namespace Core.Validation.ValidationService
                 {
                     var offer = await _offerRepository
                         .GetBySpecAsync(new OfferSpecification
-                            .GetById((int)point.OfferId, tripId, startTrip, expirationTrip));
+                            .GetById((int)point.OfferId, tripId, expirationTrip));
 
                     ExceptionMethods.OfferNullCheck(offer);
 

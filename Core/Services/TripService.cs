@@ -212,13 +212,6 @@ namespace Core.Services
                 }
             }
 
-            var offersIds = new List<int>();
-
-            foreach(var offerId in manageTrip.OffersId)
-            {
-                offersIds.Add(offerId.OfferId);
-            }
-
             var offers = await _offerRepository
                 .ListAsync(new OfferSpecification
                     .GetOfferByIds(offersIds));
