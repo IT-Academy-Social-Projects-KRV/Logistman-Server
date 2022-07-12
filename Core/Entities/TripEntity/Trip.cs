@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Core.Entities.PointEntity;
 using Core.Entities.InviteEntity;
+using NetTopologySuite.Geometries;
 
 namespace Core.Entities.TripEntity
 {
@@ -26,6 +27,7 @@ namespace Core.Entities.TripEntity
         public int TransportationCarId { get; set; }
         public Car Car { get; set; }
         public float Distance { get; set; }
+        //public LineString RouteGeographyData { get; set; }
         public ICollection<Invite> Invites { get; set; }
         public ICollection<Offer> Offers { get; set; }
         public ICollection<Rating> Ratings { get; set; }

@@ -103,10 +103,7 @@ namespace Core.Services
                 .ForEach(x => listOfRouteCoordinates
                 .Add(new Coordinate(x.Location.X, x.Location.Y)));
 
-            var geometryFactory = NtsGeometryServices.Instance
-                .CreateGeometryFactory(GeodeticSystem.WGS84);
-
-            return geometryFactory.CreateLineString(listOfRouteCoordinates.ToArray());
+            return NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(listOfRouteCoordinates.ToArray());
         }
 
         public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter)
