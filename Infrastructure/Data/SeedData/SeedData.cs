@@ -39,6 +39,28 @@ namespace Infrastructure.Data.SeedData
 
         #endregion
 
+        #region ArraysOfRoutesCoordinates
+
+        private static readonly Coordinate[] FirstRouteCoordinates = new Coordinate[] {
+            new Coordinate(30.2557039, 48.7424709),
+            new Coordinate(30.3017199, 48.1390924),
+            new Coordinate(30.3174055, 47.0235592),
+            new Coordinate(30.6598914, 46.4932837)};
+        private static readonly Coordinate[] SecondRouteCoordinates = new Coordinate[] {
+            new Coordinate(30.36545, 50.45624),
+            new Coordinate(28.68603, 50.26679),
+            new Coordinate(27.62649, 50.58838),
+            new Coordinate(26.2517, 50.62034)};
+        private static readonly Coordinate[] ThirdRouteCoordinates = new Coordinate[] {
+            new Coordinate(25.35595, 50.7553),
+            new Coordinate(24.76512, 50.50216),
+            new Coordinate(24.63097, 50.28358),
+            new Coordinate(24.00991, 49.77351),
+            new Coordinate(23.85867, 49.26081),
+            new Coordinate(22.3112, 48.60822)};
+
+        #endregion
+
         private static readonly string[] _colors = new[]
             {"Red","Black","White","Grey","Green","Blue","Yellow"};
 
@@ -911,7 +933,8 @@ namespace Infrastructure.Data.SeedData
                     MaxRouteDeviationKm = 20,
                     TripCreatorId = ANTONINA_ID,
                     TransportationCarId = 1,
-                    Distance = 150
+                    Distance = 150,
+                    RouteGeographyData = NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(FirstRouteCoordinates)
                 },
                 new Trip()
                 {
@@ -923,7 +946,8 @@ namespace Infrastructure.Data.SeedData
                     MaxRouteDeviationKm = 15,
                     TripCreatorId = MARYNA_ID,
                     TransportationCarId = 3,
-                    Distance = 400
+                    Distance = 400,
+                    RouteGeographyData = NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(SecondRouteCoordinates)
                 },
                 new Trip()
                 {
@@ -935,7 +959,8 @@ namespace Infrastructure.Data.SeedData
                     MaxRouteDeviationKm = 15,
                     TripCreatorId = EUGEN_ID,
                     TransportationCarId = 10,
-                    Distance = 400
+                    Distance = 400,
+                    RouteGeographyData = NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(ThirdRouteCoordinates)
                 });
         #endregion
 
