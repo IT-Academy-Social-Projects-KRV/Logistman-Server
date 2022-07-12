@@ -11,8 +11,8 @@ using NetTopologySuite.Geometries;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220712181607_AddRouteGeographyDataField")]
-    partial class AddRouteGeographyDataField
+    [Migration("20220712221108_ChangeTripAndPointDataFields")]
+    partial class ChangeTripAndPointDataFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -212,9 +212,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsStopover")
-                        .HasColumnType("bit");
 
                     b.Property<Point>("Location")
                         .HasColumnType("geography");

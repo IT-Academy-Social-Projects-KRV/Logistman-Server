@@ -303,7 +303,7 @@ namespace Infrastructure.Data.SeedData
 
         #endregion
 
-        #region MyRegion
+        #region SeedGoodCategory
 
         public static void SeedGoodCategory(ModelBuilder builder) =>
             builder.Entity<GoodCategory>().HasData(
@@ -379,7 +379,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Острог",
                    Region = "Рівненська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "35800",
                    Order = 0,
                    OfferId = 1
@@ -392,7 +391,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Рівне",
                    Region = "Рівненська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "33000",
                    Order = 0,
                    OfferId = 2
@@ -405,7 +403,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Луцьк",
                    Region = "Волинська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "43000",
                    Order = 0,
                    OfferId = 3
@@ -418,7 +415,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Дніпро",
                    Region = "Дніпропетровська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "49000",
                    Order = 0,
                    OfferId = 4
@@ -431,7 +427,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Нікольське",
                    Region = "Донецька область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "87000",
                    Order = 0,
                    OfferId = 5
@@ -444,7 +439,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Миколаїв",
                    Region = "Миколаївська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "54000",
                    Order = 0,
                    OfferId = 6
@@ -457,7 +451,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Кропивницький",
                    Region = "Кіровоградська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "25000",
                    Order = 0,
                    OfferId = 7
@@ -470,7 +463,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Кропивницький",
                    Region = "Кіровоградська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "25000",
                    Order = 0,
                    OfferId = 8
@@ -483,7 +475,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Кропивницький",
                    Region = "Кіровоградська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "25000",
                    Order = 0,
                    OfferId = 9
@@ -496,7 +487,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Дніпро",
                    Region = "Дніпропетровська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "49000",
                    Order = 0,
                    OfferId = 10
@@ -509,7 +499,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Львів",
                    Region = "Львівська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "79000",
                    Order = 0,
                    OfferId = 11
@@ -522,7 +511,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Ужгород",
                    Region = "Закарпатська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "88000",
                    Order = 0,
                    OfferId = 12
@@ -535,7 +523,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Хмельницький",
                    Region = "Хмельницька  область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "29000",
                    Order = 0,
                    OfferId = 13
@@ -548,7 +535,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Кривий Ріг",
                    Region = "Дніпропетровська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "50000",
                    Order = 0,
                    OfferId = 14
@@ -561,7 +547,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Миколаїв",
                    Region = "Миколаївська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "54000",
                    Order = 0,
                    OfferId = 15
@@ -574,7 +559,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Миколаїв",
                    Region = "Миколаївська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "54000",
                    Order = 0,
                    OfferId = 16
@@ -587,7 +571,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Миколаїв",
                    Region = "Миколаївська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "54000",
                    Order = 0,
                    OfferId = 17
@@ -600,7 +583,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Луцьк",
                    Region = "Волинська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "43000",
                    Order = 0,
                    OfferId = 18
@@ -613,7 +595,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Славута",
                    Region = "Хмельницька область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "30000",
                    Order = 0,
                    OfferId = 19
@@ -626,7 +607,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Житомир",
                    Region = "Житомирська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "10001",
                    Order = 0,
                    OfferId = 20
@@ -639,7 +619,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Голованівськ",
                    Region = "Кіровоградська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "26500",
                    Order = 0,
                    OfferId = 21
@@ -652,7 +631,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Вільшанка",
                    Region = "Одеська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "66221",
                    Order = 0,
                    OfferId = 22
@@ -665,7 +643,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Криве Озеро",
                    Region = "Миколаївська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "55100",
                    Order = 0,
                    OfferId = 23
@@ -678,7 +655,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Березівка",
                    Region = "Одеська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "67301",
                    Order = 0,
                    OfferId = 24
@@ -691,7 +667,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Знам'янка",
                    Region = "Одеська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "67211",
                    Order = 0,
                    OfferId = 25
@@ -704,7 +679,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Дубинове",
                    Region = "Одеська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "66220",
                    Order = 0,
                    OfferId = 26
@@ -717,7 +691,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Кривий Ріг",
                    Region = "Дніпропетровська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "50005",
                    Order = 0,
                    OfferId = 27
@@ -730,7 +703,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Новополтавка",
                    Region = "Миколаївська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "55642",
                    Order = 0,
                    OfferId = 28
@@ -743,7 +715,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Умань",
                    Region = "Черкаська область",
                    Country = "Україна",
-                   IsStopover = false,
                    Postcode = "20300",
                    Order = 1,
                    TripId = 1
@@ -756,7 +727,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Дубинове",
                    Region = "Одеська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "20300",
                    Order = 2,
                    TripId = 1
@@ -769,7 +739,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Знам'янка",
                    Region = "Одеська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "20300",
                    Order = 3,
                    TripId = 1
@@ -782,7 +751,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Одеса",
                    Region = "Одеська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "65000",
                    Order = 4,
                    TripId = 1
@@ -795,7 +763,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Київ",
                    Region = "Київcька область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "02000",
                    Order = 1,
                    TripId = 2
@@ -808,7 +775,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Житомир",
                    Region = "Житомирська область",
                    Country = "Україна",
-                   IsStopover = false,
                    Postcode = "10001",
                    Order = 2,
                    TripId = 2
@@ -821,7 +787,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Новоград-Волинський",
                    Region = "Житомирська область",
                    Country = "Україна",
-                   IsStopover = false,
                    Postcode = "11702",
                    Order = 3,
                    TripId = 2
@@ -834,7 +799,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Рівне",
                    Region = "Рівненська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "33000",
                    Order = 4,
                    TripId = 2
@@ -847,7 +811,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Луцьк",
                    Region = "Волинська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "43000",
                    Order = 1,
                    TripId = 3
@@ -860,7 +823,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Горохів",
                    Region = "Волинська область",
                    Country = "Україна",
-                   IsStopover = false,
                    Postcode = "45700",
                    Order = 2,
                    TripId = 3
@@ -873,7 +835,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Радехів",
                    Region = "Львівська область",
                    Country = "Україна",
-                   IsStopover = false,
                    Postcode = "80200",
                    Order = 3,
                    TripId = 3
@@ -886,7 +847,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Сокільники",
                    Region = "Львівська область",
                    Country = "Україна",
-                   IsStopover = false,
                    Postcode = "81130",
                    Order = 4,
                    TripId = 3
@@ -899,7 +859,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Стрий",
                    Region = "Львівська область",
                    Country = "Україна",
-                   IsStopover = false,
                    Postcode = "82400",
                    Order = 5,
                    TripId = 3
@@ -912,7 +871,6 @@ namespace Infrastructure.Data.SeedData
                    Settlement = "Ужгород",
                    Region = "Закарпатська область",
                    Country = "Україна",
-                   IsStopover = true,
                    Postcode = "88000",
                    Order = 6,
                    TripId = 3
@@ -974,7 +932,8 @@ namespace Infrastructure.Data.SeedData
                     Description = $"{_faker.Company.CompanyName() + _faker.Random.Words(_faker.Random.Int(10, 30))}.",
                     IsClosed = false,
                     GoodsWeight = _faker.Random.Float(0.1f, _maxWeight),
-                    StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),                    GoodCategoryId = _faker.Random.Int(1, 7),
+                    StartDate = DateTimeOffset.Parse($"{_faker.Random.Int(1, 5)}.07.2022 {_faker.Random.Int(5, 12)}:00"),
+                    GoodCategoryId = _faker.Random.Int(1, 7),
                     OfferPointId = 1,
                     OfferCreatorId = EUGEN_ID,
                     CreatorRoleId = 1,

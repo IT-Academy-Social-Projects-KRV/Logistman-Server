@@ -13,7 +13,6 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
-using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -71,6 +70,8 @@ namespace Core.Services
 
             var sortedPoints = _pointService.SortByOrder(createTripDTO.Points);
 
+            createTripDTO.Points = DeleteNullPointsFromRoute(sortedPoints);
+
             var isCarVerified = await _carService
                 .CheckIsUserVerifiedByIdsAsync(createTripDTO.TransportationCarId, creatorId);
 
@@ -84,24 +85,38 @@ namespace Core.Services
             trip.IsActive = false;
             trip.IsEnded = false;
             trip.TripCreatorId = creatorId;
+            trip.RouteGeographyData = SetRouteGeographyData(sortedPoints);
 
-            var tripFromDb = await _tripRepository.AddAsync(trip);
-
-            ExceptionMethods.TripNullCheck(tripFromDb);
-
-            await _pointService.SetTripIdToListAsync(sortedPoints, tripFromDb.Id);
+            await _tripRepository.AddAsync(trip);
         }
 
-        public async Task<LineString> GetRouteGeographyDataAsync(int routeId)
+        public List<PointDTO> DeleteNullPointsFromRoute(List<PointDTO> fullSortedListOfPoints)
         {
-            var routePoints = await _pointDataRepository
-                .ListAsync(new PointDataSpecification.GetByTripId(routeId));
+            List<PointDTO> sortedListOfPointsWithoutNullPoints = new List<PointDTO>();
+            
+            foreach (var point in fullSortedListOfPoints)
+            {
+                if (point.IsStopover != false)
+                {
+                    sortedListOfPointsWithoutNullPoints.Add(point);
+                }
+            }
 
+            for (int i = 0; i < sortedListOfPointsWithoutNullPoints.Count(); i++)
+            {
+                sortedListOfPointsWithoutNullPoints[i].Order = i + 1;
+            }
+
+            return sortedListOfPointsWithoutNullPoints;
+        }
+
+        public LineString SetRouteGeographyData(List<PointDTO> sortedRoutePoints)
+        {
             var listOfRouteCoordinates = new List<Coordinate>();
 
-            routePoints
+            sortedRoutePoints
                 .ForEach(x => listOfRouteCoordinates
-                .Add(new Coordinate(x.Location.X, x.Location.Y)));
+                .Add(new Coordinate(x.Longitude, x.Latitude)));
 
             return NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(listOfRouteCoordinates.ToArray());
         }
@@ -190,7 +205,7 @@ namespace Core.Services
 
             var offersIds = new List<int>();
 
-            foreach(var offerId in manageTrip.OffersId)
+            foreach (var offerId in manageTrip.OffersId)
             {
                 offersIds.Add(offerId.OfferId);
             }
@@ -223,7 +238,7 @@ namespace Core.Services
             await _pointDataRepository.DeleteRangeAsync(points);
             await _tripRepository.DeleteRangeAsync(trips);
         }
-        
+
         public async Task DeleteRouteAsync(string userId, int tripId)
         {
             var route = await _tripRepository.GetBySpecAsync(
