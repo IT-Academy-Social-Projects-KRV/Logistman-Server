@@ -82,8 +82,6 @@ namespace Core.Services
 
             var trip = _mapper.Map<Trip>(createTripDTO);
 
-            trip.IsActive = false;
-            trip.IsEnded = false;
             trip.TripCreatorId = creatorId;
             trip.RouteGeographyData = SetRouteGeographyData(sortedPoints);
 
@@ -96,7 +94,7 @@ namespace Core.Services
             
             foreach (var point in fullSortedListOfPoints)
             {
-                if (point.IsStopover != false)
+                if (point.IsStopover)
                 {
                     sortedListOfPointsWithoutNullPoints.Add(point);
                 }
