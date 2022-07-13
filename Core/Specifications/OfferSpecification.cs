@@ -108,5 +108,27 @@ namespace Core.Specifications
                     .Include(o => o.Point);
             }
         }
+
+        public class GetByIdWithActiveTrip : Specification<Offer>, ISingleResultSpecification<Offer>
+        {
+            public GetByIdWithActiveTrip(int offerId)
+            {
+                Query
+                    .Where(o => o.Id == offerId 
+                    && o.Trip.IsActive 
+                    && !o.IsAnsweredByDriver)
+                    .Include(o => o.Trip);
+            }
+
+            public GetByIdWithActiveTrip(int offerId, string userId)
+            {
+                Query
+                    .Where(o => o.Id == offerId
+                    && o.OfferCreatorId == userId
+                    && o.Trip.IsActive
+                    && !o.IsAnsweredByCreator)
+                    .Include(o => o.Trip);
+            }
+        }
     }
 }

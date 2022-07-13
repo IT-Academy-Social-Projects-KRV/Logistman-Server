@@ -19,7 +19,7 @@ namespace Core.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class ErrorMessages {
@@ -147,6 +147,24 @@ namespace Core.Resources {
         internal static string ConfirmEmailInvalidCode {
             get {
                 return ResourceManager.GetString("ConfirmEmailInvalidCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t confirm goods delivery on trip you didn&apos;t create.
+        /// </summary>
+        internal static string ConfirmGoodsDeliveryTripCreatorIdDoesntMatch {
+            get {
+                return ResourceManager.GetString("ConfirmGoodsDeliveryTripCreatorIdDoesntMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Such role does not exist: .
+        /// </summary>
+        internal static string ConfirmGoodsDeliveryWrongRoleName {
+            get {
+                return ResourceManager.GetString("ConfirmGoodsDeliveryWrongRoleName", resourceCulture);
             }
         }
         

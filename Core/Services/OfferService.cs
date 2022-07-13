@@ -9,10 +9,12 @@ using Core.Exceptions;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
+using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -155,6 +157,84 @@ namespace Core.Services
 
             await _offerRepository.DeleteAsync(offer);
             await _pointRepository.DeleteAsync(offer.Point);
+        }
+
+        public async Task ConfirmGoodTransferAsync(
+            ConfirmGoodTransferDTO сonfirmGoodTransferDTO, 
+            string userId)
+        {
+            if (сonfirmGoodTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Driver)
+            {
+                var offer = await _offerRepository
+                    .GetBySpecAsync(new OfferSpecification
+                    .GetByIdWithActiveTrip(сonfirmGoodTransferDTO.OfferIdDTO.OfferId));
+
+                ExceptionMethods.OfferNullCheck(offer);
+
+                if (offer.Trip.TripCreatorId != userId)
+                {
+                    throw new HttpException(
+                        ErrorMessages.ConfirmGoodsDeliveryTripCreatorIdDoesntMatch,
+                        HttpStatusCode.Forbidden);
+                }
+
+                offer.GoodTransferConfirmedByDriver = сonfirmGoodTransferDTO.IsConfirmed;
+                offer.IsAnsweredByDriver = true;
+
+                await _offerRepository.SaveChangesAsync();
+                await EndTripAsync(userId);
+            }
+            else if (сonfirmGoodTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Sender
+                     ||
+                     сonfirmGoodTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Recipient)
+            {
+                var offer = await _offerRepository
+                    .GetBySpecAsync(new OfferSpecification
+                    .GetByIdWithActiveTrip(сonfirmGoodTransferDTO.OfferIdDTO.OfferId, userId));
+
+                ExceptionMethods.OfferNullCheck(offer);
+
+                offer.GoodTransferConfirmedByCreator = сonfirmGoodTransferDTO.IsConfirmed;
+                offer.IsAnsweredByCreator = true;
+
+                await _offerRepository.SaveChangesAsync();
+            }
+            else
+            {
+                throw new HttpException(
+                        ErrorMessages.ConfirmGoodsDeliveryWrongRoleName 
+                        + 
+                        сonfirmGoodTransferDTO.TripRole,
+                        HttpStatusCode.Forbidden);
+            }
+        }
+
+        private async Task EndTripAsync(string tripCreatorId)
+        {
+            var trip = await _tripRepository
+                .GetBySpecAsync(new TripSpecification
+                .GetActiveByUserIdWithOffers(tripCreatorId));
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            foreach (var offer in trip.Offers)
+            {
+                if (!offer.IsAnsweredByDriver)
+                {
+                    return;
+                }
+            }
+
+            foreach (var offer in trip.Offers)
+            {
+                offer.IsClosed = true;
+            }
+
+            trip.IsActive = false;
+            trip.IsEnded = true;
+            trip.EndDate = DateTimeOffset.UtcNow;
+
+            await _tripRepository.SaveChangesAsync();
         }
     }
 }

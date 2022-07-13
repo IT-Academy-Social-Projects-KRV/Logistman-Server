@@ -17,7 +17,7 @@ namespace API.Controllers
         private readonly IOfferService _offerService;
         private readonly IUserService _userService;
         public OffersController(
-            IOfferService offerService, 
+            IOfferService offerService,
             IUserService userService)
         {
             _offerService = offerService;
@@ -67,6 +67,17 @@ namespace API.Controllers
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
             await _offerService.DeleteAsync(offerIdDTO, userId);
+
+            return Ok();
+        }
+
+        [HttpPost("confirm-goods-transfer")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> ConfirmGoodTransferAsync([FromBody] ConfirmGoodTransferDTO confirmGoodTransferDTO)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+
+            await _offerService.ConfirmGoodTransferAsync(confirmGoodTransferDTO, userId);
 
             return Ok();
         }

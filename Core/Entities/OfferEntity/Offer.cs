@@ -27,5 +27,9 @@ namespace Core.Entities.OfferEntity
         public int CreatorRoleId { get; set; }
         public Invite Invite { get; set; }
         public OfferRole OfferRole { get; set; }
+        public bool GoodTransferConfirmedByCreator { get; set; }
+        public bool GoodTransferConfirmedByDriver { get; set; }
+        public bool IsAnsweredByCreator { get; set; }
+        public bool IsAnsweredByDriver { get; set; }
     }
 }
