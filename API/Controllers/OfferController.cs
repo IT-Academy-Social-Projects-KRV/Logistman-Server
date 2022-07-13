@@ -73,11 +73,11 @@ namespace API.Controllers
 
         [HttpPost("confirm-goods-transfer")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> ConfirmGoodTransferAsync([FromBody] ConfirmGoodTransferDTO confirmGoodTransferDTO)
+        public async Task<IActionResult> ConfirmGoodsTransferAsync([FromBody] ConfirmGoodsTransferDTO confirmGoodsTransferDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
-            await _offerService.ConfirmGoodTransferAsync(confirmGoodTransferDTO, userId);
+            await _offerService.ConfirmGoodsTransferAsync(confirmGoodsTransferDTO, userId);
 
             return Ok();
         }

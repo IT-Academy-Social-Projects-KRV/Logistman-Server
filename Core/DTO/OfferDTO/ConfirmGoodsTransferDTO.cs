@@ -1,6 +1,6 @@
 ﻿namespace Core.DTO.OfferDTO
 {
-    public class ConfirmGoodTransferDTO
+    public class ConfirmGoodsTransferDTO
     {
         public OfferIdDTO OfferIdDTO { get; set; }
         public string TripRole { get; set; }

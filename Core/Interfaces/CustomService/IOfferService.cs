@@ -12,6 +12,6 @@ namespace Core.Interfaces.CustomService
         Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter);
         Task<PaginatedList<OfferCreateTripDTO>> GetNearRouteAsync(PaginationFilterDTO paginationFilter, int tripId);
         Task DeleteAsync(OfferIdDTO offerIdDTO, string userId);
-        Task ConfirmGoodTransferAsync(ConfirmGoodTransferDTO confirmGoodTransferDTO, string userId);
+        Task ConfirmGoodsTransferAsync(ConfirmGoodsTransferDTO confirmGoodTransferDTO, string userId);
     }
 }

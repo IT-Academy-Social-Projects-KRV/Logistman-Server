@@ -159,15 +159,15 @@ namespace Core.Services
             await _pointRepository.DeleteAsync(offer.Point);
         }
 
-        public async Task ConfirmGoodTransferAsync(
-            ConfirmGoodTransferDTO сonfirmGoodTransferDTO, 
+        public async Task ConfirmGoodsTransferAsync(
+            ConfirmGoodsTransferDTO сonfirmGoodsTransferDTO, 
             string userId)
         {
-            if (сonfirmGoodTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Driver)
+            if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Driver)
             {
                 var offer = await _offerRepository
                     .GetBySpecAsync(new OfferSpecification
-                    .GetByIdWithActiveTrip(сonfirmGoodTransferDTO.OfferIdDTO.OfferId));
+                    .GetByIdWithActiveTrip(сonfirmGoodsTransferDTO.OfferIdDTO.OfferId));
 
                 ExceptionMethods.OfferNullCheck(offer);
 
@@ -178,23 +178,23 @@ namespace Core.Services
                         HttpStatusCode.Forbidden);
                 }
 
-                offer.GoodTransferConfirmedByDriver = сonfirmGoodTransferDTO.IsConfirmed;
+                offer.GoodTransferConfirmedByDriver = сonfirmGoodsTransferDTO.IsConfirmed;
                 offer.IsAnsweredByDriver = true;
 
                 await _offerRepository.SaveChangesAsync();
                 await EndTripAsync(userId);
             }
-            else if (сonfirmGoodTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Sender
+            else if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Sender
                      ||
-                     сonfirmGoodTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Recipient)
+                     сonfirmGoodsTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Recipient)
             {
                 var offer = await _offerRepository
                     .GetBySpecAsync(new OfferSpecification
-                    .GetByIdWithActiveTrip(сonfirmGoodTransferDTO.OfferIdDTO.OfferId, userId));
+                    .GetByIdWithActiveTrip(сonfirmGoodsTransferDTO.OfferIdDTO.OfferId, userId));
 
                 ExceptionMethods.OfferNullCheck(offer);
 
-                offer.GoodTransferConfirmedByCreator = сonfirmGoodTransferDTO.IsConfirmed;
+                offer.GoodTransferConfirmedByCreator = сonfirmGoodsTransferDTO.IsConfirmed;
                 offer.IsAnsweredByCreator = true;
 
                 await _offerRepository.SaveChangesAsync();
@@ -204,7 +204,7 @@ namespace Core.Services
                 throw new HttpException(
                         ErrorMessages.ConfirmGoodsDeliveryWrongRoleName 
                         + 
-                        сonfirmGoodTransferDTO.TripRole,
+                        сonfirmGoodsTransferDTO.TripRole,
                         HttpStatusCode.Forbidden);
             }
         }
