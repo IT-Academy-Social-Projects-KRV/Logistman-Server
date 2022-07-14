@@ -14,6 +14,9 @@ namespace Core.Entities.TripEntity
                 .Property(p => p.Description)
                 .IsRequired(false);
             builder
+                .Property(p => p.RouteGeographyData)
+                .IsRequired(true);
+            builder
                 .HasMany(p => p.Points)
                 .WithOne(p => p.Trip)
                 .HasForeignKey(p => p.TripId);
