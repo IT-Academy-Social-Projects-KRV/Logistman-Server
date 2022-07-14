@@ -1,6 +1,5 @@
 ﻿using Ardalis.Specification;
 using Core.DTO;
-using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
 using NetTopologySuite.Geometries;
 using System;

@@ -27,7 +27,9 @@ namespace Core.Specifications
                                 && !t.IsActive
                                 && !t.IsEnded
                                 && t.LoadCapacity >= totalWeight
-                                && DateTimeOffset.UtcNow <= t.ExpirationDate);
+                                && DateTimeOffset.UtcNow <= t.ExpirationDate)
+                    .Include(t => t.Offers)
+                    .Include(t => t.Points);
             }
         }
 

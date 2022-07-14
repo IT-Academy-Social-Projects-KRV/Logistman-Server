@@ -172,7 +172,7 @@ namespace Core.Services
         {
             var trip = await _tripRepository
                 .GetBySpecAsync(new TripSpecification
-                    .GetById(manageTrip.TripId));
+                    .GetValidTripById(manageTrip.TripId, manageTrip.TotalWeight));
 
             ExceptionMethods.TripNullCheck(trip);
 
@@ -185,32 +185,17 @@ namespace Core.Services
                 manageTrip.TripId,
                 trip.ExpirationDate);
 
-            await _tripValidationService.ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
-
             var points = new List<PointData>();
 
             foreach (var point in sortedPoints)
             {
-                if (point.Id != null)
-                {
-                    var pointData = await _pointDataRepository.GetByIdAsync(point.Id);
+                var pointData = await _pointDataRepository.GetByIdAsync(point.Id);
 
-                    ExceptionMethods.PointNullCheck(pointData);
+                ExceptionMethods.PointNullCheck(pointData);
 
-                    pointData.Address = point.Address;
-                    pointData.Settlement = point.Settlement;
-                    pointData.Country = point.Country;
-                    pointData.Postcode = point.Postcode;
-                    pointData.Region = point.Region;
-                    pointData.Order = point.Order;
-
-                    points.Add(pointData);
-                }
+                pointData.Order = point.Order;
+                points.Add(pointData);
             }
-
-            var pointsToCreate = sortedPoints.Where(point => point.Id == null);
-
-            points.AddRange(_mapper.Map<List<PointData>>(pointsToCreate));
 
             var offersIds = new List<int>();
 
@@ -231,11 +216,6 @@ namespace Core.Services
             trip.Distance = manageTrip.Distance;
 
             await _tripRepository.UpdateAsync(trip);
-
-            var auxiliaryPoints = await _pointDataRepository
-                .ListAsync(new PointDataSpecification.GetPointsWithoutTripAndOffer());
-
-            await _pointDataRepository.DeleteRangeAsync(auxiliaryPoints);
             await _inviteService.ManageTripInvitesAsync(
                 trip,
                 _mapper.Map<List<OfferInviteDTO>>(offers));

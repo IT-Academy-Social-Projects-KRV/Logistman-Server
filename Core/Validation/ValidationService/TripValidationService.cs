@@ -53,19 +53,6 @@ namespace Core.Validation.ValidationService
             }
         }
 
-        public async Task ValidateTripAsync(int tripId, float totalWeight)
-        {
-            var isValid = await _tripRepository.AnyAsync(
-                new TripSpecification.GetValidTripById(tripId, totalWeight));
-
-            if (!isValid)
-            {
-                throw new HttpException(
-                    ErrorMessages.TripNotValid,
-                    HttpStatusCode.BadRequest);
-            }
-        }
-
         public async Task ValidateTripDateAsync(
             DateTimeOffset startDate, 
             DateTimeOffset expirationDate, 
@@ -88,11 +75,11 @@ namespace Core.Validation.ValidationService
             var tripPoints = new List<PointData>();
 
             newTripPoints = points
-                .Where(point => point.IsStopover && point.OfferId == null)
+                .Where(point => point.OfferId == null)
                 .ToList();
 
             tripPoints = trip.Points
-                .Where(point => point.IsStopover && point.OfferId == null)
+                .Where(point => point.OfferId == null)
                 .ToList();
 
             if (newTripPoints.Count != tripPoints.Count)
