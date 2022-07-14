@@ -6,6 +6,7 @@ using AutoMapper;
 using Core.DTO;
 using Core.Entities.CarCategoryEntity;
 using Core.Entities.CarEntity;
+using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
 using Core.Entities.UserEntity;
 using Core.Exceptions;
@@ -23,18 +24,21 @@ namespace Core.Services
         private readonly UserManager<User> _userManager;
         private readonly IRepository<Car> _carRepository;
         private readonly IRepository<Trip> _tripRepository;
+        private readonly IRepository<PointData> _pointDataRepository;
         private readonly IRepository<CarCategory> _categoryRepository;
         private readonly IMapper _mapper;
 
         public CarService(
             IRepository<Car> carRepository,
             IRepository<Trip> tripRepository,
+            IRepository<PointData> pointDataRepository,
             IRepository<CarCategory> categoryRepository,
             IMapper mapper,
             UserManager<User> userManager)
         {
             _carRepository = carRepository;
             _tripRepository = tripRepository;
+            _pointDataRepository = pointDataRepository;
             _categoryRepository = categoryRepository;
             _mapper = mapper;
             _userManager = userManager;
@@ -144,6 +148,14 @@ namespace Core.Services
 
             if (routesWithCurrentCarToDelete.Count != 0)
             {
+                var pointsToDelete = new List<PointData>();
+
+                foreach (var userRoute in routesWithCurrentCarToDelete)
+                {
+                    pointsToDelete.AddRange(userRoute.Points);
+                }
+
+                await _pointDataRepository.DeleteRangeAsync(pointsToDelete);
                 await _tripRepository.DeleteRangeAsync(routesWithCurrentCarToDelete);
             }
 
