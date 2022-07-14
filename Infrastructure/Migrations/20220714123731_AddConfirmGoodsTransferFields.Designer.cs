@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220713084515_AddConfirmGoodsTransferFields")]
+    [Migration("20220714123731_AddConfirmGoodsTransferFields")]
     partial class AddConfirmGoodsTransferFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,9 +225,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsStopover")
-                        .HasColumnType("bit");
-
                     b.Property<Point>("Location")
                         .HasColumnType("geography");
 
@@ -398,6 +395,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("MaxRouteDeviationKm")
                         .HasColumnType("int");
+
+                    b.Property<LineString>("RouteGeographyData")
+                        .IsRequired()
+                        .HasColumnType("geography");
 
                     b.Property<DateTimeOffset>("StartDate")
                         .HasColumnType("datetimeoffset");
