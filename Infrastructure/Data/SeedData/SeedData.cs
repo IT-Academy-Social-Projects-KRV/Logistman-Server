@@ -892,7 +892,7 @@ namespace Infrastructure.Data.SeedData
                     TripCreatorId = ANTONINA_ID,
                     TransportationCarId = 1,
                     Distance = 150,
-                    RouteGeographyData = NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(FirstRouteCoordinates)
+                    RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(FirstRouteCoordinates)
                 },
                 new Trip()
                 {
@@ -905,7 +905,7 @@ namespace Infrastructure.Data.SeedData
                     TripCreatorId = MARYNA_ID,
                     TransportationCarId = 3,
                     Distance = 400,
-                    RouteGeographyData = NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(SecondRouteCoordinates)
+                    RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(SecondRouteCoordinates)
                 },
                 new Trip()
                 {
@@ -918,7 +918,7 @@ namespace Infrastructure.Data.SeedData
                     TripCreatorId = EUGEN_ID,
                     TransportationCarId = 10,
                     Distance = 400,
-                    RouteGeographyData = NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(ThirdRouteCoordinates)
+                    RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(ThirdRouteCoordinates)
                 });
         #endregion
 

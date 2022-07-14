@@ -116,7 +116,7 @@ namespace Core.Services
                 .ForEach(x => listOfRouteCoordinates
                 .Add(new Coordinate(x.Longitude, x.Latitude)));
 
-            return NtsGemetryFactories.geometryFactoryWGS84.CreateLineString(listOfRouteCoordinates.ToArray());
+            return NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(listOfRouteCoordinates.ToArray());
         }
 
         public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter)

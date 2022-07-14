@@ -3,7 +3,7 @@ using NetTopologySuite.Geometries;
 
 namespace Core.Constants
 {
-    public static class NtsGemetryFactories
+    public static class NtsGeometryFactories
     {
         /// <summary>
         /// Supplies a set of utility methods for building Geometry objects from lists of Coordinates with SRID WGS84 which using in GPS.
