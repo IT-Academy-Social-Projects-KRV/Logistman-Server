@@ -72,7 +72,7 @@ namespace Core.Specifications
             public GetOfferByIds(List<int> offersIds)
             {
                 Query
-                    .Where(offer => offersIds.Contains(offer.Id));
+                    .Where(o => offersIds.Contains(o.Id));
             }
         }
 
