@@ -30,6 +30,7 @@ namespace Core
             services.AddScoped<IInviteService, InviteService>();
             services.AddScoped<ITemplateHelper, TemplateHelper>();
             services.AddScoped<ITripValidationService, TripValidationService>();
+            services.AddScoped<INotificationService, NotificationService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
@@ -43,7 +44,6 @@ namespace Core
                 mc.AddProfile(new CarProfile());
                 mc.AddProfile(new TripProfile());
                 mc.AddProfile(new CarCategoryProfile());
-                mc.AddProfile(new InviteProfile());
             });
 
             var mapper = configures.CreateMapper();

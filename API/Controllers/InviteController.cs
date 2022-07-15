@@ -36,24 +36,13 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("offers")]
+        [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> OffersInvitesAsync(
+        public async Task<IActionResult> GetAllByUserAsync(
             [FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var invites = await _inviteService.OffersInvitesAsync(userId, paginationFilter);
-
-            return Ok(invites);
-        }
-
-        [HttpGet("drivers")]
-        [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> DriversInvitesAsync(
-            [FromQuery] PaginationFilterDTO paginationFilter)
-        {
-            var userId = _userService.GetCurrentUserNameIdentifier(User);
-            var invites = await _inviteService.DriversInvitesAsync(userId, paginationFilter);
+            var invites = await _inviteService.GetByUserIdAsync(userId, paginationFilter);
 
             return Ok(invites);
         }

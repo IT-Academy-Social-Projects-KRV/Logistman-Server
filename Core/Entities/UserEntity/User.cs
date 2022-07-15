@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using Core.Entities.CarEntity;
 using Core.Entities.InviteEntity;
+using Core.Entities.NotificationEntity;
 
 namespace Core.Entities.UserEntity
 {
@@ -15,7 +16,7 @@ namespace Core.Entities.UserEntity
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public float? Rating  { get; set; }
+        public float? Rating { get; set; }
         public bool HasCar { get; set; }
         public string ConfirmationEmailToken { get; set; }
         public DateTimeOffset? ConfirmationEmailTokenExpirationDate { get; set; }
@@ -28,6 +29,7 @@ namespace Core.Entities.UserEntity
         public ICollection<Rating> EstimatorRatings { get; set; }
         public ICollection<Report> ViolationReports { get; set; }
         public ICollection<Report> ReporterReports { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     }
 }
