@@ -34,7 +34,9 @@ namespace Core.Specifications
                                 && !t.IsActive
                                 && !t.IsEnded
                                 && t.LoadCapacity >= totalWeight
-                                && DateTimeOffset.UtcNow <= t.ExpirationDate);
+                                && DateTimeOffset.UtcNow <= t.ExpirationDate)
+                    .Include(t => t.Offers)
+                    .Include(t => t.Points);
             }
         }
 
@@ -93,6 +95,29 @@ namespace Core.Specifications
                 Query.Where(t => t.TripCreatorId == userId && t.IsActive);
             }
         }
+        internal class GetActiveOrWithRelatedOffersByCarId : Specification<Trip>, 
+            ISingleResultSpecification<Trip>
+        {
+            public GetActiveOrWithRelatedOffersByCarId(int carId)
+            {
+                Query
+                    .Where(t => 
+                        t.TransportationCarId == carId 
+                        && (t.IsActive || (!t.IsActive && !t.IsEnded && t.Offers.Count != 0)));
+            }
+        }
+
+        internal class GetRoutesWithoutRelatedOffersByCarId : Specification<Trip>
+        {
+            public GetRoutesWithoutRelatedOffersByCarId(int carId)
+            {
+                Query
+                    .Where(t => 
+                        t.TransportationCarId == carId 
+                        && (!t.IsActive && !t.IsEnded && t.Offers.Count == 0))
+                    .Include(t => t.Points);
+            }
+        }
 
         internal class GetActiveById : Specification<Trip>, ISingleResultSpecification<Trip>
         {
@@ -115,6 +140,19 @@ namespace Core.Specifications
             }
         }
 
+        internal class GetExpiredRoutes : Specification<Trip>
+        {
+            public GetExpiredRoutes()
+            {
+                Query
+                    .Where(t => !t.IsActive
+                        && !t.IsEnded
+                        && t.Offers.Count == 0
+                        && t.ExpirationDate <= DateTimeOffset.UtcNow)
+                    .Include(t => t.Points);
+            }
+        }
+        
         internal class GetRouteByUserIdAndId : Specification<Trip>, ISingleResultSpecification<Trip>
         {
             public GetRouteByUserIdAndId(string userId, int tripId)

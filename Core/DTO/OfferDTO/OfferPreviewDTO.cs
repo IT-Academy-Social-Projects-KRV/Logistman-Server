@@ -14,6 +14,7 @@ namespace Core.DTO.OfferDTO
         public DateTimeOffset StartDate { get; set; }
         public string Address { get; set; }
         public string Settlement { get; set; }
-        public string Region { get; set; }   
+        public string Region { get; set; }
+        public int? RelatedTripId { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -243,7 +243,13 @@
   <data name="TripNotValid" xml:space="preserve">
     <value>Trip is not valid!</value>
   </data>
+  <data name="CarCantBeDeleted" xml:space="preserve">
+    <value>A car participating in an active trip or a trip for which the invitation has not been rejected cannot be deleted!</value>
+  </data>
   <data name="RouteHasInvites" xml:space="preserve">
     <value>The route has already had invites! You can only decline the invite!</value>
+  </data>
+  <data name="PointsDoNotMatch" xml:space="preserve">
+    <value>Points do not match with points from trip</value>
   </data>
 </root>

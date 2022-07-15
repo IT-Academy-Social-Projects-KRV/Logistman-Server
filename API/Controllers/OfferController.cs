@@ -59,5 +59,16 @@ namespace API.Controllers
         {
             return Ok(await _offerService.GetNearRouteAsync(paginationFilter, routeId));
         }
+
+        [HttpDelete("delete")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> DeleteAsync([FromQuery] OfferIdDTO offerIdDTO)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+
+            await _offerService.DeleteAsync(offerIdDTO, userId);
+
+            return Ok();
+        }
     }
 }

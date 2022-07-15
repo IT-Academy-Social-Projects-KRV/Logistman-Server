@@ -116,11 +116,10 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(route);
 
             var maxRouteDeviationMeters = route.MaxRouteDeviationKm * 1000;
-            var geoRoute = await _tripService.GetRouteGeographyDataAsync(routeId);
 
             var offerListCount = await _offerRepository
                 .CountAsync(new OfferSpecification.GetOffersNearRoute(
-                    geoRoute,
+                    route.RouteGeographyData,
                     maxRouteDeviationMeters,
                     route.ExpirationDate,
                     paginationFilter
@@ -135,7 +134,7 @@ namespace Core.Services
 
             var offerList = await _offerRepository
                 .ListAsync(new OfferSpecification.GetOffersNearRoute(
-                    geoRoute,
+                    route.RouteGeographyData,
                     maxRouteDeviationMeters,
                     route.ExpirationDate,
                     paginationFilter
@@ -143,6 +142,18 @@ namespace Core.Services
 
             return PaginatedList<OfferPointCreateTripDTO>.Evaluate(
                 _mapper.Map<List<OfferPointCreateTripDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
+        }
+
+        public async Task DeleteAsync(OfferIdDTO offerIdDTO, string userId)
+        {
+            var offer = await _offerRepository
+                .GetBySpecAsync(new OfferSpecification
+                .GetOpenByIdAndUserIdWithoutTrip(offerIdDTO.OfferId, userId));
+
+            ExceptionMethods.OfferNullCheck(offer);
+
+            await _offerRepository.DeleteAsync(offer);
+            await _pointRepository.DeleteAsync(offer.Point);
         }
     }
 }

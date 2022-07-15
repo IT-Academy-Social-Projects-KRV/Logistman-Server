@@ -57,7 +57,7 @@ namespace API.Controllers
             var userCars = await _carService.GetAllUserCarsAsync(userId, paginationFilter);
             return Ok(userCars);
         }
-        
+
         [HttpPost("verify")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<OkResult> VerifyCarAsync(VinDTO vinDTO)
@@ -65,12 +65,22 @@ namespace API.Controllers
             await _carService.VerifyAsync(vinDTO);
             return Ok();
         }
-        
+
         [HttpPost("unverify")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
         public async Task<OkResult> UnverifyCarAsync(VinDTO vinDTO)
         {
             await _carService.UnverifyAsync(vinDTO);
+            return Ok();
+        }
+
+        [HttpDelete("delete")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> DeleteCarAsync([FromQuery] CarIdDTO carIdDTO)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            await _carService.DeleteCarAsync(userId, carIdDTO.CarId);
+
             return Ok();
         }
     }

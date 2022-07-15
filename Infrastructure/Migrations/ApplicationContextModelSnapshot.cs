@@ -119,141 +119,141 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CategoryId = 4,
-                            Color = "Grey",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 2, 13, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            Color = "Yellow",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 986f,
+                            LoadCapacity = 756f,
                             Model = "Ford,F350 Super Duty Crew Cab, Pickup",
                             RegistrationNumber = "AA4567XI",
-                            TechnicalPassport = "PSD61EOYW05JRPLJSGP1",
-                            UserId = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48",
-                            Vin = "GF6C4RYP717PQQGHM"
+                            TechnicalPassport = "PH9EAOZ23SIRLDGSMNXG",
+                            UserId = "bb1c48e0-541e-4605-abec-d79eaae6f2eb",
+                            Vin = "OC9TGNK119MBT8NXE"
                         },
                         new
                         {
                             Id = 2,
-                            CategoryId = 2,
+                            CategoryId = 4,
                             Color = "Blue",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 2, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 1, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 510f,
-                            Model = "Nissan,Titan Crew Cab, Pickup",
+                            LoadCapacity = 434f,
+                            Model = "Nissan,Titan King Cab, Pickup",
                             RegistrationNumber = "BC2234OP",
-                            TechnicalPassport = "WZS7FGYI239E9BYZP9X0",
-                            UserId = "a4e78abe-826b-41d0-8ae5-b30e53c6efe3",
-                            Vin = "3C2YV2ATGMBVKGE4P"
+                            TechnicalPassport = "UAXKYJY8LZBQQSX4G8BH",
+                            UserId = "ac89bf4f-b222-4df6-be3e-cb2821b45b49",
+                            Vin = "959K74O8BOQCU1C9H"
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = 4,
+                            CategoryId = 2,
                             Color = "Green",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 17, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 547f,
-                            Model = "Jeep,Wrangler Unlimited, SUV",
+                            LoadCapacity = 617f,
+                            Model = "Ford,F350 Super Duty Super Cab, Pickup",
                             RegistrationNumber = "BH4456AI",
-                            TechnicalPassport = "YYBGEIIWYHOD3VG4GLW8",
-                            UserId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
-                            Vin = "M3DRHLKKM0ZN5EQIG"
+                            TechnicalPassport = "9AK2GQTXDGCK21RAECTK",
+                            UserId = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
+                            Vin = "NZDYWR7Q8W9BZUPHR"
                         },
                         new
                         {
                             Id = 4,
-                            CategoryId = 3,
-                            Color = "Blue",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 4, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CategoryId = 4,
+                            Color = "Black",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 633f,
-                            Model = "Ford,F350 Super Duty Super Cab, Pickup",
+                            LoadCapacity = 775f,
+                            Model = "Porsche,Cayenne, SUV",
                             RegistrationNumber = "AC6344AC",
-                            TechnicalPassport = "5NIGLX08O3ZWBB82M0WB",
-                            UserId = "a4e78abe-826b-41d0-8ae5-b30e53c6efe3",
-                            Vin = "NDGP2EY5CGB5HFVBW"
+                            TechnicalPassport = "7ERR0KZ2QS73LNKPHT2Q",
+                            UserId = "ac89bf4f-b222-4df6-be3e-cb2821b45b49",
+                            Vin = "GBR1XKXLEP2PFLM6W"
                         },
                         new
                         {
                             Id = 5,
                             CategoryId = 2,
-                            Color = "Blue",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 5, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            Color = "White",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 728f,
-                            Model = "Porsche,Cayenne, SUV",
+                            LoadCapacity = 497f,
+                            Model = "Ford,F350 Super Duty Super Cab, Pickup",
                             RegistrationNumber = "BH1232AA",
-                            TechnicalPassport = "X0QU2IGUJVL3AZ4ZVVLA",
-                            UserId = "f370cd81-7edc-491f-a656-4d816f156436",
-                            Vin = "JK6US7B39R1WPDQV0"
+                            TechnicalPassport = "418D64S9KSJBZYG0YNE5",
+                            UserId = "1141f601-cb4e-4deb-9838-c88f864dcc97",
+                            Vin = "H0W7Z2AXVJYQC9INR"
                         },
                         new
                         {
                             Id = 6,
                             CategoryId = 2,
-                            Color = "Green",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            Color = "Yellow",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 5, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 660f,
+                            LoadCapacity = 781f,
                             Model = "Porsche,911, Convertible, Coupe",
                             RegistrationNumber = "AA5421BH",
-                            TechnicalPassport = "KQ16GQC1SY2E6H5N7P8J",
-                            UserId = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
-                            Vin = "U2DAR90VQS8XYU5OC"
+                            TechnicalPassport = "XJDGM65XJSIBQJ8HY4PY",
+                            UserId = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
+                            Vin = "0D8M6IBWX0UJKGJRC"
                         },
                         new
                         {
                             Id = 7,
                             CategoryId = 2,
-                            Color = "Black",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 4, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            Color = "Yellow",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 952f,
-                            Model = "Ford,F350 Super Duty Super Cab, Pickup",
+                            LoadCapacity = 789f,
+                            Model = "Ford,F350 Super Duty Crew Cab, Pickup",
                             RegistrationNumber = "BC7739AA",
-                            TechnicalPassport = "SZIIWK7S59RDYWYS5Y21",
-                            UserId = "f370cd81-7edc-491f-a656-4d816f156436",
-                            Vin = "959JBIJDRKD512VRV"
+                            TechnicalPassport = "QFFLPA5SCFC7ZJZ80ZNL",
+                            UserId = "1141f601-cb4e-4deb-9838-c88f864dcc97",
+                            Vin = "IG7ZRY7RSTMLAXS1G"
                         },
                         new
                         {
                             Id = 8,
-                            CategoryId = 2,
-                            Color = "Grey",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 2, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CategoryId = 3,
+                            Color = "Green",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 871f,
-                            Model = "Nissan,Titan Crew Cab, Pickup",
+                            LoadCapacity = 737f,
+                            Model = "Nissan,Titan King Cab, Pickup",
                             RegistrationNumber = "BH2333XI",
-                            TechnicalPassport = "IHKZX6V6IV1JJPD9D9O8",
-                            UserId = "f370cd81-7edc-491f-a656-4d816f156436",
-                            Vin = "70TUWXE3E8UNQNOJD"
+                            TechnicalPassport = "KIBKXJICWHEOVXYDQJ7K",
+                            UserId = "1141f601-cb4e-4deb-9838-c88f864dcc97",
+                            Vin = "ILE92FZJFGJ9XYVET"
                         },
                         new
                         {
                             Id = 9,
-                            CategoryId = 3,
-                            Color = "Grey",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CategoryId = 4,
+                            Color = "Red",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 643f,
-                            Model = "Ford,F250 Super Duty Super Cab, Pickup",
+                            LoadCapacity = 625f,
+                            Model = "Porsche,911, Convertible, Coupe",
                             RegistrationNumber = "AA8992BH",
-                            TechnicalPassport = "OCLHCHHHF3US1AK529XR",
-                            UserId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
-                            Vin = "SPWYPLTVCKL8IN7CJ"
+                            TechnicalPassport = "C7WEZUNPOXJ1X0Q6OH2C",
+                            UserId = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
+                            Vin = "Y4MZZHBPTV4Q5DHU2"
                         },
                         new
                         {
                             Id = 10,
                             CategoryId = 3,
-                            Color = "Blue",
-                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 3, 13, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            Color = "Red",
+                            CreationDate = new DateTimeOffset(new DateTime(2016, 7, 2, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             IsVerified = true,
-                            LoadCapacity = 741f,
-                            Model = "Porsche,Cayenne, SUV",
+                            LoadCapacity = 992f,
+                            Model = "Nissan,TITAN XD Crew Cab, Pickup",
                             RegistrationNumber = "AC1273IX",
-                            TechnicalPassport = "40VPD4DB2QFU6JWLDRWO",
-                            UserId = "16b21411-f0e6-421b-910f-4c22f075f9c6",
-                            Vin = "97SRWXPQHUSINP09C"
+                            TechnicalPassport = "J070Y585XM2IB9RS0U5E",
+                            UserId = "aadb4939-a8ff-44a3-99bc-2b1f52d0b95e",
+                            Vin = "NX6UDOUEH1KAF4EZ1"
                         });
                 });
 
@@ -401,262 +401,262 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 23, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 25, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Ritchie LLCFantastic Progressive South Carolina Garden & Music silver Re-engineered architectures Route Focused purple Well Frozen infrastructures Gorgeous International recontextualize Berkshire.",
+                            Description = "Gibson, Braun and HagenesParkways Group CSS Kentucky monitor Incredible Wooden Ball card calculate architectures overriding indexing COM Steel conglomeration Guinea Franc Solomon Islands Executive help-desk Health, Health & Jewelery Global matrix Future reinvent Credit Card Account.",
                             GoodCategoryId = 6,
-                            GoodsWeight = 432.28418f,
+                            GoodsWeight = 757.3397f,
                             IsClosed = false,
-                            OfferCreatorId = "16b21411-f0e6-421b-910f-4c22f075f9c6",
+                            OfferCreatorId = "aadb4939-a8ff-44a3-99bc-2b1f52d0b95e",
                             OfferPointId = 1,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 2,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 25, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 28, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Kunde - Mosciskie-tailers Health dot-com bottom-line Factors Organic Islands Central Intelligent Granite Soap Exclusive Industrial Minnesota Representative.",
-                            GoodCategoryId = 7,
-                            GoodsWeight = 586.51733f,
+                            Description = "Bernier LLCAlgeria transmit B2C Checking Account extensible Arizona strategize Usability Rubber indigo.",
+                            GoodCategoryId = 5,
+                            GoodsWeight = 920.8494f,
                             IsClosed = false,
-                            OfferCreatorId = "a4e78abe-826b-41d0-8ae5-b30e53c6efe3",
+                            OfferCreatorId = "ac89bf4f-b222-4df6-be3e-cb2821b45b49",
                             OfferPointId = 2,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 3,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 28, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 23, 19, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Ryan Groupyellow connecting Fall Awesome Cotton Shirt generate bifurcated Georgia Tasty Concrete Hat back up contingency clicks-and-mortar quantifying Gorgeous Soft Chicken motivating impactful mindshare Turnpike Lead Awesome Wooden Car deposit viral.",
+                            Description = "Hegmann, Simonis and Turcotteparse Grove PNG Web Credit Card Account cutting-edge Clothing Buckinghamshire haptic deliverables USB Granite Marketing Fantastic Granite Gloves violet Forward Unbranded Steel teal Intranet Awesome Concrete Car Avon Way Kentucky.",
                             GoodCategoryId = 2,
-                            GoodsWeight = 56.218857f,
+                            GoodsWeight = 506.43036f,
                             IsClosed = false,
-                            OfferCreatorId = "5cb8107f-f075-411c-9d97-07585237884e",
+                            OfferCreatorId = "f6197150-ec48-4dc2-a37b-b97f8ac76bbb",
                             OfferPointId = 3,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 4,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 28, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 23, 17, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Monahan, Douglas and Klingconvergence Generic Wooden Bike invoice Licensed Plastic Shirt migration back up bypass encompassing Money Market Account Danish Krone deposit Music, Clothing & Jewelery British Indian Ocean Territory (Chagos Archipelago) Mississippi Tokelau Brand backing up.",
-                            GoodCategoryId = 6,
-                            GoodsWeight = 374.37894f,
+                            Description = "Moore, Stracke and Farrellintuitive partnerships extensible North Dakota card indigo logistical Iowa SMTP Beauty, Shoes & Outdoors Principal Internal.",
+                            GoodCategoryId = 5,
+                            GoodsWeight = 610.49927f,
                             IsClosed = false,
-                            OfferCreatorId = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48",
+                            OfferCreatorId = "bb1c48e0-541e-4605-abec-d79eaae6f2eb",
                             OfferPointId = 4,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 5,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 21, 13, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 20, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Bayer - ColeWashington Soft Soft Usability Manager 1080p implement open-source hack Cross-platform auxiliary.",
-                            GoodCategoryId = 1,
-                            GoodsWeight = 421.56802f,
+                            Description = "Schuppe - KautzerLiaison Turnpike projection Games Credit Card Account generate Unbranded Fresh Gloves New Jersey human-resource Cotton mobile systems bus Licensed Soft Computer Turkey Monaco Intelligent Frozen Pizza Auto Loan Account client-driven calculating Handcrafted Granite Table Future Gorgeous Fresh Fish invoice Corporate info-mediaries.",
+                            GoodCategoryId = 5,
+                            GoodsWeight = 100.27089f,
                             IsClosed = false,
-                            OfferCreatorId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
+                            OfferCreatorId = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
                             OfferPointId = 5,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 6,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 22, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 26, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Smitham, Howell and Schillerdeposit Bridge virtual matrix Security Savings Account Personal Loan Account Virginia Borders Buckinghamshire Beauty San Marino Avon withdrawal Rustic backing up feed compress value-added connecting Refined Frozen Bacon Rubber Awesome Lakes synergy Strategist models Gorgeous Plastic Mouse Sleek Fresh Sausages digital.",
-                            GoodCategoryId = 5,
-                            GoodsWeight = 891.6105f,
+                            Description = "Gleason - FunkInvestment Account FTP Rubber Metal Circles turn-key EXE Integration Licensed Security productivity Crest Tenge client-driven circuit Enterprise-wide salmon.",
+                            GoodCategoryId = 4,
+                            GoodsWeight = 593.87085f,
                             IsClosed = false,
-                            OfferCreatorId = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
+                            OfferCreatorId = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
                             OfferPointId = 6,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 7,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 25, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 20, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Grant - StehrCredit Card Account invoice Ergonomic Fresh Tuna programming Home, Movies & Games Kids & Grocery Personal Loan Account Strategist Assurance synthesizing Implementation port Pula Garden Landing Frozen deposit Fresh.",
-                            GoodCategoryId = 6,
-                            GoodsWeight = 161.07285f,
+                            Description = "Gerhold, Luettgen and EmardCambridgeshire repurpose bypass Money Market Account Small Fresh Bacon alarm withdrawal Factors transmitter Cotton system engine fuchsia.",
+                            GoodCategoryId = 2,
+                            GoodsWeight = 570.5916f,
                             IsClosed = false,
-                            OfferCreatorId = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
+                            OfferCreatorId = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
                             OfferPointId = 7,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 8,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 20, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 28, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Abshire, Smith and ErdmanCredit Card Account Costa Rican Colon orange Central Generic turn-key zero administration navigating tan Vista bus Licensed Valleys Industrial & Jewelery systemic Investor Place AGP.",
-                            GoodCategoryId = 6,
-                            GoodsWeight = 918.5931f,
+                            Description = "Ankunding - FayRSS Data Personal Loan Account Shoes & Automotive invoice Dynamic FTP navigating Kids Mission Optimization technologies XSS Investment Account interface Practical Granite Chips Dynamic violet microchip Distributed.",
+                            GoodCategoryId = 3,
+                            GoodsWeight = 703.70654f,
                             IsClosed = false,
-                            OfferCreatorId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
+                            OfferCreatorId = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
                             OfferPointId = 8,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 9,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 24, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 28, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Kulas, Osinski and Sanfordinput Haiti needs-based calculate Investor emulation Berkshire frame Route payment Optimized Intranet override Creative solid state Gorgeous Self-enabling Assimilated connect invoice invoice Branding Investment Account.",
-                            GoodCategoryId = 7,
-                            GoodsWeight = 268.98477f,
+                            Description = "Anderson, Effertz and TillmanMetrics contingency Avon Courts Turks and Caicos Islands Shores maroon customized indigo Trail didactic transmitter Wooden Field Multi-layered microchip 3rd generation Zambia Personal Loan Account.",
+                            GoodCategoryId = 1,
+                            GoodsWeight = 721.4988f,
                             IsClosed = false,
-                            OfferCreatorId = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
+                            OfferCreatorId = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
                             OfferPointId = 9,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 10,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 29, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Franecki and Sonssolid state Burg matrix parsing Argentina Handcrafted Concrete Ball Vista Handmade Fresh Ball Grove Markets Branding Unbranded Kentucky Vision-oriented.",
-                            GoodCategoryId = 6,
-                            GoodsWeight = 404.12906f,
+                            Description = "Larson Incconvergence compress Checking Account magenta homogeneous Incredible Iceland Krona TCP black Bedfordshire.",
+                            GoodCategoryId = 2,
+                            GoodsWeight = 900.20435f,
                             IsClosed = false,
-                            OfferCreatorId = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
+                            OfferCreatorId = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
                             OfferPointId = 10,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 11,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 22, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 30, 19, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Pfeffer IncGeneric Plastic Soap Sleek Plastic Shirt Guinea Franc embrace withdrawal Implementation Ergonomic Chief initiatives auxiliary dedicated Movies, Grocery & Beauty purple Savings Account integrate seamless Passage Generic Frozen Tuna encompassing reboot Mauritius Rupee Soft Optional Consultant focus group online Inlet regional silver Incredible Rubber Keyboard.",
-                            GoodCategoryId = 3,
-                            GoodsWeight = 727.1763f,
+                            Description = "Dach, Little and KrajcikSavings Account Station feed Borders stable 1080p Refined Cotton Towels override Taka Supervisor RAM Intelligent Granite Keyboard data-warehouse Jewelery Central white Crossroad cross-media Czech Koruna revolutionary Court.",
+                            GoodCategoryId = 7,
+                            GoodsWeight = 356.73758f,
                             IsClosed = false,
-                            OfferCreatorId = "f370cd81-7edc-491f-a656-4d816f156436",
+                            OfferCreatorId = "1141f601-cb4e-4deb-9838-c88f864dcc97",
                             OfferPointId = 11,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 12,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 20, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 25, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Johns, Yundt and Vandervortcopying AI cultivate Intelligent Rubber Fish Music, Industrial & Jewelery enable Gardens groupware internet solution quantifying Cambridgeshire hardware SCSI visionary ivory.",
-                            GoodCategoryId = 6,
-                            GoodsWeight = 992.4621f,
+                            Description = "McClure - McCulloughout-of-the-box Cameroon B2B Baby, Industrial & Computers eyeballs circuit Fantastic Cotton Gloves connecting Music & Electronics Borders 5th generation function visionary Human quantifying.",
+                            GoodCategoryId = 2,
+                            GoodsWeight = 189.20988f,
                             IsClosed = false,
-                            OfferCreatorId = "a4e78abe-826b-41d0-8ae5-b30e53c6efe3",
+                            OfferCreatorId = "ac89bf4f-b222-4df6-be3e-cb2821b45b49",
                             OfferPointId = 12,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 13,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 23, 13, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 25, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Zulauf and Sonsdeposit web-enabled ivory Developer Summit Tennessee Handcrafted Frozen Chair input Hryvnia invoice AGP mobile alarm orange disintermediate Ergonomic Toys open-source Frozen withdrawal reinvent Incredible Metal Salad Intelligent Cotton Ball Checking Account card.",
-                            GoodCategoryId = 1,
-                            GoodsWeight = 77.98786f,
+                            Description = "Strosin - WelchSquares Central Shoes copy foreground Configuration input navigate Underpass Georgia Inlet initiatives Baby, Industrial & Kids overriding Automated Sleek Soft integrate Wooden.",
+                            GoodCategoryId = 2,
+                            GoodsWeight = 563.70514f,
                             IsClosed = false,
-                            OfferCreatorId = "16b21411-f0e6-421b-910f-4c22f075f9c6",
+                            OfferCreatorId = "aadb4939-a8ff-44a3-99bc-2b1f52d0b95e",
                             OfferPointId = 13,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 14,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 23, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 22, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Mertz IncBranding Investment Account Optimization Union Beauty & Movies Credit Card Account Games, Movies & Sports Books & Home Applications Ergonomic Wooden Soap Steel parse Inlet Gorgeous Rubber Ball International Aruban Guilder Licensed Beauty Garden & Electronics compress uniform open-source Consultant Meadows user-centric.",
-                            GoodCategoryId = 2,
-                            GoodsWeight = 632.72095f,
+                            Description = "Rogahn - ArmstrongAdministrator Steel Meadow workforce partnerships synthesize Divide transmitter withdrawal Home Loan Account Synchronised.",
+                            GoodCategoryId = 6,
+                            GoodsWeight = 389.56192f,
                             IsClosed = false,
-                            OfferCreatorId = "a4e78abe-826b-41d0-8ae5-b30e53c6efe3",
+                            OfferCreatorId = "ac89bf4f-b222-4df6-be3e-cb2821b45b49",
                             OfferPointId = 14,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 15,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 28, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 30, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Mills - Schmelerproduct Manager Practical Wooden Towels Small neural Games, Grocery & Clothing Parks Kyrgyz Republic grey turquoise Sports, Games & Books Handmade Cotton Bacon Central Direct Mali invoice e-services Licensed Soft Shirt Home, Automotive & Books hub Fantastic 1080p Awesome Plastic Shirt Tasty Steel Shirt indigo Malagasy Ariary Arkansas Kids, Jewelery & Movies Rubber.",
+                            Description = "Feeney - DuBuqueSprings solution-oriented Senior Health & Tools deposit exploit Ergonomic Panama Officer Cotton bypassing Games, Baby & Home grow Unbranded Granite Computer invoice.",
                             GoodCategoryId = 2,
-                            GoodsWeight = 280.5007f,
+                            GoodsWeight = 897.5877f,
                             IsClosed = false,
-                            OfferCreatorId = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48",
+                            OfferCreatorId = "bb1c48e0-541e-4605-abec-d79eaae6f2eb",
                             OfferPointId = 15,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 16,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 30, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 29, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Boyle, Hermann and SchusterCotton rich grow facilitate Beauty & Kids function bus Sports & Home cross-media Fresh Music & Home.",
-                            GoodCategoryId = 6,
-                            GoodsWeight = 821.38696f,
+                            Description = "Effertz, Heathcote and SchmittCanadian Dollar Street Advanced Rustic Frozen Mouse mobile Regional embrace Central Refined Soft Table Generic Soft Shirt.",
+                            GoodCategoryId = 7,
+                            GoodsWeight = 957.6458f,
                             IsClosed = false,
-                            OfferCreatorId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
+                            OfferCreatorId = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
                             OfferPointId = 16,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 17,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 20, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 29, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Davis - RauCrescent Ridges Concrete capacitor Cambridgeshire Gorgeous Metal Tuna Macedonia system homogeneous Interactions.",
-                            GoodCategoryId = 5,
-                            GoodsWeight = 368.57526f,
+                            Description = "Connelly GroupWeb Accountability matrix monitor Unbranded invoice Personal Loan Account Mobility lavender discrete Assistant Refined Steel Chair.",
+                            GoodCategoryId = 1,
+                            GoodsWeight = 811.5033f,
                             IsClosed = false,
-                            OfferCreatorId = "5cb8107f-f075-411c-9d97-07585237884e",
+                            OfferCreatorId = "f6197150-ec48-4dc2-a37b-b97f8ac76bbb",
                             OfferPointId = 17,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 18,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 28, 5, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 29, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
-                            Description = "Parisian - WymanTasty Steel Fish THX Turnpike Wooden Manager Organic payment bleeding-edge JBOD Future Awesome Soft Pants Sleek Wooden Car protocol Global Handmade Auto Loan Account deposit copying cutting-edge Corporate JBOD.",
+                            Description = "Fahey - DickiIowa Buckinghamshire Tenge Syrian Arab Republic bandwidth Berkshire Beauty cyan Savings Account Awesome Licensed innovative index Executive PCI.",
                             GoodCategoryId = 2,
-                            GoodsWeight = 962.62494f,
+                            GoodsWeight = 408.49664f,
                             IsClosed = false,
-                            OfferCreatorId = "5cb8107f-f075-411c-9d97-07585237884e",
+                            OfferCreatorId = "f6197150-ec48-4dc2-a37b-b97f8ac76bbb",
                             OfferPointId = 18,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 3, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 19,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 20, 20, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 27, 19, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Waelchi - VandervortOperations Avon bypass digital object-oriented Vista Awesome Soft Cheese Rubber SSL payment Bedfordshire Rwanda Belarussian Ruble Outdoors, Electronics & Jewelery Licensed Wooden Tuna pixel 5th generation circuit Granite.",
-                            GoodCategoryId = 3,
-                            GoodsWeight = 995.07935f,
+                            Description = "Monahan - Larsonblue Infrastructure experiences Rubber Personal Loan Account backing up Handcrafted Meadows Handcrafted Fresh Chair Saint Martin USB Generic compelling Auto Loan Account Brook invoice.",
+                            GoodCategoryId = 6,
+                            GoodsWeight = 404.8527f,
                             IsClosed = false,
-                            OfferCreatorId = "a4e78abe-826b-41d0-8ae5-b30e53c6efe3",
+                            OfferCreatorId = "ac89bf4f-b222-4df6-be3e-cb2821b45b49",
                             OfferPointId = 19,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
                             Id = 20,
-                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 21, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
+                            CreationDate = new DateTimeOffset(new DateTime(2022, 6, 28, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
-                            Description = "Bayer LLCutilize matrix Baby & Games revolutionize client-driven USB Savings Account methodologies Drive Quality world-class Iceland Legacy Sports Wooden brand Plastic Rubber PCI Nebraska database indexing Sports, Health & Movies Motorway quantifying payment.",
-                            GoodCategoryId = 7,
-                            GoodsWeight = 90.71428f,
+                            Description = "Hodkiewicz and SonsLouisiana invoice interface optimal Moroccan Dirham redundant Diverse Buckinghamshire Curve Assistant Station action-items heuristic Money Market Account Associate Belize Dollar tertiary lime Identity Enhanced Buckinghamshire capability Metrics calculate superstructure client-driven reintermediate Russian Federation Tactics Cedi.",
+                            GoodCategoryId = 5,
+                            GoodsWeight = 764.0247f,
                             IsClosed = false,
-                            OfferCreatorId = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48",
+                            OfferCreatorId = "bb1c48e0-541e-4605-abec-d79eaae6f2eb",
                             OfferPointId = 20,
-                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 4, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
+                            StartDate = new DateTimeOffset(new DateTime(2022, 7, 5, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
                         new
                         {
@@ -664,10 +664,10 @@ namespace Infrastructure.Migrations
                             CreationDate = new DateTimeOffset(new DateTime(2022, 7, 13, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
                             Description = "My 1 offer",
-                            GoodCategoryId = 7,
+                            GoodCategoryId = 2,
                             GoodsWeight = 120f,
                             IsClosed = false,
-                            OfferCreatorId = "16b21411-f0e6-421b-910f-4c22f075f9c6",
+                            OfferCreatorId = "aadb4939-a8ff-44a3-99bc-2b1f52d0b95e",
                             OfferPointId = 21,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 13, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
@@ -677,10 +677,10 @@ namespace Infrastructure.Migrations
                             CreationDate = new DateTimeOffset(new DateTime(2022, 7, 18, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
                             Description = "My 2 offer",
-                            GoodCategoryId = 1,
+                            GoodCategoryId = 3,
                             GoodsWeight = 120f,
                             IsClosed = false,
-                            OfferCreatorId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
+                            OfferCreatorId = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
                             OfferPointId = 22,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 18, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
@@ -693,7 +693,7 @@ namespace Infrastructure.Migrations
                             GoodCategoryId = 1,
                             GoodsWeight = 120f,
                             IsClosed = false,
-                            OfferCreatorId = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
+                            OfferCreatorId = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
                             OfferPointId = 23,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 20, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
@@ -703,10 +703,10 @@ namespace Infrastructure.Migrations
                             CreationDate = new DateTimeOffset(new DateTime(2022, 7, 22, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
                             Description = "My 4 offer",
-                            GoodCategoryId = 4,
+                            GoodCategoryId = 6,
                             GoodsWeight = 120f,
                             IsClosed = false,
-                            OfferCreatorId = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48",
+                            OfferCreatorId = "bb1c48e0-541e-4605-abec-d79eaae6f2eb",
                             OfferPointId = 24,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 22, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
@@ -716,10 +716,10 @@ namespace Infrastructure.Migrations
                             CreationDate = new DateTimeOffset(new DateTime(2022, 7, 24, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
                             Description = "My 5 offer",
-                            GoodCategoryId = 3,
+                            GoodCategoryId = 7,
                             GoodsWeight = 120f,
                             IsClosed = false,
-                            OfferCreatorId = "16b21411-f0e6-421b-910f-4c22f075f9c6",
+                            OfferCreatorId = "aadb4939-a8ff-44a3-99bc-2b1f52d0b95e",
                             OfferPointId = 25,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 24, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
@@ -729,10 +729,10 @@ namespace Infrastructure.Migrations
                             CreationDate = new DateTimeOffset(new DateTime(2022, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 2,
                             Description = "My 6 offer",
-                            GoodCategoryId = 4,
+                            GoodCategoryId = 2,
                             GoodsWeight = 120f,
                             IsClosed = false,
-                            OfferCreatorId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
+                            OfferCreatorId = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
                             OfferPointId = 26,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
@@ -742,10 +742,10 @@ namespace Infrastructure.Migrations
                             CreationDate = new DateTimeOffset(new DateTime(2022, 7, 28, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
                             Description = "My 7 offer",
-                            GoodCategoryId = 6,
+                            GoodCategoryId = 7,
                             GoodsWeight = 120f,
                             IsClosed = false,
-                            OfferCreatorId = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
+                            OfferCreatorId = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
                             OfferPointId = 27,
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 28, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         },
@@ -755,10 +755,10 @@ namespace Infrastructure.Migrations
                             CreationDate = new DateTimeOffset(new DateTime(2022, 8, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             CreatorRoleId = 1,
                             Description = "My 8 offer",
-                            GoodCategoryId = 2,
+                            GoodCategoryId = 6,
                             GoodsWeight = 120f,
                             IsClosed = false,
-                            OfferCreatorId = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48",
+                            OfferCreatorId = "bb1c48e0-541e-4605-abec-d79eaae6f2eb",
                             OfferPointId = 28,
                             StartDate = new DateTimeOffset(new DateTime(2022, 8, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0))
                         });
@@ -777,9 +777,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsStopover")
-                        .HasColumnType("bit");
 
                     b.Property<Point>("Location")
                         .HasColumnType("geography");
@@ -816,7 +813,6 @@ namespace Infrastructure.Migrations
                             Id = 1,
                             Address = "вулиця Східна, 32",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (26.5283633 50.3288577)"),
                             OfferId = 1,
                             Order = 0,
@@ -829,7 +825,6 @@ namespace Infrastructure.Migrations
                             Id = 2,
                             Address = "вулиця Соборна, 5",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (26.2614291 50.6175848)"),
                             OfferId = 2,
                             Order = 0,
@@ -842,7 +837,6 @@ namespace Infrastructure.Migrations
                             Id = 3,
                             Address = "Вишнівецька вулиця, 30",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (25.3839251 50.724626)"),
                             OfferId = 3,
                             Order = 0,
@@ -855,7 +849,6 @@ namespace Infrastructure.Migrations
                             Id = 4,
                             Address = "вулиця Юрія Савченко, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (35.0256349 48.4674516)"),
                             OfferId = 4,
                             Order = 0,
@@ -868,7 +861,6 @@ namespace Infrastructure.Migrations
                             Id = 5,
                             Address = "вулиця Пушкіна, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (37.3386598 47.1917281)"),
                             OfferId = 5,
                             Order = 0,
@@ -881,7 +873,6 @@ namespace Infrastructure.Migrations
                             Id = 6,
                             Address = "вулиця Садова, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.0033648 46.9690278)"),
                             OfferId = 6,
                             Order = 0,
@@ -894,7 +885,6 @@ namespace Infrastructure.Migrations
                             Id = 7,
                             Address = "вулиця Павлова, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.2345305 48.5175858)"),
                             OfferId = 7,
                             Order = 0,
@@ -907,7 +897,6 @@ namespace Infrastructure.Migrations
                             Id = 8,
                             Address = "вулиця Чкалова, 20",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.2277797 48.5183484)"),
                             OfferId = 8,
                             Order = 0,
@@ -920,7 +909,6 @@ namespace Infrastructure.Migrations
                             Id = 9,
                             Address = "Посадочна вулиця, 5",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.2269653 48.5181244)"),
                             OfferId = 9,
                             Order = 0,
@@ -933,7 +921,6 @@ namespace Infrastructure.Migrations
                             Id = 10,
                             Address = "вулиця Юрія Савченка, 3",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (35.0247707 48.4658504)"),
                             OfferId = 10,
                             Order = 0,
@@ -946,7 +933,6 @@ namespace Infrastructure.Migrations
                             Id = 11,
                             Address = "просп. Вячеслава Черновола, 11",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (24.0253381 49.8468734)"),
                             OfferId = 11,
                             Order = 0,
@@ -959,7 +945,6 @@ namespace Infrastructure.Migrations
                             Id = 12,
                             Address = "вулиця Шишкіна, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (22.3178905 48.6102995)"),
                             OfferId = 12,
                             Order = 0,
@@ -972,7 +957,6 @@ namespace Infrastructure.Migrations
                             Id = 13,
                             Address = "вулиця Козацька, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (26.9919167 49.4178562)"),
                             OfferId = 13,
                             Order = 0,
@@ -985,7 +969,6 @@ namespace Infrastructure.Migrations
                             Id = 14,
                             Address = "вулиця Братиславська, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (33.3286723 47.8847308)"),
                             OfferId = 14,
                             Order = 0,
@@ -998,7 +981,6 @@ namespace Infrastructure.Migrations
                             Id = 15,
                             Address = "вулиця Слов'янська, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.0147107 47.031949)"),
                             OfferId = 15,
                             Order = 0,
@@ -1011,7 +993,6 @@ namespace Infrastructure.Migrations
                             Id = 16,
                             Address = "вулиця Привільна, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.0222338 46.9858772)"),
                             OfferId = 16,
                             Order = 0,
@@ -1024,7 +1005,6 @@ namespace Infrastructure.Migrations
                             Id = 17,
                             Address = "вулиця Привільна, 10",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.0210963 46.9880672)"),
                             OfferId = 17,
                             Order = 0,
@@ -1037,7 +1017,6 @@ namespace Infrastructure.Migrations
                             Id = 18,
                             Address = "вулиця В'ячеслава Чорновола, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (25.36196 50.755603)"),
                             OfferId = 18,
                             Order = 0,
@@ -1050,7 +1029,6 @@ namespace Infrastructure.Migrations
                             Id = 19,
                             Address = "вулиця Острозька, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (26.8544323 50.3006939)"),
                             OfferId = 19,
                             Order = 0,
@@ -1063,7 +1041,6 @@ namespace Infrastructure.Migrations
                             Id = 20,
                             Address = "вулиця Бориса Тена, 2",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (28.6727154 50.2541948)"),
                             OfferId = 20,
                             Order = 0,
@@ -1076,7 +1053,6 @@ namespace Infrastructure.Migrations
                             Id = 21,
                             Address = "вул Соборна 44б",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.4570465 48.3880023)"),
                             OfferId = 21,
                             Order = 0,
@@ -1089,7 +1065,6 @@ namespace Infrastructure.Migrations
                             Id = 22,
                             Address = "Центральна 119",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.1641172 48.1413224)"),
                             OfferId = 22,
                             Order = 0,
@@ -1102,7 +1077,6 @@ namespace Infrastructure.Migrations
                             Id = 23,
                             Address = "Криве Озеро",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.3443027 47.9484405)"),
                             OfferId = 23,
                             Order = 0,
@@ -1115,7 +1089,6 @@ namespace Infrastructure.Migrations
                             Id = 24,
                             Address = "вулиця Шевченка, 10",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.9116167 47.1991193)"),
                             OfferId = 24,
                             Order = 0,
@@ -1128,7 +1101,6 @@ namespace Infrastructure.Migrations
                             Id = 25,
                             Address = "Трасса Е 95",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.317371 47.0234622)"),
                             OfferId = 25,
                             Order = 0,
@@ -1141,7 +1113,6 @@ namespace Infrastructure.Migrations
                             Id = 26,
                             Address = "48Q2+JJ Дубинове",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.3017199 48.1390924)"),
                             OfferId = 26,
                             Order = 0,
@@ -1154,7 +1125,6 @@ namespace Infrastructure.Migrations
                             Id = 27,
                             Address = "вулиця Медична, 19",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (33.3832712 47.8876902)"),
                             OfferId = 27,
                             Order = 0,
@@ -1167,7 +1137,6 @@ namespace Infrastructure.Migrations
                             Id = 28,
                             Address = "вул. Станціонна, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (32.4974225 47.5464278)"),
                             OfferId = 28,
                             Order = 0,
@@ -1180,7 +1149,6 @@ namespace Infrastructure.Migrations
                             Id = 29,
                             Address = "вулиця Волкова, 2",
                             Country = "Україна",
-                            IsStopover = false,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.2557039 48.7424709)"),
                             Order = 1,
                             Postcode = "20300",
@@ -1193,7 +1161,6 @@ namespace Infrastructure.Migrations
                             Id = 30,
                             Address = "48Q2+JJ",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.3017199 48.1390924)"),
                             Order = 2,
                             Postcode = "20300",
@@ -1206,7 +1173,6 @@ namespace Infrastructure.Migrations
                             Id = 31,
                             Address = "28F8+9X",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.3174055 47.0235592)"),
                             Order = 3,
                             Postcode = "20300",
@@ -1219,7 +1185,6 @@ namespace Infrastructure.Migrations
                             Id = 32,
                             Address = "вулиця Мічуріна, 41",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.6598914 46.4932837)"),
                             Order = 4,
                             Postcode = "65000",
@@ -1232,7 +1197,6 @@ namespace Infrastructure.Migrations
                             Id = 33,
                             Address = "проспект Перемоги, ст. метро Житомирська",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (30.36545 50.45624)"),
                             Order = 1,
                             Postcode = "02000",
@@ -1245,7 +1209,6 @@ namespace Infrastructure.Migrations
                             Id = 34,
                             Address = "вулиця Київська, 77",
                             Country = "Україна",
-                            IsStopover = false,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (28.68603 50.26679)"),
                             Order = 2,
                             Postcode = "10001",
@@ -1258,7 +1221,6 @@ namespace Infrastructure.Migrations
                             Id = 35,
                             Address = "вулиця Житомирська, 41-А",
                             Country = "Україна",
-                            IsStopover = false,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (27.62649 50.58838)"),
                             Order = 3,
                             Postcode = "11702",
@@ -1271,7 +1233,6 @@ namespace Infrastructure.Migrations
                             Id = 36,
                             Address = "майдан Незалежності, 2",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (26.2517 50.62034)"),
                             Order = 4,
                             Postcode = "33000",
@@ -1284,7 +1245,6 @@ namespace Infrastructure.Migrations
                             Id = 37,
                             Address = "вулиця Сухомлинського, 1",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (25.35595 50.7553)"),
                             Order = 1,
                             Postcode = "43000",
@@ -1297,7 +1257,6 @@ namespace Infrastructure.Migrations
                             Id = 38,
                             Address = "вулиця Луцька, 27",
                             Country = "Україна",
-                            IsStopover = false,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (24.76512 50.50216)"),
                             Order = 2,
                             Postcode = "45700",
@@ -1310,7 +1269,6 @@ namespace Infrastructure.Migrations
                             Id = 39,
                             Address = "вулиця Витківська",
                             Country = "Україна",
-                            IsStopover = false,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (24.63097 50.28358)"),
                             Order = 3,
                             Postcode = "80200",
@@ -1323,7 +1281,6 @@ namespace Infrastructure.Migrations
                             Id = 40,
                             Address = "вулиця Стрийська, 30 ТРЦ King Cross Leopolis",
                             Country = "Україна",
-                            IsStopover = false,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (24.00991 49.77351)"),
                             Order = 4,
                             Postcode = "81130",
@@ -1336,7 +1293,6 @@ namespace Infrastructure.Migrations
                             Id = 41,
                             Address = "вулиця Дубравського, 6",
                             Country = "Україна",
-                            IsStopover = false,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (23.85867 49.26081)"),
                             Order = 5,
                             Postcode = "82400",
@@ -1349,7 +1305,6 @@ namespace Infrastructure.Migrations
                             Id = 42,
                             Address = "вулиця Верещагіна, 16",
                             Country = "Україна",
-                            IsStopover = true,
                             Location = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT (22.3112 48.60822)"),
                             Order = 6,
                             Postcode = "88000",
@@ -1512,6 +1467,10 @@ namespace Infrastructure.Migrations
                     b.Property<int>("MaxRouteDeviationKm")
                         .HasColumnType("int");
 
+                    b.Property<LineString>("RouteGeographyData")
+                        .IsRequired()
+                        .HasColumnType("geography");
+
                     b.Property<DateTimeOffset>("StartDate")
                         .HasColumnType("datetimeoffset");
 
@@ -1540,9 +1499,10 @@ namespace Infrastructure.Migrations
                             IsEnded = false,
                             LoadCapacity = 2000f,
                             MaxRouteDeviationKm = 20,
+                            RouteGeographyData = (NetTopologySuite.Geometries.LineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;LINESTRING (30.2557039 48.7424709, 30.3017199 48.1390924, 30.3174055 47.0235592, 30.6598914 46.4932837)"),
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             TransportationCarId = 1,
-                            TripCreatorId = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48"
+                            TripCreatorId = "bb1c48e0-541e-4605-abec-d79eaae6f2eb"
                         },
                         new
                         {
@@ -1554,9 +1514,10 @@ namespace Infrastructure.Migrations
                             IsEnded = false,
                             LoadCapacity = 2000f,
                             MaxRouteDeviationKm = 15,
+                            RouteGeographyData = (NetTopologySuite.Geometries.LineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;LINESTRING (30.36545 50.45624, 28.68603 50.26679, 27.62649 50.58838, 26.2517 50.62034)"),
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             TransportationCarId = 3,
-                            TripCreatorId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6"
+                            TripCreatorId = "47fdc75d-9b6a-4e54-867d-5fa278af946d"
                         },
                         new
                         {
@@ -1568,9 +1529,10 @@ namespace Infrastructure.Migrations
                             IsEnded = false,
                             LoadCapacity = 2000f,
                             MaxRouteDeviationKm = 15,
+                            RouteGeographyData = (NetTopologySuite.Geometries.LineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;LINESTRING (25.35595 50.7553, 24.76512 50.50216, 24.63097 50.28358, 24.00991 49.77351, 23.85867 49.26081, 22.3112 48.60822)"),
                             StartDate = new DateTimeOffset(new DateTime(2022, 7, 2, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             TransportationCarId = 10,
-                            TripCreatorId = "16b21411-f0e6-421b-910f-4c22f075f9c6"
+                            TripCreatorId = "aadb4939-a8ff-44a3-99bc-2b1f52d0b95e"
                         });
                 });
 
@@ -1603,22 +1565,22 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d6d44967-f587-4009-8849-0916eadc072d",
-                            ConcurrencyStamp = "d6d44967-f587-4009-8849-0916eadc072d",
+                            Id = "9a99cfa5-4903-4ba9-a88a-5537fbe986df",
+                            ConcurrencyStamp = "9a99cfa5-4903-4ba9-a88a-5537fbe986df",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "1eb41f54-6e1a-4c5a-91e2-3070c522d747",
-                            ConcurrencyStamp = "1eb41f54-6e1a-4c5a-91e2-3070c522d747",
+                            Id = "a3e585ab-d0b0-4f6c-8beb-89bd99e909ec",
+                            ConcurrencyStamp = "a3e585ab-d0b0-4f6c-8beb-89bd99e909ec",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "5fdc3f78-771a-439d-9958-65bda8ebc7b9",
-                            ConcurrencyStamp = "5fdc3f78-771a-439d-9958-65bda8ebc7b9",
+                            Id = "fa74a019-2f67-471f-8e64-a175b7273b46",
+                            ConcurrencyStamp = "fa74a019-2f67-471f-8e64-a175b7273b46",
                             Name = "Logist",
                             NormalizedName = "LOGIST"
                         });
@@ -1782,43 +1744,43 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "a4e78abe-826b-41d0-8ae5-b30e53c6efe3",
-                            RoleId = "d6d44967-f587-4009-8849-0916eadc072d"
+                            UserId = "ac89bf4f-b222-4df6-be3e-cb2821b45b49",
+                            RoleId = "9a99cfa5-4903-4ba9-a88a-5537fbe986df"
                         },
                         new
                         {
-                            UserId = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
-                            RoleId = "d6d44967-f587-4009-8849-0916eadc072d"
+                            UserId = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
+                            RoleId = "9a99cfa5-4903-4ba9-a88a-5537fbe986df"
                         },
                         new
                         {
-                            UserId = "5cb8107f-f075-411c-9d97-07585237884e",
-                            RoleId = "d6d44967-f587-4009-8849-0916eadc072d"
+                            UserId = "f6197150-ec48-4dc2-a37b-b97f8ac76bbb",
+                            RoleId = "9a99cfa5-4903-4ba9-a88a-5537fbe986df"
                         },
                         new
                         {
-                            UserId = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
-                            RoleId = "d6d44967-f587-4009-8849-0916eadc072d"
+                            UserId = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
+                            RoleId = "9a99cfa5-4903-4ba9-a88a-5537fbe986df"
                         },
                         new
                         {
-                            UserId = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48",
-                            RoleId = "d6d44967-f587-4009-8849-0916eadc072d"
+                            UserId = "bb1c48e0-541e-4605-abec-d79eaae6f2eb",
+                            RoleId = "9a99cfa5-4903-4ba9-a88a-5537fbe986df"
                         },
                         new
                         {
-                            UserId = "2fbab35b-1fc5-4e69-8331-432a9021e35a",
-                            RoleId = "5fdc3f78-771a-439d-9958-65bda8ebc7b9"
+                            UserId = "817ff966-2d11-4066-a647-0deb85081403",
+                            RoleId = "fa74a019-2f67-471f-8e64-a175b7273b46"
                         },
                         new
                         {
-                            UserId = "16b21411-f0e6-421b-910f-4c22f075f9c6",
-                            RoleId = "d6d44967-f587-4009-8849-0916eadc072d"
+                            UserId = "aadb4939-a8ff-44a3-99bc-2b1f52d0b95e",
+                            RoleId = "9a99cfa5-4903-4ba9-a88a-5537fbe986df"
                         },
                         new
                         {
-                            UserId = "f370cd81-7edc-491f-a656-4d816f156436",
-                            RoleId = "d6d44967-f587-4009-8849-0916eadc072d"
+                            UserId = "1141f601-cb4e-4deb-9838-c88f864dcc97",
+                            RoleId = "9a99cfa5-4903-4ba9-a88a-5537fbe986df"
                         });
                 });
 
@@ -1873,162 +1835,162 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a4e78abe-826b-41d0-8ae5-b30e53c6efe3",
+                            Id = "ac89bf4f-b222-4df6-be3e-cb2821b45b49",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d3388724-763c-48c2-8ad8-038a6e0d04aa",
+                            ConcurrencyStamp = "36e3539a-29bc-4084-9778-b37e356ddb6c",
                             Email = "chorrny228@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CHORRNY228@GMAIL.COM",
                             NormalizedUserName = "CHORRNY228@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIQWkQ1AZkUMjSdqSXkeDy4BHdfVLd9RajzYMVTue6wPKZTsniyXUtLPm9RLuFJJAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDb+T6Y9xrb+Mv7U1njMVixEruKTypIEwBH9lgIRnK8ScDKkoBdZaczwQLGZp+ygZQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b99fbc56-489f-4a8c-b48d-eeac86c0c368",
+                            SecurityStamp = "5876e8d2-d3c6-4953-8928-327e80328e51",
                             TwoFactorEnabled = false,
                             UserName = "chorrny228@gmail.com",
                             HasCar = false,
                             Name = "Vadym",
-                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 28, 27, 110, DateTimeKind.Unspecified).AddTicks(6367), new TimeSpan(0, 0, 0, 0, 0)),
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 14, 12, 4, 31, 335, DateTimeKind.Unspecified).AddTicks(3198), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Chorrny"
                         },
                         new
                         {
-                            Id = "13b09adb-717d-4d10-bc58-1e74e20fd8c9",
+                            Id = "1269fb2f-0e32-4a4f-862b-7eed9ee676cb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4273cba6-925e-4876-884d-97fd60ec27fd",
+                            ConcurrencyStamp = "84f7713f-808c-4e8c-9d99-fe13eb34541f",
                             Email = "oppaiarchmaster@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OPPAIARCHMASTER@GMAIL.COM",
                             NormalizedUserName = "OPPAIARCHMASTER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEARAltDA3myXIm6BlZsVPMqXKo74VShkFLopnJd6OoW2xX5zY9jgtghTE3y7zPlJFg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMrO9xj+7WPVaplmK/Yqhgovsf5b+M9RCqNoQD3TunlEolMbjMCGuX4G5Obgf9konw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c1d16575-8a9e-4eac-814d-308e905deb58",
+                            SecurityStamp = "b155adbe-2127-44e8-b2e4-624b499651af",
                             TwoFactorEnabled = false,
                             UserName = "oppaiarchmaster@gmail.com",
                             HasCar = false,
                             Name = "Vlad",
-                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 28, 27, 110, DateTimeKind.Unspecified).AddTicks(8092), new TimeSpan(0, 0, 0, 0, 0)),
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 14, 12, 4, 31, 335, DateTimeKind.Unspecified).AddTicks(4815), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Sievostyanov"
                         },
                         new
                         {
-                            Id = "2fbab35b-1fc5-4e69-8331-432a9021e35a",
+                            Id = "817ff966-2d11-4066-a647-0deb85081403",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ff0ffd9-cecc-450e-8233-4145b096240e",
+                            ConcurrencyStamp = "617ae47c-c5bb-4f63-aaf2-2e19b03dae1b",
                             Email = "andrewchepeliuk@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ANDREWCHEPELIUK@GMAIL.COM",
                             NormalizedUserName = "ANDREWCHEPELIUK@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIc40c0BW8q6dlNdcfmBPTbtkchdBtcirr9/kuUd8WXr5SejZ3WYq4NHsH1XS2Bu5w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI99V6i10gDtYF4E0PskwdfBGrupInuTLxXXylYcgZ67lKzyfRGEGgJepRn+nioYgQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "74f8562a-3e0c-4495-ae8c-c43ad00bf87e",
+                            SecurityStamp = "3009017c-3fb2-46bf-a160-155ffe8e5b2c",
                             TwoFactorEnabled = false,
                             UserName = "andrewchepeliuk@gmail.com",
                             HasCar = false,
                             Name = "Andrii",
-                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 28, 27, 110, DateTimeKind.Unspecified).AddTicks(8141), new TimeSpan(0, 0, 0, 0, 0)),
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 14, 12, 4, 31, 335, DateTimeKind.Unspecified).AddTicks(4875), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Chepeliuk"
                         },
                         new
                         {
-                            Id = "fd1f0824-69ea-47e4-b34d-b11a7ba1cfa6",
+                            Id = "47fdc75d-9b6a-4e54-867d-5fa278af946d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c9a271ad-fd09-4e96-b678-044bc97b6bd6",
+                            ConcurrencyStamp = "894c6b75-9900-49ca-9292-2f0679a317d7",
                             Email = "mapourse@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MAPOURSE@GMAIL.COM",
                             NormalizedUserName = "MAPOURSE@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDcPtRxSVdFV5S5xXTqG6hxZjZAnmivX950C4NotAAUeqw5DA2rJ5GqoubchiReRYA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGNmkggpW4a5owCCcmDV7vBi702+dJmfoQbUyPvHZIS5dZZ3GBJczJ760Gk9tVml4g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "deddb17d-1996-4899-8538-1fb9f7257777",
+                            SecurityStamp = "c607be8f-6dd4-449b-9d84-dff7ee436fbb",
                             TwoFactorEnabled = false,
                             UserName = "mapourse@gmail.com",
                             HasCar = false,
                             Name = "Maryna",
-                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 28, 27, 110, DateTimeKind.Unspecified).AddTicks(8164), new TimeSpan(0, 0, 0, 0, 0)),
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 14, 12, 4, 31, 335, DateTimeKind.Unspecified).AddTicks(4958), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Kernychna"
                         },
                         new
                         {
-                            Id = "16b21411-f0e6-421b-910f-4c22f075f9c6",
+                            Id = "aadb4939-a8ff-44a3-99bc-2b1f52d0b95e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "36543443-b121-4a98-8c6f-a88b62a97cf7",
+                            ConcurrencyStamp = "1718f1d1-05ac-4775-b923-469aa49ecc0a",
                             Email = "yevhen.pasichnyk@oa.edu.ua",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "YEVHEN.PASICHNYK@OA.EDU.UA",
                             NormalizedUserName = "YEVHEN.PASICHNYK@OA.EDU.UA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDu9teSRZIa3p+f4c2W+p2Ze+KHmo0aNRV6BHTIRZh5n6zEEYG2fDd9ifpFc4dcZHA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEBOJ+sp4z38x6PNsh0WOAtv3qtP9BAmA6P5Ik9LykjxWQHpSJ58qPQJOgvSRdq0tA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e7409fda-2714-4fe5-9b8d-05c623295a36",
+                            SecurityStamp = "c5b6e7ef-abdc-41f9-842f-3d556dd7ddc6",
                             TwoFactorEnabled = false,
                             UserName = "yevhen.pasichnyk@oa.edu.ua",
                             HasCar = false,
                             Name = "Eugen",
-                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 28, 27, 110, DateTimeKind.Unspecified).AddTicks(8173), new TimeSpan(0, 0, 0, 0, 0)),
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 14, 12, 4, 31, 335, DateTimeKind.Unspecified).AddTicks(4970), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Pasichnyk"
                         },
                         new
                         {
-                            Id = "5cb8107f-f075-411c-9d97-07585237884e",
+                            Id = "f6197150-ec48-4dc2-a37b-b97f8ac76bbb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fe3848be-094e-413e-b514-e1e7483efd66",
+                            ConcurrencyStamp = "6960178f-5f93-4396-8367-8c1de2535c0d",
                             Email = "pashunskyi@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "PASHUNSKYI@GMAIL.COM",
                             NormalizedUserName = "PASHUNSKYI@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELSvUt00/GfQABH4fRQFsXoHpbh6a8x3g1fUv/B/okE/0KKRZMdtggJGFjiWLgHpTw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGSwzLw9pA8mglGHo6HZLKneB2RDwyvg0hkiOV/IRuUzH7VhMBqOAFO8iQVMsZcD4Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "db59c1fc-8a1a-452e-a777-76a951433d27",
+                            SecurityStamp = "0743153f-166e-4d87-8d0b-74e82c932f93",
                             TwoFactorEnabled = false,
                             UserName = "pashunskyi@gmail.com",
                             HasCar = false,
                             Name = "Volodya",
-                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 28, 27, 110, DateTimeKind.Unspecified).AddTicks(8187), new TimeSpan(0, 0, 0, 0, 0)),
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 14, 12, 4, 31, 335, DateTimeKind.Unspecified).AddTicks(4985), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Pashunskyi"
                         },
                         new
                         {
-                            Id = "fc9e4c58-b7b8-4a08-ac85-786b62c44e48",
+                            Id = "bb1c48e0-541e-4605-abec-d79eaae6f2eb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bb24816f-5f31-4c6c-9562-1a435148a5ae",
+                            ConcurrencyStamp = "dbd24898-8d74-445a-b87b-6da78075ab63",
                             Email = "antonina.loboda@oa.edu.ua",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ANTONINA.LOBODA@OA.EDU.UA",
                             NormalizedUserName = "ANTONINA.LOBODA@OA.EDU.UA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBoKKyy4Gv7L1fSydZrl9cYlttnBKLekS77hV5qKZYDHzI1FlZxIXYp40zd45jyZqA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECUQZWGezgE/HI/BV4k+eQN1OoTGXlsDdcbeGLeDCQ52wNL0KvG9U7EolqfCEH5lcA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "58b12507-a7d2-47d4-9bf2-ce4ac3d96b5c",
+                            SecurityStamp = "f3ea65bd-96b0-48f9-b74a-c30a7010b3d6",
                             TwoFactorEnabled = false,
                             UserName = "antonina.loboda@oa.edu.ua",
                             HasCar = false,
                             Name = "Antonina",
-                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 28, 27, 110, DateTimeKind.Unspecified).AddTicks(8197), new TimeSpan(0, 0, 0, 0, 0)),
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 14, 12, 4, 31, 335, DateTimeKind.Unspecified).AddTicks(4996), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Loboda"
                         },
                         new
                         {
-                            Id = "f370cd81-7edc-491f-a656-4d816f156436",
+                            Id = "1141f601-cb4e-4deb-9838-c88f864dcc97",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3bf9025e-77a6-4a65-82e0-2aaf12f2b54a",
+                            ConcurrencyStamp = "3fc92ed2-8311-4748-adf5-0697af4726d0",
                             Email = "sergeyeremenko@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SERGEYEREMENKO@GMAIL.COM",
                             NormalizedUserName = "SERGEYEREMENKO@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBp0cx676L22rC6tWIqCjuxkrtG0K+LdECDm0qwiyoDduJDwTy7ANCwtwVKX/6jd+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIRU5jeT/5jEUb6D/pCg4BPeI0aAeT0SuaI311XYiGiD/BPjkk3nT5gT2vWon8Nitw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9f089db2-4f05-429b-8be6-83de32192add",
+                            SecurityStamp = "5cb46a93-0e63-4910-8a25-ea76a821a75e",
                             TwoFactorEnabled = false,
                             UserName = "sergeyeremenko@gmail.com",
                             HasCar = false,
                             Name = "Sergey",
-                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 5, 12, 28, 27, 110, DateTimeKind.Unspecified).AddTicks(8207), new TimeSpan(0, 0, 0, 0, 0)),
+                            RegistrationDate = new DateTimeOffset(new DateTime(2022, 7, 14, 12, 4, 31, 335, DateTimeKind.Unspecified).AddTicks(5006), new TimeSpan(0, 0, 0, 0, 0)),
                             Surname = "Eremenko"
                         });
                 });

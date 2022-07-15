@@ -13,10 +13,8 @@ using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
-using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -71,6 +69,8 @@ namespace Core.Services
 
             var sortedPoints = _pointService.SortByOrder(createTripDTO.Points);
 
+            createTripDTO.Points = DeleteNullPointsFromRoute(sortedPoints);
+
             var isCarVerified = await _carService
                 .CheckIsUserVerifiedByIdsAsync(createTripDTO.TransportationCarId, creatorId);
 
@@ -81,32 +81,41 @@ namespace Core.Services
 
             var trip = _mapper.Map<Trip>(createTripDTO);
 
-            trip.IsActive = false;
-            trip.IsEnded = false;
             trip.TripCreatorId = creatorId;
+            trip.RouteGeographyData = SetRouteGeographyData(sortedPoints);
 
-            var tripFromDb = await _tripRepository.AddAsync(trip);
-
-            ExceptionMethods.TripNullCheck(tripFromDb);
-
-            await _pointService.SetTripIdToListAsync(sortedPoints, tripFromDb.Id);
+            await _tripRepository.AddAsync(trip);
         }
 
-        public async Task<LineString> GetRouteGeographyDataAsync(int routeId)
+        public List<PointDTO> DeleteNullPointsFromRoute(List<PointDTO> fullSortedListOfPoints)
         {
-            var routePoints = await _pointDataRepository
-                .ListAsync(new PointDataSpecification.GetByTripId(routeId));
+            List<PointDTO> sortedListOfPointsWithoutNullPoints = new List<PointDTO>();
+            
+            foreach (var point in fullSortedListOfPoints)
+            {
+                if (point.IsStopover)
+                {
+                    sortedListOfPointsWithoutNullPoints.Add(point);
+                }
+            }
 
+            for (int i = 0; i < sortedListOfPointsWithoutNullPoints.Count(); i++)
+            {
+                sortedListOfPointsWithoutNullPoints[i].Order = i + 1;
+            }
+
+            return sortedListOfPointsWithoutNullPoints;
+        }
+
+        public LineString SetRouteGeographyData(List<PointDTO> sortedRoutePoints)
+        {
             var listOfRouteCoordinates = new List<Coordinate>();
 
-            routePoints
+            sortedRoutePoints
                 .ForEach(x => listOfRouteCoordinates
-                .Add(new Coordinate(x.Location.X, x.Location.Y)));
+                .Add(new Coordinate(x.Longitude, x.Latitude)));
 
-            var geometryFactory = NtsGeometryServices.Instance
-                .CreateGeometryFactory(GeodeticSystem.WGS84);
-
-            return geometryFactory.CreateLineString(listOfRouteCoordinates.ToArray());
+            return NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(listOfRouteCoordinates.ToArray());
         }
 
         public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter)
@@ -163,48 +172,67 @@ namespace Core.Services
         {
             var trip = await _tripRepository
                 .GetBySpecAsync(new TripSpecification
-                    .GetById(manageTrip.TripId));
+                    .GetValidTripById(manageTrip.TripId, manageTrip.TotalWeight));
 
             ExceptionMethods.TripNullCheck(trip);
 
             var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
 
-            manageTrip.OffersId = manageTrip.OffersId.Distinct().ToList();
+            _tripValidationService.ValidatePointsInTrip(trip, sortedPoints);
 
             await _tripValidationService.ValidateOffersCheckAsync(
-                manageTrip.OffersId,
+                manageTrip.PointsTrip,
                 manageTrip.TripId,
-                trip.StartDate,
                 trip.ExpirationDate);
 
-            await _tripValidationService.ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
-
-            var points = new Collection<PointData>();
+            var points = new List<PointData>();
 
             foreach (var point in sortedPoints)
             {
-                var pointData = await _pointDataRepository.GetByIdAsync(point.PointId);
+                var pointData = await _pointDataRepository.GetByIdAsync(point.Id);
 
                 ExceptionMethods.PointNullCheck(pointData);
 
-                points.Add(pointData);
-
                 pointData.Order = point.Order;
+                points.Add(pointData);
+            }
+
+            var offersIds = new List<int>();
+
+            foreach (var point in sortedPoints)
+            {
+                if (point.OfferId != null)
+                {
+                    offersIds.Add((int)point.OfferId);
+                }
             }
 
             var offers = await _offerRepository
                 .ListAsync(new OfferSpecification
-                    .GetOfferByIds(manageTrip.OffersId));
+                    .GetOfferByIds(offersIds));
 
             trip.Offers = offers;
             trip.Points = points;
             trip.Distance = manageTrip.Distance;
 
             await _tripRepository.UpdateAsync(trip);
-
             await _inviteService.ManageTripInvitesAsync(
                 trip,
                 _mapper.Map<List<OfferInviteDTO>>(offers));
+        }
+
+        public async Task DeleteExpiredRoutesAsync()
+        {
+            var trips = await _tripRepository.ListAsync(new TripSpecification.GetExpiredRoutes());
+            var points = new List<PointData>();
+
+            foreach (var trip in trips)
+            {
+                points.AddRange(trip.Points);
+            }
+
+            await _pointDataRepository.DeleteRangeAsync(points);
+            await _tripRepository.DeleteRangeAsync(trips);
         }
 
         public async Task DeleteRouteAsync(string userId, int tripId)
