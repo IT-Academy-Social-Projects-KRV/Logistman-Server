@@ -108,7 +108,7 @@ namespace Core.Services
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
 
-        public async Task<List<OfferPointCreateTripDTO>> GetNearRouteAsync(int routeId)
+        public async Task<List<PointOfferCreateTripDTO>> GetNearRouteAsync(int routeId)
         {
             var route = await _tripRepository.GetByIdAsync(routeId);
 
@@ -123,7 +123,12 @@ namespace Core.Services
                     route.ExpirationDate
                 ));
 
-            return _mapper.Map<List<OfferPointCreateTripDTO>>(offers);
+            var points = new List<PointOfferCreateTripDTO>();
+
+            offers.ForEach(item => 
+                points.Add(_mapper.Map<PointOfferCreateTripDTO>(item.Point)));
+
+            return points;
         }
 
         public async Task DeleteAsync(OfferIdDTO offerIdDTO, string userId)

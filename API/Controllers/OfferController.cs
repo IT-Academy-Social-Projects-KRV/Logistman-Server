@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Core.Helpers;
 using Core.Constants;
 using Core.DTO;
+using Core.DTO.TripDTO;
 
 namespace API.Controllers
 {
@@ -55,9 +56,9 @@ namespace API.Controllers
 
         [HttpGet("near-route")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<IActionResult> GetNearRouteAsync(int routeId)
+        public async Task<IActionResult> GetNearRouteAsync([FromQuery] TripIdDTO tripIdDTO)
         {
-            return Ok(await _offerService.GetNearRouteAsync(routeId));
+            return Ok(await _offerService.GetNearRouteAsync(tripIdDTO.TripId));
         }
 
         [HttpDelete("delete")]
