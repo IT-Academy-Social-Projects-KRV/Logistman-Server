@@ -255,4 +255,8 @@
   <data name="ConfirmGoodsDeliveryWrongRoleName" xml:space="preserve">
     <value>Such role does not exist: </value>
   </data>
+  <data name="PointsDoNotMatch" xml:space="preserve">
+    <value>Points do not match with points from trip</value>
+  </data>
 </root>
+

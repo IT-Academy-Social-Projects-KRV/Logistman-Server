@@ -15,7 +15,6 @@ using Core.Resources;
 using Core.Specifications;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -173,39 +172,39 @@ namespace Core.Services
         {
             var trip = await _tripRepository
                 .GetBySpecAsync(new TripSpecification
-                    .GetById(manageTrip.TripId));
+                    .GetValidTripById(manageTrip.TripId, manageTrip.TotalWeight));
 
             ExceptionMethods.TripNullCheck(trip);
 
             var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
 
-            manageTrip.OffersId = manageTrip.OffersId.Distinct().ToList();
+            _tripValidationService.ValidatePointsInTrip(trip, sortedPoints);
 
             await _tripValidationService.ValidateOffersCheckAsync(
-                manageTrip.OffersId,
+                manageTrip.PointsTrip,
                 manageTrip.TripId,
                 trip.ExpirationDate);
 
-            await _tripValidationService.ValidateTripAsync(manageTrip.TripId, manageTrip.TotalWeight);
-
-            var points = new Collection<PointData>();
+            var points = new List<PointData>();
 
             foreach (var point in sortedPoints)
             {
-                var pointData = await _pointDataRepository.GetByIdAsync(point.PointId);
+                var pointData = await _pointDataRepository.GetByIdAsync(point.Id);
 
                 ExceptionMethods.PointNullCheck(pointData);
 
-                points.Add(pointData);
-
                 pointData.Order = point.Order;
+                points.Add(pointData);
             }
 
             var offersIds = new List<int>();
 
-            foreach (var offerId in manageTrip.OffersId)
+            foreach (var point in sortedPoints)
             {
-                offersIds.Add(offerId.OfferId);
+                if (point.OfferId != null)
+                {
+                    offersIds.Add((int)point.OfferId);
+                }
             }
 
             var offers = await _offerRepository
@@ -217,7 +216,6 @@ namespace Core.Services
             trip.Distance = manageTrip.Distance;
 
             await _tripRepository.UpdateAsync(trip);
-
             await _inviteService.ManageTripInvitesAsync(
                 trip,
                 _mapper.Map<List<OfferInviteDTO>>(offers));

@@ -74,7 +74,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpDelete("delete-car")]
+        [HttpDelete("delete")]
         [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<IActionResult> DeleteCarAsync([FromQuery] CarIdDTO carIdDTO)
         {

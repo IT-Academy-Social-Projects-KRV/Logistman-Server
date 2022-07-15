@@ -322,6 +322,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Points do not match with points from trip.
+        /// </summary>
+        internal static string PointsDoNotMatch {
+            get {
+                return ResourceManager.GetString("PointsDoNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rating not found.
         /// </summary>
         internal static string RatingNotFound {

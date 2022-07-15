@@ -53,7 +53,7 @@ namespace Core.Services
             return sortedPointsByOrder;
         }
 
-        public List<PointsTripDTO> SortByOrder(List<PointsTripDTO> pointsDTOs)
+        public List<PointTripDTO> SortByOrder(List<PointTripDTO> pointsDTOs)
         {
             var sortedPointsByOrder = pointsDTOs.OrderBy(p => p.Order).ToList();
 

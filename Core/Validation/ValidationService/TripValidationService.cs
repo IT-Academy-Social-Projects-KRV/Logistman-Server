@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Core.DTO.OfferDTO;
+using Core.DTO;
 using Core.Entities.OfferEntity;
+using Core.Entities.PointEntity;
 using Core.Entities.TripEntity;
 using Core.Exceptions;
 using Core.Interfaces;
@@ -27,33 +29,27 @@ namespace Core.Validation.ValidationService
         }
 
         public async Task ValidateOffersCheckAsync(
-            List<OfferIdDTO> offerIds,
+            List<PointTripDTO> points,
             int tripId,
             DateTimeOffset expirationTrip)
         {
-            foreach (var offerIdDTO in offerIds)
+            foreach (var point in points)
             {
-                if (!await _offerRepository
-                        .AnyAsync(new OfferSpecification
-                            .GetById(offerIdDTO.OfferId, tripId, expirationTrip)))
+                if (point.OfferId != null)
                 {
-                    throw new HttpException(
-                        ErrorMessages.OfferNotValid + $" Id: {offerIdDTO.OfferId}",
-                        HttpStatusCode.BadRequest);
+                    var offer = await _offerRepository
+                        .GetBySpecAsync(new OfferSpecification
+                            .GetById((int)point.OfferId, tripId, expirationTrip));
+
+                    ExceptionMethods.OfferNullCheck(offer);
+
+                    if (offer.Point.Id != point.Id)
+                    {
+                        throw new HttpException(
+                            ErrorMessages.OfferNotValid + $" Id: {point.OfferId}",
+                            HttpStatusCode.BadRequest);
+                    }
                 }
-            }
-        }
-
-        public async Task ValidateTripAsync(int tripId, float totalWeight)
-        {
-            var isValid = await _tripRepository.AnyAsync(
-                new TripSpecification.GetValidTripById(tripId, totalWeight));
-
-            if (!isValid)
-            {
-                throw new HttpException(
-                    ErrorMessages.TripNotValid,
-                    HttpStatusCode.BadRequest);
             }
         }
 
@@ -70,6 +66,37 @@ namespace Core.Validation.ValidationService
                 throw new HttpException(
                     ErrorMessages.TripIsAlreadyExistsInTheTimeSpace,
                     HttpStatusCode.BadRequest);
+            }
+        }
+
+        public void ValidatePointsInTrip(Trip trip, List<PointTripDTO> points)
+        {
+            var newTripPoints = new List<PointTripDTO>();
+            var tripPoints = new List<PointData>();
+
+            newTripPoints = points
+                .Where(point => point.OfferId == null)
+                .ToList();
+
+            tripPoints = trip.Points
+                .Where(point => point.OfferId == null)
+                .ToList();
+
+            if (newTripPoints.Count != tripPoints.Count)
+            {
+                throw new HttpException(
+                    ErrorMessages.PointsDoNotMatch, 
+                    HttpStatusCode.Forbidden);
+            }
+
+            foreach (var tripPoint in tripPoints)
+            {
+                if (!newTripPoints.Any(point => point.Id == tripPoint.Id))
+                {
+                    throw new HttpException(
+                        ErrorMessages.PointsDoNotMatch, 
+                        HttpStatusCode.Forbidden);
+                }
             }
         }
     }
