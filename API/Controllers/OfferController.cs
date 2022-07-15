@@ -55,9 +55,9 @@ namespace API.Controllers
 
         [HttpGet("near-route")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<IActionResult> GetNearRouteAsync([FromQuery] PaginationFilterDTO paginationFilter, int routeId)
+        public async Task<IActionResult> GetNearRouteAsync(int routeId)
         {
-            return Ok(await _offerService.GetNearRouteAsync(paginationFilter, routeId));
+            return Ok(await _offerService.GetNearRouteAsync(routeId));
         }
 
         [HttpDelete("delete")]
