@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220714123731_AddConfirmGoodsTransferFields")]
+    [Migration("20220715114226_AddConfirmGoodsTransferFields")]
     partial class AddConfirmGoodsTransferFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
