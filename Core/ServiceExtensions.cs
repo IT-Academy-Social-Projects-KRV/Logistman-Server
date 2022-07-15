@@ -44,6 +44,7 @@ namespace Core
                 mc.AddProfile(new CarProfile());
                 mc.AddProfile(new TripProfile());
                 mc.AddProfile(new CarCategoryProfile());
+                mc.AddProfile(new NotificationProfile());
             });
 
             var mapper = configures.CreateMapper();

@@ -1,6 +1,9 @@
-﻿using Core.DTO.NotificationDTO;
+﻿using AutoMapper;
+using Core.DTO;
+using Core.DTO.NotificationDTO;
 using Core.Entities.NotificationEntity;
 using Core.Entities.TripEntity;
+using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Specifications;
@@ -13,11 +16,38 @@ namespace Core.Services
     public class NotificationService : INotificationService
     {
         private readonly IRepository<Notification> _notificationRepository;
+        private readonly IMapper _mapper;
 
         public NotificationService(
-            IRepository<Notification> notificationRepository)
+            IRepository<Notification> notificationRepository,
+            IMapper mapper)
         {
             _notificationRepository = notificationRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<PaginatedList<NotificationPreviewDTO>> GetByUserIdAsync(
+            string userId, PaginationFilterDTO paginationFilter)
+        {
+            var notificationsCount = await _notificationRepository.CountAsync(
+                new NotificationSpecification.GetByUserId(userId, paginationFilter));
+
+            int totalPages = PaginatedList<NotificationPreviewDTO>
+                .GetTotalPages(paginationFilter, notificationsCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var notifications = await _notificationRepository.ListAsync(
+                new NotificationSpecification.GetByUserId(userId, paginationFilter));
+
+            return PaginatedList<NotificationPreviewDTO>.Evaluate(
+                _mapper.Map<List<NotificationPreviewDTO>>(notifications),
+                paginationFilter.PageNumber,
+                notificationsCount,
+                totalPages);
         }
 
         public async Task ManageTripNotificationsAsync(

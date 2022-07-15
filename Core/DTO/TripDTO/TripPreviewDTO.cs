@@ -2,7 +2,7 @@
 
 namespace Core.DTO.TripDTO
 {
-    public class TripPreviewForInviteDTO
+    public class TripPreviewDTO
     {
         public UserFullNameDTO CreatorFullName { get; set; }
         public string Description { get; set; }
