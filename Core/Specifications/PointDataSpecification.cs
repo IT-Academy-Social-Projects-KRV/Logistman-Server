@@ -24,5 +24,14 @@ namespace Core.Specifications
                     .OrderBy(p => p.Order);
             }
         }
+
+        internal class GetPointsWithoutTripAndOffer : Specification<PointData>
+        {
+            public GetPointsWithoutTripAndOffer()
+            {
+                Query
+                    .Where(p => p.TripId == null && p.OfferId == null);
+            }
+        }
     }
 }

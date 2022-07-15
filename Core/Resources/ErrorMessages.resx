@@ -249,4 +249,7 @@
   <data name="RouteHasInvites" xml:space="preserve">
     <value>The route has already had invites! You can only decline the invite!</value>
   </data>
+  <data name="PointsDoNotMatch" xml:space="preserve">
+    <value>Points do not match with points from trip</value>
+  </data>
 </root>

@@ -77,6 +77,7 @@ namespace Infrastructure.Data.SeedData
                 "Porsche,911, Convertible, Coupe",
                 "Porsche,Cayenne, SUV"
             };
+
         private static readonly PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
         private static readonly Faker _faker = new Faker();
         private static readonly float _maxWeight = 1000f;
