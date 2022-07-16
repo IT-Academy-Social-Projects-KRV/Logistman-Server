@@ -6,6 +6,7 @@ using Core.Exceptions;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
 using Core.Resources;
+using Core.Specifications;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -32,7 +33,7 @@ namespace Core.Services
         public async Task<PointData> CreateAsync(PointDTO pointDTO)
         {
             var point = _mapper.Map<PointData>(pointDTO);
-            
+
             await _pointRepository.AddAsync(point);
 
             return point;
@@ -78,6 +79,29 @@ namespace Core.Services
             {
                 pointDTO.TripId = tripId;
             }
+        }
+
+        public async Task ResetTripPointOrdersAsync(int tripId)
+        {
+            var points = await _pointRepository.ListAsync(
+                new PointDataSpecification.GetByTripId(tripId));
+
+            int order = 1;
+
+            foreach (var point in points)
+            {
+                if (point.OfferId != null)
+                {
+                    point.TripId = null;
+                }
+                else
+                {
+                    point.Order = order;
+                    order++;
+                }
+            }
+
+            await _pointRepository.SaveChangesAsync();
         }
     }
 }

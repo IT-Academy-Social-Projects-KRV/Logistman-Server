@@ -123,7 +123,7 @@ namespace Core.Services
 
             var points = new List<PointOfferCreateTripDTO>();
 
-            offers.ForEach(item => 
+            offers.ForEach(item =>
                 points.Add(_mapper.Map<PointOfferCreateTripDTO>(item.Point)));
 
             return points;
@@ -156,6 +156,7 @@ namespace Core.Services
                 offer.RelatedTripId = null;
             }
 
+            await _pointService.ResetTripPointOrdersAsync(tripId);
             await _offerRepository.UpdateRangeAsync(offers);
         }
     }

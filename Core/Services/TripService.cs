@@ -116,7 +116,8 @@ namespace Core.Services
             return NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(listOfRouteCoordinates.ToArray());
         }
 
-        public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter)
+        public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(
+            PaginationFilterDTO paginationFilter)
         {
             var routesCount = await _tripRepository
                 .CountAsync(new TripSpecification.GetRoutes(paginationFilter));

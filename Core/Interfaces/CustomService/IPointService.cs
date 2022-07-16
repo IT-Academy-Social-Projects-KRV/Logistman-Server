@@ -11,5 +11,6 @@ namespace Core.Interfaces.CustomService
         List<PointDTO> SortByOrder(List<PointDTO> points);
         List<PointTripDTO> SortByOrder(List<PointTripDTO> points);
         Task SetTripIdToListAsync(List<PointDTO> points, int tripId);
+        Task ResetTripPointOrdersAsync(int tripId);
     }
 }
