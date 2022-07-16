@@ -2,6 +2,7 @@
 using Core.DTO;
 using Core.DTO.NotificationDTO;
 using Core.Entities.NotificationEntity;
+using Core.Entities.OfferEntity;
 using Core.Entities.TripEntity;
 using Core.Helpers;
 using Core.Interfaces;
@@ -16,13 +17,16 @@ namespace Core.Services
     public class NotificationService : INotificationService
     {
         private readonly IRepository<Notification> _notificationRepository;
+        private readonly IRepository<Offer> _offerRepository;
         private readonly IMapper _mapper;
 
         public NotificationService(
             IRepository<Notification> notificationRepository,
+            IRepository<Offer> offerRepository,
             IMapper mapper)
         {
             _notificationRepository = notificationRepository;
+            _offerRepository = offerRepository;
             _mapper = mapper;
         }
 
@@ -93,7 +97,16 @@ namespace Core.Services
 
             if (newNotifications.Count > 0)
             {
-                await _notificationRepository.AddRangeAsync(newNotifications);
+                var notifications = await _notificationRepository.AddRangeAsync(newNotifications);
+
+                foreach (var notification in notifications)
+                {
+                    var offer = await _offerRepository.GetByIdAsync(notification.OfferId);
+
+                    offer.NotificationId = notification.Id;
+                }
+
+                await _offerRepository.SaveChangesAsync();
             }
         }
 

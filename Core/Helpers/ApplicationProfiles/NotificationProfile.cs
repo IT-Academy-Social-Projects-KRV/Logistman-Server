@@ -9,6 +9,7 @@ namespace Core.Helpers.ApplicationProfiles
         public NotificationProfile()
         {
             CreateMap<Notification, NotificationPreviewDTO>()
+                .ForMember(dest => dest.OfferInfo, dto => dto.MapFrom(n => n.Offer))
                 .ForMember(dest => dest.TripInfo, dto => dto.MapFrom(n => n.Trip));
         }
     }

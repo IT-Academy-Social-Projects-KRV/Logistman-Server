@@ -39,6 +39,12 @@ namespace Core.Specifications
             {
                 Query
                     .Where(n => n.UserId == userId)
+                    .Include(n => n.Offer)
+                    .ThenInclude(o => o.OfferRole)
+                    .Include(n => n.Offer)
+                    .ThenInclude(o => o.Point)
+                    .Include(n => n.Offer)
+                    .ThenInclude(o => o.GoodCategory)
                     .Include(n => n.Trip)
                     .ThenInclude(t => t.User)
                     .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
