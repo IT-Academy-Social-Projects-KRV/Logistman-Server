@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Core.Entities.PointEntity;
 using Core.Entities.InviteEntity;
 using NetTopologySuite.Geometries;
+using Core.Entities.NotificationEntity;
 
 namespace Core.Entities.TripEntity
 {
@@ -33,5 +34,6 @@ namespace Core.Entities.TripEntity
         public ICollection<Rating> Ratings { get; set; }
         public ICollection<Report> Reports { get; set; }
         public ICollection<PointData> Points { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
     }
 }
