@@ -1,4 +1,5 @@
-﻿using Core.DTO;
+﻿using System.Collections.Generic;
+using Core.DTO;
 using Core.DTO.OfferDTO;
 using Core.Helpers;
 using System.Threading.Tasks;
@@ -11,8 +12,7 @@ namespace Core.Interfaces.CustomService
         Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId);
         Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(
             string userId, PaginationFilterDTO paginationFilter);
-        Task<PaginatedList<OfferCreateTripDTO>> GetNearRouteAsync(
-            PaginationFilterDTO paginationFilter, int tripId);
+        Task<List<PointOfferCreateTripDTO>> GetNearRouteAsync(int routeId);
         Task DeleteAsync(OfferIdDTO offerIdDTO, string userId);
         Task UnlinkFromTripAsync(int tripId);
     }

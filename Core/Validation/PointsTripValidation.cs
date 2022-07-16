@@ -1,4 +1,6 @@
-﻿using Core.DTO;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Core.DTO;
 using FluentValidation;
 
 namespace Core.Validation

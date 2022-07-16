@@ -14,7 +14,14 @@ namespace Core.Specifications
                 Query
                     .Where(t => t.Id == tripId)
                     .Include(t => t.Offers)
-                    .Include(t => t.Points);
+                    .Include(t => t.Car)
+                    .Include(t => t.User)
+                    .Include(t => t.Points)
+                    .ThenInclude(t => t.Offer)
+                    .ThenInclude(t => t.OfferRole)
+                    .Include(t => t.Points)
+                    .ThenInclude(t => t.Offer)
+                    .ThenInclude(t => t.GoodCategory);
             }
         }
 
