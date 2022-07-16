@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220716111136_FixedTripTimeFields")]
+    [Migration("20220716141700_FixedTripTimeFields")]
     partial class FixedTripTimeFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,7 +124,29 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsAnswered")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("OfferId")
+                    b.Property<int>("TripId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TripId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Invites");
+                });
+
+            modelBuilder.Entity("Core.Entities.NotificationEntity.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OfferId")
                         .HasColumnType("int");
 
                     b.Property<int>("TripId")
@@ -135,15 +157,11 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OfferId")
-                        .IsUnique()
-                        .HasFilter("[OfferId] IS NOT NULL");
-
                     b.HasIndex("TripId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Invites");
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("Core.Entities.OfferEntity.Offer", b =>
@@ -171,6 +189,9 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("NotificationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("OfferCreatorId")
                         .HasColumnType("nvarchar(450)");
 
@@ -188,6 +209,10 @@ namespace Infrastructure.Migrations
                     b.HasIndex("CreatorRoleId");
 
                     b.HasIndex("GoodCategoryId");
+
+                    b.HasIndex("NotificationId")
+                        .IsUnique()
+                        .HasFilter("[NotificationId] IS NOT NULL");
 
                     b.HasIndex("OfferCreatorId");
 
@@ -657,10 +682,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.InviteEntity.Invite", b =>
                 {
-                    b.HasOne("Core.Entities.OfferEntity.Offer", "Offer")
-                        .WithOne("Invite")
-                        .HasForeignKey("Core.Entities.InviteEntity.Invite", "OfferId");
-
                     b.HasOne("Core.Entities.TripEntity.Trip", "Trip")
                         .WithMany("Invites")
                         .HasForeignKey("TripId")
@@ -671,7 +692,22 @@ namespace Infrastructure.Migrations
                         .WithMany("Invites")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("Offer");
+                    b.Navigation("Trip");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.NotificationEntity.Notification", b =>
+                {
+                    b.HasOne("Core.Entities.TripEntity.Trip", "Trip")
+                        .WithMany("Notifications")
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.UserEntity.User", "User")
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Trip");
 
@@ -692,6 +728,10 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.NotificationEntity.Notification", "Notification")
+                        .WithOne("Offer")
+                        .HasForeignKey("Core.Entities.OfferEntity.Offer", "NotificationId");
+
                     b.HasOne("Core.Entities.UserEntity.User", "User")
                         .WithMany("Offers")
                         .HasForeignKey("OfferCreatorId");
@@ -707,6 +747,8 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("RelatedTripId");
 
                     b.Navigation("GoodCategory");
+
+                    b.Navigation("Notification");
 
                     b.Navigation("OfferRole");
 
@@ -866,9 +908,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Offers");
                 });
 
-            modelBuilder.Entity("Core.Entities.OfferEntity.Offer", b =>
+            modelBuilder.Entity("Core.Entities.NotificationEntity.Notification", b =>
                 {
-                    b.Navigation("Invite");
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("Core.Entities.PointEntity.PointData", b =>
@@ -884,6 +926,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.TripEntity.Trip", b =>
                 {
                     b.Navigation("Invites");
+
+                    b.Navigation("Notifications");
 
                     b.Navigation("Offers");
 
@@ -901,6 +945,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("EstimatorRatings");
 
                     b.Navigation("Invites");
+
+                    b.Navigation("Notifications");
 
                     b.Navigation("Offers");
 
