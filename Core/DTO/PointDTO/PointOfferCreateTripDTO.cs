@@ -5,7 +5,7 @@
         public int PointId { get; set; }
         public int? OfferId { get; set; }
         public int? RelatedTripId { get; set; }
-        public string CreationDate { get; set; }
+        public string StartDate { get; set; }
         public string Description { get; set; }
         public float? GoodsWeight { get; set; }
         public string GoodCategoryName { get; set; }

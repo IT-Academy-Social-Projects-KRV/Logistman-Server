@@ -29,7 +29,7 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.Settlement, opt => opt.MapFrom(point => point.Settlement))
                 .ForMember(dest => dest.Latitude, opt => opt.MapFrom(point => point.Location.Y))
                 .ForMember(dest => dest.Longitude, opt => opt.MapFrom(point => point.Location.X))
-                .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(point => point.Offer.CreationDate.ToString("yyyy/MM/dd HH:mm")))
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(point => point.Offer.StartDate.ToString("yyyy/MM/dd HH:mm")))
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(point => point.Address))
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(point => point.Region))
                 .ForMember(dest => dest.Country, opt => opt.MapFrom(point => point.Country))
