@@ -9,8 +9,8 @@ namespace Core.Validation
         {
             RuleFor(confirmGoodsTransfer => confirmGoodsTransfer.TripRole)
                 .NotEmpty();
-            RuleFor(confirmGoodsTransfer => confirmGoodsTransfer.OfferIdDTO)
-                .SetValidator(new OfferIdValidation());
+            RuleFor(confirmGoodsTransfer => confirmGoodsTransfer.OfferId)
+                .GreaterThan(0);
         }
     }
 }

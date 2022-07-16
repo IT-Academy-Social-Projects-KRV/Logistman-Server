@@ -249,9 +249,6 @@
   <data name="RouteHasInvites" xml:space="preserve">
     <value>The route has already had invites! You can only decline the invite!</value>
   </data>
-  <data name="ConfirmGoodsDeliveryTripCreatorIdDoesntMatch" xml:space="preserve">
-    <value>You can't confirm goods delivery on trip you didn't create</value>
-  </data>
   <data name="ConfirmGoodsDeliveryWrongRoleName" xml:space="preserve">
     <value>Such role does not exist: </value>
   </data>
@@ -259,4 +256,3 @@
     <value>Points do not match with points from trip</value>
   </data>
 </root>
-

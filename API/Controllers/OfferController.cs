@@ -73,7 +73,8 @@ namespace API.Controllers
 
         [HttpPost("confirm-goods-transfer")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> ConfirmGoodsTransferAsync([FromBody] ConfirmGoodsTransferDTO confirmGoodsTransferDTO)
+        public async Task<IActionResult> ConfirmGoodsTransferAsync(
+            [FromBody] ConfirmGoodsTransferDTO confirmGoodsTransferDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 

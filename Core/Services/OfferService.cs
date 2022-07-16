@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.DTO;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
@@ -29,7 +30,6 @@ namespace Core.Services
         private readonly IGoodCategoryService _goodCategoryService;
         private readonly IOfferRoleService _offerRoleService;
         private readonly IPointService _pointService;
-        private readonly ITripService _tripService;
 
         public OfferService(
             IMapper mapper,
@@ -39,8 +39,7 @@ namespace Core.Services
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryService,
             IOfferRoleService offerRoleService,
-            IPointService pointService,
-            ITripService tripService)
+            IPointService pointService)
         {
             _pointService = pointService;
             _offerRoleService = offerRoleService;
@@ -50,7 +49,6 @@ namespace Core.Services
             _tripRepository = tripRepository;
             _userManager = userManager;
             _goodCategoryService = goodCategoryService;
-            _tripService = tripService;
         }
 
         public async Task CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
@@ -81,7 +79,8 @@ namespace Core.Services
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
         {
-            var offer = await _offerRepository.GetBySpecAsync(new OfferSpecification.GetById(offerId, userId));
+            var offer = await _offerRepository.GetBySpecAsync(
+                new OfferSpecification.GetById(offerId, userId));
 
             ExceptionMethods.OfferNullCheck(offer);
 
@@ -90,12 +89,14 @@ namespace Core.Services
             return offerInfo;
         }
 
-        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(
+            string userId, PaginationFilterDTO paginationFilter)
         {
             var offerListCount = await _offerRepository
                 .CountAsync(new OfferSpecification.GetByUserId(userId, paginationFilter));
 
-            int totalPages = PaginatedList<OfferPreviewDTO>.GetTotalPages(paginationFilter, offerListCount);
+            int totalPages = PaginatedList<OfferPreviewDTO>
+                .GetTotalPages(paginationFilter, offerListCount);
 
             if (totalPages == 0)
             {
@@ -107,7 +108,10 @@ namespace Core.Services
                 new OfferSpecification.GetByUserId(userId, paginationFilter));
 
             return PaginatedList<OfferPreviewDTO>.Evaluate(
-                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
+                _mapper.Map<List<OfferPreviewDTO>>(offerList), 
+                paginationFilter.PageNumber, 
+                offerListCount, 
+                totalPages);
         }
 
         public async Task<PaginatedList<OfferCreateTripDTO>> GetNearRouteAsync(
@@ -127,7 +131,8 @@ namespace Core.Services
                     paginationFilter
                 ));
 
-            int totalPages = PaginatedList<OfferCreateTripDTO>.GetTotalPages(paginationFilter, offerListCount);
+            int totalPages = PaginatedList<OfferCreateTripDTO>
+                .GetTotalPages(paginationFilter, offerListCount);
 
             if (totalPages == 0)
             {
@@ -143,14 +148,17 @@ namespace Core.Services
                 ));
 
             return PaginatedList<OfferCreateTripDTO>.Evaluate(
-                _mapper.Map<List<OfferCreateTripDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
+                _mapper.Map<List<OfferCreateTripDTO>>(offerList), 
+                paginationFilter.PageNumber, 
+                offerListCount, 
+                totalPages);
         }
 
         public async Task DeleteAsync(OfferIdDTO offerIdDTO, string userId)
         {
             var offer = await _offerRepository
                 .GetBySpecAsync(new OfferSpecification
-                .GetOpenByIdAndUserIdWithoutTrip(offerIdDTO.OfferId, userId));
+                    .GetOpenByIdAndUserIdWithoutTrip(offerIdDTO.OfferId, userId));
 
             ExceptionMethods.OfferNullCheck(offer);
 
@@ -162,20 +170,13 @@ namespace Core.Services
             ConfirmGoodsTransferDTO сonfirmGoodsTransferDTO, 
             string userId)
         {
-            if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Driver)
+            if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == TripRoles.Driver)
             {
                 var offer = await _offerRepository
-                    .GetBySpecAsync(new OfferSpecification
-                    .GetByIdWithActiveTrip(сonfirmGoodsTransferDTO.OfferIdDTO.OfferId));
+                .GetBySpecAsync(new OfferSpecification
+                        .GetByIdWithActiveTrip(сonfirmGoodsTransferDTO.OfferId, userId));
 
                 ExceptionMethods.OfferNullCheck(offer);
-
-                if (offer.Trip.TripCreatorId != userId)
-                {
-                    throw new HttpException(
-                        ErrorMessages.ConfirmGoodsDeliveryTripCreatorIdDoesntMatch,
-                        HttpStatusCode.Forbidden);
-                }
 
                 offer.GoodTransferConfirmedByDriver = сonfirmGoodsTransferDTO.IsConfirmed;
                 offer.IsAnsweredByDriver = true;
@@ -183,13 +184,13 @@ namespace Core.Services
                 await _offerRepository.SaveChangesAsync();
                 await EndTripAsync(userId);
             }
-            else if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Sender
+            else if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == TripRoles.Sender
                      ||
-                     сonfirmGoodsTransferDTO.TripRole.ToUpper() == Constants.TripRoles.Recipient)
+                     сonfirmGoodsTransferDTO.TripRole.ToUpper() == TripRoles.Recipient)
             {
                 var offer = await _offerRepository
                     .GetBySpecAsync(new OfferSpecification
-                    .GetByIdWithActiveTrip(сonfirmGoodsTransferDTO.OfferIdDTO.OfferId, userId));
+                        .GetByIdWithTrip(сonfirmGoodsTransferDTO.OfferId, userId));
 
                 ExceptionMethods.OfferNullCheck(offer);
 
@@ -212,7 +213,7 @@ namespace Core.Services
         {
             var trip = await _tripRepository
                 .GetBySpecAsync(new TripSpecification
-                .GetActiveByUserIdWithOffers(tripCreatorId));
+                    .GetActiveByUserIdWithOffers(tripCreatorId));
 
             ExceptionMethods.TripNullCheck(trip);
 

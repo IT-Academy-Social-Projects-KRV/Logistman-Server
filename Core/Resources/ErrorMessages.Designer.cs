@@ -151,15 +151,6 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t confirm goods delivery on trip you didn&apos;t create.
-        /// </summary>
-        internal static string ConfirmGoodsDeliveryTripCreatorIdDoesntMatch {
-            get {
-                return ResourceManager.GetString("ConfirmGoodsDeliveryTripCreatorIdDoesntMatch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Such role does not exist: .
         /// </summary>
         internal static string ConfirmGoodsDeliveryWrongRoleName {

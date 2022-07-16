@@ -2,7 +2,7 @@
 {
     public class ConfirmGoodsTransferDTO
     {
-        public OfferIdDTO OfferIdDTO { get; set; }
+        public int OfferId { get; set; }
         public string TripRole { get; set; }
         public bool IsConfirmed { get; set; }
     }
