@@ -56,9 +56,9 @@ namespace Core.Specifications
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
-                    && !offer.IsClosed
-                    && offer.RelatedTripId == null
-                    && offer.StartDate <= expirationDate)
+                        && !offer.IsClosed
+                        && offer.RelatedTripId == null
+                        && offer.StartDate <= expirationDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
                     .Include(offer => offer.GoodCategory)
@@ -107,9 +107,9 @@ namespace Core.Specifications
             {
                 Query
                     .Where(o => o.Id == offerId
-                    && o.OfferCreatorId == userId
-                    && !o.IsClosed
-                    && o.RelatedTripId == null)
+                        && o.OfferCreatorId == userId
+                        && !o.IsClosed
+                        && o.RelatedTripId == null)
                     .Include(o => o.Point);
             }
         }
@@ -121,9 +121,9 @@ namespace Core.Specifications
             {
                 Query
                     .Where(o => o.Id == offerId 
-                    && o.Trip.TripCreatorId == userId
-                    && o.Trip.IsActive 
-                    && !o.IsAnsweredByDriver)
+                        && o.Trip.TripCreatorId == userId
+                        && o.Trip.IsActive 
+                        && !o.IsAnsweredByDriver)
                     .Include(o => o.Trip);
             }
         }
@@ -135,8 +135,8 @@ namespace Core.Specifications
             {
                 Query
                     .Where(o => o.Id == offerId
-                    && o.OfferCreatorId == userId
-                    && !o.IsAnsweredByCreator)
+                        && o.OfferCreatorId == userId
+                        && !o.IsAnsweredByCreator)
                     .Include(o => o.Trip);
             }
         }
