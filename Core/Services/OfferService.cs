@@ -121,7 +121,7 @@ namespace Core.Services
                 .CountAsync(new OfferSpecification.GetOffersNearRoute(
                     route.RouteGeographyData,
                     maxRouteDeviationMeters,
-                    route.ExpirationDate,
+                    route.DepartureDate,
                     paginationFilter
                 ));
 
@@ -136,7 +136,7 @@ namespace Core.Services
                 .ListAsync(new OfferSpecification.GetOffersNearRoute(
                     route.RouteGeographyData,
                     maxRouteDeviationMeters,
-                    route.ExpirationDate,
+                    route.DepartureDate,
                     paginationFilter
                 ));
 

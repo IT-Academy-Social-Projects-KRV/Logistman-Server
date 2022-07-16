@@ -21,13 +21,13 @@ namespace Core.Specifications
                     .Include(o => o.GoodCategory);
             }
 
-            public GetById(int offerId, int tripId, DateTimeOffset expirationTrip)
+            public GetById(int offerId, int tripId, DateTimeOffset tripDepartureDate)
             {
                 Query
                     .Where(o => o.Id == offerId
                                      && !o.IsClosed
                                      && (o.RelatedTripId == tripId || o.RelatedTripId == null)
-                                     && o.StartDate <= expirationTrip)
+                                     && o.StartDate <= tripDepartureDate)
                     .Include(o => o.Point);
             }
         }

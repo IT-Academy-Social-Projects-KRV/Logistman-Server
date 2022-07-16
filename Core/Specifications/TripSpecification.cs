@@ -27,7 +27,7 @@ namespace Core.Specifications
                                 && !t.IsActive
                                 && !t.IsEnded
                                 && t.LoadCapacity >= totalWeight
-                                && DateTimeOffset.UtcNow <= t.ExpirationDate)
+                                && DateTimeOffset.UtcNow <= t.DepartureDate)
                     .Include(t => t.Offers)
                     .Include(t => t.Points);
             }
@@ -36,14 +36,12 @@ namespace Core.Specifications
         internal class GetByTimeSpace : Specification<Trip>, ISingleResultSpecification<Trip>
         {
             public GetByTimeSpace(
-                DateTimeOffset startDate,
-                DateTimeOffset expirationDate,
+                DateTimeOffset tripDepartureDate,
                 string creatorId)
             {
                 Query.Where(t => t.TripCreatorId == creatorId
                                  && !t.IsEnded
-                                 && ((t.StartDate >= startDate && t.StartDate < expirationDate) ||
-                                     (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate)));
+                                 && (t.DepartureDate.Date == tripDepartureDate.Date));
             }
         }
 
@@ -52,7 +50,7 @@ namespace Core.Specifications
             public GetRoutes(PaginationFilterDTO paginationFilter)
             {
                 Query
-                    .Where(t => !t.IsActive && !t.IsEnded && t.ExpirationDate > DateTimeOffset.UtcNow)
+                    .Where(t => !t.IsActive && !t.IsEnded && t.DepartureDate > DateTimeOffset.UtcNow)
                     .Include(t => t.User)
                     .Include(t => t.Points)
                     .Include(t => t.Car)
@@ -141,7 +139,7 @@ namespace Core.Specifications
                     .Where(t => !t.IsActive
                         && !t.IsEnded
                         && t.Offers.Count == 0
-                        && t.ExpirationDate <= DateTimeOffset.UtcNow)
+                        && t.DepartureDate <= DateTimeOffset.UtcNow)
                     .Include(t => t.Points);
             }
         }

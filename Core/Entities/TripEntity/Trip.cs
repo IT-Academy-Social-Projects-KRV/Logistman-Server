@@ -16,8 +16,8 @@ namespace Core.Entities.TripEntity
         public int Id { get; set; }
         public bool IsActive { get; set; }
         public bool IsEnded { get; set; }
-        public DateTimeOffset StartDate { get; set; }
-        public DateTimeOffset ExpirationDate { get; set; }
+        public DateTimeOffset CreationDate { get; set; }
+        public DateTimeOffset DepartureDate { get; set; }
         public DateTimeOffset? EndDate { get; set; }
         public string Description { get; set; }
         public float LoadCapacity { get; set; }

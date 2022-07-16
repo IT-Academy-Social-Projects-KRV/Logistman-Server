@@ -10,12 +10,12 @@ namespace Core.Validation
 
         public CreateTripValidation()
         {
-            RuleFor(trip => trip.StartDate)
+            RuleFor(trip => trip.DepartureDate)
                 .NotEmpty()
                 .Must(date => date >= DateTimeOffset.UtcNow)
-                .WithMessage("Start date cannot be earlier than the current time!");
+                .WithMessage("Departure date cannot be earlier than the current time!");
 
-            RuleFor(trip => trip.ExpirationDate.Subtract(trip.StartDate) < _hour)
+            RuleFor(trip => trip.DepartureDate.Subtract(DateTimeOffset.UtcNow) < _hour)
                 .Must(date => !date)
                 .WithMessage(
                     $"The difference between the start date and the expiration date must be at least {_hour.Hours} hours!");
