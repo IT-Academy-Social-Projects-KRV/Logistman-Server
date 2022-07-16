@@ -22,17 +22,20 @@ namespace Core.Services
         private readonly IRepository<Offer> _offerRepository;
         private readonly IRepository<PointData> _pointRepository;
         private readonly IMapper _mapper;
+        private readonly INotificationService _notificationService;
 
         public InviteService(
             IRepository<Invite> inviteRepository,
             IRepository<Offer> offerRepository,
             IRepository<PointData> pointRepository,
-            IMapper mapper)
+            IMapper mapper,
+            INotificationService notificationService)
         {
             _inviteRepository = inviteRepository;
             _offerRepository = offerRepository;
             _pointRepository = pointRepository;
             _mapper = mapper;
+            _notificationService = notificationService;
         }
 
         public async Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId)
@@ -46,6 +49,7 @@ namespace Core.Services
             invite.IsAnswered = true;
 
             await _inviteRepository.SaveChangesAsync();
+            await _notificationService.SendNotificationsForTripParticipantsAsync(invite.Trip, invite.IsAccepted);
         }
 
         public async Task<PaginatedList<InvitePreviewDTO>> GetByUserIdAsync(

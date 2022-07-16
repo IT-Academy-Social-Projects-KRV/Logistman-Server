@@ -19,7 +19,9 @@ namespace Core.Specifications
         {
             public GetUnansweredByInviteAndUserIds(int inviteId, string userId)
             {
-                Query.Where(i => i.Id == inviteId && i.UserId == userId && !i.IsAnswered);
+                Query
+                    .Where(i => i.Id == inviteId && i.UserId == userId && !i.IsAnswered)
+                    .Include(i => i.Trip.Offers);
             }
         }
 

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core.Constants;
 using Core.DTO;
-using Core.DTO.NotificationDTO;
 using Core.DTO.TripDTO;
 using Core.Entities.InviteEntity;
 using Core.Entities.OfferEntity;
@@ -32,7 +31,6 @@ namespace Core.Services
         private readonly IRepository<Offer> _offerRepository;
         private readonly IInviteService _inviteService;
         private readonly ITripValidationService _tripValidationService;
-        private readonly INotificationService _notificationService;
 
         public TripService(
             IRepository<Trip> tripRepository,
@@ -43,8 +41,7 @@ namespace Core.Services
             IMapper mapper,
             IRepository<Offer> offerRepository,
             IInviteService inviteService,
-            ITripValidationService tripValidationService,
-            INotificationService notificationService)
+            ITripValidationService tripValidationService)
         {
             _tripRepository = tripRepository;
             _pointDataRepository = pointDataRepository;
@@ -55,7 +52,6 @@ namespace Core.Services
             _offerRepository = offerRepository;
             _inviteService = inviteService;
             _tripValidationService = tripValidationService;
-            _notificationService = notificationService;
         }
 
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
@@ -215,9 +211,6 @@ namespace Core.Services
 
             await _tripRepository.UpdateAsync(trip);
             await _inviteService.AddDriverInvite(trip.Id, trip.TripCreatorId);
-            await _notificationService.ManageTripNotificationsAsync(
-                        trip,
-                        _mapper.Map<List<BriefNotificationDTO>>(offers));
         }
 
         public async Task DeleteExpiredRoutesAsync()

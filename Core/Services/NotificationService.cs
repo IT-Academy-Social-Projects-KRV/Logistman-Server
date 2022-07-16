@@ -96,5 +96,17 @@ namespace Core.Services
                 await _notificationRepository.AddRangeAsync(newNotifications);
             }
         }
+
+        public async Task SendNotificationsForTripParticipantsAsync(Trip trip, bool driverTripInvitationAnswer)
+        {
+            if (driverTripInvitationAnswer)
+            {
+                var offers = trip.Offers;
+                List<BriefNotificationDTO> notificationList = _mapper.Map<List<BriefNotificationDTO>>(offers);
+
+                await ManageTripNotificationsAsync(trip, notificationList);
+            }
+
+        }
     }
 }
