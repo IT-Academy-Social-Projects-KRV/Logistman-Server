@@ -13,13 +13,14 @@ using Infrastructure.Data.SeedData;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Core.Entities.InviteEntity;
+using Core.Entities.NotificationEntity;
 
 namespace Infrastructure.Data
 {
     public class ApplicationContext : IdentityDbContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) 
-            : base(options) {}
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+            : base(options) { }
         public DbSet<OfferRole> OfferRoles { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Report> Reports { get; set; }
@@ -30,6 +31,7 @@ namespace Infrastructure.Data
         public DbSet<GoodCategory> GoodCategories { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Invite> Invites { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -44,6 +46,7 @@ namespace Infrastructure.Data
             builder.ApplyConfiguration(new TripConfiguration());
             builder.ApplyConfiguration(new RatingConfiguration());
             builder.ApplyConfiguration(new RefreshTokenConfiguration());
+            builder.ApplyConfiguration(new NotificationConfiguration());
             builder.Seed();
             base.OnModelCreating(builder);
         }
