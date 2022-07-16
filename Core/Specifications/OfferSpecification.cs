@@ -51,13 +51,13 @@ namespace Core.Specifications
             public GetOffersNearRoute(
                 Geometry routeGeography,
                 double dist,
-                DateTimeOffset expirationDate)
+                DateTimeOffset tripDepartureDate)
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
                                     && !offer.IsClosed
                                     && offer.RelatedTripId == null
-                                    && offer.StartDate <= expirationDate)
+                                    && offer.StartDate <= tripDepartureDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
                     .Include(offer => offer.GoodCategory);
