@@ -77,15 +77,25 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByTripId : Specification<Offer>
+        internal class GetFullyByTripId : Specification<Offer>
         {
-            public GetByTripId(int tripId)
+            public GetFullyByTripId(int tripId)
             {
                 Query
                     .Where(o => o.RelatedTripId == tripId)
                     .Include(o => o.Point)
                     .Include(o => o.OfferRole)
                     .Include(o => o.GoodCategory)
+                    .AsNoTracking();
+            }
+        }
+
+        internal class GetByTripId : Specification<Offer>
+        {
+            public GetByTripId(int tripId)
+            {
+                Query
+                    .Where(o => o.RelatedTripId == tripId)
                     .AsNoTracking();
             }
         }
@@ -100,15 +110,16 @@ namespace Core.Specifications
             }
         }
 
-        public class GetOpenByIdAndUserIdWithoutTrip : Specification<Offer>, ISingleResultSpecification<Offer>
+        public class GetOpenByIdAndUserIdWithoutTrip : Specification<Offer>,
+                                                       ISingleResultSpecification<Offer>
         {
             public GetOpenByIdAndUserIdWithoutTrip(int offerId, string userId)
             {
                 Query
                     .Where(o => o.Id == offerId
-                    && o.OfferCreatorId == userId
-                    && !o.IsClosed
-                    && o.RelatedTripId == null)
+                           && o.OfferCreatorId == userId
+                           && !o.IsClosed
+                           && o.RelatedTripId == null)
                     .Include(o => o.Point);
             }
         }

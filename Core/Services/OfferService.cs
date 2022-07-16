@@ -27,7 +27,6 @@ namespace Core.Services
         private readonly IGoodCategoryService _goodCategoryService;
         private readonly IOfferRoleService _offerRoleService;
         private readonly IPointService _pointService;
-        private readonly ITripService _tripService;
 
         public OfferService(
             IMapper mapper,
@@ -37,8 +36,7 @@ namespace Core.Services
             UserManager<User> userManager,
             IGoodCategoryService goodCategoryService,
             IOfferRoleService offerRoleService,
-            IPointService pointService,
-            ITripService tripService)
+            IPointService pointService)
         {
             _pointService = pointService;
             _offerRoleService = offerRoleService;
@@ -48,7 +46,6 @@ namespace Core.Services
             _tripRepository = tripRepository;
             _userManager = userManager;
             _goodCategoryService = goodCategoryService;
-            _tripService = tripService;
         }
 
         public async Task CreateOfferAsync(OfferCreateDTO offerCreate, string userId)
@@ -88,7 +85,8 @@ namespace Core.Services
             return offerInfo;
         }
 
-        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter)
+        public async Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(
+            string userId, PaginationFilterDTO paginationFilter)
         {
             var offerListCount = await _offerRepository
                 .CountAsync(new OfferSpecification.GetByUserId(userId, paginationFilter));
@@ -154,6 +152,24 @@ namespace Core.Services
 
             await _offerRepository.DeleteAsync(offer);
             await _pointRepository.DeleteAsync(offer.Point);
+        }
+
+        public async Task UnlinkFromTripAsync(int tripId)
+        {
+            var offers = await _offerRepository.ListAsync(
+                new OfferSpecification.GetByTripId(tripId));
+
+            if (offers.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var offer in offers)
+            {
+                offer.RelatedTripId = null;
+            }
+
+            await _offerRepository.UpdateRangeAsync(offers);
         }
     }
 }

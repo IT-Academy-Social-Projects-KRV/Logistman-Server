@@ -21,26 +21,41 @@ namespace Core.Services
         private readonly IRepository<Invite> _inviteRepository;
         private readonly IRepository<Offer> _offerRepository;
         private readonly IRepository<PointData> _pointRepository;
+        private readonly IOfferService _offerService;
+        private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
 
         public InviteService(
             IRepository<Invite> inviteRepository,
             IRepository<Offer> offerRepository,
             IRepository<PointData> pointRepository,
+            IOfferService offerService,
+            INotificationService notificationService,
             IMapper mapper)
         {
             _inviteRepository = inviteRepository;
             _offerRepository = offerRepository;
             _pointRepository = pointRepository;
+            _offerService = offerService;
+            _notificationService = notificationService;
             _mapper = mapper;
         }
 
         public async Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId)
         {
             var invite = await _inviteRepository.GetBySpecAsync(
-                new InviteSpecification.GetUnansweredByInviteAndUserIds(manageInviteDTO.InviteId, userId));
+                new InviteSpecification.GetUnansweredByInviteAndUserIds(
+                    manageInviteDTO.InviteId,
+                    userId)
+                );
 
             ExceptionMethods.InviteNullCheck(invite);
+
+            if (!manageInviteDTO.IsAccepted)
+            {
+                await _offerService.UnlinkFromTripAsync(invite.TripId);
+                await _notificationService.DeleteNotificationsAsync(invite.TripId);
+            }
 
             invite.IsAccepted = manageInviteDTO.IsAccepted;
             invite.IsAnswered = true;
@@ -70,7 +85,7 @@ namespace Core.Services
             foreach (var invite in invites)
             {
                 var offers = await _offerRepository.ListAsync(
-                    new OfferSpecification.GetByTripId(invite.TripId));
+                    new OfferSpecification.GetFullyByTripId(invite.TripId));
 
                 offers = offers.OrderBy(o => o.Point.Order).ToList();
 

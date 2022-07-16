@@ -54,7 +54,7 @@ namespace Core.Services
             Trip trip, List<BriefNotificationDTO> notificationsDTOs)
         {
             var previousTripNotifications = await _notificationRepository.ListAsync(
-                new NotificationSpecification.GetByTripId(trip.Id));
+                new NotificationSpecification.GetSingleByTripId(trip.Id));
 
             var newNotifications = new List<Notification>();
             var notificationsIdsForDelete = new List<int>();
@@ -95,6 +95,19 @@ namespace Core.Services
             {
                 await _notificationRepository.AddRangeAsync(newNotifications);
             }
+        }
+
+        public async Task DeleteNotificationsAsync(int tripId)
+        {
+            var notifications = await _notificationRepository.ListAsync(
+                new NotificationSpecification.GetByTripId(tripId));
+
+            if (notifications.Count == 0)
+            {
+                return;
+            }
+
+            await _notificationRepository.DeleteRangeAsync(notifications);
         }
     }
 }
