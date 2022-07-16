@@ -72,7 +72,8 @@ namespace Core.Specifications
             public GetOfferByIds(List<int> offersIds)
             {
                 Query
-                    .Where(o => offersIds.Contains(o.Id));
+                    .Where(o => offersIds.Contains(o.Id))
+                    .Include(o => o.User);
             }
         }
 
@@ -104,9 +105,9 @@ namespace Core.Specifications
             public GetOpenByIdAndUserIdWithoutTrip(int offerId, string userId)
             {
                 Query
-                    .Where(o => o.Id == offerId 
-                    && o.OfferCreatorId == userId 
-                    && !o.IsClosed 
+                    .Where(o => o.Id == offerId
+                    && o.OfferCreatorId == userId
+                    && !o.IsClosed
                     && o.RelatedTripId == null)
                     .Include(o => o.Point);
             }

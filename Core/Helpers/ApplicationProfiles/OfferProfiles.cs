@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTO.InviteDTO;
+using Core.DTO.NotificationDTO;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
 
@@ -22,7 +22,9 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(offer => offer.Point.Region))
                 .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
-            CreateMap<Offer, OfferInviteDTO>();
+            CreateMap<Offer, BriefNotificationDTO>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(offer => offer.User.Id))
+                .ForMember(dest => dest.OfferId, opt => opt.MapFrom(offer => offer.Id));
             CreateMap<Offer, OfferPreviewForInviteDTO>()
                 .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(offer => offer.Point.Address))
