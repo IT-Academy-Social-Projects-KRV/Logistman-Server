@@ -108,8 +108,7 @@ namespace Core.Services
                 _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
         }
 
-        public async Task<PaginatedList<OfferCreateTripDTO>> GetNearRouteAsync(
-            PaginationFilterDTO paginationFilter, int routeId)
+        public async Task<List<PointOfferCreateTripDTO>> GetNearRouteAsync(int routeId)
         {
             var route = await _tripRepository.GetByIdAsync(routeId);
 
@@ -117,31 +116,19 @@ namespace Core.Services
 
             var maxRouteDeviationMeters = route.MaxRouteDeviationKm * 1000;
 
-            var offerListCount = await _offerRepository
-                .CountAsync(new OfferSpecification.GetOffersNearRoute(
-                    route.RouteGeographyData,
-                    maxRouteDeviationMeters,
-                    route.DepartureDate,
-                    paginationFilter
-                ));
-
-            int totalPages = PaginatedList<OfferCreateTripDTO>.GetTotalPages(paginationFilter, offerListCount);
-
-            if (totalPages == 0)
-            {
-                return null;
-            }
-
-            var offerList = await _offerRepository
+            var offers = await _offerRepository
                 .ListAsync(new OfferSpecification.GetOffersNearRoute(
                     route.RouteGeographyData,
                     maxRouteDeviationMeters,
-                    route.DepartureDate,
-                    paginationFilter
+                    route.DepartureDate
                 ));
 
-            return PaginatedList<OfferCreateTripDTO>.Evaluate(
-                _mapper.Map<List<OfferCreateTripDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
+            var points = new List<PointOfferCreateTripDTO>();
+
+            offers.ForEach(item => 
+                points.Add(_mapper.Map<PointOfferCreateTripDTO>(item.Point)));
+
+            return points;
         }
 
         public async Task DeleteAsync(OfferIdDTO offerIdDTO, string userId)
