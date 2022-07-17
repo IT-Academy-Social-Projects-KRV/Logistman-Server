@@ -93,6 +93,7 @@ namespace Core.Services
                 if (point.OfferId != null)
                 {
                     point.TripId = null;
+                    point.Order = 0;
                 }
                 else
                 {

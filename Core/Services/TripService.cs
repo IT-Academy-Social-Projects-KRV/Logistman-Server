@@ -85,7 +85,7 @@ namespace Core.Services
             await _tripRepository.AddAsync(trip);
         }
 
-        public List<PointDTO> DeleteNullPointsFromRoute(List<PointDTO> fullSortedListOfPoints)
+        private List<PointDTO> DeleteNullPointsFromRoute(List<PointDTO> fullSortedListOfPoints)
         {
             List<PointDTO> sortedListOfPointsWithoutNullPoints = new List<PointDTO>();
 
@@ -105,7 +105,7 @@ namespace Core.Services
             return sortedListOfPointsWithoutNullPoints;
         }
 
-        public LineString SetRouteGeographyData(List<PointDTO> sortedRoutePoints)
+        private LineString SetRouteGeographyData(List<PointDTO> sortedRoutePoints)
         {
             var listOfRouteCoordinates = new List<Coordinate>();
 
@@ -175,6 +175,14 @@ namespace Core.Services
 
             ExceptionMethods.TripNullCheck(trip);
 
+            foreach (var point in trip.Points)
+            {
+                if (point.OfferId != null)
+                {
+                    point.Order = 0;
+                }
+            }
+
             var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
 
             _tripValidationService.ValidatePointsInTrip(trip, sortedPoints);
@@ -214,6 +222,7 @@ namespace Core.Services
             trip.Points = points;
             trip.Distance = manageTrip.Distance;
 
+            await _pointDataRepository.SaveChangesAsync();
             await _tripRepository.UpdateAsync(trip);
             await _inviteService.CreateAsync(trip.Id, trip.TripCreatorId);
             await _notificationService.ManageTripNotificationsAsync(
