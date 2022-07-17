@@ -39,7 +39,7 @@ namespace Core.Validation.ValidationService
                 {
                     var offer = await _offerRepository
                         .GetBySpecAsync(new OfferSpecification
-                            .GetById((int)point.OfferId, tripId, tripDepartureDate));
+                            .GetByIdForSpecificTrip((int)point.OfferId, tripId, tripDepartureDate));
 
                     ExceptionMethods.OfferNullCheck(offer);
 
@@ -58,7 +58,7 @@ namespace Core.Validation.ValidationService
             string creatorId)
         {
             var isTimeSpaceBusy = await _tripRepository.AnyAsync(
-                new TripSpecification.GetByTimeSpace(tripDepartureDate, creatorId));
+                new TripSpecification.GetInTheSameDayByCreatorId(tripDepartureDate, creatorId));
 
             if (isTimeSpaceBusy)
             {

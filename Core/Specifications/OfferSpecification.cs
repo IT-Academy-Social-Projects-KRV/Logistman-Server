@@ -20,8 +20,11 @@ namespace Core.Specifications
                     .Include(o => o.OfferRole)
                     .Include(o => o.GoodCategory);
             }
+        }
 
-            public GetById(int offerId, int tripId, DateTimeOffset tripDepartureDate)
+        internal class GetByIdForSpecificTrip : Specification<Offer>, ISingleResultSpecification<Offer>
+        {
+            public GetByIdForSpecificTrip(int offerId, int tripId, DateTimeOffset tripDepartureDate)
             {
                 Query
                     .Where(o => o.Id == offerId

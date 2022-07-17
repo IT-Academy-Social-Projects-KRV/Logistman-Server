@@ -40,9 +40,9 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByTimeSpace : Specification<Trip>, ISingleResultSpecification<Trip>
+        internal class GetInTheSameDayByCreatorId : Specification<Trip>, ISingleResultSpecification<Trip>
         {
-            public GetByTimeSpace(
+            public GetInTheSameDayByCreatorId(
                 DateTimeOffset tripDepartureDate,
                 string creatorId)
             {

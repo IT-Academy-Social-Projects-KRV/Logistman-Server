@@ -18,7 +18,7 @@ namespace Core.Validation
             RuleFor(trip => trip.DepartureDate.Subtract(DateTimeOffset.UtcNow) < _hour)
                 .Must(date => !date)
                 .WithMessage(
-                    $"The difference between the start date and the expiration date must be at least {_hour.Hours} hours!");
+                    $"You cannot create a route earlier than {_hour.Hours} hours before departure!");
 
             RuleFor(trip => trip.Description)
                 .MinimumLength(0)
