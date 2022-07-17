@@ -144,7 +144,9 @@ namespace Core.Specifications
             {
                 Query
                     .Where(o => o.OfferCreatorId == userId
-                    && o.RelatedTripId != null)
+                    && o.RelatedTripId != null
+                    && (o.Trip.IsActive
+                    || o.Trip.IsEnded))
                     .Include(o => o.Point)
                     .Include(o => o.OfferRole)
                     .Include(o => o.GoodCategory)
