@@ -126,7 +126,7 @@ namespace Core.Services
                 .ListAsync(new OfferSpecification.GetOffersNearRoute(
                     route.RouteGeographyData,
                     maxRouteDeviationMeters,
-                    route.ExpirationDate
+                    route.DepartureDate
                 ));
 
             var points = new List<PointOfferCreateTripDTO>();
