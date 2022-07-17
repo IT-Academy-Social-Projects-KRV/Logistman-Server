@@ -27,6 +27,7 @@ namespace Core.Entities.TripEntity
         public User User { get; set; }
         public int TransportationCarId { get; set; }
         public Car Car { get; set; }
+        public float InitialDistance { get; set; }
         public float Distance { get; set; }
         public LineString RouteGeographyData { get; set; }
         public ICollection<Invite> Invites { get; set; }

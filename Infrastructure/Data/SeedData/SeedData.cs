@@ -892,6 +892,7 @@ namespace Infrastructure.Data.SeedData
                     MaxRouteDeviationKm = 20,
                     TripCreatorId = ANTONINA_ID,
                     TransportationCarId = 1,
+                    InitialDistance = 150,
                     Distance = 150,
                     RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(FirstRouteCoordinates)
                 },
@@ -905,6 +906,7 @@ namespace Infrastructure.Data.SeedData
                     MaxRouteDeviationKm = 15,
                     TripCreatorId = MARYNA_ID,
                     TransportationCarId = 3,
+                    InitialDistance = 400,
                     Distance = 400,
                     RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(SecondRouteCoordinates)
                 },
@@ -918,6 +920,7 @@ namespace Infrastructure.Data.SeedData
                     MaxRouteDeviationKm = 15,
                     TripCreatorId = EUGEN_ID,
                     TransportationCarId = 10,
+                    InitialDistance = 400,
                     Distance = 400,
                     RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(ThirdRouteCoordinates)
                 });

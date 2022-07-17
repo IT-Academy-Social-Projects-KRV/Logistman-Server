@@ -13,6 +13,7 @@ using Core.DTO.OfferDTO;
 using Core.Entities.PointEntity;
 using System.Threading.Tasks;
 using Core.Entities.OfferEntity;
+using Core.Entities.TripEntity;
 
 namespace Core.Services
 {
@@ -21,6 +22,7 @@ namespace Core.Services
         private readonly IRepository<Invite> _inviteRepository;
         private readonly IRepository<Offer> _offerRepository;
         private readonly IRepository<PointData> _pointRepository;
+        private readonly IRepository<Trip> _tripRepository;
         private readonly IOfferService _offerService;
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
@@ -29,6 +31,7 @@ namespace Core.Services
             IRepository<Invite> inviteRepository,
             IRepository<Offer> offerRepository,
             IRepository<PointData> pointRepository,
+            IRepository<Trip> tripRepository,
             IOfferService offerService,
             INotificationService notificationService,
             IMapper mapper)
@@ -36,6 +39,7 @@ namespace Core.Services
             _inviteRepository = inviteRepository;
             _offerRepository = offerRepository;
             _pointRepository = pointRepository;
+            _tripRepository = tripRepository;
             _offerService = offerService;
             _notificationService = notificationService;
             _mapper = mapper;
@@ -55,6 +59,13 @@ namespace Core.Services
             {
                 await _offerService.UnlinkFromTripAsync(invite.TripId);
                 await _notificationService.DeleteNotificationsAsync(invite.TripId);
+
+                var trip = await _tripRepository.GetBySpecAsync(
+                    new TripSpecification.GetById(invite.TripId));
+
+                trip.Distance = trip.InitialDistance;
+
+                await _tripRepository.SaveChangesAsync();
             }
 
             invite.IsAccepted = manageInviteDTO.IsAccepted;
