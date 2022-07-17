@@ -20,14 +20,17 @@ namespace Core.Specifications
                     .Include(o => o.OfferRole)
                     .Include(o => o.GoodCategory);
             }
+        }
 
-            public GetById(int offerId, int tripId, DateTimeOffset expirationTrip)
+        internal class GetByIdForSpecificTrip : Specification<Offer>, ISingleResultSpecification<Offer>
+        {
+            public GetByIdForSpecificTrip(int offerId, int tripId, DateTimeOffset tripDepartureDate)
             {
                 Query
                     .Where(o => o.Id == offerId
                                      && !o.IsClosed
                                      && (o.RelatedTripId == tripId || o.RelatedTripId == null)
-                                     && o.StartDate <= expirationTrip)
+                                     && o.StartDate <= tripDepartureDate)
                     .Include(o => o.Point);
             }
         }
@@ -51,13 +54,13 @@ namespace Core.Specifications
             public GetOffersNearRoute(
                 Geometry routeGeography,
                 double dist,
-                DateTimeOffset expirationDate)
+                DateTimeOffset tripDepartureDate)
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
                                     && !offer.IsClosed
                                     && offer.RelatedTripId == null
-                                    && offer.StartDate <= expirationDate)
+                                    && offer.StartDate <= tripDepartureDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
                     .Include(offer => offer.GoodCategory);
