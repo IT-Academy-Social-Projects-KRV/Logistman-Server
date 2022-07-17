@@ -85,5 +85,12 @@ namespace API.Controllers
             
             return Ok(await _tripService.GetTripOfferByDriverAsync(userId));
         }
+
+        [HttpGet("info")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> GetTripInfo([FromQuery] TripIdDTO tripIdDTO)
+        {
+            return Ok(await _tripService.GetTripInfoAsync(tripIdDTO.TripId));
+        }
     }
 }

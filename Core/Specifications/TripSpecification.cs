@@ -170,14 +170,13 @@ namespace Core.Specifications
                     .Where(t => t.IsActive && !t.IsEnded &&
                                  t.TripCreatorId == userId)
                     .Include(t => t.Offers)
-                    .ThenInclude(o => o.Point)
-                    .Include(t => t.Offers)
                     .ThenInclude(o => o.User)
-                    .Include(t => t.Offers)
-                    .ThenInclude(o => o.GoodCategory)
-                    .Include(t => t.Offers)
-                    .ThenInclude(o => o.OfferRole)
-                    .Include(t => t.Car);
+                    .Include(t => t.Points)
+                    .ThenInclude(t => t.Offer)
+                    .ThenInclude(t => t.OfferRole)
+                    .Include(t => t.Points)
+                    .ThenInclude(t => t.Offer)
+                    .ThenInclude(t => t.GoodCategory);
             }
         }
     }
