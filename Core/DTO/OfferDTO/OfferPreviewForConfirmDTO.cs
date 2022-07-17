@@ -12,7 +12,6 @@ namespace Core.DTO.OfferDTO
         public bool IsClosed { get; set; }
         public bool IsConfirmedByCreator { get; set; }
         public bool IsAnsweredByCreator { get; set; }
-        public bool IsAnsweredByDriver { get; set; }
         public float GoodsWeight { get; set; }
         public string Address { get; set; }
         public string Settlement { get; set; }
