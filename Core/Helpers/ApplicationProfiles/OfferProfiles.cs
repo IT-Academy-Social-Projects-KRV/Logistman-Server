@@ -23,7 +23,7 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(offer => offer.Point.Region))
                 .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
             CreateMap<Offer, BriefNotificationDTO>()
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(offer => offer.User.Id))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(offer => offer.OfferCreatorId))
                 .ForMember(dest => dest.OfferId, opt => opt.MapFrom(offer => offer.Id));
             CreateMap<Offer, OfferPreviewForNotificationDTO>()
                 .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))

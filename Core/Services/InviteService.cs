@@ -14,6 +14,7 @@ using Core.Entities.PointEntity;
 using System.Threading.Tasks;
 using Core.Entities.OfferEntity;
 using Core.Entities.TripEntity;
+using Core.DTO.NotificationDTO;
 
 namespace Core.Services
 {
@@ -55,7 +56,15 @@ namespace Core.Services
 
             ExceptionMethods.InviteNullCheck(invite);
 
-            if (!manageInviteDTO.IsAccepted)
+            if (manageInviteDTO.IsAccepted)
+            {
+                var offers = await _offerRepository.ListAsync(new OfferSpecification.GetByTripId(invite.TripId));
+
+                await _notificationService.ManageTripNotificationsAsync(
+                    invite.Trip, 
+                    _mapper.Map<List<BriefNotificationDTO>>(offers));
+            }
+            else
             {
                 await _offerService.UnlinkFromTripAsync(invite.TripId);
                 await _notificationService.DeleteNotificationsAsync(invite.TripId);

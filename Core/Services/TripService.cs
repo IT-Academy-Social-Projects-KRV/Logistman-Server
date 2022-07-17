@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core.Constants;
 using Core.DTO;
-using Core.DTO.NotificationDTO;
 using Core.DTO.TripDTO;
 using Core.Entities.InviteEntity;
 using Core.Entities.OfferEntity;
@@ -226,9 +225,6 @@ namespace Core.Services
             await _pointDataRepository.SaveChangesAsync();
             await _tripRepository.UpdateAsync(trip);
             await _inviteService.CreateAsync(trip.Id, trip.TripCreatorId);
-            await _notificationService.ManageTripNotificationsAsync(
-                        trip,
-                        _mapper.Map<List<BriefNotificationDTO>>(offers));
         }
 
         public async Task DeleteExpiredRoutesAsync()
