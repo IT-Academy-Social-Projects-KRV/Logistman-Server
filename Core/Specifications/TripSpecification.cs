@@ -34,23 +34,21 @@ namespace Core.Specifications
                                 && !t.IsActive
                                 && !t.IsEnded
                                 && t.LoadCapacity >= totalWeight
-                                && DateTimeOffset.UtcNow <= t.ExpirationDate)
+                                && DateTimeOffset.UtcNow <= t.DepartureDate)
                     .Include(t => t.Offers)
                     .Include(t => t.Points);
             }
         }
 
-        internal class GetByTimeSpace : Specification<Trip>, ISingleResultSpecification<Trip>
+        internal class GetInTheSameDayByCreatorId : Specification<Trip>, ISingleResultSpecification<Trip>
         {
-            public GetByTimeSpace(
-                DateTimeOffset startDate,
-                DateTimeOffset expirationDate,
+            public GetInTheSameDayByCreatorId(
+                DateTimeOffset tripDepartureDate,
                 string creatorId)
             {
                 Query.Where(t => t.TripCreatorId == creatorId
                                  && !t.IsEnded
-                                 && ((t.StartDate >= startDate && t.StartDate < expirationDate) ||
-                                     (t.ExpirationDate > startDate && t.ExpirationDate < expirationDate)));
+                                 && (t.DepartureDate.Date == tripDepartureDate.Date));
             }
         }
 
@@ -59,7 +57,7 @@ namespace Core.Specifications
             public GetRoutes(PaginationFilterDTO paginationFilter)
             {
                 Query
-                    .Where(t => !t.IsActive && !t.IsEnded && t.ExpirationDate > DateTimeOffset.UtcNow)
+                    .Where(t => !t.IsActive && !t.IsEnded && t.DepartureDate > DateTimeOffset.UtcNow)
                     .Include(t => t.User)
                     .Include(t => t.Points)
                     .Include(t => t.Car)
@@ -95,7 +93,18 @@ namespace Core.Specifications
                 Query.Where(t => t.TripCreatorId == userId && t.IsActive);
             }
         }
-        internal class GetActiveOrWithRelatedOffersByCarId : Specification<Trip>,
+
+        internal class GetActiveByUserIdWithOffers : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetActiveByUserIdWithOffers(string userId)
+            {
+                Query
+                    .Where(t => t.TripCreatorId == userId && t.IsActive)
+                    .Include(t => t.Offers);
+            }
+        }
+
+        internal class GetActiveOrWithRelatedOffersByCarId : Specification<Trip>, 
             ISingleResultSpecification<Trip>
         {
             public GetActiveOrWithRelatedOffersByCarId(int carId)
@@ -148,7 +157,7 @@ namespace Core.Specifications
                     .Where(t => !t.IsActive
                         && !t.IsEnded
                         && t.Offers.Count == 0
-                        && t.ExpirationDate <= DateTimeOffset.UtcNow)
+                        && t.DepartureDate <= DateTimeOffset.UtcNow)
                     .Include(t => t.Points);
             }
         }

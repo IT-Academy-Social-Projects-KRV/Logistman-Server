@@ -8,7 +8,8 @@ namespace Core.Helpers.ApplicationProfiles
     {
         public TripProfile()
         {
-            CreateMap<CreateTripDTO, Trip>();
+            CreateMap<CreateTripDTO, Trip>()
+                .ForMember(dest => dest.InitialDistance, dto => dto.MapFrom(trip => trip.Distance));
             CreateMap<Trip, RouteDTO>();
             CreateMap<Trip, RoutePreviewDTO>();
             CreateMap<Trip, TripPreviewDTO>()

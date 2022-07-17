@@ -19,9 +19,17 @@ namespace Infrastructure.Repository
             _dbSet = context.Set<TEntity>();
         }
 
-        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+
+            return entities;
+        }
+
+        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
+        {
+            _dbSet.UpdateRange(entities);
             await _context.SaveChangesAsync();
         }
     }

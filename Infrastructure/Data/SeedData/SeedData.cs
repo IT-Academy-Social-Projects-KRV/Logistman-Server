@@ -294,12 +294,12 @@ namespace Infrastructure.Data.SeedData
                 new OfferRole()
                 {
                     Id = 1,
-                    Name = OfferRoles.Sender
+                    Name = TripRoles.Sender
                 },
                 new OfferRole()
                 {
                     Id = 2,
-                    Name = OfferRoles.Recipient
+                    Name = TripRoles.Recipient
                 });
 
         #endregion
@@ -885,39 +885,42 @@ namespace Infrastructure.Data.SeedData
                 new Trip()
                 {
                     Id = 1,
-                    StartDate = DateTimeOffset.Parse("10.07.2022 12:00"),
-                    ExpirationDate = DateTimeOffset.Parse("22.08.2022 12:00"),
+                    CreationDate = DateTimeOffset.Parse("10.07.2022 12:00"),
+                    DepartureDate = DateTimeOffset.Parse("22.08.2022 12:00"),
                     Description = "It`s my first offer!",
                     LoadCapacity = 2000,
                     MaxRouteDeviationKm = 20,
                     TripCreatorId = ANTONINA_ID,
                     TransportationCarId = 1,
+                    InitialDistance = 150,
                     Distance = 150,
                     RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(FirstRouteCoordinates)
                 },
                 new Trip()
                 {
                     Id = 2,
-                    StartDate = DateTimeOffset.Parse("01.07.2022 12:00"),
-                    ExpirationDate = DateTimeOffset.Parse("15.07.2022 12:00"),
+                    CreationDate = DateTimeOffset.Parse("01.07.2022 12:00"),
+                    DepartureDate = DateTimeOffset.Parse("15.07.2022 12:00"),
                     Description = "I'm going from Kyiv to Rivne. So welcome!",
                     LoadCapacity = 2000,
                     MaxRouteDeviationKm = 15,
                     TripCreatorId = MARYNA_ID,
                     TransportationCarId = 3,
+                    InitialDistance = 400,
                     Distance = 400,
                     RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(SecondRouteCoordinates)
                 },
                 new Trip()
                 {
                     Id = 3,
-                    StartDate = DateTimeOffset.Parse("02.07.2022 12:00"),
-                    ExpirationDate = DateTimeOffset.Parse("18.07.2022 12:00"),
+                    CreationDate = DateTimeOffset.Parse("02.07.2022 12:00"),
+                    DepartureDate = DateTimeOffset.Parse("18.07.2022 12:00"),
                     Description = "I'm going from Lutsk to Uzhhorod. So welcome!",
                     LoadCapacity = 2000,
                     MaxRouteDeviationKm = 15,
                     TripCreatorId = EUGEN_ID,
                     TransportationCarId = 10,
+                    InitialDistance = 400,
                     Distance = 400,
                     RouteGeographyData = NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(ThirdRouteCoordinates)
                 });

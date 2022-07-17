@@ -220,7 +220,7 @@
     <value>User with such email already exists.</value>
   </data>
   <data name="TripIsAlreadyExistsInTheTimeSpace" xml:space="preserve">
-    <value>There is already a trip in this time space!</value>
+    <value>There is already a trip in this day!</value>
   </data>
   <data name="CarIsNotVerified" xml:space="preserve">
     <value>Car is not verified!</value>
@@ -248,6 +248,9 @@
   </data>
   <data name="RouteHasInvites" xml:space="preserve">
     <value>The route has already had invites! You can only decline the invite!</value>
+  </data>
+  <data name="ConfirmGoodsDeliveryWrongRoleName" xml:space="preserve">
+    <value>Such role does not exist: </value>
   </data>
   <data name="PointsDoNotMatch" xml:space="preserve">
     <value>Points do not match with points from trip</value>

@@ -14,6 +14,7 @@ using Core.Interfaces.CustomService;
 using Core.Resources;
 using Core.Specifications;
 using NetTopologySuite.Geometries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -63,8 +64,7 @@ namespace Core.Services
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
         {
             await _tripValidationService.ValidateTripDateAsync(
-                createTripDTO.StartDate,
-                createTripDTO.ExpirationDate,
+                createTripDTO.DepartureDate,
                 creatorId);
 
             var sortedPoints = _pointService.SortByOrder(createTripDTO.Points);
@@ -82,12 +82,13 @@ namespace Core.Services
             var trip = _mapper.Map<Trip>(createTripDTO);
 
             trip.TripCreatorId = creatorId;
+            trip.CreationDate = DateTimeOffset.UtcNow;
             trip.RouteGeographyData = SetRouteGeographyData(sortedPoints);
 
             await _tripRepository.AddAsync(trip);
         }
 
-        public List<PointDTO> DeleteNullPointsFromRoute(List<PointDTO> fullSortedListOfPoints)
+        private List<PointDTO> DeleteNullPointsFromRoute(List<PointDTO> fullSortedListOfPoints)
         {
             List<PointDTO> sortedListOfPointsWithoutNullPoints = new List<PointDTO>();
 
@@ -107,7 +108,7 @@ namespace Core.Services
             return sortedListOfPointsWithoutNullPoints;
         }
 
-        public LineString SetRouteGeographyData(List<PointDTO> sortedRoutePoints)
+        private LineString SetRouteGeographyData(List<PointDTO> sortedRoutePoints)
         {
             var listOfRouteCoordinates = new List<Coordinate>();
 
@@ -118,7 +119,8 @@ namespace Core.Services
             return NtsGeometryFactories.geometryFactoryWGS84.CreateLineString(listOfRouteCoordinates.ToArray());
         }
 
-        public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(PaginationFilterDTO paginationFilter)
+        public async Task<PaginatedList<RouteDTO>> GetAllRoutesAsync(
+            PaginationFilterDTO paginationFilter)
         {
             var routesCount = await _tripRepository
                 .CountAsync(new TripSpecification.GetRoutes(paginationFilter));
@@ -176,6 +178,14 @@ namespace Core.Services
 
             ExceptionMethods.TripNullCheck(trip);
 
+            foreach (var point in trip.Points)
+            {
+                if (point.OfferId != null)
+                {
+                    point.Order = 0;
+                }
+            }
+
             var sortedPoints = _pointService.SortByOrder(manageTrip.PointsTrip);
 
             _tripValidationService.ValidatePointsInTrip(trip, sortedPoints);
@@ -183,7 +193,7 @@ namespace Core.Services
             await _tripValidationService.ValidateOffersCheckAsync(
                 manageTrip.PointsTrip,
                 manageTrip.TripId,
-                trip.ExpirationDate);
+                trip.DepartureDate);
 
             var points = new List<PointData>();
 
@@ -215,8 +225,9 @@ namespace Core.Services
             trip.Points = points;
             trip.Distance = manageTrip.Distance;
 
+            await _pointDataRepository.SaveChangesAsync();
             await _tripRepository.UpdateAsync(trip);
-            await _inviteService.AddDriverInvite(trip.Id, trip.TripCreatorId);
+            await _inviteService.CreateAsync(trip.Id, trip.TripCreatorId);
             await _notificationService.ManageTripNotificationsAsync(
                         trip,
                         _mapper.Map<List<BriefNotificationDTO>>(offers));
@@ -244,7 +255,7 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(route);
 
             if (await _inviteRepository.AnyAsync(
-                new InviteSpecification.GetByTripId(route.Id)))
+                new InviteSpecification.GetSingleByTripId(route.Id)))
             {
                 throw new HttpException(
                         ErrorMessages.RouteHasInvites,

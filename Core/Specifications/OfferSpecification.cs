@@ -20,14 +20,17 @@ namespace Core.Specifications
                     .Include(o => o.OfferRole)
                     .Include(o => o.GoodCategory);
             }
+        }
 
-            public GetById(int offerId, int tripId, DateTimeOffset expirationTrip)
+        internal class GetByIdForSpecificTrip : Specification<Offer>, ISingleResultSpecification<Offer>
+        {
+            public GetByIdForSpecificTrip(int offerId, int tripId, DateTimeOffset tripDepartureDate)
             {
                 Query
                     .Where(o => o.Id == offerId
                                      && !o.IsClosed
                                      && (o.RelatedTripId == tripId || o.RelatedTripId == null)
-                                     && o.StartDate <= expirationTrip)
+                                     && o.StartDate <= tripDepartureDate)
                     .Include(o => o.Point);
             }
         }
@@ -51,13 +54,13 @@ namespace Core.Specifications
             public GetOffersNearRoute(
                 Geometry routeGeography,
                 double dist,
-                DateTimeOffset expirationDate)
+                DateTimeOffset tripDepartureDate)
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
                                     && !offer.IsClosed
                                     && offer.RelatedTripId == null
-                                    && offer.StartDate <= expirationDate)
+                                    && offer.StartDate <= tripDepartureDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
                     .Include(offer => offer.GoodCategory);
@@ -74,15 +77,25 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByTripId : Specification<Offer>
+        internal class GetFullyByTripId : Specification<Offer>
         {
-            public GetByTripId(int tripId)
+            public GetFullyByTripId(int tripId)
             {
                 Query
                     .Where(o => o.RelatedTripId == tripId)
                     .Include(o => o.Point)
                     .Include(o => o.OfferRole)
                     .Include(o => o.GoodCategory)
+                    .AsNoTracking();
+            }
+        }
+
+        internal class GetByTripId : Specification<Offer>
+        {
+            public GetByTripId(int tripId)
+            {
+                Query
+                    .Where(o => o.RelatedTripId == tripId)
                     .AsNoTracking();
             }
         }
@@ -97,16 +110,44 @@ namespace Core.Specifications
             }
         }
 
-        public class GetOpenByIdAndUserIdWithoutTrip : Specification<Offer>, ISingleResultSpecification<Offer>
+        public class GetOpenByIdAndUserIdWithoutTrip : Specification<Offer>,
+                                                       ISingleResultSpecification<Offer>
         {
             public GetOpenByIdAndUserIdWithoutTrip(int offerId, string userId)
             {
                 Query
                     .Where(o => o.Id == offerId
-                    && o.OfferCreatorId == userId
-                    && !o.IsClosed
-                    && o.RelatedTripId == null)
+                           && o.OfferCreatorId == userId
+                           && !o.IsClosed
+                           && o.RelatedTripId == null)
                     .Include(o => o.Point);
+            }
+        }
+
+        public class GetByIdWithActiveTrip : Specification<Offer>, 
+            ISingleResultSpecification<Offer>
+        {
+            public GetByIdWithActiveTrip(int offerId, string userId)
+            {
+                Query
+                    .Where(o => o.Id == offerId 
+                        && o.Trip.TripCreatorId == userId
+                        && o.Trip.IsActive 
+                        && !o.IsAnsweredByDriver)
+                    .Include(o => o.Trip);
+            }
+        }
+
+        public class GetByIdWithTrip : Specification<Offer>,
+                                       ISingleResultSpecification<Offer>
+        {
+            public GetByIdWithTrip(int offerId, string userId)
+            {
+                Query
+                    .Where(o => o.Id == offerId
+                        && o.OfferCreatorId == userId
+                        && !o.IsAnsweredByCreator)
+                    .Include(o => o.Trip);
             }
         }
     }
