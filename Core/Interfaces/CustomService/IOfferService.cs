@@ -14,6 +14,8 @@ namespace Core.Interfaces.CustomService
             string userId, PaginationFilterDTO paginationFilter);
         Task<List<PointOfferCreateTripDTO>> GetNearRouteAsync(int routeId);
         Task DeleteAsync(OfferIdDTO offerIdDTO, string userId);
+        Task ConfirmGoodsTransferAsync(
+            ConfirmGoodsTransferDTO confirmGoodTransferDTO, string userId);
         Task UnlinkFromTripAsync(int tripId);
     }
 }

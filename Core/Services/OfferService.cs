@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.DTO;
 using Core.DTO.OfferDTO;
 using Core.Entities.OfferEntity;
@@ -9,10 +10,12 @@ using Core.Exceptions;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Interfaces.CustomService;
+using Core.Resources;
 using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -76,7 +79,8 @@ namespace Core.Services
 
         public async Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId)
         {
-            var offer = await _offerRepository.GetBySpecAsync(new OfferSpecification.GetById(offerId, userId));
+            var offer = await _offerRepository.GetBySpecAsync(
+                new OfferSpecification.GetById(offerId, userId));
 
             ExceptionMethods.OfferNullCheck(offer);
 
@@ -91,7 +95,8 @@ namespace Core.Services
             var offerListCount = await _offerRepository
                 .CountAsync(new OfferSpecification.GetByUserId(userId, paginationFilter));
 
-            int totalPages = PaginatedList<OfferPreviewDTO>.GetTotalPages(paginationFilter, offerListCount);
+            int totalPages = PaginatedList<OfferPreviewDTO>
+                .GetTotalPages(paginationFilter, offerListCount);
 
             if (totalPages == 0)
             {
@@ -103,7 +108,10 @@ namespace Core.Services
                 new OfferSpecification.GetByUserId(userId, paginationFilter));
 
             return PaginatedList<OfferPreviewDTO>.Evaluate(
-                _mapper.Map<List<OfferPreviewDTO>>(offerList), paginationFilter.PageNumber, offerListCount, totalPages);
+                _mapper.Map<List<OfferPreviewDTO>>(offerList), 
+                paginationFilter.PageNumber, 
+                offerListCount, 
+                totalPages);
         }
 
         public async Task<List<PointOfferCreateTripDTO>> GetNearRouteAsync(int routeId)
@@ -133,12 +141,83 @@ namespace Core.Services
         {
             var offer = await _offerRepository
                 .GetBySpecAsync(new OfferSpecification
-                .GetOpenByIdAndUserIdWithoutTrip(offerIdDTO.OfferId, userId));
+                    .GetOpenByIdAndUserIdWithoutTrip(offerIdDTO.OfferId, userId));
 
             ExceptionMethods.OfferNullCheck(offer);
 
             await _offerRepository.DeleteAsync(offer);
             await _pointRepository.DeleteAsync(offer.Point);
+        }
+
+        public async Task ConfirmGoodsTransferAsync(
+            ConfirmGoodsTransferDTO сonfirmGoodsTransferDTO, 
+            string userId)
+        {
+            if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == TripRoles.Driver)
+            {
+                var offer = await _offerRepository
+                .GetBySpecAsync(new OfferSpecification
+                        .GetByIdWithActiveTrip(сonfirmGoodsTransferDTO.OfferId, userId));
+
+                ExceptionMethods.OfferNullCheck(offer);
+
+                offer.GoodTransferConfirmedByDriver = сonfirmGoodsTransferDTO.IsConfirmed;
+                offer.IsAnsweredByDriver = true;
+
+                await _offerRepository.SaveChangesAsync();
+                await EndTripAsync(userId);
+            }
+            else if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == TripRoles.Sender
+                     ||
+                     сonfirmGoodsTransferDTO.TripRole.ToUpper() == TripRoles.Recipient)
+            {
+                var offer = await _offerRepository
+                    .GetBySpecAsync(new OfferSpecification
+                        .GetByIdWithTrip(сonfirmGoodsTransferDTO.OfferId, userId));
+
+                ExceptionMethods.OfferNullCheck(offer);
+
+                offer.GoodTransferConfirmedByCreator = сonfirmGoodsTransferDTO.IsConfirmed;
+                offer.IsAnsweredByCreator = true;
+
+                await _offerRepository.SaveChangesAsync();
+            }
+            else
+            {
+                throw new HttpException(
+                        ErrorMessages.ConfirmGoodsDeliveryWrongRoleName 
+                        + 
+                        сonfirmGoodsTransferDTO.TripRole,
+                        HttpStatusCode.Forbidden);
+            }
+        }
+
+        private async Task EndTripAsync(string tripCreatorId)
+        {
+            var trip = await _tripRepository
+                .GetBySpecAsync(new TripSpecification
+                    .GetActiveByUserIdWithOffers(tripCreatorId));
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            foreach (var offer in trip.Offers)
+            {
+                if (!offer.IsAnsweredByDriver)
+                {
+                    return;
+                }
+            }
+
+            foreach (var offer in trip.Offers)
+            {
+                offer.IsClosed = true;
+            }
+
+            trip.IsActive = false;
+            trip.IsEnded = true;
+            trip.EndDate = DateTimeOffset.UtcNow;
+
+            await _tripRepository.SaveChangesAsync();
         }
 
         public async Task UnlinkFromTripAsync(int tripId)

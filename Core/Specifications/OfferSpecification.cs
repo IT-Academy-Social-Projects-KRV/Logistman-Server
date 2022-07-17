@@ -120,5 +120,32 @@ namespace Core.Specifications
                     .Include(o => o.Point);
             }
         }
+
+        public class GetByIdWithActiveTrip : Specification<Offer>, 
+            ISingleResultSpecification<Offer>
+        {
+            public GetByIdWithActiveTrip(int offerId, string userId)
+            {
+                Query
+                    .Where(o => o.Id == offerId 
+                        && o.Trip.TripCreatorId == userId
+                        && o.Trip.IsActive 
+                        && !o.IsAnsweredByDriver)
+                    .Include(o => o.Trip);
+            }
+        }
+
+        public class GetByIdWithTrip : Specification<Offer>,
+                                       ISingleResultSpecification<Offer>
+        {
+            public GetByIdWithTrip(int offerId, string userId)
+            {
+                Query
+                    .Where(o => o.Id == offerId
+                        && o.OfferCreatorId == userId
+                        && !o.IsAnsweredByCreator)
+                    .Include(o => o.Trip);
+            }
+        }
     }
 }
