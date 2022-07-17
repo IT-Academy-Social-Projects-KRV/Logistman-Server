@@ -26,6 +26,10 @@ namespace Core.Entities.OfferEntity
         public User User { get; set; }
         public int CreatorRoleId { get; set; }
         public OfferRole OfferRole { get; set; }
+        public bool GoodTransferConfirmedByCreator { get; set; }
+        public bool GoodTransferConfirmedByDriver { get; set; }
+        public bool IsAnsweredByCreator { get; set; }
+        public bool IsAnsweredByDriver { get; set; }
         public int? NotificationId { get; set; }
         public Notification Notification { get; set; }
     }

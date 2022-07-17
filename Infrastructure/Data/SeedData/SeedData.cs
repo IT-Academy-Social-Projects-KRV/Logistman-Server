@@ -294,12 +294,12 @@ namespace Infrastructure.Data.SeedData
                 new OfferRole()
                 {
                     Id = 1,
-                    Name = OfferRoles.Sender
+                    Name = TripRoles.Sender
                 },
                 new OfferRole()
                 {
                     Id = 2,
-                    Name = OfferRoles.Recipient
+                    Name = TripRoles.Recipient
                 });
 
         #endregion
