@@ -51,6 +51,7 @@ namespace API.Controllers
         public async Task<IActionResult> GetUserOffersAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
+            
             return Ok(await _offerService.GetUsersOffersAsync(userId, paginationFilter));
         }
 
@@ -89,6 +90,7 @@ namespace API.Controllers
         public async Task<IActionResult> GetUserOffersToConfirmAsync([FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
+            
             return Ok(await _offerService.GetOffersToConfirmAsync(userId, paginationFilter));
         }
     }
