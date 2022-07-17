@@ -8,7 +8,7 @@ namespace Core.Interfaces.CustomService
     public interface IInviteService
     {
         Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId);
-        Task AddDriverInvite(int tripId, string userId);
+        Task CreateAsync(int tripId, string userId);
         Task<PaginatedList<InvitePreviewDTO>> GetByUserIdAsync(
             string userId, PaginationFilterDTO paginationFilter);
     }

@@ -1,6 +1,6 @@
 ﻿namespace Core.DTO.OfferDTO
 {
-    public class OfferPreviewForInviteDTO
+    public class OfferPreviewForNotificationDTO
     {
         public string CreatorRoleName { get; set; }
         public string Address { get; set; }

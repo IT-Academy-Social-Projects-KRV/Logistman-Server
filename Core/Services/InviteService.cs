@@ -13,6 +13,7 @@ using Core.DTO.OfferDTO;
 using Core.Entities.PointEntity;
 using System.Threading.Tasks;
 using Core.Entities.OfferEntity;
+using Core.Entities.TripEntity;
 
 namespace Core.Services
 {
@@ -21,26 +22,51 @@ namespace Core.Services
         private readonly IRepository<Invite> _inviteRepository;
         private readonly IRepository<Offer> _offerRepository;
         private readonly IRepository<PointData> _pointRepository;
+        private readonly IRepository<Trip> _tripRepository;
+        private readonly IOfferService _offerService;
+        private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
 
         public InviteService(
             IRepository<Invite> inviteRepository,
             IRepository<Offer> offerRepository,
             IRepository<PointData> pointRepository,
+            IRepository<Trip> tripRepository,
+            IOfferService offerService,
+            INotificationService notificationService,
             IMapper mapper)
         {
             _inviteRepository = inviteRepository;
             _offerRepository = offerRepository;
             _pointRepository = pointRepository;
+            _tripRepository = tripRepository;
+            _offerService = offerService;
+            _notificationService = notificationService;
             _mapper = mapper;
         }
 
         public async Task ManageAsync(ManageInviteDTO manageInviteDTO, string userId)
         {
             var invite = await _inviteRepository.GetBySpecAsync(
-                new InviteSpecification.GetUnansweredByInviteAndUserIds(manageInviteDTO.InviteId, userId));
+                new InviteSpecification.GetUnansweredByInviteAndUserIds(
+                    manageInviteDTO.InviteId,
+                    userId)
+                );
 
             ExceptionMethods.InviteNullCheck(invite);
+
+            if (!manageInviteDTO.IsAccepted)
+            {
+                await _offerService.UnlinkFromTripAsync(invite.TripId);
+                await _notificationService.DeleteNotificationsAsync(invite.TripId);
+
+                var trip = await _tripRepository.GetBySpecAsync(
+                    new TripSpecification.GetById(invite.TripId));
+
+                trip.Distance = trip.InitialDistance;
+
+                await _tripRepository.SaveChangesAsync();
+            }
 
             invite.IsAccepted = manageInviteDTO.IsAccepted;
             invite.IsAnswered = true;
@@ -70,7 +96,7 @@ namespace Core.Services
             foreach (var invite in invites)
             {
                 var offers = await _offerRepository.ListAsync(
-                    new OfferSpecification.GetByTripId(invite.TripId));
+                    new OfferSpecification.GetFullyByTripId(invite.TripId));
 
                 offers = offers.OrderBy(o => o.Point.Order).ToList();
 
@@ -106,13 +132,18 @@ namespace Core.Services
                 );
         }
 
-        public async Task AddDriverInvite(int tripId, string userId)
+        public async Task CreateAsync(int tripId, string userId)
         {
-            var isInvite = await _inviteRepository.AnyAsync(
-                new InviteSpecification.GetByTripId(tripId));
+            var invite = await _inviteRepository.GetBySpecAsync(
+                new InviteSpecification.GetSingleByTripId(tripId));
 
-            if (isInvite)
+            if (invite != null)
             {
+                invite.IsAccepted = false;
+                invite.IsAnswered = false;
+
+                await _inviteRepository.SaveChangesAsync();
+
                 return;
             }
 

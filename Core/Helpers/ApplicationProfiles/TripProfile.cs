@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.DTO.TripDTO;
 using Core.Entities.TripEntity;
 
@@ -9,7 +8,8 @@ namespace Core.Helpers.ApplicationProfiles
     {
         public TripProfile()
         {
-            CreateMap<CreateTripDTO, Trip>();
+            CreateMap<CreateTripDTO, Trip>()
+                .ForMember(dest => dest.InitialDistance, dto => dto.MapFrom(trip => trip.Distance));
             CreateMap<Trip, RouteDTO>();
             CreateMap<Trip, RoutePreviewDTO>();
             CreateMap<Trip, TripPreviewDTO>()

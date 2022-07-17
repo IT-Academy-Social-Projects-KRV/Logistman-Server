@@ -7,8 +7,16 @@ namespace Core.Specifications
 {
     public static class NotificationSpecification
     {
-        internal class GetByTripId : Specification<Notification>,
-                                     ISingleResultSpecification<Notification>
+        internal class GetSingleByTripId : Specification<Notification>,
+                                           ISingleResultSpecification<Notification>
+        {
+            public GetSingleByTripId(int tripId)
+            {
+                Query.Where(n => n.TripId == tripId);
+            }
+        }
+
+        internal class GetByTripId : Specification<Notification>
         {
             public GetByTripId(int tripId)
             {
@@ -31,6 +39,12 @@ namespace Core.Specifications
             {
                 Query
                     .Where(n => n.UserId == userId)
+                    .Include(n => n.Offer)
+                    .ThenInclude(o => o.OfferRole)
+                    .Include(n => n.Offer)
+                    .ThenInclude(o => o.Point)
+                    .Include(n => n.Offer)
+                    .ThenInclude(o => o.GoodCategory)
                     .Include(n => n.Trip)
                     .ThenInclude(t => t.User)
                     .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
