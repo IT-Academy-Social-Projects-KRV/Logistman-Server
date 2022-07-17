@@ -273,5 +273,17 @@ namespace Core.Services
 
             return _mapper.Map<TripInfoDTO>(trip);
         }
+
+        public async Task ActivatePossibleTrips()
+        {
+            var trips = await _tripRepository.ListAsync(new TripSpecification.GetReadyForActivationTrips());
+
+            foreach (var trip in trips)
+            {
+                trip.IsActive = true;
+            }
+
+            await _tripRepository.SaveChangesAsync();
+        }
     }
 }

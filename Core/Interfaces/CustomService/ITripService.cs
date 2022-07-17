@@ -15,5 +15,6 @@ namespace Core.Interfaces.CustomService
         Task DeleteExpiredRoutesAsync();
         Task DeleteRouteAsync(string userId, int tripId);
         Task<TripInfoDTO> GetTripByIdAsync(int tripId);
+        Task ActivatePossibleTrips();
     }
 }

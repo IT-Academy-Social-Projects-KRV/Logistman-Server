@@ -123,6 +123,7 @@ namespace API
             });
 
             RecurringJob.AddOrUpdate<ITripService>(o => o.DeleteExpiredRoutesAsync(), Cron.Daily);
+            RecurringJob.AddOrUpdate<ITripService>(o => o.ActivatePossibleTrips(), Cron.MinuteInterval(10)); //activation will be performed every 10 minutes
         }
     }
 }
