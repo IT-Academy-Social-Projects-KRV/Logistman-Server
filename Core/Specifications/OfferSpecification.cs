@@ -51,19 +51,16 @@ namespace Core.Specifications
             public GetOffersNearRoute(
                 Geometry routeGeography,
                 double dist,
-                DateTimeOffset expirationDate,
-                PaginationFilterDTO paginationFilter)
+                DateTimeOffset expirationDate)
             {
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
-                        && !offer.IsClosed
-                        && offer.RelatedTripId == null
-                        && offer.StartDate <= expirationDate)
+                                    && !offer.IsClosed
+                                    && offer.RelatedTripId == null
+                                    && offer.StartDate <= expirationDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
-                    .Include(offer => offer.GoodCategory)
-                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
-                    .Take(paginationFilter.PageSize);
+                    .Include(offer => offer.GoodCategory);
             }
         }
 
@@ -101,7 +98,7 @@ namespace Core.Specifications
         }
 
         public class GetOpenByIdAndUserIdWithoutTrip : Specification<Offer>, 
-            ISingleResultSpecification<Offer>
+                                                       ISingleResultSpecification<Offer>
         {
             public GetOpenByIdAndUserIdWithoutTrip(int offerId, string userId)
             {
@@ -129,7 +126,7 @@ namespace Core.Specifications
         }
 
         public class GetByIdWithTrip : Specification<Offer>,
-            ISingleResultSpecification<Offer>
+                                       ISingleResultSpecification<Offer>
         {
             public GetByIdWithTrip(int offerId, string userId)
             {

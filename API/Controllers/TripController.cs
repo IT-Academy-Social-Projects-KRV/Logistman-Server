@@ -69,5 +69,12 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [HttpGet("by-id")]
+        [AuthorizeByRole(IdentityRoleNames.Logist)]
+        public async Task<IActionResult> GetTripById([FromQuery] TripIdDTO tripIdDTO)
+        {
+            return Ok(await _tripService.GetTripByIdAsync(tripIdDTO.TripId));
+        }
     }
 }
