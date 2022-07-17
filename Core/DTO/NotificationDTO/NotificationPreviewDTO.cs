@@ -1,10 +1,11 @@
-﻿using Core.DTO.TripDTO;
+﻿using Core.DTO.OfferDTO;
+using Core.DTO.TripDTO;
 
 namespace Core.DTO.NotificationDTO
 {
     public class NotificationPreviewDTO
     {
-        public int Id { get; set; }
+        public OfferPreviewForNotificationDTO OfferInfo { get; set; }
         public TripPreviewDTO TripInfo { get; set; }
     }
 }

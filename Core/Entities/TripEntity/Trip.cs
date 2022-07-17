@@ -17,8 +17,8 @@ namespace Core.Entities.TripEntity
         public int Id { get; set; }
         public bool IsActive { get; set; }
         public bool IsEnded { get; set; }
-        public DateTimeOffset StartDate { get; set; }
-        public DateTimeOffset ExpirationDate { get; set; }
+        public DateTimeOffset CreationDate { get; set; }
+        public DateTimeOffset DepartureDate { get; set; }
         public DateTimeOffset? EndDate { get; set; }
         public string Description { get; set; }
         public float LoadCapacity { get; set; }
@@ -27,6 +27,7 @@ namespace Core.Entities.TripEntity
         public User User { get; set; }
         public int TransportationCarId { get; set; }
         public Car Car { get; set; }
+        public float InitialDistance { get; set; }
         public float Distance { get; set; }
         public LineString RouteGeographyData { get; set; }
         public ICollection<Invite> Invites { get; set; }

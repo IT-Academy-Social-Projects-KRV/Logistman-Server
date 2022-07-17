@@ -31,7 +31,7 @@ namespace Core.Validation.ValidationService
         public async Task ValidateOffersCheckAsync(
             List<PointTripDTO> points,
             int tripId,
-            DateTimeOffset expirationTrip)
+            DateTimeOffset tripDepartureDate)
         {
             foreach (var point in points)
             {
@@ -39,7 +39,7 @@ namespace Core.Validation.ValidationService
                 {
                     var offer = await _offerRepository
                         .GetBySpecAsync(new OfferSpecification
-                            .GetById((int)point.OfferId, tripId, expirationTrip));
+                            .GetByIdForSpecificTrip((int)point.OfferId, tripId, tripDepartureDate));
 
                     ExceptionMethods.OfferNullCheck(offer);
 
@@ -54,12 +54,11 @@ namespace Core.Validation.ValidationService
         }
 
         public async Task ValidateTripDateAsync(
-            DateTimeOffset startDate, 
-            DateTimeOffset expirationDate, 
+            DateTimeOffset tripDepartureDate, 
             string creatorId)
         {
             var isTimeSpaceBusy = await _tripRepository.AnyAsync(
-                new TripSpecification.GetByTimeSpace(startDate, expirationDate, creatorId));
+                new TripSpecification.GetInTheSameDayByCreatorId(tripDepartureDate, creatorId));
 
             if (isTimeSpaceBusy)
             {
