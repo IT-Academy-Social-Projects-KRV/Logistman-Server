@@ -6,9 +6,10 @@ namespace Core.Specifications
 {
     public static class InviteSpecification
     {
-        internal class GetByTripId : Specification<Invite>
+        internal class GetSingleByTripId : Specification<Invite>,
+                                           ISingleResultSpecification<Invite>
         {
-            public GetByTripId(int tripId)
+            public GetSingleByTripId(int tripId)
             {
                 Query.Where(i => i.TripId == tripId);
             }

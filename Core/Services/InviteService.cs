@@ -121,13 +121,18 @@ namespace Core.Services
                 );
         }
 
-        public async Task AddDriverInvite(int tripId, string userId)
+        public async Task CreateAsync(int tripId, string userId)
         {
-            var isInvite = await _inviteRepository.AnyAsync(
-                new InviteSpecification.GetByTripId(tripId));
+            var invite = await _inviteRepository.GetBySpecAsync(
+                new InviteSpecification.GetSingleByTripId(tripId));
 
-            if (isInvite)
+            if (invite != null)
             {
+                invite.IsAccepted = false;
+                invite.IsAnswered = false;
+
+                await _inviteRepository.SaveChangesAsync();
+
                 return;
             }
 

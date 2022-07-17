@@ -215,7 +215,7 @@ namespace Core.Services
             trip.Distance = manageTrip.Distance;
 
             await _tripRepository.UpdateAsync(trip);
-            await _inviteService.AddDriverInvite(trip.Id, trip.TripCreatorId);
+            await _inviteService.CreateAsync(trip.Id, trip.TripCreatorId);
             await _notificationService.ManageTripNotificationsAsync(
                         trip,
                         _mapper.Map<List<BriefNotificationDTO>>(offers));
@@ -243,7 +243,7 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(route);
 
             if (await _inviteRepository.AnyAsync(
-                new InviteSpecification.GetByTripId(route.Id)))
+                new InviteSpecification.GetSingleByTripId(route.Id)))
             {
                 throw new HttpException(
                         ErrorMessages.RouteHasInvites,
