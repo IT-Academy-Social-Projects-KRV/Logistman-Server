@@ -16,5 +16,7 @@ namespace Core.Interfaces.CustomService
         Task DeleteAsync(OfferIdDTO offerIdDTO, string userId);
         Task ConfirmGoodsTransferAsync(
             ConfirmGoodsTransferDTO confirmGoodTransferDTO, string userId);
+        Task<PaginatedList<OfferPreviewForConfirmDTO>> GetOffersToConfirmAsync(
+            string userId, PaginationFilterDTO paginationFilter);
     }
 }

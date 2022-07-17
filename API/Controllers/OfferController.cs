@@ -83,5 +83,13 @@ namespace API.Controllers
 
             return Ok();
         }
+        
+        [HttpGet("to-confirm")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> GetUserOffersToConfirmAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            return Ok(await _offerService.GetOffersToConfirmAsync(userId, paginationFilter));
+        }
     }
 }

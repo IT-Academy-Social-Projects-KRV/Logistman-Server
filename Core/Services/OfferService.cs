@@ -30,6 +30,7 @@ namespace Core.Services
         private readonly IGoodCategoryService _goodCategoryService;
         private readonly IOfferRoleService _offerRoleService;
         private readonly IPointService _pointService;
+        private IOfferService _offerServiceImplementation;
 
         public OfferService(
             IMapper mapper,
@@ -218,6 +219,31 @@ namespace Core.Services
             trip.EndDate = DateTimeOffset.UtcNow;
 
             await _tripRepository.SaveChangesAsync();
+        }
+
+        public async Task<PaginatedList<OfferPreviewForConfirmDTO>> GetOffersToConfirmAsync(
+            string userId, PaginationFilterDTO paginationFilter)
+        {
+            var offerListCount = await _offerRepository
+                .CountAsync(new OfferSpecification.GetWithTripByUserId(userId, paginationFilter));
+
+            var totalPages = PaginatedList<OfferPreviewDTO>
+                .GetTotalPages(paginationFilter, offerListCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var offerList = await _offerRepository
+                .ListAsync(
+                    new OfferSpecification.GetWithTripByUserId(userId, paginationFilter));
+
+            return PaginatedList<OfferPreviewForConfirmDTO>.Evaluate(
+                _mapper.Map<List<OfferPreviewForConfirmDTO>>(offerList), 
+                paginationFilter.PageNumber, 
+                offerListCount, 
+                totalPages);
         }
     }
 }

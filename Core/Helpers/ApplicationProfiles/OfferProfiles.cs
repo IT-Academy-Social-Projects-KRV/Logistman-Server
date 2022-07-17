@@ -35,6 +35,16 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))
                 .ForMember(dest => dest.PointInfo, opt => opt.MapFrom(offer => offer.Point))
                 .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
+            CreateMap<Offer, OfferPreviewForConfirmDTO>()
+                .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(offer => offer.Point.Address))
+                .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
+                .ForMember(dest => dest.Region, opt => opt.MapFrom(offer => offer.Point.Region))
+                .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name))
+                .ForMember(dest => dest.DriversName, opt => opt.MapFrom(offer => offer.Trip.User.Name))
+                .ForMember(dest => dest.DriversSurname, opt => opt.MapFrom(offer => offer.Trip.User.Surname))
+                .ForMember(dest => dest.CarModel, opt => opt.MapFrom(offer => offer.Trip.Car.Model))
+                .ForMember(dest => dest.CarNumber, opt => opt.MapFrom(offer => offer.Trip.Car.RegistrationNumber));
         }
     }
 }
