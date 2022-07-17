@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220715143737_AddNotificationEntity")]
+    [Migration("20220716183750_AddNotificationEntity")]
     partial class AddNotificationEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

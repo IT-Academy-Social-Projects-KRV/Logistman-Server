@@ -131,7 +131,7 @@ namespace Core.Services
 
             var points = new List<PointOfferCreateTripDTO>();
 
-            offers.ForEach(item => 
+            offers.ForEach(item =>
                 points.Add(_mapper.Map<PointOfferCreateTripDTO>(item.Point)));
 
             return points;
@@ -218,6 +218,25 @@ namespace Core.Services
             trip.EndDate = DateTimeOffset.UtcNow;
 
             await _tripRepository.SaveChangesAsync();
+        }
+
+        public async Task UnlinkFromTripAsync(int tripId)
+        {
+            var offers = await _offerRepository.ListAsync(
+                new OfferSpecification.GetByTripId(tripId));
+
+            if (offers.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var offer in offers)
+            {
+                offer.RelatedTripId = null;
+            }
+
+            await _pointService.ResetTripPointOrdersAsync(tripId);
+            await _offerRepository.UpdateRangeAsync(offers);
         }
     }
 }

@@ -16,5 +16,6 @@ namespace Core.Interfaces.CustomService
         Task DeleteAsync(OfferIdDTO offerIdDTO, string userId);
         Task ConfirmGoodsTransferAsync(
             ConfirmGoodsTransferDTO confirmGoodTransferDTO, string userId);
+        Task UnlinkFromTripAsync(int tripId);
     }
 }

@@ -12,5 +12,6 @@ namespace Core.Interfaces.CustomService
         Task ManageTripNotificationsAsync(Trip trip, List<BriefNotificationDTO> offers);
         Task<PaginatedList<NotificationPreviewDTO>> GetByUserIdAsync(
             string userId, PaginationFilterDTO paginationFilter);
+        Task DeleteNotificationsAsync(int tripId);
     }
 }

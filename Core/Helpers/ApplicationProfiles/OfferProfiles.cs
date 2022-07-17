@@ -25,7 +25,7 @@ namespace Core.Helpers.ApplicationProfiles
             CreateMap<Offer, BriefNotificationDTO>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(offer => offer.User.Id))
                 .ForMember(dest => dest.OfferId, opt => opt.MapFrom(offer => offer.Id));
-            CreateMap<Offer, OfferPreviewForInviteDTO>()
+            CreateMap<Offer, OfferPreviewForNotificationDTO>()
                 .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(offer => offer.Point.Address))
                 .ForMember(dest => dest.Settlement, opt => opt.MapFrom(offer => offer.Point.Settlement))
