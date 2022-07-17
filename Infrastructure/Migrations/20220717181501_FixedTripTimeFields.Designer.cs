@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220716141700_FixedTripTimeFields")]
+    [Migration("20220717181501_FixedTripTimeFields")]
     partial class FixedTripTimeFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,8 +183,20 @@ namespace Infrastructure.Migrations
                     b.Property<int>("GoodCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("GoodTransferConfirmedByCreator")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("GoodTransferConfirmedByDriver")
+                        .HasColumnType("bit");
+
                     b.Property<float>("GoodsWeight")
                         .HasColumnType("real");
+
+                    b.Property<bool>("IsAnsweredByCreator")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAnsweredByDriver")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
