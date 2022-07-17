@@ -95,14 +95,14 @@ namespace Core.Specifications
                 Query.Where(t => t.TripCreatorId == userId && t.IsActive);
             }
         }
-        internal class GetActiveOrWithRelatedOffersByCarId : Specification<Trip>, 
+        internal class GetActiveOrWithRelatedOffersByCarId : Specification<Trip>,
             ISingleResultSpecification<Trip>
         {
             public GetActiveOrWithRelatedOffersByCarId(int carId)
             {
                 Query
-                    .Where(t => 
-                        t.TransportationCarId == carId 
+                    .Where(t =>
+                        t.TransportationCarId == carId
                         && (t.IsActive || (!t.IsActive && !t.IsEnded && t.Offers.Count != 0)));
             }
         }
@@ -112,8 +112,8 @@ namespace Core.Specifications
             public GetRoutesWithoutRelatedOffersByCarId(int carId)
             {
                 Query
-                    .Where(t => 
-                        t.TransportationCarId == carId 
+                    .Where(t =>
+                        t.TransportationCarId == carId
                         && (!t.IsActive && !t.IsEnded && t.Offers.Count == 0))
                     .Include(t => t.Points);
             }
@@ -152,13 +152,32 @@ namespace Core.Specifications
                     .Include(t => t.Points);
             }
         }
-        
+
         internal class GetRouteByUserIdAndId : Specification<Trip>, ISingleResultSpecification<Trip>
         {
             public GetRouteByUserIdAndId(string userId, int tripId)
             {
                 Query.Where(t => t.Id == tripId && !t.IsActive && !t.IsEnded &&
                                  t.TripCreatorId == userId);
+            }
+        }
+
+        internal class GetTripForConfirmDeliveryByDriver : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetTripForConfirmDeliveryByDriver(string userId)
+            {
+                Query
+                    .Where(t => t.IsActive && !t.IsEnded &&
+                                 t.TripCreatorId == userId)
+                    .Include(t => t.Offers)
+                    .ThenInclude(o => o.Point)
+                    .Include(t => t.Offers)
+                    .ThenInclude(o => o.User)
+                    .Include(t => t.Offers)
+                    .ThenInclude(o => o.GoodCategory)
+                    .Include(t => t.Offers)
+                    .ThenInclude(o => o.OfferRole)
+                    .Include(t => t.Car);
             }
         }
     }

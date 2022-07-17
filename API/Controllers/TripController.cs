@@ -76,5 +76,14 @@ namespace API.Controllers
         {
             return Ok(await _tripService.GetTripByIdAsync(tripIdDTO.TripId));
         }
+
+        [HttpGet("by-user")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> GetTripOfferByDriverAsync()
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            
+            return Ok(await _tripService.GetTripOfferByDriverAsync(userId));
+        }
     }
 }

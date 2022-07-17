@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Core.DTO.OfferDTO;
 
 namespace Core.Services
 {
@@ -265,6 +266,18 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(trip);
 
             return _mapper.Map<TripInfoDTO>(trip);
+        }
+
+        public async Task<TripOffersDTO> GetTripOfferByDriverAsync(string userId)
+        {
+            var trip = await _tripRepository
+                .GetBySpecAsync(
+                    new TripSpecification
+                        .GetTripForConfirmDeliveryByDriver(userId));
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            return _mapper.Map<TripOffersDTO>(trip);
         }
     }
 }
