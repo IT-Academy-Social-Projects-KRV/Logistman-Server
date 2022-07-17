@@ -10,11 +10,8 @@ namespace Core.Interfaces.CustomService
     {
         Task CreateOfferAsync(OfferCreateDTO offerCreate, string userId);
         Task<OfferInfoDTO> GetOfferByIdAsync(int offerId, string userId);
-        Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(
-            string userId, PaginationFilterDTO paginationFilter);
+        Task<PaginatedList<OfferPreviewDTO>> GetUsersOffersAsync(string userId, PaginationFilterDTO paginationFilter);
         Task<List<PointOfferCreateTripDTO>> GetNearRouteAsync(int routeId);
         Task DeleteAsync(OfferIdDTO offerIdDTO, string userId);
-        Task ConfirmGoodsTransferAsync(
-            ConfirmGoodsTransferDTO confirmGoodTransferDTO, string userId);
     }
 }

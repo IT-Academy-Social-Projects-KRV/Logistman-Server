@@ -19,7 +19,6 @@ using Core.Entities.InviteEntity;
 using Core.Entities.TripEntity;
 using Core.Entities.OfferEntity;
 using Core.Entities.PointEntity;
-using Core.Entities.NotificationEntity;
 
 namespace Core.Services
 {
@@ -32,7 +31,6 @@ namespace Core.Services
         private readonly IRepository<Invite> _inviteRepository;
         private readonly IRepository<Offer> _offerRepository;
         private readonly IRepository<PointData> _pointDataRepository;
-        private readonly IRepository<Notification> _notificationRepository;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -46,7 +44,6 @@ namespace Core.Services
             IRepository<Invite> inviteRepository,
             IRepository<Offer> offerRepository,
             IRepository<PointData> pointDataRepository,
-            IRepository<Notification> notificationRepository,
             IMapper mapper,
             UserManager<User> userManager,
             RoleManager<IdentityRole> roleManager,
@@ -59,7 +56,6 @@ namespace Core.Services
             _inviteRepository = inviteRepository;
             _offerRepository = offerRepository;
             _pointDataRepository = pointDataRepository;
-            _notificationRepository = notificationRepository;
             _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -204,7 +200,6 @@ namespace Core.Services
             }
 
             await _inviteRepository.DeleteRangeAsync(user.Invites);
-            await _notificationRepository.DeleteRangeAsync(user.Notifications);
             await _tripRepository.DeleteRangeAsync(userTripsToDelete);
             await _offerRepository.DeleteRangeAsync(userOffersToDelete);
             await _pointDataRepository.DeleteRangeAsync(pointsToDelete);

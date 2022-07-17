@@ -44,8 +44,7 @@ namespace Core.Specifications
                     .Include(u => u.RatedRatings)
                     .Include(u => u.Trips)
                     .Include(u => u.ViolationReports)
-                    .Include(u => u.ReporterReports)
-                    .Include(u => u.Notifications);
+                    .Include(u => u.ReporterReports);
             }
         }
     }

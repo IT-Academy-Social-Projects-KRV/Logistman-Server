@@ -151,15 +151,6 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Such role does not exist: .
-        /// </summary>
-        internal static string ConfirmGoodsDeliveryWrongRoleName {
-            get {
-                return ResourceManager.GetString("ConfirmGoodsDeliveryWrongRoleName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to User with such email already exists..
         /// </summary>
         internal static string EmailAlreadyExists {
