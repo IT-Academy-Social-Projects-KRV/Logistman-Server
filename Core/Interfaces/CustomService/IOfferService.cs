@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Core.DTO;
 using Core.DTO.OfferDTO;
 using Core.Helpers;
@@ -16,6 +16,8 @@ namespace Core.Interfaces.CustomService
         Task DeleteAsync(OfferIdDTO offerIdDTO, string userId);
         Task ConfirmGoodsTransferAsync(
             ConfirmGoodsTransferDTO confirmGoodTransferDTO, string userId);
+        Task<PaginatedList<OfferPreviewForConfirmDTO>> GetOffersToConfirmAsync(
+            string userId, PaginationFilterDTO paginationFilter);
         Task UnlinkFromTripAsync(int tripId);
         Task<List<OfferPreviewForInvite>> GetConfirmedGoodsDeliveryAsync(
             int tripId, string userId);

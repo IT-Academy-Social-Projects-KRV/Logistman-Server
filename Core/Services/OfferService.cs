@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Core.Constants;
 using Core.DTO;
 using Core.DTO.OfferDTO;
@@ -31,6 +31,7 @@ namespace Core.Services
         private readonly IGoodCategoryService _goodCategoryService;
         private readonly IOfferRoleService _offerRoleService;
         private readonly IPointService _pointService;
+        private IOfferService _offerServiceImplementation;
 
         public OfferService(
             IMapper mapper,
@@ -221,6 +222,31 @@ namespace Core.Services
             await _tripRepository.SaveChangesAsync();
         }
 
+        public async Task<PaginatedList<OfferPreviewForConfirmDTO>> GetOffersToConfirmAsync(
+            string userId, PaginationFilterDTO paginationFilter)
+        {
+            var offerListCount = await _offerRepository
+                .CountAsync(new OfferSpecification.GetWithTripByUserId(userId, paginationFilter));
+
+            var totalPages = PaginatedList<OfferPreviewDTO>
+                .GetTotalPages(paginationFilter, offerListCount);
+
+            if (totalPages == 0)
+            {
+                return null;
+            }
+
+            var offerList = await _offerRepository
+                .ListAsync(
+                    new OfferSpecification.GetWithTripByUserId(userId, paginationFilter));
+
+            return PaginatedList<OfferPreviewForConfirmDTO>.Evaluate(
+                _mapper.Map<List<OfferPreviewForConfirmDTO>>(offerList), 
+                paginationFilter.PageNumber, 
+                offerListCount, 
+                totalPages);
+        }
+        
         public async Task UnlinkFromTripAsync(int tripId)
         {
             var offers = await _offerRepository.ListAsync(
