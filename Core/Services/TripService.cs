@@ -32,7 +32,6 @@ namespace Core.Services
         private readonly IRepository<Offer> _offerRepository;
         private readonly IInviteService _inviteService;
         private readonly ITripValidationService _tripValidationService;
-        private readonly INotificationService _notificationService;
 
         public TripService(
             IRepository<Trip> tripRepository,
@@ -43,8 +42,7 @@ namespace Core.Services
             IMapper mapper,
             IRepository<Offer> offerRepository,
             IInviteService inviteService,
-            ITripValidationService tripValidationService,
-            INotificationService notificationService)
+            ITripValidationService tripValidationService)
         {
             _tripRepository = tripRepository;
             _pointDataRepository = pointDataRepository;
@@ -55,7 +53,6 @@ namespace Core.Services
             _offerRepository = offerRepository;
             _inviteService = inviteService;
             _tripValidationService = tripValidationService;
-            _notificationService = notificationService;
         }
 
         public async Task CreateTripAsync(CreateTripDTO createTripDTO, string creatorId)
@@ -227,20 +224,6 @@ namespace Core.Services
             await _inviteService.CreateAsync(trip.Id, trip.TripCreatorId);
         }
 
-        public async Task DeleteExpiredRoutesAsync()
-        {
-            var trips = await _tripRepository.ListAsync(new TripSpecification.GetExpiredRoutes());
-            var points = new List<PointData>();
-
-            foreach (var trip in trips)
-            {
-                points.AddRange(trip.Points);
-            }
-
-            await _pointDataRepository.DeleteRangeAsync(points);
-            await _tripRepository.DeleteRangeAsync(trips);
-        }
-
         public async Task DeleteRouteAsync(string userId, int tripId)
         {
             var route = await _tripRepository.GetBySpecAsync(
@@ -272,18 +255,6 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(trip);
 
             return _mapper.Map<TripInfoDTO>(trip);
-        }
-
-        public async Task ActivatePossibleTrips()
-        {
-            var trips = await _tripRepository.ListAsync(new TripSpecification.GetReadyForActivationTrips());
-
-            foreach (var trip in trips)
-            {
-                trip.IsActive = true;
-            }
-
-            await _tripRepository.SaveChangesAsync();
         }
     }
 }
