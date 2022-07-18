@@ -40,7 +40,8 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetInTheSameDayByCreatorId : Specification<Trip>, ISingleResultSpecification<Trip>
+        internal class GetInTheSameDayByCreatorId : Specification<Trip>,
+                                                    ISingleResultSpecification<Trip>
         {
             public GetInTheSameDayByCreatorId(
                 DateTimeOffset tripDepartureDate,
@@ -57,7 +58,9 @@ namespace Core.Specifications
             public GetRoutes(PaginationFilterDTO paginationFilter)
             {
                 Query
-                    .Where(t => !t.IsActive && !t.IsEnded && t.DepartureDate > DateTimeOffset.UtcNow)
+                    .Where(t => !t.IsActive
+                             && !t.IsEnded
+                             && t.DepartureDate > DateTimeOffset.UtcNow)
                     .Include(t => t.User)
                     .Include(t => t.Points)
                     .Include(t => t.Car)
@@ -94,7 +97,8 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetActiveByUserIdWithOffers : Specification<Trip>, ISingleResultSpecification<Trip>
+        internal class GetActiveByUserIdWithOffers : Specification<Trip>,
+                                                     ISingleResultSpecification<Trip>
         {
             public GetActiveByUserIdWithOffers(string userId)
             {
@@ -104,14 +108,14 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetActiveOrWithRelatedOffersByCarId : Specification<Trip>, 
+        internal class GetActiveOrWithRelatedOffersByCarId : Specification<Trip>,
             ISingleResultSpecification<Trip>
         {
             public GetActiveOrWithRelatedOffersByCarId(int carId)
             {
                 Query
-                    .Where(t => 
-                        t.TransportationCarId == carId 
+                    .Where(t =>
+                        t.TransportationCarId == carId
                         && (t.IsActive || (!t.IsActive && !t.IsEnded && t.Offers.Count != 0)));
             }
         }
@@ -121,8 +125,8 @@ namespace Core.Specifications
             public GetRoutesWithoutRelatedOffersByCarId(int carId)
             {
                 Query
-                    .Where(t => 
-                        t.TransportationCarId == carId 
+                    .Where(t =>
+                        t.TransportationCarId == carId
                         && (!t.IsActive && !t.IsEnded && t.Offers.Count == 0))
                     .Include(t => t.Points);
             }
@@ -138,7 +142,8 @@ namespace Core.Specifications
 
         internal class GetRoutesByCreatorId : Specification<Trip>
         {
-            public GetRoutesByCreatorId(PaginationFilterDTO paginationFilter, string tripCreatorId)
+            public GetRoutesByCreatorId(
+                PaginationFilterDTO paginationFilter, string tripCreatorId)
             {
                 Query
                     .Where(t => t.TripCreatorId == tripCreatorId && !t.IsActive && !t.IsEnded)
@@ -161,13 +166,25 @@ namespace Core.Specifications
                     .Include(t => t.Points);
             }
         }
-        
-        internal class GetRouteByUserIdAndId : Specification<Trip>, ISingleResultSpecification<Trip>
+
+        internal class GetRouteByUserIdAndId : Specification<Trip>,
+                                               ISingleResultSpecification<Trip>
         {
             public GetRouteByUserIdAndId(string userId, int tripId)
             {
                 Query.Where(t => t.Id == tripId && !t.IsActive && !t.IsEnded &&
                                  t.TripCreatorId == userId);
+            }
+        }
+
+        internal class GetActiveByUserIdAndId : Specification<Trip>,
+                                                ISingleResultSpecification<Trip>
+        {
+            public GetActiveByUserIdAndId(int tripId, string userId)
+            {
+                Query.Where(t => t.Id == tripId
+                              && t.TripCreatorId == userId
+                              && t.IsActive);
             }
         }
     }

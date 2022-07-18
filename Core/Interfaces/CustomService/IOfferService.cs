@@ -17,5 +17,7 @@ namespace Core.Interfaces.CustomService
         Task ConfirmGoodsTransferAsync(
             ConfirmGoodsTransferDTO confirmGoodTransferDTO, string userId);
         Task UnlinkFromTripAsync(int tripId);
+        Task<List<OfferPreviewForInvite>> GetConfirmedGoodsDeliveryAsync(
+            int tripId, string userId);
     }
 }

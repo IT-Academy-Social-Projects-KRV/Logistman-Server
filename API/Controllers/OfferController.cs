@@ -48,7 +48,8 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> GetUserOffersAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        public async Task<IActionResult> GetUserOffersAsync(
+            [FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             return Ok(await _offerService.GetUsersOffersAsync(userId, paginationFilter));
@@ -59,6 +60,18 @@ namespace API.Controllers
         public async Task<IActionResult> GetNearRouteAsync([FromQuery] TripIdDTO tripIdDTO)
         {
             return Ok(await _offerService.GetNearRouteAsync(tripIdDTO.TripId));
+        }
+
+        [HttpGet("confirmed-goods-delivery")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> GetConfirmedGoodsDeliveryAsync(
+            [FromQuery] TripIdDTO tripIdDTO)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            var offers =
+                await _offerService.GetConfirmedGoodsDeliveryAsync(tripIdDTO.TripId, userId);
+
+            return Ok(offers);
         }
 
         [HttpDelete("delete")]
