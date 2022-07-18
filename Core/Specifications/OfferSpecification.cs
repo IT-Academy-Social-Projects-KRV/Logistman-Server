@@ -150,5 +150,25 @@ namespace Core.Specifications
                     .Include(o => o.Trip);
             }
         }
+        
+        internal class GetWithTripByUserId : Specification<Offer>
+        {
+            public GetWithTripByUserId(string userId, PaginationFilterDTO paginationFilter)
+            {
+                Query
+                    .Where(o => o.OfferCreatorId == userId
+                    && o.RelatedTripId != null
+                    && (o.Trip.IsActive
+                    || o.Trip.IsEnded))
+                    .Include(o => o.Point)
+                    .Include(o => o.OfferRole)
+                    .Include(o => o.GoodCategory)
+                    .Include(o => o.Trip)
+                    .Include(o => o.Trip.User)
+                    .Include(o => o.Trip.Car)
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize);
+            }
+        }
     }
 }
