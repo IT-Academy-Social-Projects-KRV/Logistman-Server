@@ -266,7 +266,7 @@ namespace Core.Services
             await _offerRepository.UpdateRangeAsync(offers);
         }
 
-        public async Task<List<OfferPreviewForInvite>>
+        public async Task<List<OfferPreviewForInviteDTO>>
             GetConfirmedGoodsDeliveryAsync(int tripId, string userId)
         {
             var trip = await _tripRepository.GetBySpecAsync(
@@ -298,7 +298,7 @@ namespace Core.Services
                 return null;
             }
 
-            return _mapper.Map<List<OfferPreviewForInvite>>(result);
+            return _mapper.Map<List<OfferPreviewForInviteDTO>>(result);
         }
     }
 }

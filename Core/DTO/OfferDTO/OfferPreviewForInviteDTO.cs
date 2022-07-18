@@ -1,6 +1,6 @@
 ﻿namespace Core.DTO.OfferDTO
 {
-    public class OfferPreviewForInvite
+    public class OfferPreviewForInviteDTO
     {
         public int Id { get; set; }
         public bool GoodTransferConfirmedByCreator { get; set; }
