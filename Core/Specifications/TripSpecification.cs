@@ -175,6 +175,7 @@ namespace Core.Specifications
             {
                 Query
                     .Where(t => t.TripCreatorId == userId && t.IsActive)
+                    .OrderBy(t => t.DepartureDate)
                     .Include(t => t.Offers)
                     .Include(t => t.Car)
                     .Include(t => t.User)

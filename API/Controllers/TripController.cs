@@ -77,9 +77,9 @@ namespace API.Controllers
             return Ok(await _tripService.GetTripByIdAsync(tripIdDTO.TripId));
         }
 
-        [HttpGet("info-for-confirm")]
+        [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> GetTripInfoAsync()
+        public async Task<IActionResult> GetUserTripInfoAsync()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
