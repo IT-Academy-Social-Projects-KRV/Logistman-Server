@@ -37,7 +37,8 @@ namespace Core.Services
 
         public async Task ActivatePossibleTripsAsync()
         {
-            var trips = await _tripRepository.ListAsync(new TripSpecification.GetReadyForActivationTrips());
+            var trips = await _tripRepository.ListAsync(
+                new TripSpecification.GetReadyForActivationTrips());
 
             foreach (var trip in trips)
             {

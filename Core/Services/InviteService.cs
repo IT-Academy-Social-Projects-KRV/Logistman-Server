@@ -63,7 +63,8 @@ namespace Core.Services
 
             if (manageInviteDTO.IsAccepted)
             {
-                var offers = await _offerRepository.ListAsync(new OfferSpecification.GetByTripId(invite.TripId));
+                var offers = await _offerRepository.ListAsync(
+                    new OfferSpecification.GetByTripId(invite.TripId));
 
                 await _notificationService.ManageTripNotificationsAsync(
                     invite.Trip, 

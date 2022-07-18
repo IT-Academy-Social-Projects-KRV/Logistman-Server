@@ -175,9 +175,9 @@ namespace Core.Specifications
         {
             public GetReadyForActivationTrips()
             {
-                Query.Where(t => !t.IsActive
-                                && t.DepartureDate <= DateTimeOffset.UtcNow
-                                && t.Offers.Count > 0);
+                Query.Where(t => !t.IsActive 
+                        && t.DepartureDate <= DateTimeOffset.UtcNow
+                        && t.Offers.Count > 0);
             }
         }
     }
