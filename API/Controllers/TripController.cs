@@ -77,13 +77,13 @@ namespace API.Controllers
             return Ok(await _tripService.GetTripByIdAsync(tripIdDTO.TripId));
         }
 
-        [HttpGet("confirm-info-by-user")]
+        [HttpGet("info-for-confirm")]
         [AuthorizeByRole(IdentityRoleNames.User)]
         public async Task<IActionResult> GetTripInfoAsync()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
-            return Ok(await _tripService.GetTripConfirmInfoAsync(userId));
+            return Ok(await _tripService.GetInfoForTripConfirmAsync(userId));
         }
     }
 }

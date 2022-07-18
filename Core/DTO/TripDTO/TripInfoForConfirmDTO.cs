@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.AccessControl;
 
 namespace Core.DTO.TripDTO
 {
-    public class TripInfoConfirmDTO
+    public class TripInfoForConfirmDTO
     {
         public int Id { get; set; }
         public string Model { get; set; }

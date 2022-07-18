@@ -100,16 +100,7 @@ namespace Core.Specifications
             {
                 Query
                     .Where(t => t.TripCreatorId == userId && t.IsActive)
-                    .Include(t => t.Offers)
-                    .Include(t => t.Offers)
-                    .Include(t => t.Car)
-                    .Include(t => t.User)
-                    .Include(t => t.Points)
-                    .ThenInclude(t => t.Offer)
-                    .ThenInclude(t => t.OfferRole)
-                    .Include(t => t.Points)
-                    .ThenInclude(t => t.Offer)
-                    .ThenInclude(t => t.GoodCategory);
+                    .Include(t => t.Offers);
             }
         }
 
@@ -175,6 +166,19 @@ namespace Core.Specifications
             {
                 Query.Where(t => t.Id == tripId && !t.IsActive && !t.IsEnded &&
                                  t.TripCreatorId == userId);
+            }
+        }
+
+        internal class GetTripForConfirmOffers : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetTripForConfirmOffers(string userId)
+            {
+                Query
+                    .Where(t => t.TripCreatorId == userId && t.IsActive)
+                    .Include(t => t.Offers)
+                    .Include(t => t.Car)
+                    .Include(t => t.User)
+                    .Include(t => t.Points);
             }
         }
     }
