@@ -35,12 +35,6 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))
                 .ForMember(dest => dest.PointInfo, opt => opt.MapFrom(offer => offer.Point))
                 .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name));
-            CreateMap<Offer, OfferConfirmDTO>()
-                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(offer => offer.User))
-                .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(offer => offer.GoodCategory.Name))
-                .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(offer => offer.OfferRole.Name))
-                .ForMember(dest => dest.PointInfo, opt => opt.MapFrom(offer => offer.Point));
-
         }
     }
 }

@@ -20,9 +20,8 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.RegistrationNumber, dto => dto.MapFrom(trip => trip.Car.RegistrationNumber))
                 .ForMember(dest => dest.Points, dto => dto.MapFrom(trip => trip.Points));
             CreateMap<Trip, TripInfoConfirmDTO>()
-                .ForMember(dest => dest.Model, dto => dto.MapFrom(trip => trip.Car.Model));
-            CreateMap<Trip, TripOffersConfirmDTO>()
-                .ForMember(dest => dest.Offers, dto => dto.MapFrom(trip => trip.Offers));
+                .ForMember(dest => dest.Model, dto => dto.MapFrom(trip => trip.Car.Model))
+                .ForMember(dest => dest.RegistrationNumber, dto => dto.MapFrom(trip => trip.Car.RegistrationNumber));
         }
     }
 }

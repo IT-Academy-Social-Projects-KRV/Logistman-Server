@@ -19,8 +19,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Core.DTO.OfferDTO;
-using Microsoft.AspNetCore.Identity;
 
 namespace Core.Services
 {
@@ -280,32 +278,21 @@ namespace Core.Services
             return _mapper.Map<TripInfoDTO>(trip);
         }
 
-        public async Task<TripOffersConfirmDTO> GetTripOfferByDriverAsync(string userId)
+        public async Task<TripInfoConfirmDTO> GetTripInfoAsync(int tripId, string userId)
         {
             var trip = await _tripRepository
-                .GetBySpecAsync(new TripSpecification
-                    .GetTripForConfirmDeliveryByDriver(userId));
-
-            ExceptionMethods.TripNullCheck(trip);
-
-            var tripOffers = _mapper.Map<TripOffersConfirmDTO>(trip);
-
-           return _mapper.Map<TripOffersConfirmDTO>(trip);
-        }
-
-        public async Task<TripInfoConfirmDTO> GetTripInfoAsync(int tripId)
-        {
-            var trip = await _tripRepository
-                .GetBySpecAsync(new TripSpecification.GetById(tripId));
+                .GetBySpecAsync(new TripSpecification.GetById(tripId, userId));
 
             ExceptionMethods.TripNullCheck(trip);
 
             var tripInfo = _mapper.Map<TripInfoConfirmDTO>(trip);
+            var sortPoints = tripInfo.Points
+                .OrderBy(p => p.Order);
 
             tripInfo.Points = new List<PointTripInfoDTO>()
             {
-                tripInfo.Points.Min(),
-                tripInfo.Points.Max()
+                sortPoints.First(),
+                sortPoints.Last()
             };
 
             return tripInfo;
