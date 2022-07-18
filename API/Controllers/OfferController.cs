@@ -100,7 +100,8 @@ namespace API.Controllers
         
         [HttpGet("to-confirm")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> GetUserOffersToConfirmAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        public async Task<IActionResult> GetUserOffersToConfirmAsync(
+            [FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             
