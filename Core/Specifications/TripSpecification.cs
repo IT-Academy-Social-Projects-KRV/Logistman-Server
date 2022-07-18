@@ -119,9 +119,8 @@ namespace Core.Specifications
             public GetActiveOrWithRelatedOffersByCarId(int carId)
             {
                 Query
-                    .Where(t =>
-                        t.TransportationCarId == carId
-                        && (t.IsActive || (!t.IsActive && !t.IsEnded && t.Offers.Count != 0)));
+                    .Where(t => t.TransportationCarId == carId
+                                && (t.IsActive || (!t.IsActive && !t.IsEnded && t.Offers.Count != 0)));
             }
         }
 
@@ -130,9 +129,8 @@ namespace Core.Specifications
             public GetRoutesWithoutRelatedOffersByCarId(int carId)
             {
                 Query
-                    .Where(t =>
-                        t.TransportationCarId == carId
-                        && (!t.IsActive && !t.IsEnded && t.Offers.Count == 0))
+                    .Where(t => t.TransportationCarId == carId
+                                && (!t.IsActive && !t.IsEnded && t.Offers.Count == 0))
                     .Include(t => t.Points);
             }
         }

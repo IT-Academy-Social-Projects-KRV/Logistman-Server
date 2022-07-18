@@ -72,14 +72,14 @@ namespace API.Controllers
 
         [HttpGet("by-id")]
         [AuthorizeByRole(IdentityRoleNames.Logist)]
-        public async Task<IActionResult> GetTripById([FromQuery] TripIdDTO tripIdDTO)
+        public async Task<IActionResult> GetTripByIdAsync([FromQuery] TripIdDTO tripIdDTO)
         {
             return Ok(await _tripService.GetTripByIdAsync(tripIdDTO.TripId));
         }
 
         [HttpGet("confirm-info-by-user")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> GetTripInfo()
+        public async Task<IActionResult> GetTripInfoAsync()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
