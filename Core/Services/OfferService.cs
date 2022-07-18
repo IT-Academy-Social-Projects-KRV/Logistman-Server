@@ -275,7 +275,7 @@ namespace Core.Services
             ExceptionMethods.TripNullCheck(trip);
 
             var offers = await _offerRepository.ListAsync(
-                new OfferSpecification.GetConfirmedByTripAndUserIds(tripId, userId));
+                new OfferSpecification.GetToConfirmByTripAndUserIds(tripId, userId));
 
             var theLastAnswered = offers.LastOrDefault(o => o.IsAnsweredByDriver);
 

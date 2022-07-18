@@ -153,9 +153,9 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetConfirmedByTripAndUserIds : Specification<Offer>
+        internal class GetToConfirmByTripAndUserIds : Specification<Offer>
         {
-            public GetConfirmedByTripAndUserIds(int tripId, string userId)
+            public GetToConfirmByTripAndUserIds(int tripId, string userId)
             {
                 Query
                     .Where(o => o.Trip.TripCreatorId == userId
