@@ -12,7 +12,6 @@ namespace Core.Interfaces.CustomService
         Task<PaginatedList<RoutePreviewDTO>> GetUserRoutesAsync(
             PaginationFilterDTO paginationFilter, string tripCreatorId);
         Task ManageOffersTripAsync(ManageTripDTO manageTrip);
-        Task DeleteExpiredRoutesAsync();
         Task DeleteRouteAsync(string userId, int tripId);
         Task<TripInfoDTO> GetTripByIdAsync(int tripId);
         Task<TripInfoForConfirmDTO> GetTripInfoForConfirm(string userId);

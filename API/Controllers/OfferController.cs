@@ -48,9 +48,11 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> GetUserOffersAsync([FromQuery] PaginationFilterDTO paginationFilter)
+        public async Task<IActionResult> GetUserOffersAsync(
+            [FromQuery] PaginationFilterDTO paginationFilter)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
+            
             return Ok(await _offerService.GetUsersOffersAsync(userId, paginationFilter));
         }
 
@@ -59,6 +61,18 @@ namespace API.Controllers
         public async Task<IActionResult> GetNearRouteAsync([FromQuery] TripIdDTO tripIdDTO)
         {
             return Ok(await _offerService.GetNearRouteAsync(tripIdDTO.TripId));
+        }
+
+        [HttpGet("driver-to-confirm")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> GetDriverConfirmGoodsDevliveryAsync(
+            [FromQuery] TripIdDTO tripIdDTO)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            var offers =
+                await _offerService.GetDriverConfirmGoodsDevliveryAsync(tripIdDTO.TripId, userId);
+
+            return Ok(offers);
         }
 
         [HttpDelete("delete")]
@@ -82,6 +96,16 @@ namespace API.Controllers
             await _offerService.ConfirmGoodsTransferAsync(confirmGoodsTransferDTO, userId);
 
             return Ok();
+        }
+        
+        [HttpGet("to-confirm")]
+        [AuthorizeByRole(IdentityRoleNames.User)]
+        public async Task<IActionResult> GetUserOffersToConfirmAsync(
+            [FromQuery] PaginationFilterDTO paginationFilter)
+        {
+            var userId = _userService.GetCurrentUserNameIdentifier(User);
+            
+            return Ok(await _offerService.GetOffersToConfirmAsync(userId, paginationFilter));
         }
     }
 }
