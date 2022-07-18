@@ -241,12 +241,12 @@ namespace Core.Services
                     new OfferSpecification.GetWithTripByUserId(userId, paginationFilter));
 
             return PaginatedList<OfferPreviewForConfirmDTO>.Evaluate(
-                _mapper.Map<List<OfferPreviewForConfirmDTO>>(offerList), 
-                paginationFilter.PageNumber, 
-                offerListCount, 
+                _mapper.Map<List<OfferPreviewForConfirmDTO>>(offerList),
+                paginationFilter.PageNumber,
+                offerListCount,
                 totalPages);
         }
-        
+
         public async Task UnlinkFromTripAsync(int tripId)
         {
             var offers = await _offerRepository.ListAsync(
@@ -291,11 +291,6 @@ namespace Core.Services
             if (toAnswer.Count() != 0)
             {
                 result.AddRange(toAnswer);
-            }
-
-            if (result.Count == 0)
-            {
-                return null;
             }
 
             return _mapper.Map<List<OfferPreviewForInviteDTO>>(result);
