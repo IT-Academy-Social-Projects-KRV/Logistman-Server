@@ -63,14 +63,14 @@ namespace API.Controllers
             return Ok(await _offerService.GetNearRouteAsync(tripIdDTO.TripId));
         }
 
-        [HttpGet("confirmed-goods-delivery")]
+        [HttpGet("driver-to-confirm")]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> GetConfirmedGoodsDeliveryAsync(
+        public async Task<IActionResult> GetDriverConfirmGoodsDevliveryAsync(
             [FromQuery] TripIdDTO tripIdDTO)
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
             var offers =
-                await _offerService.GetConfirmedGoodsDeliveryAsync(tripIdDTO.TripId, userId);
+                await _offerService.GetDriverConfirmGoodsDevliveryAsync(tripIdDTO.TripId, userId);
 
             return Ok(offers);
         }

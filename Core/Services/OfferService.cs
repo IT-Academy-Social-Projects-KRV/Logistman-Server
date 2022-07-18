@@ -267,7 +267,7 @@ namespace Core.Services
         }
 
         public async Task<List<OfferPreviewForInviteDTO>>
-            GetConfirmedGoodsDeliveryAsync(int tripId, string userId)
+            GetDriverConfirmGoodsDevliveryAsync(int tripId, string userId)
         {
             var trip = await _tripRepository.GetBySpecAsync(
                 new TripSpecification.GetActiveByUserIdAndId(tripId, userId));
