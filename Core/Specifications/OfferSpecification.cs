@@ -59,7 +59,6 @@ namespace Core.Specifications
                 Query
                     .Where(offer => offer.Point.Location.IsWithinDistance(routeGeography, dist)
                                     && !offer.IsClosed
-                                    && offer.RelatedTripId == null
                                     && offer.StartDate <= tripDepartureDate)
                     .Include(offer => offer.Point)
                     .Include(offer => offer.OfferRole)
