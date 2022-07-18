@@ -31,6 +31,7 @@ namespace Core
             services.AddScoped<ITemplateHelper, TemplateHelper>();
             services.AddScoped<ITripValidationService, TripValidationService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IHangFireService, HangFireService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

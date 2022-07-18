@@ -187,5 +187,15 @@ namespace Core.Specifications
                               && t.IsActive);
             }
         }
+
+        internal class GetReadyForActivationTrips : Specification<Trip>
+        {
+            public GetReadyForActivationTrips()
+            {
+                Query.Where(t => !t.IsActive
+                        && t.DepartureDate <= DateTimeOffset.UtcNow
+                        && t.Offers.Count > 0);
+            }
+        }
     }
 }

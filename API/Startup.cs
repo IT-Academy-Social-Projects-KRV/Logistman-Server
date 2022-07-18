@@ -122,7 +122,7 @@ namespace API
                 endpoints.MapHangfireDashboard();
             });
 
-            RecurringJob.AddOrUpdate<ITripService>(o => o.DeleteExpiredRoutesAsync(), Cron.Daily);
+            RecurringJob.AddOrUpdate<IHangFireService>(o => o.DeleteExpiredRoutesAsync(), Cron.Daily);
         }
     }
 }

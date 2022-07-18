@@ -14,6 +14,9 @@ using Core.Entities.PointEntity;
 using System.Threading.Tasks;
 using Core.Entities.OfferEntity;
 using Core.Entities.TripEntity;
+using Core.DTO.NotificationDTO;
+using Hangfire;
+using System;
 
 namespace Core.Services
 {
@@ -24,6 +27,7 @@ namespace Core.Services
         private readonly IRepository<PointData> _pointRepository;
         private readonly IRepository<Trip> _tripRepository;
         private readonly IOfferService _offerService;
+        private readonly IHangFireService _hangFireService;
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
 
@@ -33,6 +37,7 @@ namespace Core.Services
             IRepository<PointData> pointRepository,
             IRepository<Trip> tripRepository,
             IOfferService offerService,
+            IHangFireService hangFireService,
             INotificationService notificationService,
             IMapper mapper)
         {
@@ -41,6 +46,7 @@ namespace Core.Services
             _pointRepository = pointRepository;
             _tripRepository = tripRepository;
             _offerService = offerService;
+            _hangFireService = hangFireService;
             _notificationService = notificationService;
             _mapper = mapper;
         }
@@ -55,7 +61,19 @@ namespace Core.Services
 
             ExceptionMethods.InviteNullCheck(invite);
 
-            if (!manageInviteDTO.IsAccepted)
+            if (manageInviteDTO.IsAccepted)
+            {
+                var offers = await _offerRepository.ListAsync(
+                    new OfferSpecification.GetByTripId(invite.TripId));
+
+                await _notificationService.ManageTripNotificationsAsync(
+                    invite.Trip, 
+                    _mapper.Map<List<BriefNotificationDTO>>(offers));
+
+                BackgroundJob.Schedule(() => _hangFireService.ActivatePossibleTripsAsync(), 
+                    invite.Trip.DepartureDate.AddMinutes(5) - DateTimeOffset.UtcNow);
+            }
+            else
             {
                 await _offerService.UnlinkFromTripAsync(invite.TripId);
                 await _notificationService.DeleteNotificationsAsync(invite.TripId);
