@@ -22,9 +22,11 @@ namespace Core.Specifications
             }
         }
 
-        internal class GetByIdForSpecificTrip : Specification<Offer>, ISingleResultSpecification<Offer>
+        internal class GetByIdForSpecificTrip : Specification<Offer>,
+                                                ISingleResultSpecification<Offer>
         {
-            public GetByIdForSpecificTrip(int offerId, int tripId, DateTimeOffset tripDepartureDate)
+            public GetByIdForSpecificTrip(
+                int offerId, int tripId, DateTimeOffset tripDepartureDate)
             {
                 Query
                     .Where(o => o.Id == offerId
@@ -124,15 +126,15 @@ namespace Core.Specifications
             }
         }
 
-        public class GetByIdWithActiveTrip : Specification<Offer>, 
-            ISingleResultSpecification<Offer>
+        public class GetByIdWithActiveTrip : Specification<Offer>,
+                                             ISingleResultSpecification<Offer>
         {
             public GetByIdWithActiveTrip(int offerId, string userId)
             {
                 Query
-                    .Where(o => o.Id == offerId 
+                    .Where(o => o.Id == offerId
                         && o.Trip.TripCreatorId == userId
-                        && o.Trip.IsActive 
+                        && o.Trip.IsActive
                         && !o.IsAnsweredByDriver)
                     .Include(o => o.Trip);
             }
@@ -150,7 +152,22 @@ namespace Core.Specifications
                     .Include(o => o.Trip);
             }
         }
-        
+
+        internal class GetToConfirmByTripAndUserIds : Specification<Offer>
+        {
+            public GetToConfirmByTripAndUserIds(int tripId, string userId)
+            {
+                Query
+                    .Where(o => o.Trip.TripCreatorId == userId
+                             && o.RelatedTripId == tripId)
+                    .OrderBy(o => o.Point.Order)
+                    .Include(o => o.GoodCategory)
+                    .Include(o => o.User)
+                    .Include(o => o.Point)
+                    .Include(o => o.OfferRole);
+            }
+        }
+
         internal class GetWithTripByUserId : Specification<Offer>
         {
             public GetWithTripByUserId(string userId, PaginationFilterDTO paginationFilter)

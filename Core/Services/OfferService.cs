@@ -15,6 +15,7 @@ using Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -109,9 +110,9 @@ namespace Core.Services
                 new OfferSpecification.GetByUserId(userId, paginationFilter));
 
             return PaginatedList<OfferPreviewDTO>.Evaluate(
-                _mapper.Map<List<OfferPreviewDTO>>(offerList), 
-                paginationFilter.PageNumber, 
-                offerListCount, 
+                _mapper.Map<List<OfferPreviewDTO>>(offerList),
+                paginationFilter.PageNumber,
+                offerListCount,
                 totalPages);
         }
 
@@ -151,7 +152,7 @@ namespace Core.Services
         }
 
         public async Task ConfirmGoodsTransferAsync(
-            ConfirmGoodsTransferDTO сonfirmGoodsTransferDTO, 
+            ConfirmGoodsTransferDTO сonfirmGoodsTransferDTO,
             string userId)
         {
             if (сonfirmGoodsTransferDTO.TripRole.ToUpper() == TripRoles.Driver)
@@ -186,8 +187,8 @@ namespace Core.Services
             else
             {
                 throw new HttpException(
-                        ErrorMessages.ConfirmGoodsDeliveryWrongRoleName 
-                        + 
+                        ErrorMessages.ConfirmGoodsDeliveryWrongRoleName
+                        +
                         сonfirmGoodsTransferDTO.TripRole,
                         HttpStatusCode.Forbidden);
             }
@@ -240,12 +241,12 @@ namespace Core.Services
                     new OfferSpecification.GetWithTripByUserId(userId, paginationFilter));
 
             return PaginatedList<OfferPreviewForConfirmDTO>.Evaluate(
-                _mapper.Map<List<OfferPreviewForConfirmDTO>>(offerList), 
-                paginationFilter.PageNumber, 
-                offerListCount, 
+                _mapper.Map<List<OfferPreviewForConfirmDTO>>(offerList),
+                paginationFilter.PageNumber,
+                offerListCount,
                 totalPages);
         }
-        
+
         public async Task UnlinkFromTripAsync(int tripId)
         {
             var offers = await _offerRepository.ListAsync(
@@ -263,6 +264,36 @@ namespace Core.Services
 
             await _pointService.ResetTripPointOrdersAsync(tripId);
             await _offerRepository.UpdateRangeAsync(offers);
+        }
+
+        public async Task<List<OfferPreviewForInviteDTO>>
+            GetDriverConfirmGoodsDevliveryAsync(int tripId, string userId)
+        {
+            var trip = await _tripRepository.GetBySpecAsync(
+                new TripSpecification.GetActiveByUserIdAndId(tripId, userId));
+
+            ExceptionMethods.TripNullCheck(trip);
+
+            var offers = await _offerRepository.ListAsync(
+                new OfferSpecification.GetToConfirmByTripAndUserIds(tripId, userId));
+
+            var theLastAnswered = offers.LastOrDefault(o => o.IsAnsweredByDriver);
+
+            var toAnswer = offers.Where(o => !o.IsAnsweredByDriver).Take(2);
+
+            var result = new List<Offer>();
+
+            if (theLastAnswered != null)
+            {
+                result.Add(theLastAnswered);
+            }
+
+            if (toAnswer.Count() != 0)
+            {
+                result.AddRange(toAnswer);
+            }
+
+            return _mapper.Map<List<OfferPreviewForInviteDTO>>(result);
         }
     }
 }
