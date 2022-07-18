@@ -46,6 +46,7 @@ namespace Infrastructure.Data
             builder.ApplyConfiguration(new TripConfiguration());
             builder.ApplyConfiguration(new RatingConfiguration());
             builder.ApplyConfiguration(new RefreshTokenConfiguration());
+            builder.ApplyConfiguration(new InviteConfiguration());
             builder.ApplyConfiguration(new NotificationConfiguration());
             builder.Seed();
             base.OnModelCreating(builder);
