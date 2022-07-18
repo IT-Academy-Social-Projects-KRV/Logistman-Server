@@ -79,11 +79,11 @@ namespace API.Controllers
 
         [HttpGet]
         [AuthorizeByRole(IdentityRoleNames.User)]
-        public async Task<IActionResult> GetUserTripInfoAsync()
+        public async Task<IActionResult> GetTripInfoForConfirm()
         {
             var userId = _userService.GetCurrentUserNameIdentifier(User);
 
-            return Ok(await _tripService.GetInfoForTripConfirmAsync(userId));
+            return Ok(await _tripService.GetTripInfoForConfirm(userId));
         }
     }
 }

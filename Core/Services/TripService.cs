@@ -278,7 +278,7 @@ namespace Core.Services
             return _mapper.Map<TripInfoDTO>(trip);
         }
 
-        public async Task<TripInfoForConfirmDTO> GetInfoForTripConfirmAsync(string userId)
+        public async Task<TripInfoForConfirmDTO> GetTripInfoForConfirm(string userId)
         {
             var trip = await _tripRepository
                 .GetBySpecAsync(new TripSpecification.GetTripForConfirmOffers(userId));
