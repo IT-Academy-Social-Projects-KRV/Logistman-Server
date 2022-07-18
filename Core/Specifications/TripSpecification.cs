@@ -23,22 +23,6 @@ namespace Core.Specifications
                     .ThenInclude(t => t.Offer)
                     .ThenInclude(t => t.GoodCategory);
             }
-
-            public GetById(int tripId, string userId)
-            {
-                Query
-                    .Where(t => t.Id == tripId && 
-                                t.TripCreatorId == userId)
-                    .Include(t => t.Offers)
-                    .Include(t => t.Car)
-                    .Include(t => t.User)
-                    .Include(t => t.Points)
-                    .ThenInclude(t => t.Offer)
-                    .ThenInclude(t => t.OfferRole)
-                    .Include(t => t.Points)
-                    .ThenInclude(t => t.Offer)
-                    .ThenInclude(t => t.GoodCategory);
-            }
         }
 
         internal class GetValidTripById : Specification<Trip>, ISingleResultSpecification<Trip>
@@ -116,7 +100,16 @@ namespace Core.Specifications
             {
                 Query
                     .Where(t => t.TripCreatorId == userId && t.IsActive)
-                    .Include(t => t.Offers);
+                    .Include(t => t.Offers)
+                    .Include(t => t.Offers)
+                    .Include(t => t.Car)
+                    .Include(t => t.User)
+                    .Include(t => t.Points)
+                    .ThenInclude(t => t.Offer)
+                    .ThenInclude(t => t.OfferRole)
+                    .Include(t => t.Points)
+                    .ThenInclude(t => t.Offer)
+                    .ThenInclude(t => t.GoodCategory);
             }
         }
 

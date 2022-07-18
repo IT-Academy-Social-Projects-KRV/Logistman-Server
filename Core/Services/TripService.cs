@@ -278,24 +278,24 @@ namespace Core.Services
             return _mapper.Map<TripInfoDTO>(trip);
         }
 
-        public async Task<TripInfoConfirmDTO> GetTripInfoAsync(int tripId, string userId)
+        public async Task<TripInfoConfirmDTO> GetTripConfirmInfoAsync(string userId)
         {
             var trip = await _tripRepository
-                .GetBySpecAsync(new TripSpecification.GetById(tripId, userId));
+                .GetBySpecAsync(new TripSpecification.GetActiveByUserIdWithOffers(userId));
 
             ExceptionMethods.TripNullCheck(trip);
 
-            var tripInfo = _mapper.Map<TripInfoConfirmDTO>(trip);
-            var sortPoints = tripInfo.Points
+            var tripConfirmInfo = _mapper.Map<TripInfoConfirmDTO>(trip);
+            var sortPoints = tripConfirmInfo.Points
                 .OrderBy(p => p.Order);
 
-            tripInfo.Points = new List<PointTripInfoDTO>()
+            tripConfirmInfo.Points = new List<PointTripInfoDTO>()
             {
                 sortPoints.First(),
                 sortPoints.Last()
             };
 
-            return tripInfo;
+            return tripConfirmInfo;
         }
     }
 }
