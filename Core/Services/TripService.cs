@@ -262,7 +262,10 @@ namespace Core.Services
             var trip = await _tripRepository
                 .GetBySpecAsync(new TripSpecification.GetTripForConfirmOffers(userId));
 
-            ExceptionMethods.TripNullCheck(trip);
+            if (trip == null)
+            {
+                return null;
+            }
 
             var tripInfo = _mapper.Map<TripInfoForConfirmDTO>(trip);
             var sortPoints = tripInfo.Points.OrderBy(p => p.Order);
