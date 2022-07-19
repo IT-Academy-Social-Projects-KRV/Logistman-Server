@@ -19,7 +19,7 @@ namespace Core.Interfaces.CustomService
         Task<PaginatedList<OfferPreviewForConfirmDTO>> GetOffersToConfirmAsync(
             string userId, PaginationFilterDTO paginationFilter);
         Task UnlinkFromTripAsync(int tripId);
-        Task<List<OfferPreviewForInviteDTO>> GetDriverConfirmGoodsDevliveryAsync(
+        Task<List<OfferPreviewForInviteDTO>> GetDriverConfirmGoodsDeliveryAsync(
             int tripId, string userId);
     }
 }

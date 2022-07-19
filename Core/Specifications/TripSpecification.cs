@@ -197,5 +197,19 @@ namespace Core.Specifications
                         && t.Offers.Count > 0);
             }
         }
+
+        internal class GetTripForConfirmOffers : Specification<Trip>, ISingleResultSpecification<Trip>
+        {
+            public GetTripForConfirmOffers(string userId)
+            {
+                Query
+                    .Where(t => t.TripCreatorId == userId && t.IsActive)
+                    .OrderBy(t => t.DepartureDate)
+                    .Include(t => t.Offers)
+                    .Include(t => t.Car)
+                    .Include(t => t.User)
+                    .Include(t => t.Points);
+            }
+        }
     }
 }

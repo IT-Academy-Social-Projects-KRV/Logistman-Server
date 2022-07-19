@@ -37,10 +37,10 @@ namespace Core.Helpers.ApplicationProfiles
                 .ForMember(dest => dest.PointId, opt => opt.MapFrom(point => point.Id))
                 .ForMember(dest => dest.OfferId, opt => opt.MapFrom(point => point.OfferId))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(point => point.Offer.Description))
-                .ForMember(dest => dest.RelatedTripId, opt => opt.MapFrom(point => point.Offer.RelatedTripId))
                 .ForMember(dest => dest.GoodsWeight, opt => opt.MapFrom(point => point.Offer.GoodsWeight))
                 .ForMember(dest => dest.GoodCategoryName, opt => opt.MapFrom(point => point.Offer.GoodCategory.Name))
                 .ForMember(dest => dest.CreatorRoleName, opt => opt.MapFrom(point => point.Offer.OfferRole.Name));
+            CreateMap<PointData, PointTripInfoDTO>();
         }
     }
 }

@@ -267,12 +267,15 @@ namespace Core.Services
         }
 
         public async Task<List<OfferPreviewForInviteDTO>>
-            GetDriverConfirmGoodsDevliveryAsync(int tripId, string userId)
+            GetDriverConfirmGoodsDeliveryAsync(int tripId, string userId)
         {
             var trip = await _tripRepository.GetBySpecAsync(
                 new TripSpecification.GetActiveByUserIdAndId(tripId, userId));
 
-            ExceptionMethods.TripNullCheck(trip);
+            if (trip == null)
+            {
+                return null;
+            }
 
             var offers = await _offerRepository.ListAsync(
                 new OfferSpecification.GetToConfirmByTripAndUserIds(tripId, userId));
